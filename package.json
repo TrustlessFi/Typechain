@@ -1,0 +1,11 @@
+{
+  "name": "@trustlessfi/typechain",
+  "packageManager": "yarn@3.0.2",
+  "version": "0.3.3",
+  "description": "Typechain files for deployed trustless protocols to allow for fully typed typescript.",
+  "repository": "https://github.com/TrustlessFi/Typechain",
+  "author": "TrustlessOfficial <TrustlessFi@protonmail.com>",
+  "license": "MIT",
+  "main": "dist/",
+  "types": "dist/"
+}
