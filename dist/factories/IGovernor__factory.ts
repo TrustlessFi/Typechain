@@ -137,6 +137,32 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "communityAllocation",
+    outputs: [
+      {
+        internalType: "contract CommunityAllocation",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "creatorAllocation",
+    outputs: [
+      {
+        internalType: "contract CreatorAllocation",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "currentPhase",
     outputs: [
       {
@@ -204,6 +230,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "genesisAllocation",
+    outputs: [
+      {
+        internalType: "contract GenesisAllocation",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "hue",
     outputs: [
       {
@@ -226,6 +265,24 @@ const _abi = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "count",
+        type: "uint256",
+      },
+    ],
+    name: "increaseTCPAllocation",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -332,6 +389,19 @@ const _abi = [
     name: "mintVotingRewards",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "operatingAllocation",
+    outputs: [
+      {
+        internalType: "contract OperatingAllocation",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {

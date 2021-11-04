@@ -27,6 +27,8 @@ interface GovernorTestableInterface extends ethers.utils.Interface {
     "borrowRewardsPortion()": FunctionFragment;
     "calculateCurrentDailyDebtRewardCount()": FunctionFragment;
     "calculateCurrentDailyLiquidityRewardCount()": FunctionFragment;
+    "communityAllocation()": FunctionFragment;
+    "creatorAllocation()": FunctionFragment;
     "currentPeriod()": FunctionFragment;
     "currentPhase()": FunctionFragment;
     "deployer()": FunctionFragment;
@@ -38,9 +40,11 @@ interface GovernorTestableInterface extends ethers.utils.Interface {
     "executeShutdown()": FunctionFragment;
     "firstPeriod()": FunctionFragment;
     "firstRewardsPeriod()": FunctionFragment;
+    "genesisAllocation()": FunctionFragment;
     "governorAlpha()": FunctionFragment;
     "hue()": FunctionFragment;
     "huePositionNFT()": FunctionFragment;
+    "increaseTCPAllocation(address,uint256)": FunctionFragment;
     "init(tuple)": FunctionFragment;
     "isShutdown()": FunctionFragment;
     "lendHue()": FunctionFragment;
@@ -50,6 +54,7 @@ interface GovernorTestableInterface extends ethers.utils.Interface {
     "mintIncentive(address,uint256)": FunctionFragment;
     "mintTCP(address,uint256)": FunctionFragment;
     "mintVotingRewards(address,uint256)": FunctionFragment;
+    "operatingAllocation()": FunctionFragment;
     "periodLength()": FunctionFragment;
     "periodRewards()": FunctionFragment;
     "prices()": FunctionFragment;
@@ -103,6 +108,14 @@ interface GovernorTestableInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "communityAllocation",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "creatorAllocation",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "currentPeriod",
     values?: undefined
   ): string;
@@ -144,6 +157,10 @@ interface GovernorTestableInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "genesisAllocation",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "governorAlpha",
     values?: undefined
   ): string;
@@ -151,6 +168,10 @@ interface GovernorTestableInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "huePositionNFT",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseTCPAllocation",
+    values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "init",
@@ -172,6 +193,10 @@ interface GovernorTestableInterface extends ethers.utils.Interface {
         settlement: string;
         tcp: string;
         timelock: string;
+        communityAllocation: string;
+        creatorAllocation: string;
+        genesisAllocation: string;
+        operatingAllocation: string;
         tokenIncentiveMinters: string[];
         caps: BigNumberish[];
       }
@@ -202,6 +227,10 @@ interface GovernorTestableInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "mintVotingRewards",
     values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "operatingAllocation",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "periodLength",
@@ -324,6 +353,14 @@ interface GovernorTestableInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "communityAllocation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "creatorAllocation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "currentPeriod",
     data: BytesLike
   ): Result;
@@ -362,12 +399,20 @@ interface GovernorTestableInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "genesisAllocation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "governorAlpha",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "hue", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "huePositionNFT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseTCPAllocation",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
@@ -389,6 +434,10 @@ interface GovernorTestableInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "mintTCP", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "mintVotingRewards",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "operatingAllocation",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -567,6 +616,10 @@ export class GovernorTestable extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    communityAllocation(overrides?: CallOverrides): Promise<[string]>;
+
+    creatorAllocation(overrides?: CallOverrides): Promise<[string]>;
+
     currentPeriod(
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { period: BigNumber }>;
@@ -605,11 +658,19 @@ export class GovernorTestable extends BaseContract {
 
     firstRewardsPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    genesisAllocation(overrides?: CallOverrides): Promise<[string]>;
+
     governorAlpha(overrides?: CallOverrides): Promise<[string]>;
 
     hue(overrides?: CallOverrides): Promise<[string]>;
 
     huePositionNFT(overrides?: CallOverrides): Promise<[string]>;
+
+    increaseTCPAllocation(
+      to: string,
+      count: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     init(
       pd: {
@@ -629,6 +690,10 @@ export class GovernorTestable extends BaseContract {
         settlement: string;
         tcp: string;
         timelock: string;
+        communityAllocation: string;
+        creatorAllocation: string;
+        genesisAllocation: string;
+        operatingAllocation: string;
         tokenIncentiveMinters: string[];
         caps: BigNumberish[];
       },
@@ -665,6 +730,8 @@ export class GovernorTestable extends BaseContract {
       count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    operatingAllocation(overrides?: CallOverrides): Promise<[string]>;
 
     periodLength(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -801,6 +868,10 @@ export class GovernorTestable extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  communityAllocation(overrides?: CallOverrides): Promise<string>;
+
+  creatorAllocation(overrides?: CallOverrides): Promise<string>;
+
   currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
   currentPhase(overrides?: CallOverrides): Promise<number>;
@@ -835,11 +906,19 @@ export class GovernorTestable extends BaseContract {
 
   firstRewardsPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
+  genesisAllocation(overrides?: CallOverrides): Promise<string>;
+
   governorAlpha(overrides?: CallOverrides): Promise<string>;
 
   hue(overrides?: CallOverrides): Promise<string>;
 
   huePositionNFT(overrides?: CallOverrides): Promise<string>;
+
+  increaseTCPAllocation(
+    to: string,
+    count: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   init(
     pd: {
@@ -859,6 +938,10 @@ export class GovernorTestable extends BaseContract {
       settlement: string;
       tcp: string;
       timelock: string;
+      communityAllocation: string;
+      creatorAllocation: string;
+      genesisAllocation: string;
+      operatingAllocation: string;
       tokenIncentiveMinters: string[];
       caps: BigNumberish[];
     },
@@ -895,6 +978,8 @@ export class GovernorTestable extends BaseContract {
     count: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  operatingAllocation(overrides?: CallOverrides): Promise<string>;
 
   periodLength(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1031,6 +1116,10 @@ export class GovernorTestable extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    communityAllocation(overrides?: CallOverrides): Promise<string>;
+
+    creatorAllocation(overrides?: CallOverrides): Promise<string>;
+
     currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
     currentPhase(overrides?: CallOverrides): Promise<number>;
@@ -1061,11 +1150,19 @@ export class GovernorTestable extends BaseContract {
 
     firstRewardsPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
+    genesisAllocation(overrides?: CallOverrides): Promise<string>;
+
     governorAlpha(overrides?: CallOverrides): Promise<string>;
 
     hue(overrides?: CallOverrides): Promise<string>;
 
     huePositionNFT(overrides?: CallOverrides): Promise<string>;
+
+    increaseTCPAllocation(
+      to: string,
+      count: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     init(
       pd: {
@@ -1085,6 +1182,10 @@ export class GovernorTestable extends BaseContract {
         settlement: string;
         tcp: string;
         timelock: string;
+        communityAllocation: string;
+        creatorAllocation: string;
+        genesisAllocation: string;
+        operatingAllocation: string;
         tokenIncentiveMinters: string[];
         caps: BigNumberish[];
       },
@@ -1121,6 +1222,8 @@ export class GovernorTestable extends BaseContract {
       count: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    operatingAllocation(overrides?: CallOverrides): Promise<string>;
 
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1276,6 +1379,10 @@ export class GovernorTestable extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    communityAllocation(overrides?: CallOverrides): Promise<BigNumber>;
+
+    creatorAllocation(overrides?: CallOverrides): Promise<BigNumber>;
+
     currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
     currentPhase(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1312,11 +1419,19 @@ export class GovernorTestable extends BaseContract {
 
     firstRewardsPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
+    genesisAllocation(overrides?: CallOverrides): Promise<BigNumber>;
+
     governorAlpha(overrides?: CallOverrides): Promise<BigNumber>;
 
     hue(overrides?: CallOverrides): Promise<BigNumber>;
 
     huePositionNFT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    increaseTCPAllocation(
+      to: string,
+      count: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     init(
       pd: {
@@ -1336,6 +1451,10 @@ export class GovernorTestable extends BaseContract {
         settlement: string;
         tcp: string;
         timelock: string;
+        communityAllocation: string;
+        creatorAllocation: string;
+        genesisAllocation: string;
+        operatingAllocation: string;
         tokenIncentiveMinters: string[];
         caps: BigNumberish[];
       },
@@ -1372,6 +1491,8 @@ export class GovernorTestable extends BaseContract {
       count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    operatingAllocation(overrides?: CallOverrides): Promise<BigNumber>;
 
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1506,6 +1627,12 @@ export class GovernorTestable extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    communityAllocation(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    creatorAllocation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     currentPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     currentPhase(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1546,11 +1673,19 @@ export class GovernorTestable extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    genesisAllocation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     governorAlpha(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     hue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     huePositionNFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    increaseTCPAllocation(
+      to: string,
+      count: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     init(
       pd: {
@@ -1570,6 +1705,10 @@ export class GovernorTestable extends BaseContract {
         settlement: string;
         tcp: string;
         timelock: string;
+        communityAllocation: string;
+        creatorAllocation: string;
+        genesisAllocation: string;
+        operatingAllocation: string;
         tokenIncentiveMinters: string[];
         caps: BigNumberish[];
       },
@@ -1605,6 +1744,10 @@ export class GovernorTestable extends BaseContract {
       to: string,
       count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    operatingAllocation(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     periodLength(overrides?: CallOverrides): Promise<PopulatedTransaction>;

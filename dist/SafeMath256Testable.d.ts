@@ -18,7 +18,7 @@ import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
-interface SafeMathTestableInterface extends ethers.utils.Interface {
+interface SafeMath256TestableInterface extends ethers.utils.Interface {
   functions: {
     "add(uint256,uint256)": FunctionFragment;
     "mul(uint256,uint256)": FunctionFragment;
@@ -45,7 +45,7 @@ interface SafeMathTestableInterface extends ethers.utils.Interface {
   events: {};
 }
 
-export class SafeMathTestable extends BaseContract {
+export class SafeMath256Testable extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
@@ -86,7 +86,7 @@ export class SafeMathTestable extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>;
 
-  interface: SafeMathTestableInterface;
+  interface: SafeMath256TestableInterface;
 
   functions: {
     add(

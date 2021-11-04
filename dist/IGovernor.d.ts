@@ -25,12 +25,16 @@ interface IGovernorInterface extends ethers.utils.Interface {
     "auctions()": FunctionFragment;
     "calculateCurrentDailyDebtRewardCount()": FunctionFragment;
     "calculateCurrentDailyLiquidityRewardCount()": FunctionFragment;
+    "communityAllocation()": FunctionFragment;
+    "creatorAllocation()": FunctionFragment;
     "currentPhase()": FunctionFragment;
     "enforcedDecentralization()": FunctionFragment;
     "execute(address,string,bytes)": FunctionFragment;
     "executeShutdown()": FunctionFragment;
+    "genesisAllocation()": FunctionFragment;
     "hue()": FunctionFragment;
     "huePositionNFT()": FunctionFragment;
+    "increaseTCPAllocation(address,uint256)": FunctionFragment;
     "isShutdown()": FunctionFragment;
     "lendHue()": FunctionFragment;
     "liquidations()": FunctionFragment;
@@ -38,6 +42,7 @@ interface IGovernorInterface extends ethers.utils.Interface {
     "mintIncentive(address,uint256)": FunctionFragment;
     "mintTCP(address,uint256)": FunctionFragment;
     "mintVotingRewards(address,uint256)": FunctionFragment;
+    "operatingAllocation()": FunctionFragment;
     "prices()": FunctionFragment;
     "protocolLock()": FunctionFragment;
     "rates()": FunctionFragment;
@@ -74,6 +79,14 @@ interface IGovernorInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "communityAllocation",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "creatorAllocation",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "currentPhase",
     values?: undefined
   ): string;
@@ -89,10 +102,18 @@ interface IGovernorInterface extends ethers.utils.Interface {
     functionFragment: "executeShutdown",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "genesisAllocation",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "hue", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "huePositionNFT",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseTCPAllocation",
+    values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "isShutdown",
@@ -115,6 +136,10 @@ interface IGovernorInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "mintVotingRewards",
     values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "operatingAllocation",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "prices", values?: undefined): string;
   encodeFunctionData(
@@ -196,6 +221,14 @@ interface IGovernorInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "communityAllocation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "creatorAllocation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "currentPhase",
     data: BytesLike
   ): Result;
@@ -208,9 +241,17 @@ interface IGovernorInterface extends ethers.utils.Interface {
     functionFragment: "executeShutdown",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "genesisAllocation",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "hue", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "huePositionNFT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseTCPAllocation",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "isShutdown", data: BytesLike): Result;
@@ -227,6 +268,10 @@ interface IGovernorInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "mintTCP", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "mintVotingRewards",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "operatingAllocation",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "prices", data: BytesLike): Result;
@@ -366,6 +411,10 @@ export class IGovernor extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    communityAllocation(overrides?: CallOverrides): Promise<[string]>;
+
+    creatorAllocation(overrides?: CallOverrides): Promise<[string]>;
+
     currentPhase(overrides?: CallOverrides): Promise<[number]>;
 
     enforcedDecentralization(overrides?: CallOverrides): Promise<[string]>;
@@ -381,9 +430,17 @@ export class IGovernor extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    genesisAllocation(overrides?: CallOverrides): Promise<[string]>;
+
     hue(overrides?: CallOverrides): Promise<[string]>;
 
     huePositionNFT(overrides?: CallOverrides): Promise<[string]>;
+
+    increaseTCPAllocation(
+      to: string,
+      count: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     isShutdown(overrides?: CallOverrides): Promise<[boolean]>;
 
@@ -410,6 +467,8 @@ export class IGovernor extends BaseContract {
       count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    operatingAllocation(overrides?: CallOverrides): Promise<[string]>;
 
     prices(overrides?: CallOverrides): Promise<[string]>;
 
@@ -504,6 +563,10 @@ export class IGovernor extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  communityAllocation(overrides?: CallOverrides): Promise<string>;
+
+  creatorAllocation(overrides?: CallOverrides): Promise<string>;
+
   currentPhase(overrides?: CallOverrides): Promise<number>;
 
   enforcedDecentralization(overrides?: CallOverrides): Promise<string>;
@@ -519,9 +582,17 @@ export class IGovernor extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  genesisAllocation(overrides?: CallOverrides): Promise<string>;
+
   hue(overrides?: CallOverrides): Promise<string>;
 
   huePositionNFT(overrides?: CallOverrides): Promise<string>;
+
+  increaseTCPAllocation(
+    to: string,
+    count: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   isShutdown(overrides?: CallOverrides): Promise<boolean>;
 
@@ -548,6 +619,8 @@ export class IGovernor extends BaseContract {
     count: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  operatingAllocation(overrides?: CallOverrides): Promise<string>;
 
   prices(overrides?: CallOverrides): Promise<string>;
 
@@ -642,6 +715,10 @@ export class IGovernor extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    communityAllocation(overrides?: CallOverrides): Promise<string>;
+
+    creatorAllocation(overrides?: CallOverrides): Promise<string>;
+
     currentPhase(overrides?: CallOverrides): Promise<number>;
 
     enforcedDecentralization(overrides?: CallOverrides): Promise<string>;
@@ -655,9 +732,17 @@ export class IGovernor extends BaseContract {
 
     executeShutdown(overrides?: CallOverrides): Promise<void>;
 
+    genesisAllocation(overrides?: CallOverrides): Promise<string>;
+
     hue(overrides?: CallOverrides): Promise<string>;
 
     huePositionNFT(overrides?: CallOverrides): Promise<string>;
+
+    increaseTCPAllocation(
+      to: string,
+      count: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     isShutdown(overrides?: CallOverrides): Promise<boolean>;
 
@@ -684,6 +769,8 @@ export class IGovernor extends BaseContract {
       count: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    operatingAllocation(overrides?: CallOverrides): Promise<string>;
 
     prices(overrides?: CallOverrides): Promise<string>;
 
@@ -799,6 +886,10 @@ export class IGovernor extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    communityAllocation(overrides?: CallOverrides): Promise<BigNumber>;
+
+    creatorAllocation(overrides?: CallOverrides): Promise<BigNumber>;
+
     currentPhase(overrides?: CallOverrides): Promise<BigNumber>;
 
     enforcedDecentralization(overrides?: CallOverrides): Promise<BigNumber>;
@@ -814,9 +905,17 @@ export class IGovernor extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    genesisAllocation(overrides?: CallOverrides): Promise<BigNumber>;
+
     hue(overrides?: CallOverrides): Promise<BigNumber>;
 
     huePositionNFT(overrides?: CallOverrides): Promise<BigNumber>;
+
+    increaseTCPAllocation(
+      to: string,
+      count: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     isShutdown(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -843,6 +942,8 @@ export class IGovernor extends BaseContract {
       count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    operatingAllocation(overrides?: CallOverrides): Promise<BigNumber>;
 
     prices(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -938,6 +1039,12 @@ export class IGovernor extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    communityAllocation(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    creatorAllocation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     currentPhase(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     enforcedDecentralization(
@@ -955,9 +1062,17 @@ export class IGovernor extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    genesisAllocation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     hue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     huePositionNFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    increaseTCPAllocation(
+      to: string,
+      count: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     isShutdown(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -983,6 +1098,10 @@ export class IGovernor extends BaseContract {
       to: string,
       count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    operatingAllocation(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     prices(overrides?: CallOverrides): Promise<PopulatedTransaction>;

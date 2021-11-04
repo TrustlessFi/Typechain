@@ -141,6 +141,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.GenesisAllocation__factory>;
     getContractFactory(
+      name: "OperatingAllocation",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OperatingAllocation__factory>;
+    getContractFactory(
       name: "ProtocolDataAggregator",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ProtocolDataAggregator__factory>;
@@ -493,13 +497,13 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SafeMath128Testable__factory>;
     getContractFactory(
+      name: "SafeMath256Testable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SafeMath256Testable__factory>;
+    getContractFactory(
       name: "SafeMath64Testable",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SafeMath64Testable__factory>;
-    getContractFactory(
-      name: "SafeMathTestable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SafeMathTestable__factory>;
     getContractFactory(
       name: "StaleMockPriceAggregator",
       signerOrOptions?: ethers.Signer | FactoryOptions
