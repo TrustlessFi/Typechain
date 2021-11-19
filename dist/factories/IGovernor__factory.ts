@@ -137,32 +137,6 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "communityAllocation",
-    outputs: [
-      {
-        internalType: "contract CommunityAllocation",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "creatorAllocation",
-    outputs: [
-      {
-        internalType: "contract CreatorAllocation",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "currentPhase",
     outputs: [
       {
@@ -226,19 +200,6 @@ const _abi = [
     name: "executeShutdown",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "genesisAllocation",
-    outputs: [
-      {
-        internalType: "contract GenesisAllocation",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -368,40 +329,9 @@ const _abi = [
         type: "uint256",
       },
     ],
-    name: "mintTCP",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "count",
-        type: "uint256",
-      },
-    ],
     name: "mintVotingRewards",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "operatingAllocation",
-    outputs: [
-      {
-        internalType: "contract OperatingAllocation",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -558,6 +488,19 @@ const _abi = [
     outputs: [
       {
         internalType: "contract ITCP",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "tcpAllocation",
+    outputs: [
+      {
+        internalType: "contract TcpAllocation",
         name: "",
         type: "address",
       },

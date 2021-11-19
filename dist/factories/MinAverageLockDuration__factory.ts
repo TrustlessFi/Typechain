@@ -54,19 +54,6 @@ const _abi = [
       {
         indexed: true,
         internalType: "address",
-        name: "newGuardian",
-        type: "address",
-      },
-    ],
-    name: "NewGuardian",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
         name: "receiver",
         type: "address",
       },
@@ -85,6 +72,13 @@ const _abi = [
     ],
     name: "TokensLocked",
     type: "event",
+  },
+  {
+    inputs: [],
+    name: "abdicate",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [],
@@ -129,49 +123,21 @@ const _abi = [
       },
       {
         internalType: "uint128",
+        name: "minimumAverageTokensAllocatedxLockYears",
+        type: "uint128",
+      },
+      {
+        internalType: "uint128",
         name: "tokensAllocated",
         type: "uint128",
       },
       {
-        internalType: "uint256",
+        internalType: "uint128",
         name: "cumulativeTokensAllocatedxLockYears",
-        type: "uint256",
+        type: "uint128",
       },
     ],
     stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "minAverageYearsLocked",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "pendingGuardian",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "recieveGuardianship",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -202,10 +168,10 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "token",
+    name: "tcp",
     outputs: [
       {
-        internalType: "address",
+        internalType: "contract IERC20",
         name: "",
         type: "address",
       },
@@ -224,19 +190,6 @@ const _abi = [
       },
     ],
     stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "newGuardian",
-        type: "address",
-      },
-    ],
-    name: "transferGuardianship",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function",
   },
 ];

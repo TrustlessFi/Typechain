@@ -48,9 +48,21 @@ const _abi = [
 const _bytecode =
   "0x60806040523480156100115760006000fd5b50610017565b610193806100266000396000f3fe60806040523480156100115760006000fd5b50600436106100305760003560e01c8063890357301461003657610030565b60006000fd5b61003e6100ba565b604051808673ffffffffffffffffffffffffffffffffffffffff1681526020018573ffffffffffffffffffffffffffffffffffffffff1681526020018473ffffffffffffffffffffffffffffffffffffffff1681526020018362ffffff1681526020018260020b81526020019550505050505060405180910390f35b60006000508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060020160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060020160149054906101000a900462ffffff16908060020160179054906101000a900460020b90508556fea2646970667358221220f002d579f7a8a4360f907a164f2d435911052f80614360bf3a2f3efa123f579064736f6c63430007060033";
 
+type UniswapV3PoolDeployerConstructorParams =
+  | [signer?: Signer]
+  | ConstructorParameters<typeof ContractFactory>;
+
+const isSuperArgs = (
+  xs: UniswapV3PoolDeployerConstructorParams
+): xs is ConstructorParameters<typeof ContractFactory> => xs.length > 1;
+
 export class UniswapV3PoolDeployer__factory extends ContractFactory {
-  constructor(signer?: Signer) {
-    super(_abi, _bytecode, signer);
+  constructor(...args: UniswapV3PoolDeployerConstructorParams) {
+    if (isSuperArgs(args)) {
+      super(...args);
+    } else {
+      super(_abi, _bytecode, args[0]);
+    }
   }
 
   deploy(

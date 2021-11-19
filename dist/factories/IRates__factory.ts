@@ -133,6 +133,19 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
+        indexed: true,
+        internalType: "address",
+        name: "ratesUpdateContract",
+        type: "address",
+      },
+    ],
+    name: "RatesContractUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: false,
         internalType: "address",
         name: "pool",
@@ -164,6 +177,19 @@ const _abi = [
       },
     ],
     name: "addReferencePool",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "int256",
+        name: "newRate",
+        type: "int256",
+      },
+    ],
+    name: "executeRatesUpdateContractUpdate",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -216,6 +242,19 @@ const _abi = [
       },
     ],
     name: "setInterestRateStep",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "ratesUpdateContract",
+        type: "address",
+      },
+    ],
+    name: "setRatesUpdateContract",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
