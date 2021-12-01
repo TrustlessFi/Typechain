@@ -12,224 +12,26 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: "address",
-        name: "pool",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "price",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "int24",
-        name: "tick",
-        type: "int24",
+        internalType: "uint64",
+        name: "time",
+        type: "uint64",
       },
     ],
-    name: "PriceUpdated",
+    name: "CollateralMaxTwapTimeUpdated",
     type: "event",
   },
   {
+    anonymous: false,
     inputs: [
       {
-        internalType: "uint32",
-        name: "twapDuration",
-        type: "uint32",
+        indexed: true,
+        internalType: "uint64",
+        name: "time",
+        type: "uint64",
       },
     ],
-    name: "calculateInstantCollateralPrice",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "price",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "contract IUniswapV3Pool",
-        name: "pool",
-        type: "address",
-      },
-      {
-        internalType: "uint32",
-        name: "twapDuration",
-        type: "uint32",
-      },
-    ],
-    name: "calculateInstantTwappedPrice",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "contract IUniswapV3Pool",
-        name: "pool",
-        type: "address",
-      },
-      {
-        internalType: "uint32",
-        name: "twapDuration",
-        type: "uint32",
-      },
-    ],
-    name: "calculateInstantTwappedTick",
-    outputs: [
-      {
-        internalType: "int24",
-        name: "tick",
-        type: "int24",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "contract IUniswapV3Pool",
-        name: "pool",
-        type: "address",
-      },
-      {
-        internalType: "bool",
-        name: "normalizeDecimals",
-        type: "bool",
-      },
-    ],
-    name: "calculateTwappedPrice",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "price",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "contract IUniswapV3Pool",
-        name: "pool",
-        type: "address",
-      },
-      {
-        internalType: "int24",
-        name: "tick",
-        type: "int24",
-      },
-      {
-        internalType: "int24",
-        name: "tickLower",
-        type: "int24",
-      },
-      {
-        internalType: "int24",
-        name: "tickUpper",
-        type: "int24",
-      },
-      {
-        internalType: "uint128",
-        name: "liquidity",
-        type: "uint128",
-      },
-      {
-        internalType: "uint32",
-        name: "twapDuration",
-        type: "uint32",
-      },
-    ],
-    name: "getRealHueCountForSinglePoolPosition",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "hueCount",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint32",
-        name: "twapDuration",
-        type: "uint32",
-      },
-    ],
-    name: "hueTcpPrice",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "contract IUniswapV3Pool",
-        name: "pool",
-        type: "address",
-      },
-    ],
-    name: "initializePool",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "contract IUniswapV3Pool",
-        name: "pool",
-        type: "address",
-      },
-    ],
-    name: "initializeWethPool",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "contract IUniswapV3Pool",
-        name: "pool",
-        type: "address",
-      },
-    ],
-    name: "isPoolInitialized",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
+    name: "CollateralMinTwapTimeUpdated",
+    type: "event",
   },
   {
     inputs: [],
@@ -241,7 +43,33 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "contract IUniswapV3Pool",
+        internalType: "contract IUniswapV2Pair",
+        name: "pool",
+        type: "address",
+      },
+    ],
+    name: "systemInitializeReferencePool",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "systemObtainCollateralPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IUniswapV2Pair",
         name: "pool",
         type: "address",
       },
@@ -250,11 +78,30 @@ const _abi = [
     outputs: [
       {
         internalType: "uint256",
-        name: "",
+        name: "price",
         type: "uint256",
       },
     ],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IUniswapV2Pair",
+        name: "pool",
+        type: "address",
+      },
+    ],
+    name: "viewCurrentTwappedReferencePrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
 ];

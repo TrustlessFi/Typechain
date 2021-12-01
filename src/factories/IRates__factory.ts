@@ -171,7 +171,7 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "contract IUniswapV3Pool",
+        internalType: "contract IUniswapV2Pair",
         name: "pool",
         type: "address",
       },
@@ -223,7 +223,7 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "contract IUniswapV3Pool",
+        internalType: "contract IUniswapV2Pair",
         name: "pool",
         type: "address",
       },

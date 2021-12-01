@@ -112,9 +112,9 @@ export interface GovernorInterface extends utils.Interface {
     "prices()": FunctionFragment;
     "protocolLock()": FunctionFragment;
     "rates()": FunctionFragment;
+    "requireCollateralPriceUpdateAccess(address)": FunctionFragment;
     "requireDebtServicesAccess(address)": FunctionFragment;
     "requireHueReservesBurnAccess(address)": FunctionFragment;
-    "requireInitializePoolAccess(address)": FunctionFragment;
     "requireUpdatePositionAccess(address)": FunctionFragment;
     "requireValidAction(address,string)": FunctionFragment;
     "rewards()": FunctionFragment;
@@ -258,15 +258,15 @@ export interface GovernorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "rates", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "requireCollateralPriceUpdateAccess",
+    values: [string]
+  ): string;
+  encodeFunctionData(
     functionFragment: "requireDebtServicesAccess",
     values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "requireHueReservesBurnAccess",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "requireInitializePoolAccess",
     values: [string]
   ): string;
   encodeFunctionData(
@@ -453,15 +453,15 @@ export interface GovernorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "rates", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "requireCollateralPriceUpdateAccess",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "requireDebtServicesAccess",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "requireHueReservesBurnAccess",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "requireInitializePoolAccess",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -735,17 +735,17 @@ export interface Governor extends BaseContract {
 
     rates(overrides?: CallOverrides): Promise<[string]>;
 
+    requireCollateralPriceUpdateAccess(
+      caller: string,
+      overrides?: CallOverrides
+    ): Promise<[void]>;
+
     requireDebtServicesAccess(
       caller: string,
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     requireHueReservesBurnAccess(
-      caller: string,
-      overrides?: CallOverrides
-    ): Promise<[void]>;
-
-    requireInitializePoolAccess(
       caller: string,
       overrides?: CallOverrides
     ): Promise<[void]>;
@@ -943,17 +943,17 @@ export interface Governor extends BaseContract {
 
   rates(overrides?: CallOverrides): Promise<string>;
 
+  requireCollateralPriceUpdateAccess(
+    caller: string,
+    overrides?: CallOverrides
+  ): Promise<void>;
+
   requireDebtServicesAccess(
     caller: string,
     overrides?: CallOverrides
   ): Promise<void>;
 
   requireHueReservesBurnAccess(
-    caller: string,
-    overrides?: CallOverrides
-  ): Promise<void>;
-
-  requireInitializePoolAccess(
     caller: string,
     overrides?: CallOverrides
   ): Promise<void>;
@@ -1146,17 +1146,17 @@ export interface Governor extends BaseContract {
 
     rates(overrides?: CallOverrides): Promise<string>;
 
+    requireCollateralPriceUpdateAccess(
+      caller: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     requireDebtServicesAccess(
       caller: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
     requireHueReservesBurnAccess(
-      caller: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    requireInitializePoolAccess(
       caller: string,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -1375,17 +1375,17 @@ export interface Governor extends BaseContract {
 
     rates(overrides?: CallOverrides): Promise<BigNumber>;
 
+    requireCollateralPriceUpdateAccess(
+      caller: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     requireDebtServicesAccess(
       caller: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     requireHueReservesBurnAccess(
-      caller: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    requireInitializePoolAccess(
       caller: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1589,17 +1589,17 @@ export interface Governor extends BaseContract {
 
     rates(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    requireCollateralPriceUpdateAccess(
+      caller: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     requireDebtServicesAccess(
       caller: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     requireHueReservesBurnAccess(
-      caller: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    requireInitializePoolAccess(
       caller: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

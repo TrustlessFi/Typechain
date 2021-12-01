@@ -9,7 +9,6 @@ import {
   CallOverrides,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -22,68 +21,43 @@ export type ConstructorParamsStruct = {
   Governor: string;
   ProtocolLock: string;
   Accounting: string;
-  Weth: string;
-  NftPositionManager: string;
-  UniswapV3Factory: string;
 };
 
-export type ConstructorParamsStructOutput = [
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
-] & {
+export type ConstructorParamsStructOutput = [string, string, string] & {
   Governor: string;
   ProtocolLock: string;
   Accounting: string;
-  Weth: string;
-  NftPositionManager: string;
-  UniswapV3Factory: string;
 };
 
 export type PoolPositionStruct = {
-  owner: string;
-  poolID: BigNumberish;
-  cumulativeLiquidity: BigNumberish;
-  totalRewards: BigNumberish;
-  lastBlockPositionIncreased: BigNumberish;
-  liquidity: BigNumberish;
-  lastTimeRewarded: BigNumberish;
-  tickLower: BigNumberish;
-  tickUpper: BigNumberish;
   ui: BigNumberish;
   kickbackDestination: string;
   kickbackPortion: BigNumberish;
+  liquidity: BigNumberish;
+  cumulativeLiquidity: BigNumberish;
+  totalRewards: BigNumberish;
+  lastTimeRewarded: BigNumberish;
+  lastBlockPositionIncreased: BigNumberish;
 };
 
 export type PoolPositionStructOutput = [
-  string,
-  number,
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  number,
-  number,
   number,
   string,
+  BigNumber,
+  BigNumber,
+  BigNumber,
+  BigNumber,
+  BigNumber,
   BigNumber
 ] & {
-  owner: string;
-  poolID: number;
-  cumulativeLiquidity: BigNumber;
-  totalRewards: BigNumber;
-  lastBlockPositionIncreased: BigNumber;
-  liquidity: BigNumber;
-  lastTimeRewarded: BigNumber;
-  tickLower: number;
-  tickUpper: number;
   ui: number;
   kickbackDestination: string;
   kickbackPortion: BigNumber;
+  liquidity: BigNumber;
+  cumulativeLiquidity: BigNumber;
+  totalRewards: BigNumber;
+  lastTimeRewarded: BigNumber;
+  lastBlockPositionIncreased: BigNumber;
 };
 
 export type RewardStatusStruct = {
@@ -96,134 +70,34 @@ export type RewardStatusStructOutput = [BigNumber, BigNumber] & {
   cumulativeLiquidity: BigNumber;
 };
 
-export type MintParamsStruct = {
-  token0: string;
-  token1: string;
-  fee: BigNumberish;
-  tickLower: BigNumberish;
-  tickUpper: BigNumberish;
-  amount0Desired: BigNumberish;
-  amount1Desired: BigNumberish;
-  amount0Min: BigNumberish;
-  amount1Min: BigNumberish;
-  recipient: string;
-  deadline: BigNumberish;
-};
-
-export type MintParamsStructOutput = [
-  string,
-  string,
-  number,
-  number,
-  number,
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  string,
-  BigNumber
-] & {
-  token0: string;
-  token1: string;
-  fee: number;
-  tickLower: number;
-  tickUpper: number;
-  amount0Desired: BigNumber;
-  amount1Desired: BigNumber;
-  amount0Min: BigNumber;
-  amount1Min: BigNumber;
-  recipient: string;
-  deadline: BigNumber;
-};
-
-export type DecreaseLiquidityParamsStruct = {
-  tokenId: BigNumberish;
-  liquidity: BigNumberish;
-  amount0Min: BigNumberish;
-  amount1Min: BigNumberish;
-  deadline: BigNumberish;
-};
-
-export type DecreaseLiquidityParamsStructOutput = [
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  BigNumber
-] & {
-  tokenId: BigNumber;
-  liquidity: BigNumber;
-  amount0Min: BigNumber;
-  amount1Min: BigNumber;
-  deadline: BigNumber;
-};
-
-export type IncreaseLiquidityParamsStruct = {
-  tokenId: BigNumberish;
-  amount0Desired: BigNumberish;
-  amount1Desired: BigNumberish;
-  amount0Min: BigNumberish;
-  amount1Min: BigNumberish;
-  deadline: BigNumberish;
-};
-
-export type IncreaseLiquidityParamsStructOutput = [
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  BigNumber
-] & {
-  tokenId: BigNumber;
-  amount0Desired: BigNumber;
-  amount1Desired: BigNumber;
-  amount0Min: BigNumber;
-  amount1Min: BigNumber;
-  deadline: BigNumber;
-};
-
 export interface RewardsTestableInterface extends utils.Interface {
   functions: {
     "accounting()": FunctionFragment;
     "accrueRewards()": FunctionFragment;
     "addIncentivePool(address,uint64)": FunctionFragment;
-    "calculateUpdatedLiquidityPosition((address,uint16,uint256,uint256,uint256,uint128,uint64,int24,int24,uint32,address,uint64),(uint256,uint256),uint64)": FunctionFragment;
-    "claimRewards(uint256,uint32)": FunctionFragment;
+    "addLiquidity(address,uint256,uint32)": FunctionFragment;
+    "calculateUpdatedLiquidityPosition((uint32,address,uint64,uint256,uint256,uint256,uint64,uint256),(uint256,uint256),uint64)": FunctionFragment;
+    "claimRewards(address[],uint32)": FunctionFragment;
     "countPools()": FunctionFragment;
-    "createLiquidityPosition((address,address,uint24,int24,int24,uint256,uint256,uint256,uint256,address,uint256),uint32)": FunctionFragment;
     "currentPeriod()": FunctionFragment;
-    "decreaseLiquidityPosition((uint256,uint128,uint256,uint256,uint256),uint32)": FunctionFragment;
     "deployer()": FunctionFragment;
     "firstPeriod()": FunctionFragment;
     "governor()": FunctionFragment;
-    "increaseLiquidityPosition((uint256,uint256,uint256,uint256,uint256,uint256),uint32)": FunctionFragment;
     "init(address,address)": FunctionFragment;
-    "isLiquidityInRange((address,uint16,uint256,uint256,uint256,uint128,uint64,int24,int24,uint32,address,uint64),int24)": FunctionFragment;
     "lastPeriodGlobalRewardsAccrued()": FunctionFragment;
-    "liquidateOutofRangePositions(address,uint256[])": FunctionFragment;
-    "liquidationPenalty()": FunctionFragment;
     "maxCollateralLiquidityDecreasePerPeriod()": FunctionFragment;
     "minCollateralLiquidityByPeriod(address)": FunctionFragment;
-    "minHueCountPerPosition()": FunctionFragment;
-    "nftPositionManager()": FunctionFragment;
     "periodLength()": FunctionFragment;
     "poolConfigForPoolID(uint16)": FunctionFragment;
     "poolIDForPool(address)": FunctionFragment;
-    "removeKickback(uint256)": FunctionFragment;
-    "removeLiquidityPosition((uint256,uint128,uint256,uint256,uint256))": FunctionFragment;
+    "removeKickback(address)": FunctionFragment;
+    "removeLiquidity(address,uint256,uint32)": FunctionFragment;
     "requireAuthorized(bool)": FunctionFragment;
-    "setLiquidationPenalty(uint64)": FunctionFragment;
     "setMaxCollateralLiquidityDecreasePerPeriod(uint64)": FunctionFragment;
-    "setMinHueCountPerPosition(uint128)": FunctionFragment;
-    "setTwapDuration(uint32)": FunctionFragment;
     "stop()": FunctionFragment;
     "stopped()": FunctionFragment;
-    "twapDuration()": FunctionFragment;
-    "uniswapV3Factory()": FunctionFragment;
     "updatePoolIncentive(uint16,uint64)": FunctionFragment;
     "validUpdate(bytes4)": FunctionFragment;
-    "weth()": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -239,28 +113,24 @@ export interface RewardsTestableInterface extends utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "addLiquidity",
+    values: [string, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "calculateUpdatedLiquidityPosition",
     values: [PoolPositionStruct, RewardStatusStruct, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "claimRewards",
-    values: [BigNumberish, BigNumberish]
+    values: [string[], BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "countPools",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "createLiquidityPosition",
-    values: [MintParamsStruct, BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "currentPeriod",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseLiquidityPosition",
-    values: [DecreaseLiquidityParamsStruct, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "deployer", values?: undefined): string;
   encodeFunctionData(
@@ -269,27 +139,11 @@ export interface RewardsTestableInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "governor", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "increaseLiquidityPosition",
-    values: [IncreaseLiquidityParamsStruct, BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "init",
     values: [string, string]
   ): string;
   encodeFunctionData(
-    functionFragment: "isLiquidityInRange",
-    values: [PoolPositionStruct, BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "lastPeriodGlobalRewardsAccrued",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidateOutofRangePositions",
-    values: [string, BigNumberish[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidationPenalty",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -299,14 +153,6 @@ export interface RewardsTestableInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "minCollateralLiquidityByPeriod",
     values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "minHueCountPerPosition",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "nftPositionManager",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "periodLength",
@@ -322,42 +168,22 @@ export interface RewardsTestableInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "removeKickback",
-    values: [BigNumberish]
+    values: [string]
   ): string;
   encodeFunctionData(
-    functionFragment: "removeLiquidityPosition",
-    values: [DecreaseLiquidityParamsStruct]
+    functionFragment: "removeLiquidity",
+    values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "requireAuthorized",
     values: [boolean]
   ): string;
   encodeFunctionData(
-    functionFragment: "setLiquidationPenalty",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setMaxCollateralLiquidityDecreasePerPeriod",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMinHueCountPerPosition",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setTwapDuration",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "stop", values?: undefined): string;
   encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "twapDuration",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "uniswapV3Factory",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "updatePoolIncentive",
     values: [BigNumberish, BigNumberish]
@@ -366,7 +192,6 @@ export interface RewardsTestableInterface extends utils.Interface {
     functionFragment: "validUpdate",
     values: [BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: "weth", values?: undefined): string;
 
   decodeFunctionResult(functionFragment: "accounting", data: BytesLike): Result;
   decodeFunctionResult(
@@ -375,6 +200,10 @@ export interface RewardsTestableInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "addIncentivePool",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addLiquidity",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -387,15 +216,7 @@ export interface RewardsTestableInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "countPools", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "createLiquidityPosition",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "currentPeriod",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseLiquidityPosition",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "deployer", data: BytesLike): Result;
@@ -404,25 +225,9 @@ export interface RewardsTestableInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseLiquidityPosition",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "isLiquidityInRange",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "lastPeriodGlobalRewardsAccrued",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidateOutofRangePositions",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidationPenalty",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -431,14 +236,6 @@ export interface RewardsTestableInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "minCollateralLiquidityByPeriod",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "minHueCountPerPosition",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "nftPositionManager",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -458,7 +255,7 @@ export interface RewardsTestableInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "removeLiquidityPosition",
+    functionFragment: "removeLiquidity",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -466,31 +263,11 @@ export interface RewardsTestableInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setLiquidationPenalty",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "setMaxCollateralLiquidityDecreasePerPeriod",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMinHueCountPerPosition",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTwapDuration",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "stop", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "stopped", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "twapDuration",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "uniswapV3Factory",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "updatePoolIncentive",
     data: BytesLike
@@ -499,7 +276,6 @@ export interface RewardsTestableInterface extends utils.Interface {
     functionFragment: "validUpdate",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "weth", data: BytesLike): Result;
 
   events: {
     "LiquidationPenaltyUpdated(uint64)": EventFragment;
@@ -706,6 +482,13 @@ export interface RewardsTestable extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    addLiquidity(
+      pool: string,
+      count: BigNumberish,
+      ui: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     calculateUpdatedLiquidityPosition(
       _pt: PoolPositionStruct,
       rs: RewardStatusStruct,
@@ -719,28 +502,16 @@ export interface RewardsTestable extends BaseContract {
     >;
 
     claimRewards(
-      nftTokenID: BigNumberish,
+      pools: string[],
       ui: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     countPools(overrides?: CallOverrides): Promise<[number]>;
 
-    createLiquidityPosition(
-      params: MintParamsStruct,
-      ui: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     currentPeriod(
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { period: BigNumber }>;
-
-    decreaseLiquidityPosition(
-      params: DecreaseLiquidityParamsStruct,
-      ui: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
 
     deployer(overrides?: CallOverrides): Promise<[string]>;
 
@@ -748,35 +519,15 @@ export interface RewardsTestable extends BaseContract {
 
     governor(overrides?: CallOverrides): Promise<[string]>;
 
-    increaseLiquidityPosition(
-      params: IncreaseLiquidityParamsStruct,
-      ui: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     init(
       _collateralPool: string,
       _protocolPool: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    isLiquidityInRange(
-      position: PoolPositionStruct,
-      tick: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     lastPeriodGlobalRewardsAccrued(
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    liquidateOutofRangePositions(
-      pool: string,
-      nftTokenIDs: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    liquidationPenalty(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     maxCollateralLiquidityDecreasePerPeriod(
       overrides?: CallOverrides
@@ -788,10 +539,6 @@ export interface RewardsTestable extends BaseContract {
     ): Promise<
       [BigNumber, BigNumber] & { period: BigNumber; minLiquidity: BigNumber }
     >;
-
-    minHueCountPerPosition(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    nftPositionManager(overrides?: CallOverrides): Promise<[string]>;
 
     periodLength(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -805,12 +552,14 @@ export interface RewardsTestable extends BaseContract {
     poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<[number]>;
 
     removeKickback(
-      nftTokenID: BigNumberish,
+      pool: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    removeLiquidityPosition(
-      params: DecreaseLiquidityParamsStruct,
+    removeLiquidity(
+      pool: string,
+      count: BigNumberish,
+      ui: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -819,23 +568,8 @@ export interface RewardsTestable extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[void]>;
 
-    setLiquidationPenalty(
-      penalty: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     setMaxCollateralLiquidityDecreasePerPeriod(
       decreasePortion: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    setMinHueCountPerPosition(
-      min: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    setTwapDuration(
-      duration: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -845,10 +579,6 @@ export interface RewardsTestable extends BaseContract {
 
     stopped(overrides?: CallOverrides): Promise<[boolean]>;
 
-    twapDuration(overrides?: CallOverrides): Promise<[number]>;
-
-    uniswapV3Factory(overrides?: CallOverrides): Promise<[string]>;
-
     updatePoolIncentive(
       poolID: BigNumberish,
       incentive: BigNumberish,
@@ -856,8 +586,6 @@ export interface RewardsTestable extends BaseContract {
     ): Promise<ContractTransaction>;
 
     validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
-
-    weth(overrides?: CallOverrides): Promise<[string]>;
   };
 
   accounting(overrides?: CallOverrides): Promise<string>;
@@ -869,6 +597,13 @@ export interface RewardsTestable extends BaseContract {
   addIncentivePool(
     pool: string,
     rewardsPortion: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  addLiquidity(
+    pool: string,
+    count: BigNumberish,
+    ui: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -885,26 +620,14 @@ export interface RewardsTestable extends BaseContract {
   >;
 
   claimRewards(
-    nftTokenID: BigNumberish,
+    pools: string[],
     ui: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   countPools(overrides?: CallOverrides): Promise<number>;
 
-  createLiquidityPosition(
-    params: MintParamsStruct,
-    ui: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
-
-  decreaseLiquidityPosition(
-    params: DecreaseLiquidityParamsStruct,
-    ui: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   deployer(overrides?: CallOverrides): Promise<string>;
 
@@ -912,33 +635,13 @@ export interface RewardsTestable extends BaseContract {
 
   governor(overrides?: CallOverrides): Promise<string>;
 
-  increaseLiquidityPosition(
-    params: IncreaseLiquidityParamsStruct,
-    ui: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   init(
     _collateralPool: string,
     _protocolPool: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  isLiquidityInRange(
-    position: PoolPositionStruct,
-    tick: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   lastPeriodGlobalRewardsAccrued(overrides?: CallOverrides): Promise<BigNumber>;
-
-  liquidateOutofRangePositions(
-    pool: string,
-    nftTokenIDs: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  liquidationPenalty(overrides?: CallOverrides): Promise<BigNumber>;
 
   maxCollateralLiquidityDecreasePerPeriod(
     overrides?: CallOverrides
@@ -951,10 +654,6 @@ export interface RewardsTestable extends BaseContract {
     [BigNumber, BigNumber] & { period: BigNumber; minLiquidity: BigNumber }
   >;
 
-  minHueCountPerPosition(overrides?: CallOverrides): Promise<BigNumber>;
-
-  nftPositionManager(overrides?: CallOverrides): Promise<string>;
-
   periodLength(overrides?: CallOverrides): Promise<BigNumber>;
 
   poolConfigForPoolID(
@@ -965,12 +664,14 @@ export interface RewardsTestable extends BaseContract {
   poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<number>;
 
   removeKickback(
-    nftTokenID: BigNumberish,
+    pool: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  removeLiquidityPosition(
-    params: DecreaseLiquidityParamsStruct,
+  removeLiquidity(
+    pool: string,
+    count: BigNumberish,
+    ui: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -979,23 +680,8 @@ export interface RewardsTestable extends BaseContract {
     overrides?: CallOverrides
   ): Promise<void>;
 
-  setLiquidationPenalty(
-    penalty: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   setMaxCollateralLiquidityDecreasePerPeriod(
     decreasePortion: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  setMinHueCountPerPosition(
-    min: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  setTwapDuration(
-    duration: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -1005,10 +691,6 @@ export interface RewardsTestable extends BaseContract {
 
   stopped(overrides?: CallOverrides): Promise<boolean>;
 
-  twapDuration(overrides?: CallOverrides): Promise<number>;
-
-  uniswapV3Factory(overrides?: CallOverrides): Promise<string>;
-
   updatePoolIncentive(
     poolID: BigNumberish,
     incentive: BigNumberish,
@@ -1016,8 +698,6 @@ export interface RewardsTestable extends BaseContract {
   ): Promise<ContractTransaction>;
 
   validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
-
-  weth(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     accounting(overrides?: CallOverrides): Promise<string>;
@@ -1027,6 +707,13 @@ export interface RewardsTestable extends BaseContract {
     addIncentivePool(
       pool: string,
       rewardsPortion: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    addLiquidity(
+      pool: string,
+      count: BigNumberish,
+      ui: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1043,32 +730,14 @@ export interface RewardsTestable extends BaseContract {
     >;
 
     claimRewards(
-      nftTokenID: BigNumberish,
+      pools: string[],
       ui: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
-    >;
+    ): Promise<void>;
 
     countPools(overrides?: CallOverrides): Promise<number>;
 
-    createLiquidityPosition(
-      params: MintParamsStruct,
-      ui: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { nftTokenID: BigNumber; liquidity: BigNumber }
-    >;
-
     currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
-
-    decreaseLiquidityPosition(
-      params: DecreaseLiquidityParamsStruct,
-      ui: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
-    >;
 
     deployer(overrides?: CallOverrides): Promise<string>;
 
@@ -1076,35 +745,15 @@ export interface RewardsTestable extends BaseContract {
 
     governor(overrides?: CallOverrides): Promise<string>;
 
-    increaseLiquidityPosition(
-      params: IncreaseLiquidityParamsStruct,
-      ui: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     init(
       _collateralPool: string,
       _protocolPool: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    isLiquidityInRange(
-      position: PoolPositionStruct,
-      tick: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     lastPeriodGlobalRewardsAccrued(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    liquidateOutofRangePositions(
-      pool: string,
-      nftTokenIDs: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    liquidationPenalty(overrides?: CallOverrides): Promise<BigNumber>;
 
     maxCollateralLiquidityDecreasePerPeriod(
       overrides?: CallOverrides
@@ -1117,10 +766,6 @@ export interface RewardsTestable extends BaseContract {
       [BigNumber, BigNumber] & { period: BigNumber; minLiquidity: BigNumber }
     >;
 
-    minHueCountPerPosition(overrides?: CallOverrides): Promise<BigNumber>;
-
-    nftPositionManager(overrides?: CallOverrides): Promise<string>;
-
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
 
     poolConfigForPoolID(
@@ -1132,25 +777,17 @@ export interface RewardsTestable extends BaseContract {
 
     poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<number>;
 
-    removeKickback(
-      nftTokenID: BigNumberish,
+    removeKickback(pool: string, overrides?: CallOverrides): Promise<void>;
+
+    removeLiquidity(
+      pool: string,
+      count: BigNumberish,
+      ui: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    removeLiquidityPosition(
-      params: DecreaseLiquidityParamsStruct,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
-    >;
 
     requireAuthorized(
       authorized: boolean,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setLiquidationPenalty(
-      penalty: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1159,23 +796,9 @@ export interface RewardsTestable extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setMinHueCountPerPosition(
-      min: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setTwapDuration(
-      duration: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     stop(overrides?: CallOverrides): Promise<void>;
 
     stopped(overrides?: CallOverrides): Promise<boolean>;
-
-    twapDuration(overrides?: CallOverrides): Promise<number>;
-
-    uniswapV3Factory(overrides?: CallOverrides): Promise<string>;
 
     updatePoolIncentive(
       poolID: BigNumberish,
@@ -1184,8 +807,6 @@ export interface RewardsTestable extends BaseContract {
     ): Promise<void>;
 
     validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
-
-    weth(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -1339,6 +960,13 @@ export interface RewardsTestable extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    addLiquidity(
+      pool: string,
+      count: BigNumberish,
+      ui: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     calculateUpdatedLiquidityPosition(
       _pt: PoolPositionStruct,
       rs: RewardStatusStruct,
@@ -1347,26 +975,14 @@ export interface RewardsTestable extends BaseContract {
     ): Promise<BigNumber>;
 
     claimRewards(
-      nftTokenID: BigNumberish,
+      pools: string[],
       ui: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     countPools(overrides?: CallOverrides): Promise<BigNumber>;
 
-    createLiquidityPosition(
-      params: MintParamsStruct,
-      ui: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
-
-    decreaseLiquidityPosition(
-      params: DecreaseLiquidityParamsStruct,
-      ui: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
 
     deployer(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1374,35 +990,15 @@ export interface RewardsTestable extends BaseContract {
 
     governor(overrides?: CallOverrides): Promise<BigNumber>;
 
-    increaseLiquidityPosition(
-      params: IncreaseLiquidityParamsStruct,
-      ui: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     init(
       _collateralPool: string,
       _protocolPool: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    isLiquidityInRange(
-      position: PoolPositionStruct,
-      tick: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     lastPeriodGlobalRewardsAccrued(
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    liquidateOutofRangePositions(
-      pool: string,
-      nftTokenIDs: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    liquidationPenalty(overrides?: CallOverrides): Promise<BigNumber>;
 
     maxCollateralLiquidityDecreasePerPeriod(
       overrides?: CallOverrides
@@ -1412,10 +1008,6 @@ export interface RewardsTestable extends BaseContract {
       arg0: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    minHueCountPerPosition(overrides?: CallOverrides): Promise<BigNumber>;
-
-    nftPositionManager(overrides?: CallOverrides): Promise<BigNumber>;
 
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1427,12 +1019,14 @@ export interface RewardsTestable extends BaseContract {
     poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     removeKickback(
-      nftTokenID: BigNumberish,
+      pool: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    removeLiquidityPosition(
-      params: DecreaseLiquidityParamsStruct,
+    removeLiquidity(
+      pool: string,
+      count: BigNumberish,
+      ui: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1441,23 +1035,8 @@ export interface RewardsTestable extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    setLiquidationPenalty(
-      penalty: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     setMaxCollateralLiquidityDecreasePerPeriod(
       decreasePortion: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    setMinHueCountPerPosition(
-      min: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    setTwapDuration(
-      duration: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1467,10 +1046,6 @@ export interface RewardsTestable extends BaseContract {
 
     stopped(overrides?: CallOverrides): Promise<BigNumber>;
 
-    twapDuration(overrides?: CallOverrides): Promise<BigNumber>;
-
-    uniswapV3Factory(overrides?: CallOverrides): Promise<BigNumber>;
-
     updatePoolIncentive(
       poolID: BigNumberish,
       incentive: BigNumberish,
@@ -1478,8 +1053,6 @@ export interface RewardsTestable extends BaseContract {
     ): Promise<BigNumber>;
 
     validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-
-    weth(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1495,6 +1068,13 @@ export interface RewardsTestable extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    addLiquidity(
+      pool: string,
+      count: BigNumberish,
+      ui: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     calculateUpdatedLiquidityPosition(
       _pt: PoolPositionStruct,
       rs: RewardStatusStruct,
@@ -1503,26 +1083,14 @@ export interface RewardsTestable extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     claimRewards(
-      nftTokenID: BigNumberish,
+      pools: string[],
       ui: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     countPools(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    createLiquidityPosition(
-      params: MintParamsStruct,
-      ui: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     currentPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    decreaseLiquidityPosition(
-      params: DecreaseLiquidityParamsStruct,
-      ui: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
 
     deployer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1530,35 +1098,13 @@ export interface RewardsTestable extends BaseContract {
 
     governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    increaseLiquidityPosition(
-      params: IncreaseLiquidityParamsStruct,
-      ui: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     init(
       _collateralPool: string,
       _protocolPool: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    isLiquidityInRange(
-      position: PoolPositionStruct,
-      tick: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     lastPeriodGlobalRewardsAccrued(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    liquidateOutofRangePositions(
-      pool: string,
-      nftTokenIDs: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    liquidationPenalty(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1568,14 +1114,6 @@ export interface RewardsTestable extends BaseContract {
 
     minCollateralLiquidityByPeriod(
       arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    minHueCountPerPosition(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    nftPositionManager(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1592,12 +1130,14 @@ export interface RewardsTestable extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     removeKickback(
-      nftTokenID: BigNumberish,
+      pool: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    removeLiquidityPosition(
-      params: DecreaseLiquidityParamsStruct,
+    removeLiquidity(
+      pool: string,
+      count: BigNumberish,
+      ui: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1606,23 +1146,8 @@ export interface RewardsTestable extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    setLiquidationPenalty(
-      penalty: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     setMaxCollateralLiquidityDecreasePerPeriod(
       decreasePortion: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setMinHueCountPerPosition(
-      min: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setTwapDuration(
-      duration: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1631,10 +1156,6 @@ export interface RewardsTestable extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    twapDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    uniswapV3Factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     updatePoolIncentive(
       poolID: BigNumberish,
@@ -1646,7 +1167,5 @@ export interface RewardsTestable extends BaseContract {
       arg0: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    weth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

@@ -115,11 +115,9 @@ export interface MarketInterface extends utils.Interface {
     "setCollateralizationRequirement(uint256)": FunctionFragment;
     "setInterestPortionToLenders(uint256)": FunctionFragment;
     "setMinPositionSize(uint256)": FunctionFragment;
-    "setTwapDuration(uint32)": FunctionFragment;
     "stop()": FunctionFragment;
     "stopped()": FunctionFragment;
     "systemGetUpdatedPosition(uint64)": FunctionFragment;
-    "twapDuration()": FunctionFragment;
     "unlend(uint256)": FunctionFragment;
     "validUpdate(bytes4)": FunctionFragment;
     "valueOfLendTokensInHue(uint256)": FunctionFragment;
@@ -203,19 +201,11 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "setMinPositionSize",
     values: [BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "setTwapDuration",
-    values: [BigNumberish]
-  ): string;
   encodeFunctionData(functionFragment: "stop", values?: undefined): string;
   encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "systemGetUpdatedPosition",
     values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "twapDuration",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "unlend",
@@ -305,18 +295,10 @@ export interface MarketInterface extends utils.Interface {
     functionFragment: "setMinPositionSize",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTwapDuration",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "stop", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "stopped", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "systemGetUpdatedPosition",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "twapDuration",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "unlend", data: BytesLike): Result;
@@ -587,11 +569,6 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setTwapDuration(
-      duration: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     stop(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -602,8 +579,6 @@ export interface Market extends BaseContract {
       positionID: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    twapDuration(overrides?: CallOverrides): Promise<[number]>;
 
     unlend(
       lendTokenCount: BigNumberish,
@@ -705,11 +680,6 @@ export interface Market extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setTwapDuration(
-    duration: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   stop(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -720,8 +690,6 @@ export interface Market extends BaseContract {
     positionID: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  twapDuration(overrides?: CallOverrides): Promise<number>;
 
   unlend(
     lendTokenCount: BigNumberish,
@@ -816,11 +784,6 @@ export interface Market extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setTwapDuration(
-      duration: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     stop(overrides?: CallOverrides): Promise<void>;
 
     stopped(overrides?: CallOverrides): Promise<boolean>;
@@ -829,8 +792,6 @@ export interface Market extends BaseContract {
       positionID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<DebtPositionStructOutput>;
-
-    twapDuration(overrides?: CallOverrides): Promise<number>;
 
     unlend(
       lendTokenCount: BigNumberish,
@@ -1055,11 +1016,6 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    setTwapDuration(
-      duration: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     stop(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1070,8 +1026,6 @@ export interface Market extends BaseContract {
       positionID: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    twapDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
     unlend(
       lendTokenCount: BigNumberish,
@@ -1178,11 +1132,6 @@ export interface Market extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setTwapDuration(
-      duration: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     stop(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -1193,8 +1142,6 @@ export interface Market extends BaseContract {
       positionID: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    twapDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     unlend(
       lendTokenCount: BigNumberish,

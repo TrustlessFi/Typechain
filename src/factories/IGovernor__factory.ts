@@ -381,6 +381,19 @@ const _abi = [
         type: "address",
       },
     ],
+    name: "requireCollateralPriceUpdateAccess",
+    outputs: [],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "caller",
+        type: "address",
+      },
+    ],
     name: "requireDebtServicesAccess",
     outputs: [],
     stateMutability: "view",
@@ -395,19 +408,6 @@ const _abi = [
       },
     ],
     name: "requireHueReservesBurnAccess",
-    outputs: [],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "caller",
-        type: "address",
-      },
-    ],
-    name: "requireInitializePoolAccess",
     outputs: [],
     stateMutability: "view",
     type: "function",

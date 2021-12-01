@@ -104,24 +104,6 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "nftID",
-        type: "uint256",
-      },
-    ],
-    name: "addPositionToIndex",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         internalType: "uint32[]",
         name: "ids",
         type: "uint32[]",
@@ -161,8 +143,8 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "contract IUniswapV3Pool",
-        name: "pool",
+        internalType: "contract IUniswapV2Pair",
+        name: "pair",
         type: "address",
       },
       {
@@ -172,19 +154,6 @@ const _abi = [
       },
     ],
     name: "decreasePoolLiquidity",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "nftID",
-        type: "uint256",
-      },
-    ],
-    name: "deletePoolPosition",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -229,60 +198,20 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "nftID",
-        type: "uint256",
+        internalType: "address",
+        name: "positionOwner",
+        type: "address",
+      },
+      {
+        internalType: "uint16",
+        name: "poolID",
+        type: "uint16",
       },
     ],
     name: "getPoolPosition",
     outputs: [
       {
         components: [
-          {
-            internalType: "address",
-            name: "owner",
-            type: "address",
-          },
-          {
-            internalType: "uint16",
-            name: "poolID",
-            type: "uint16",
-          },
-          {
-            internalType: "uint256",
-            name: "cumulativeLiquidity",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "totalRewards",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "lastBlockPositionIncreased",
-            type: "uint256",
-          },
-          {
-            internalType: "uint128",
-            name: "liquidity",
-            type: "uint128",
-          },
-          {
-            internalType: "uint64",
-            name: "lastTimeRewarded",
-            type: "uint64",
-          },
-          {
-            internalType: "int24",
-            name: "tickLower",
-            type: "int24",
-          },
-          {
-            internalType: "int24",
-            name: "tickUpper",
-            type: "int24",
-          },
           {
             internalType: "uint32",
             name: "ui",
@@ -298,9 +227,34 @@ const _abi = [
             name: "kickbackPortion",
             type: "uint64",
           },
+          {
+            internalType: "uint256",
+            name: "liquidity",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "cumulativeLiquidity",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "totalRewards",
+            type: "uint256",
+          },
+          {
+            internalType: "uint64",
+            name: "lastTimeRewarded",
+            type: "uint64",
+          },
+          {
+            internalType: "uint256",
+            name: "lastBlockPositionIncreased",
+            type: "uint256",
+          },
         ],
         internalType: "struct IAccounting.PoolPosition",
-        name: "pt",
+        name: "pp",
         type: "tuple",
       },
     ],
@@ -488,8 +442,8 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "contract IUniswapV3Pool",
-        name: "pool",
+        internalType: "contract IUniswapV2Pair",
+        name: "pair",
         type: "address",
       },
       {
@@ -519,21 +473,8 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "newRewards",
-        type: "address",
-      },
-    ],
-    name: "onRewardsUpgrade",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "contract IUniswapV3Pool",
-        name: "pool",
+        internalType: "contract IUniswapV2Pair",
+        name: "pair",
         type: "address",
       },
     ],
@@ -587,57 +528,17 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "nftID",
-        type: "uint256",
+        internalType: "address",
+        name: "positionOwner",
+        type: "address",
+      },
+      {
+        internalType: "uint16",
+        name: "poolID",
+        type: "uint16",
       },
       {
         components: [
-          {
-            internalType: "address",
-            name: "owner",
-            type: "address",
-          },
-          {
-            internalType: "uint16",
-            name: "poolID",
-            type: "uint16",
-          },
-          {
-            internalType: "uint256",
-            name: "cumulativeLiquidity",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "totalRewards",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "lastBlockPositionIncreased",
-            type: "uint256",
-          },
-          {
-            internalType: "uint128",
-            name: "liquidity",
-            type: "uint128",
-          },
-          {
-            internalType: "uint64",
-            name: "lastTimeRewarded",
-            type: "uint64",
-          },
-          {
-            internalType: "int24",
-            name: "tickLower",
-            type: "int24",
-          },
-          {
-            internalType: "int24",
-            name: "tickUpper",
-            type: "int24",
-          },
           {
             internalType: "uint32",
             name: "ui",
@@ -653,9 +554,34 @@ const _abi = [
             name: "kickbackPortion",
             type: "uint64",
           },
+          {
+            internalType: "uint256",
+            name: "liquidity",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "cumulativeLiquidity",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "totalRewards",
+            type: "uint256",
+          },
+          {
+            internalType: "uint64",
+            name: "lastTimeRewarded",
+            type: "uint64",
+          },
+          {
+            internalType: "uint256",
+            name: "lastBlockPositionIncreased",
+            type: "uint256",
+          },
         ],
         internalType: "struct IAccounting.PoolPosition",
-        name: "pt",
+        name: "pp",
         type: "tuple",
       },
     ],
@@ -810,6 +736,29 @@ const _abi = [
       },
     ],
     name: "setSystemDebtInfo",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IUniswapV2Pair",
+        name: "pair",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "dest",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "count",
+        type: "uint256",
+      },
+    ],
+    name: "transferPoolTokens",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
