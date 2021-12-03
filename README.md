@@ -1,3 +1,3 @@
 # Typechain
 
-Available in npm/yarn here: https://www.npmjs.com/package/@trustlessfi/typechain
+Available as an npm package [@trustlessfi/typechain](https://www.npmjs.com/package/@trustlessfi/typechain).
