@@ -17,42 +17,59 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export type ConstructorParamsStruct = { Governor: string; Hue: string };
-
-export type ConstructorParamsStructOutput = [string, string] & {
+export type ConstructorParamsStruct = {
   Governor: string;
   Hue: string;
+  NftPositionManager: string;
+};
+
+export type ConstructorParamsStructOutput = [string, string, string] & {
+  Governor: string;
+  Hue: string;
+  NftPositionManager: string;
 };
 
 export type PoolPositionStruct = {
+  owner: string;
+  poolID: BigNumberish;
+  cumulativeLiquidity: BigNumberish;
+  totalRewards: BigNumberish;
+  lastBlockPositionIncreased: BigNumberish;
+  liquidity: BigNumberish;
+  lastTimeRewarded: BigNumberish;
+  tickLower: BigNumberish;
+  tickUpper: BigNumberish;
   ui: BigNumberish;
   kickbackDestination: string;
   kickbackPortion: BigNumberish;
-  liquidity: BigNumberish;
-  cumulativeLiquidity: BigNumberish;
-  totalRewards: BigNumberish;
-  lastTimeRewarded: BigNumberish;
-  lastBlockPositionIncreased: BigNumberish;
 };
 
 export type PoolPositionStructOutput = [
+  string,
+  number,
+  BigNumber,
+  BigNumber,
+  BigNumber,
+  BigNumber,
+  BigNumber,
+  number,
+  number,
   number,
   string,
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  BigNumber,
-  BigNumber,
   BigNumber
 ] & {
+  owner: string;
+  poolID: number;
+  cumulativeLiquidity: BigNumber;
+  totalRewards: BigNumber;
+  lastBlockPositionIncreased: BigNumber;
+  liquidity: BigNumber;
+  lastTimeRewarded: BigNumber;
+  tickLower: number;
+  tickUpper: number;
   ui: number;
   kickbackDestination: string;
   kickbackPortion: BigNumber;
-  liquidity: BigNumber;
-  cumulativeLiquidity: BigNumber;
-  totalRewards: BigNumber;
-  lastTimeRewarded: BigNumber;
-  lastBlockPositionIncreased: BigNumber;
 };
 
 export type DebtPositionStruct = {
@@ -155,15 +172,18 @@ export type UserInterfaceStructOutput = [
 export interface AccountingInterface extends utils.Interface {
   functions: {
     "TICK_SPACING()": FunctionFragment;
+    "addPositionToIndex(address,uint256)": FunctionFragment;
     "approveUIs(uint32[])": FunctionFragment;
     "debt()": FunctionFragment;
     "debtPositionIndexingEnabled()": FunctionFragment;
     "decreaseDebt(uint256)": FunctionFragment;
     "decreasePoolLiquidity(address,uint256)": FunctionFragment;
+    "deletePoolPosition(uint256)": FunctionFragment;
     "deployer()": FunctionFragment;
     "disapproveUIs(uint32[])": FunctionFragment;
     "getBasicPositionInfo(uint64)": FunctionFragment;
-    "getPoolPosition(address,uint16)": FunctionFragment;
+    "getPoolPosition(uint256)": FunctionFragment;
+    "getPoolPositionNftIdsByOwner(address)": FunctionFragment;
     "getPosition(uint64)": FunctionFragment;
     "getRewardStatus(uint16)": FunctionFragment;
     "getSystemDebtInfo()": FunctionFragment;
@@ -174,17 +194,20 @@ export interface AccountingInterface extends utils.Interface {
     "increaseDebt(uint256)": FunctionFragment;
     "increaseLentHue(uint256)": FunctionFragment;
     "increasePoolLiquidity(address,uint256)": FunctionFragment;
+    "init()": FunctionFragment;
     "initializeUI(uint32,string)": FunctionFragment;
     "lentHue()": FunctionFragment;
     "nextUserInterfaceID()": FunctionFragment;
+    "nftPositionManager()": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
+    "onRewardsUpgrade(address)": FunctionFragment;
     "poolLiquidity(address)": FunctionFragment;
     "poolPositionIndexingEnabled()": FunctionFragment;
     "positionsForTick(int24)": FunctionFragment;
     "registerUI(uint64,uint24)": FunctionFragment;
     "sendCollateral(address,uint256)": FunctionFragment;
     "sendLentHue(address,uint256)": FunctionFragment;
-    "setPoolPosition(address,uint16,(uint32,address,uint64,uint256,uint256,uint256,uint64,uint256))": FunctionFragment;
+    "setPoolPosition(uint256,(address,uint16,uint256,uint256,uint256,uint128,uint64,int24,int24,uint32,address,uint64))": FunctionFragment;
     "setPosition(uint64,(uint256,uint256,uint256,uint256,uint256,uint64,uint64,int24,bool,uint64,uint32,address,uint64))": FunctionFragment;
     "setRewardStatus(uint16,(uint256,uint256))": FunctionFragment;
     "setSystemDebtInfo((uint256,uint256,uint256,uint256))": FunctionFragment;
@@ -193,7 +216,6 @@ export interface AccountingInterface extends utils.Interface {
     "stopIndexingPoolPositions()": FunctionFragment;
     "stopped()": FunctionFragment;
     "sweepHue()": FunctionFragment;
-    "transferPoolTokens(address,address,uint256)": FunctionFragment;
     "userInterfaces(uint256)": FunctionFragment;
     "validUpdate(bytes4)": FunctionFragment;
   };
@@ -201,6 +223,10 @@ export interface AccountingInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "TICK_SPACING",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addPositionToIndex",
+    values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "approveUIs",
@@ -219,6 +245,10 @@ export interface AccountingInterface extends utils.Interface {
     functionFragment: "decreasePoolLiquidity",
     values: [string, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "deletePoolPosition",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "deployer", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "disapproveUIs",
@@ -230,7 +260,11 @@ export interface AccountingInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getPoolPosition",
-    values: [string, BigNumberish]
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPoolPositionNftIdsByOwner",
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "getPosition",
@@ -266,6 +300,7 @@ export interface AccountingInterface extends utils.Interface {
     functionFragment: "increasePoolLiquidity",
     values: [string, BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: "init", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "initializeUI",
     values: [BigNumberish, string]
@@ -276,8 +311,16 @@ export interface AccountingInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "nftPositionManager",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "onERC721Received",
     values: [string, string, BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "onRewardsUpgrade",
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "poolLiquidity",
@@ -305,7 +348,7 @@ export interface AccountingInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setPoolPosition",
-    values: [string, BigNumberish, PoolPositionStruct]
+    values: [BigNumberish, PoolPositionStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "setPosition",
@@ -334,10 +377,6 @@ export interface AccountingInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
   encodeFunctionData(functionFragment: "sweepHue", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "transferPoolTokens",
-    values: [string, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "userInterfaces",
     values: [BigNumberish]
   ): string;
@@ -348,6 +387,10 @@ export interface AccountingInterface extends utils.Interface {
 
   decodeFunctionResult(
     functionFragment: "TICK_SPACING",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addPositionToIndex",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "approveUIs", data: BytesLike): Result;
@@ -364,6 +407,10 @@ export interface AccountingInterface extends utils.Interface {
     functionFragment: "decreasePoolLiquidity",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "deletePoolPosition",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "deployer", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "disapproveUIs",
@@ -375,6 +422,10 @@ export interface AccountingInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getPoolPosition",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPoolPositionNftIdsByOwner",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -405,6 +456,7 @@ export interface AccountingInterface extends utils.Interface {
     functionFragment: "increasePoolLiquidity",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "initializeUI",
     data: BytesLike
@@ -415,7 +467,15 @@ export interface AccountingInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "nftPositionManager",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "onERC721Received",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onRewardsUpgrade",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -469,10 +529,6 @@ export interface AccountingInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "stopped", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "sweepHue", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "transferPoolTokens",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "userInterfaces",
     data: BytesLike
@@ -575,6 +631,12 @@ export interface Accounting extends BaseContract {
   functions: {
     TICK_SPACING(overrides?: CallOverrides): Promise<[number]>;
 
+    addPositionToIndex(
+      owner: string,
+      nftID: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     approveUIs(
       ids: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -592,6 +654,11 @@ export interface Accounting extends BaseContract {
     decreasePoolLiquidity(
       pool: string,
       liquidity: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    deletePoolPosition(
+      nftID: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -613,10 +680,14 @@ export interface Accounting extends BaseContract {
     >;
 
     getPoolPosition(
-      positionOwner: string,
-      poolID: BigNumberish,
+      nftID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[PoolPositionStructOutput] & { pp: PoolPositionStructOutput }>;
+
+    getPoolPositionNftIdsByOwner(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[]]>;
 
     getPosition(
       positionID: BigNumberish,
@@ -666,6 +737,10 @@ export interface Accounting extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    init(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     initializeUI(
       interfaceID: BigNumberish,
       ipfsHash: string,
@@ -676,6 +751,8 @@ export interface Accounting extends BaseContract {
 
     nextUserInterfaceID(overrides?: CallOverrides): Promise<[number]>;
 
+    nftPositionManager(overrides?: CallOverrides): Promise<[string]>;
+
     onERC721Received(
       arg0: string,
       arg1: string,
@@ -683,6 +760,11 @@ export interface Accounting extends BaseContract {
       arg3: BytesLike,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    onRewardsUpgrade(
+      newRewards: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     poolLiquidity(
       arg0: string,
@@ -715,8 +797,7 @@ export interface Accounting extends BaseContract {
     ): Promise<ContractTransaction>;
 
     setPoolPosition(
-      positionOwner: string,
-      poolID: BigNumberish,
+      nftID: BigNumberish,
       pp: PoolPositionStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -758,13 +839,6 @@ export interface Accounting extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    transferPoolTokens(
-      pair: string,
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     userInterfaces(
       arg0: BigNumberish,
       overrides?: CallOverrides
@@ -782,6 +856,12 @@ export interface Accounting extends BaseContract {
   };
 
   TICK_SPACING(overrides?: CallOverrides): Promise<number>;
+
+  addPositionToIndex(
+    owner: string,
+    nftID: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   approveUIs(
     ids: BigNumberish[],
@@ -803,6 +883,11 @@ export interface Accounting extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  deletePoolPosition(
+    nftID: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   deployer(overrides?: CallOverrides): Promise<string>;
 
   disapproveUIs(
@@ -821,10 +906,14 @@ export interface Accounting extends BaseContract {
   >;
 
   getPoolPosition(
-    positionOwner: string,
-    poolID: BigNumberish,
+    nftID: BigNumberish,
     overrides?: CallOverrides
   ): Promise<PoolPositionStructOutput>;
+
+  getPoolPositionNftIdsByOwner(
+    owner: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber[]>;
 
   getPosition(
     positionID: BigNumberish,
@@ -872,6 +961,10 @@ export interface Accounting extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  init(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   initializeUI(
     interfaceID: BigNumberish,
     ipfsHash: string,
@@ -882,6 +975,8 @@ export interface Accounting extends BaseContract {
 
   nextUserInterfaceID(overrides?: CallOverrides): Promise<number>;
 
+  nftPositionManager(overrides?: CallOverrides): Promise<string>;
+
   onERC721Received(
     arg0: string,
     arg1: string,
@@ -889,6 +984,11 @@ export interface Accounting extends BaseContract {
     arg3: BytesLike,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  onRewardsUpgrade(
+    newRewards: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   poolLiquidity(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -918,8 +1018,7 @@ export interface Accounting extends BaseContract {
   ): Promise<ContractTransaction>;
 
   setPoolPosition(
-    positionOwner: string,
-    poolID: BigNumberish,
+    nftID: BigNumberish,
     pp: PoolPositionStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -961,13 +1060,6 @@ export interface Accounting extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  transferPoolTokens(
-    pair: string,
-    dest: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   userInterfaces(
     arg0: BigNumberish,
     overrides?: CallOverrides
@@ -986,6 +1078,12 @@ export interface Accounting extends BaseContract {
   callStatic: {
     TICK_SPACING(overrides?: CallOverrides): Promise<number>;
 
+    addPositionToIndex(
+      owner: string,
+      nftID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     approveUIs(ids: BigNumberish[], overrides?: CallOverrides): Promise<void>;
 
     debt(overrides?: CallOverrides): Promise<BigNumber>;
@@ -997,6 +1095,11 @@ export interface Accounting extends BaseContract {
     decreasePoolLiquidity(
       pool: string,
       liquidity: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    deletePoolPosition(
+      nftID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1018,10 +1121,14 @@ export interface Accounting extends BaseContract {
     >;
 
     getPoolPosition(
-      positionOwner: string,
-      poolID: BigNumberish,
+      nftID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PoolPositionStructOutput>;
+
+    getPoolPositionNftIdsByOwner(
+      owner: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber[]>;
 
     getPosition(
       positionID: BigNumberish,
@@ -1066,6 +1173,8 @@ export interface Accounting extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    init(overrides?: CallOverrides): Promise<void>;
+
     initializeUI(
       interfaceID: BigNumberish,
       ipfsHash: string,
@@ -1076,6 +1185,8 @@ export interface Accounting extends BaseContract {
 
     nextUserInterfaceID(overrides?: CallOverrides): Promise<number>;
 
+    nftPositionManager(overrides?: CallOverrides): Promise<string>;
+
     onERC721Received(
       arg0: string,
       arg1: string,
@@ -1083,6 +1194,11 @@ export interface Accounting extends BaseContract {
       arg3: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    onRewardsUpgrade(
+      newRewards: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     poolLiquidity(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1112,8 +1228,7 @@ export interface Accounting extends BaseContract {
     ): Promise<void>;
 
     setPoolPosition(
-      positionOwner: string,
-      poolID: BigNumberish,
+      nftID: BigNumberish,
       pp: PoolPositionStruct,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -1148,13 +1263,6 @@ export interface Accounting extends BaseContract {
     stopped(overrides?: CallOverrides): Promise<boolean>;
 
     sweepHue(overrides?: CallOverrides): Promise<void>;
-
-    transferPoolTokens(
-      pair: string,
-      dest: string,
-      count: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     userInterfaces(
       arg0: BigNumberish,
@@ -1216,6 +1324,12 @@ export interface Accounting extends BaseContract {
   estimateGas: {
     TICK_SPACING(overrides?: CallOverrides): Promise<BigNumber>;
 
+    addPositionToIndex(
+      owner: string,
+      nftID: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     approveUIs(
       ids: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1236,6 +1350,11 @@ export interface Accounting extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    deletePoolPosition(
+      nftID: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     deployer(overrides?: CallOverrides): Promise<BigNumber>;
 
     disapproveUIs(
@@ -1249,8 +1368,12 @@ export interface Accounting extends BaseContract {
     ): Promise<BigNumber>;
 
     getPoolPosition(
-      positionOwner: string,
-      poolID: BigNumberish,
+      nftID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getPoolPositionNftIdsByOwner(
+      owner: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1298,6 +1421,10 @@ export interface Accounting extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    init(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     initializeUI(
       interfaceID: BigNumberish,
       ipfsHash: string,
@@ -1308,12 +1435,19 @@ export interface Accounting extends BaseContract {
 
     nextUserInterfaceID(overrides?: CallOverrides): Promise<BigNumber>;
 
+    nftPositionManager(overrides?: CallOverrides): Promise<BigNumber>;
+
     onERC721Received(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
       arg3: BytesLike,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    onRewardsUpgrade(
+      newRewards: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     poolLiquidity(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1344,8 +1478,7 @@ export interface Accounting extends BaseContract {
     ): Promise<BigNumber>;
 
     setPoolPosition(
-      positionOwner: string,
-      poolID: BigNumberish,
+      nftID: BigNumberish,
       pp: PoolPositionStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1387,13 +1520,6 @@ export interface Accounting extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    transferPoolTokens(
-      pair: string,
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     userInterfaces(
       arg0: BigNumberish,
       overrides?: CallOverrides
@@ -1404,6 +1530,12 @@ export interface Accounting extends BaseContract {
 
   populateTransaction: {
     TICK_SPACING(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    addPositionToIndex(
+      owner: string,
+      nftID: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     approveUIs(
       ids: BigNumberish[],
@@ -1427,6 +1559,11 @@ export interface Accounting extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    deletePoolPosition(
+      nftID: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     deployer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     disapproveUIs(
@@ -1440,8 +1577,12 @@ export interface Accounting extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     getPoolPosition(
-      positionOwner: string,
-      poolID: BigNumberish,
+      nftID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getPoolPositionNftIdsByOwner(
+      owner: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1489,6 +1630,10 @@ export interface Accounting extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    init(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     initializeUI(
       interfaceID: BigNumberish,
       ipfsHash: string,
@@ -1501,12 +1646,21 @@ export interface Accounting extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    nftPositionManager(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     onERC721Received(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
       arg3: BytesLike,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    onRewardsUpgrade(
+      newRewards: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     poolLiquidity(
@@ -1542,8 +1696,7 @@ export interface Accounting extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setPoolPosition(
-      positionOwner: string,
-      poolID: BigNumberish,
+      nftID: BigNumberish,
       pp: PoolPositionStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -1582,13 +1735,6 @@ export interface Accounting extends BaseContract {
     stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     sweepHue(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    transferPoolTokens(
-      pair: string,
-      dest: string,
-      count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -133,9 +133,11 @@ export interface MarketTestableInterface extends utils.Interface {
         "setCollateralizationRequirement(uint256)": FunctionFragment;
         "setInterestPortionToLenders(uint256)": FunctionFragment;
         "setMinPositionSize(uint256)": FunctionFragment;
+        "setTwapDuration(uint32)": FunctionFragment;
         "stop()": FunctionFragment;
         "stopped()": FunctionFragment;
         "systemGetUpdatedPosition(uint64)": FunctionFragment;
+        "twapDuration()": FunctionFragment;
         "unlend(uint256)": FunctionFragment;
         "updatePositionImpl((uint256,uint256,uint256,uint256,uint256,uint64,uint64,int24,bool,uint64,uint32,address,uint64),(uint256,uint256,uint256,uint256),uint64)": FunctionFragment;
         "validUpdate(bytes4)": FunctionFragment;
@@ -173,9 +175,11 @@ export interface MarketTestableInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "setCollateralizationRequirement", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "setInterestPortionToLenders", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "setMinPositionSize", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "setTwapDuration", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "stop", values?: undefined): string;
     encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
     encodeFunctionData(functionFragment: "systemGetUpdatedPosition", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "twapDuration", values?: undefined): string;
     encodeFunctionData(functionFragment: "unlend", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "updatePositionImpl", values: [DebtPositionStruct, SystemDebtInfoStruct, BigNumberish]): string;
     encodeFunctionData(functionFragment: "validUpdate", values: [BytesLike]): string;
@@ -205,9 +209,11 @@ export interface MarketTestableInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "setCollateralizationRequirement", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setInterestPortionToLenders", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setMinPositionSize", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setTwapDuration", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "stop", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "stopped", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "systemGetUpdatedPosition", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "twapDuration", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "unlend", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "updatePositionImpl", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "validUpdate", data: BytesLike): Result;
@@ -419,6 +425,9 @@ export interface MarketTestable extends BaseContract {
         setMinPositionSize(size: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
+        setTwapDuration(duration: BigNumberish, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<ContractTransaction>;
         stop(overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
@@ -426,6 +435,7 @@ export interface MarketTestable extends BaseContract {
         systemGetUpdatedPosition(positionID: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
+        twapDuration(overrides?: CallOverrides): Promise<[number]>;
         unlend(lendTokenCount: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
@@ -486,6 +496,9 @@ export interface MarketTestable extends BaseContract {
     setMinPositionSize(size: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
+    setTwapDuration(duration: BigNumberish, overrides?: Overrides & {
+        from?: string | Promise<string>;
+    }): Promise<ContractTransaction>;
     stop(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
@@ -493,6 +506,7 @@ export interface MarketTestable extends BaseContract {
     systemGetUpdatedPosition(positionID: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
+    twapDuration(overrides?: CallOverrides): Promise<number>;
     unlend(lendTokenCount: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
@@ -531,9 +545,11 @@ export interface MarketTestable extends BaseContract {
         setCollateralizationRequirement(requirement: BigNumberish, overrides?: CallOverrides): Promise<void>;
         setInterestPortionToLenders(percentage: BigNumberish, overrides?: CallOverrides): Promise<void>;
         setMinPositionSize(size: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        setTwapDuration(duration: BigNumberish, overrides?: CallOverrides): Promise<void>;
         stop(overrides?: CallOverrides): Promise<void>;
         stopped(overrides?: CallOverrides): Promise<boolean>;
         systemGetUpdatedPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<DebtPositionStructOutput>;
+        twapDuration(overrides?: CallOverrides): Promise<number>;
         unlend(lendTokenCount: BigNumberish, overrides?: CallOverrides): Promise<void>;
         updatePositionImpl(_position: DebtPositionStruct, sdi: SystemDebtInfoStruct, timeNow: BigNumberish, overrides?: CallOverrides): Promise<[
             DebtPositionStructOutput,
@@ -619,6 +635,9 @@ export interface MarketTestable extends BaseContract {
         setMinPositionSize(size: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
+        setTwapDuration(duration: BigNumberish, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<BigNumber>;
         stop(overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
@@ -626,6 +645,7 @@ export interface MarketTestable extends BaseContract {
         systemGetUpdatedPosition(positionID: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
+        twapDuration(overrides?: CallOverrides): Promise<BigNumber>;
         unlend(lendTokenCount: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
@@ -681,6 +701,9 @@ export interface MarketTestable extends BaseContract {
         setMinPositionSize(size: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
+        setTwapDuration(duration: BigNumberish, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<PopulatedTransaction>;
         stop(overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
@@ -688,6 +711,7 @@ export interface MarketTestable extends BaseContract {
         systemGetUpdatedPosition(positionID: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
+        twapDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         unlend(lendTokenCount: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;

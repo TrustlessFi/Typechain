@@ -3,33 +3,45 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export declare type PoolPositionStruct = {
+    owner: string;
+    poolID: BigNumberish;
+    cumulativeLiquidity: BigNumberish;
+    totalRewards: BigNumberish;
+    lastBlockPositionIncreased: BigNumberish;
+    liquidity: BigNumberish;
+    lastTimeRewarded: BigNumberish;
+    tickLower: BigNumberish;
+    tickUpper: BigNumberish;
     ui: BigNumberish;
     kickbackDestination: string;
     kickbackPortion: BigNumberish;
-    liquidity: BigNumberish;
-    cumulativeLiquidity: BigNumberish;
-    totalRewards: BigNumberish;
-    lastTimeRewarded: BigNumberish;
-    lastBlockPositionIncreased: BigNumberish;
 };
 export declare type PoolPositionStructOutput = [
+    string,
+    number,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    number,
+    number,
     number,
     string,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
     BigNumber
 ] & {
+    owner: string;
+    poolID: number;
+    cumulativeLiquidity: BigNumber;
+    totalRewards: BigNumber;
+    lastBlockPositionIncreased: BigNumber;
+    liquidity: BigNumber;
+    lastTimeRewarded: BigNumber;
+    tickLower: number;
+    tickUpper: number;
     ui: number;
     kickbackDestination: string;
     kickbackPortion: BigNumber;
-    liquidity: BigNumber;
-    cumulativeLiquidity: BigNumber;
-    totalRewards: BigNumber;
-    lastTimeRewarded: BigNumber;
-    lastBlockPositionIncreased: BigNumber;
 };
 export declare type DebtPositionStruct = {
     startCumulativeDebt: BigNumberish;
@@ -102,13 +114,15 @@ export declare type SystemDebtInfoStructOutput = [
 };
 export interface IAccountingInterface extends utils.Interface {
     functions: {
+        "addPositionToIndex(address,uint256)": FunctionFragment;
         "approveUIs(uint32[])": FunctionFragment;
         "debt()": FunctionFragment;
         "decreaseDebt(uint256)": FunctionFragment;
         "decreasePoolLiquidity(address,uint256)": FunctionFragment;
+        "deletePoolPosition(uint256)": FunctionFragment;
         "disapproveUIs(uint32[])": FunctionFragment;
         "getBasicPositionInfo(uint64)": FunctionFragment;
-        "getPoolPosition(address,uint16)": FunctionFragment;
+        "getPoolPosition(uint256)": FunctionFragment;
         "getPosition(uint64)": FunctionFragment;
         "getRewardStatus(uint16)": FunctionFragment;
         "getSystemDebtInfo()": FunctionFragment;
@@ -116,22 +130,24 @@ export interface IAccountingInterface extends utils.Interface {
         "increaseLentHue(uint256)": FunctionFragment;
         "increasePoolLiquidity(address,uint256)": FunctionFragment;
         "lentHue()": FunctionFragment;
+        "onRewardsUpgrade(address)": FunctionFragment;
         "poolLiquidity(address)": FunctionFragment;
         "sendCollateral(address,uint256)": FunctionFragment;
         "sendLentHue(address,uint256)": FunctionFragment;
-        "setPoolPosition(address,uint16,(uint32,address,uint64,uint256,uint256,uint256,uint64,uint256))": FunctionFragment;
+        "setPoolPosition(uint256,(address,uint16,uint256,uint256,uint256,uint128,uint64,int24,int24,uint32,address,uint64))": FunctionFragment;
         "setPosition(uint64,(uint256,uint256,uint256,uint256,uint256,uint64,uint64,int24,bool,uint64,uint32,address,uint64))": FunctionFragment;
         "setRewardStatus(uint16,(uint256,uint256))": FunctionFragment;
         "setSystemDebtInfo((uint256,uint256,uint256,uint256))": FunctionFragment;
-        "transferPoolTokens(address,address,uint256)": FunctionFragment;
     };
+    encodeFunctionData(functionFragment: "addPositionToIndex", values: [string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "approveUIs", values: [BigNumberish[]]): string;
     encodeFunctionData(functionFragment: "debt", values?: undefined): string;
     encodeFunctionData(functionFragment: "decreaseDebt", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "decreasePoolLiquidity", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "deletePoolPosition", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "disapproveUIs", values: [BigNumberish[]]): string;
     encodeFunctionData(functionFragment: "getBasicPositionInfo", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getPoolPosition", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "getPoolPosition", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getPosition", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getRewardStatus", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getSystemDebtInfo", values?: undefined): string;
@@ -139,18 +155,20 @@ export interface IAccountingInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "increaseLentHue", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "increasePoolLiquidity", values: [string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "lentHue", values?: undefined): string;
+    encodeFunctionData(functionFragment: "onRewardsUpgrade", values: [string]): string;
     encodeFunctionData(functionFragment: "poolLiquidity", values: [string]): string;
     encodeFunctionData(functionFragment: "sendCollateral", values: [string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "sendLentHue", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setPoolPosition", values: [string, BigNumberish, PoolPositionStruct]): string;
+    encodeFunctionData(functionFragment: "setPoolPosition", values: [BigNumberish, PoolPositionStruct]): string;
     encodeFunctionData(functionFragment: "setPosition", values: [BigNumberish, DebtPositionStruct]): string;
     encodeFunctionData(functionFragment: "setRewardStatus", values: [BigNumberish, RewardStatusStruct]): string;
     encodeFunctionData(functionFragment: "setSystemDebtInfo", values: [SystemDebtInfoStruct]): string;
-    encodeFunctionData(functionFragment: "transferPoolTokens", values: [string, string, BigNumberish]): string;
+    decodeFunctionResult(functionFragment: "addPositionToIndex", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "approveUIs", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "debt", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "decreaseDebt", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "decreasePoolLiquidity", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "deletePoolPosition", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "disapproveUIs", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getBasicPositionInfo", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getPoolPosition", data: BytesLike): Result;
@@ -161,6 +179,7 @@ export interface IAccountingInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "increaseLentHue", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "increasePoolLiquidity", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "lentHue", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "onRewardsUpgrade", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "poolLiquidity", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "sendCollateral", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "sendLentHue", data: BytesLike): Result;
@@ -168,7 +187,6 @@ export interface IAccountingInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "setPosition", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setRewardStatus", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setSystemDebtInfo", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "transferPoolTokens", data: BytesLike): Result;
     events: {
         "DebtPositionIndexingDisabled()": EventFragment;
         "PoolPositionIndexingDisabled()": EventFragment;
@@ -233,6 +251,9 @@ export interface IAccounting extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
+        addPositionToIndex(owner: string, nftID: BigNumberish, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<ContractTransaction>;
         approveUIs(ids: BigNumberish[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
@@ -240,7 +261,10 @@ export interface IAccounting extends BaseContract {
         decreaseDebt(count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        decreasePoolLiquidity(pair: string, liquidity: BigNumberish, overrides?: Overrides & {
+        decreasePoolLiquidity(pool: string, liquidity: BigNumberish, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<ContractTransaction>;
+        deletePoolPosition(nftID: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         disapproveUIs(ids: BigNumberish[], overrides?: Overrides & {
@@ -253,8 +277,8 @@ export interface IAccounting extends BaseContract {
             debtCount: BigNumber;
             collateralCount: BigNumber;
         }>;
-        getPoolPosition(positionOwner: string, poolID: BigNumberish, overrides?: CallOverrides): Promise<[PoolPositionStructOutput] & {
-            pp: PoolPositionStructOutput;
+        getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<[PoolPositionStructOutput] & {
+            pt: PoolPositionStructOutput;
         }>;
         getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<[DebtPositionStructOutput] & {
             acct: DebtPositionStructOutput;
@@ -269,11 +293,14 @@ export interface IAccounting extends BaseContract {
         increaseLentHue(count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        increasePoolLiquidity(pair: string, liquidity: BigNumberish, overrides?: Overrides & {
+        increasePoolLiquidity(pool: string, liquidity: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         lentHue(overrides?: CallOverrides): Promise<[BigNumber]>;
-        poolLiquidity(pair: string, overrides?: CallOverrides): Promise<[BigNumber] & {
+        onRewardsUpgrade(newRewards: string, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<ContractTransaction>;
+        poolLiquidity(pool: string, overrides?: CallOverrides): Promise<[BigNumber] & {
             liquidity: BigNumber;
         }>;
         sendCollateral(account: string, count: BigNumberish, overrides?: Overrides & {
@@ -282,7 +309,7 @@ export interface IAccounting extends BaseContract {
         sendLentHue(dest: string, count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        setPoolPosition(positionOwner: string, poolID: BigNumberish, pp: PoolPositionStruct, overrides?: Overrides & {
+        setPoolPosition(nftID: BigNumberish, pt: PoolPositionStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: Overrides & {
@@ -294,10 +321,10 @@ export interface IAccounting extends BaseContract {
         setSystemDebtInfo(_systemDebtInfo: SystemDebtInfoStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        transferPoolTokens(pair: string, dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
     };
+    addPositionToIndex(owner: string, nftID: BigNumberish, overrides?: Overrides & {
+        from?: string | Promise<string>;
+    }): Promise<ContractTransaction>;
     approveUIs(ids: BigNumberish[], overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
@@ -305,7 +332,10 @@ export interface IAccounting extends BaseContract {
     decreaseDebt(count: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    decreasePoolLiquidity(pair: string, liquidity: BigNumberish, overrides?: Overrides & {
+    decreasePoolLiquidity(pool: string, liquidity: BigNumberish, overrides?: Overrides & {
+        from?: string | Promise<string>;
+    }): Promise<ContractTransaction>;
+    deletePoolPosition(nftID: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     disapproveUIs(ids: BigNumberish[], overrides?: Overrides & {
@@ -318,7 +348,7 @@ export interface IAccounting extends BaseContract {
         debtCount: BigNumber;
         collateralCount: BigNumber;
     }>;
-    getPoolPosition(positionOwner: string, poolID: BigNumberish, overrides?: CallOverrides): Promise<PoolPositionStructOutput>;
+    getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<PoolPositionStructOutput>;
     getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<DebtPositionStructOutput>;
     getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<RewardStatusStructOutput>;
     getSystemDebtInfo(overrides?: CallOverrides): Promise<SystemDebtInfoStructOutput>;
@@ -328,18 +358,21 @@ export interface IAccounting extends BaseContract {
     increaseLentHue(count: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    increasePoolLiquidity(pair: string, liquidity: BigNumberish, overrides?: Overrides & {
+    increasePoolLiquidity(pool: string, liquidity: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     lentHue(overrides?: CallOverrides): Promise<BigNumber>;
-    poolLiquidity(pair: string, overrides?: CallOverrides): Promise<BigNumber>;
+    onRewardsUpgrade(newRewards: string, overrides?: Overrides & {
+        from?: string | Promise<string>;
+    }): Promise<ContractTransaction>;
+    poolLiquidity(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
     sendCollateral(account: string, count: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     sendLentHue(dest: string, count: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    setPoolPosition(positionOwner: string, poolID: BigNumberish, pp: PoolPositionStruct, overrides?: Overrides & {
+    setPoolPosition(nftID: BigNumberish, pt: PoolPositionStruct, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: Overrides & {
@@ -351,14 +384,13 @@ export interface IAccounting extends BaseContract {
     setSystemDebtInfo(_systemDebtInfo: SystemDebtInfoStruct, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    transferPoolTokens(pair: string, dest: string, count: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
     callStatic: {
+        addPositionToIndex(owner: string, nftID: BigNumberish, overrides?: CallOverrides): Promise<void>;
         approveUIs(ids: BigNumberish[], overrides?: CallOverrides): Promise<void>;
         debt(overrides?: CallOverrides): Promise<BigNumber>;
         decreaseDebt(count: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        decreasePoolLiquidity(pair: string, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        decreasePoolLiquidity(pool: string, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        deletePoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<void>;
         disapproveUIs(ids: BigNumberish[], overrides?: CallOverrides): Promise<void>;
         getBasicPositionInfo(positionID: BigNumberish, overrides?: CallOverrides): Promise<[
             BigNumber,
@@ -367,22 +399,22 @@ export interface IAccounting extends BaseContract {
             debtCount: BigNumber;
             collateralCount: BigNumber;
         }>;
-        getPoolPosition(positionOwner: string, poolID: BigNumberish, overrides?: CallOverrides): Promise<PoolPositionStructOutput>;
+        getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<PoolPositionStructOutput>;
         getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<DebtPositionStructOutput>;
         getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<RewardStatusStructOutput>;
         getSystemDebtInfo(overrides?: CallOverrides): Promise<SystemDebtInfoStructOutput>;
         increaseDebt(count: BigNumberish, overrides?: CallOverrides): Promise<void>;
         increaseLentHue(count: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        increasePoolLiquidity(pair: string, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        increasePoolLiquidity(pool: string, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
         lentHue(overrides?: CallOverrides): Promise<BigNumber>;
-        poolLiquidity(pair: string, overrides?: CallOverrides): Promise<BigNumber>;
+        onRewardsUpgrade(newRewards: string, overrides?: CallOverrides): Promise<void>;
+        poolLiquidity(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
         sendCollateral(account: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
         sendLentHue(dest: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setPoolPosition(positionOwner: string, poolID: BigNumberish, pp: PoolPositionStruct, overrides?: CallOverrides): Promise<void>;
+        setPoolPosition(nftID: BigNumberish, pt: PoolPositionStruct, overrides?: CallOverrides): Promise<void>;
         setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: CallOverrides): Promise<void>;
         setRewardStatus(poolID: BigNumberish, rs: RewardStatusStruct, overrides?: CallOverrides): Promise<void>;
         setSystemDebtInfo(_systemDebtInfo: SystemDebtInfoStruct, overrides?: CallOverrides): Promise<void>;
-        transferPoolTokens(pair: string, dest: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "DebtPositionIndexingDisabled()"(): DebtPositionIndexingDisabledEventFilter;
@@ -399,6 +431,9 @@ export interface IAccounting extends BaseContract {
         UIsDisapproved(uis?: null): UIsDisapprovedEventFilter;
     };
     estimateGas: {
+        addPositionToIndex(owner: string, nftID: BigNumberish, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<BigNumber>;
         approveUIs(ids: BigNumberish[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
@@ -406,14 +441,17 @@ export interface IAccounting extends BaseContract {
         decreaseDebt(count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        decreasePoolLiquidity(pair: string, liquidity: BigNumberish, overrides?: Overrides & {
+        decreasePoolLiquidity(pool: string, liquidity: BigNumberish, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<BigNumber>;
+        deletePoolPosition(nftID: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         disapproveUIs(ids: BigNumberish[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         getBasicPositionInfo(positionID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getPoolPosition(positionOwner: string, poolID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         getSystemDebtInfo(overrides?: CallOverrides): Promise<BigNumber>;
@@ -423,18 +461,21 @@ export interface IAccounting extends BaseContract {
         increaseLentHue(count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        increasePoolLiquidity(pair: string, liquidity: BigNumberish, overrides?: Overrides & {
+        increasePoolLiquidity(pool: string, liquidity: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         lentHue(overrides?: CallOverrides): Promise<BigNumber>;
-        poolLiquidity(pair: string, overrides?: CallOverrides): Promise<BigNumber>;
+        onRewardsUpgrade(newRewards: string, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<BigNumber>;
+        poolLiquidity(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
         sendCollateral(account: string, count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         sendLentHue(dest: string, count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        setPoolPosition(positionOwner: string, poolID: BigNumberish, pp: PoolPositionStruct, overrides?: Overrides & {
+        setPoolPosition(nftID: BigNumberish, pt: PoolPositionStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: Overrides & {
@@ -446,11 +487,11 @@ export interface IAccounting extends BaseContract {
         setSystemDebtInfo(_systemDebtInfo: SystemDebtInfoStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        transferPoolTokens(pair: string, dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
     };
     populateTransaction: {
+        addPositionToIndex(owner: string, nftID: BigNumberish, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<PopulatedTransaction>;
         approveUIs(ids: BigNumberish[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
@@ -458,14 +499,17 @@ export interface IAccounting extends BaseContract {
         decreaseDebt(count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        decreasePoolLiquidity(pair: string, liquidity: BigNumberish, overrides?: Overrides & {
+        decreasePoolLiquidity(pool: string, liquidity: BigNumberish, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<PopulatedTransaction>;
+        deletePoolPosition(nftID: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         disapproveUIs(ids: BigNumberish[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         getBasicPositionInfo(positionID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getPoolPosition(positionOwner: string, poolID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getSystemDebtInfo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -475,18 +519,21 @@ export interface IAccounting extends BaseContract {
         increaseLentHue(count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        increasePoolLiquidity(pair: string, liquidity: BigNumberish, overrides?: Overrides & {
+        increasePoolLiquidity(pool: string, liquidity: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         lentHue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        poolLiquidity(pair: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        onRewardsUpgrade(newRewards: string, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<PopulatedTransaction>;
+        poolLiquidity(pool: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         sendCollateral(account: string, count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         sendLentHue(dest: string, count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        setPoolPosition(positionOwner: string, poolID: BigNumberish, pp: PoolPositionStruct, overrides?: Overrides & {
+        setPoolPosition(nftID: BigNumberish, pt: PoolPositionStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: Overrides & {
@@ -496,9 +543,6 @@ export interface IAccounting extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         setSystemDebtInfo(_systemDebtInfo: SystemDebtInfoStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        transferPoolTokens(pair: string, dest: string, count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
     };

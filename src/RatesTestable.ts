@@ -82,10 +82,12 @@ export interface RatesTestableInterface extends utils.Interface {
     "collateralPool()": FunctionFragment;
     "contains(address[],address)": FunctionFragment;
     "currentRateData()": FunctionFragment;
+    "deployer()": FunctionFragment;
     "executeRatesUpdateContractUpdate(int256)": FunctionFragment;
     "getReferencePools()": FunctionFragment;
     "getRewardCount()": FunctionFragment;
     "governor()": FunctionFragment;
+    "init()": FunctionFragment;
     "interestRateAbsoluteValue()": FunctionFragment;
     "interestRateParameters()": FunctionFragment;
     "median(uint256[])": FunctionFragment;
@@ -138,6 +140,7 @@ export interface RatesTestableInterface extends utils.Interface {
     functionFragment: "currentRateData",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "deployer", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "executeRatesUpdateContractUpdate",
     values: [BigNumberish]
@@ -151,6 +154,7 @@ export interface RatesTestableInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "governor", values?: undefined): string;
+  encodeFunctionData(functionFragment: "init", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "interestRateAbsoluteValue",
     values?: undefined
@@ -256,6 +260,7 @@ export interface RatesTestableInterface extends utils.Interface {
     functionFragment: "currentRateData",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "deployer", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "executeRatesUpdateContractUpdate",
     data: BytesLike
@@ -269,6 +274,7 @@ export interface RatesTestableInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "interestRateAbsoluteValue",
     data: BytesLike
@@ -521,6 +527,8 @@ export interface RatesTestable extends BaseContract {
       }
     >;
 
+    deployer(overrides?: CallOverrides): Promise<[string]>;
+
     executeRatesUpdateContractUpdate(
       newRate: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -531,6 +539,10 @@ export interface RatesTestable extends BaseContract {
     getRewardCount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     governor(overrides?: CallOverrides): Promise<[string]>;
+
+    init(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     interestRateAbsoluteValue(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -673,6 +685,8 @@ export interface RatesTestable extends BaseContract {
     }
   >;
 
+  deployer(overrides?: CallOverrides): Promise<string>;
+
   executeRatesUpdateContractUpdate(
     newRate: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -683,6 +697,10 @@ export interface RatesTestable extends BaseContract {
   getRewardCount(overrides?: CallOverrides): Promise<BigNumber>;
 
   governor(overrides?: CallOverrides): Promise<string>;
+
+  init(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   interestRateAbsoluteValue(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -819,6 +837,8 @@ export interface RatesTestable extends BaseContract {
       }
     >;
 
+    deployer(overrides?: CallOverrides): Promise<string>;
+
     executeRatesUpdateContractUpdate(
       newRate: BigNumberish,
       overrides?: CallOverrides
@@ -829,6 +849,8 @@ export interface RatesTestable extends BaseContract {
     getRewardCount(overrides?: CallOverrides): Promise<BigNumber>;
 
     governor(overrides?: CallOverrides): Promise<string>;
+
+    init(overrides?: CallOverrides): Promise<void>;
 
     interestRateAbsoluteValue(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1012,6 +1034,8 @@ export interface RatesTestable extends BaseContract {
 
     currentRateData(overrides?: CallOverrides): Promise<BigNumber>;
 
+    deployer(overrides?: CallOverrides): Promise<BigNumber>;
+
     executeRatesUpdateContractUpdate(
       newRate: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1022,6 +1046,10 @@ export interface RatesTestable extends BaseContract {
     getRewardCount(overrides?: CallOverrides): Promise<BigNumber>;
 
     governor(overrides?: CallOverrides): Promise<BigNumber>;
+
+    init(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     interestRateAbsoluteValue(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1144,6 +1172,8 @@ export interface RatesTestable extends BaseContract {
 
     currentRateData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    deployer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     executeRatesUpdateContractUpdate(
       newRate: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1154,6 +1184,10 @@ export interface RatesTestable extends BaseContract {
     getRewardCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    init(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     interestRateAbsoluteValue(
       overrides?: CallOverrides

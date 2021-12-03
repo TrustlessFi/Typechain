@@ -51,8 +51,10 @@ export interface LiquidationsInterface extends utils.Interface {
     "setLiquidationIncentive(uint64)": FunctionFragment;
     "setMaxRewardsRatio(uint64)": FunctionFragment;
     "setMinLiquidationIncentive(uint64)": FunctionFragment;
+    "setTwapDuration(uint32)": FunctionFragment;
     "stop()": FunctionFragment;
     "stopped()": FunctionFragment;
+    "twapDuration()": FunctionFragment;
     "validUpdate(bytes4)": FunctionFragment;
   };
 
@@ -122,8 +124,16 @@ export interface LiquidationsInterface extends utils.Interface {
     functionFragment: "setMinLiquidationIncentive",
     values: [BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "setTwapDuration",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "stop", values?: undefined): string;
   encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "twapDuration",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "validUpdate",
     values: [BytesLike]
@@ -189,8 +199,16 @@ export interface LiquidationsInterface extends utils.Interface {
     functionFragment: "setMinLiquidationIncentive",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTwapDuration",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "stop", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "stopped", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "twapDuration",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "validUpdate",
     data: BytesLike
@@ -386,11 +404,18 @@ export interface Liquidations extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    setTwapDuration(
+      duration: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     stop(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     stopped(overrides?: CallOverrides): Promise<[boolean]>;
+
+    twapDuration(overrides?: CallOverrides): Promise<[number]>;
 
     validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
   };
@@ -455,11 +480,18 @@ export interface Liquidations extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  setTwapDuration(
+    duration: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   stop(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   stopped(overrides?: CallOverrides): Promise<boolean>;
+
+  twapDuration(overrides?: CallOverrides): Promise<number>;
 
   validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
@@ -522,9 +554,16 @@ export interface Liquidations extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setTwapDuration(
+      duration: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     stop(overrides?: CallOverrides): Promise<void>;
 
     stopped(overrides?: CallOverrides): Promise<boolean>;
+
+    twapDuration(overrides?: CallOverrides): Promise<number>;
 
     validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
   };
@@ -653,11 +692,18 @@ export interface Liquidations extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    setTwapDuration(
+      duration: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     stop(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     stopped(overrides?: CallOverrides): Promise<BigNumber>;
+
+    twapDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
     validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
   };
@@ -725,11 +771,18 @@ export interface Liquidations extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    setTwapDuration(
+      duration: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     stop(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    twapDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     validUpdate(
       arg0: BytesLike,

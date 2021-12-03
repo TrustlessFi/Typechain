@@ -36,7 +36,7 @@ const _abi = [
       {
         components: [
           {
-            internalType: "contract IUniswapV2Pair",
+            internalType: "contract IUniswapV3Pool",
             name: "pool",
             type: "address",
           },

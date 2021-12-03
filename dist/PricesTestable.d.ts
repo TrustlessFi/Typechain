@@ -4,12 +4,14 @@ import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export declare type ConstructorParamsStruct = {
     Governor: string;
-    ProtocolLock: string;
-    Hue: string;
     Weth: string;
+    Tcp: string;
+    Hue: string;
     CollateralPool: string;
+    ProtocolPool: string;
 };
 export declare type ConstructorParamsStructOutput = [
+    string,
     string,
     string,
     string,
@@ -17,118 +19,149 @@ export declare type ConstructorParamsStructOutput = [
     string
 ] & {
     Governor: string;
-    ProtocolLock: string;
-    Hue: string;
     Weth: string;
+    Tcp: string;
+    Hue: string;
     CollateralPool: string;
+    ProtocolPool: string;
 };
 export declare type PriceInfoStruct = {
-    cumulative: BigNumberish;
-    time: BigNumberish;
-    t0Decimals: BigNumberish;
-    t1Decimals: BigNumberish;
-    hueOrWethIsToken0: boolean;
+    startTime: BigNumberish;
+    tickCumulative: BigNumberish;
+    tick: BigNumberish;
+    otherTokenDecimals: BigNumberish;
+    isToken0: boolean;
+    valid: boolean;
 };
 export declare type PriceInfoStructOutput = [
     BigNumber,
+    BigNumber,
     number,
     number,
-    number,
+    boolean,
     boolean
 ] & {
-    cumulative: BigNumber;
-    time: number;
-    t0Decimals: number;
-    t1Decimals: number;
-    hueOrWethIsToken0: boolean;
+    startTime: BigNumber;
+    tickCumulative: BigNumber;
+    tick: number;
+    otherTokenDecimals: number;
+    isToken0: boolean;
+    valid: boolean;
 };
 export interface PricesTestableInterface extends utils.Interface {
     functions: {
+        "__now()": FunctionFragment;
+        "calculate64To32(uint64)": FunctionFragment;
+        "calculateInstantCollateralPrice(uint32)": FunctionFragment;
+        "calculateInstantTwappedPrice(address,uint32)": FunctionFragment;
+        "calculateInstantTwappedTick(address,uint32)": FunctionFragment;
+        "calculateTwappedPrice(address,bool)": FunctionFragment;
         "collateralPool()": FunctionFragment;
-        "collateralPoolMaxTwapTime()": FunctionFragment;
-        "collateralPoolMinTwapTime()": FunctionFragment;
-        "collateralPriceInfo()": FunctionFragment;
         "deployer()": FunctionFragment;
+        "getE18PriceForSqrtX96Price(uint160)": FunctionFragment;
+        "getPriceForTick(int24,bool)": FunctionFragment;
+        "getRealHueCountForSinglePoolPosition(address,int24,int24,int24,uint128,uint32)": FunctionFragment;
+        "getTickForCumulators(int56,int56,uint32)": FunctionFragment;
         "governor()": FunctionFragment;
         "hue()": FunctionFragment;
+        "hueTcpPrice(uint32)": FunctionFragment;
         "init()": FunctionFragment;
-        "normalizeDecimals(uint256,(uint192,uint40,uint8,uint8,bool))": FunctionFragment;
-        "referencePriceInfo(address)": FunctionFragment;
-        "setCollateralPoolMaxTwapTime(uint64)": FunctionFragment;
-        "setCollateralPoolMinTwapTime(uint64)": FunctionFragment;
+        "initializePool(address)": FunctionFragment;
+        "initializeWethPool(address)": FunctionFragment;
+        "isPoolInitialized(address)": FunctionFragment;
+        "normalizeDecimals(uint256,(uint64,int56,int24,uint8,bool,bool))": FunctionFragment;
+        "priceInfo(address)": FunctionFragment;
+        "protocolPool()": FunctionFragment;
+        "requireValidPool(bool)": FunctionFragment;
         "stop()": FunctionFragment;
         "stopped()": FunctionFragment;
-        "systemInitializeReferencePool(address)": FunctionFragment;
-        "systemObtainCollateralPrice()": FunctionFragment;
         "systemObtainReferencePrice(address)": FunctionFragment;
-        "updateCollateralPrice()": FunctionFragment;
+        "tcp()": FunctionFragment;
         "validUpdate(bytes4)": FunctionFragment;
-        "viewCurrentTwappedReferencePrice(address)": FunctionFragment;
         "weth()": FunctionFragment;
     };
+    encodeFunctionData(functionFragment: "__now", values?: undefined): string;
+    encodeFunctionData(functionFragment: "calculate64To32", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "calculateInstantCollateralPrice", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "calculateInstantTwappedPrice", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "calculateInstantTwappedTick", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "calculateTwappedPrice", values: [string, boolean]): string;
     encodeFunctionData(functionFragment: "collateralPool", values?: undefined): string;
-    encodeFunctionData(functionFragment: "collateralPoolMaxTwapTime", values?: undefined): string;
-    encodeFunctionData(functionFragment: "collateralPoolMinTwapTime", values?: undefined): string;
-    encodeFunctionData(functionFragment: "collateralPriceInfo", values?: undefined): string;
     encodeFunctionData(functionFragment: "deployer", values?: undefined): string;
+    encodeFunctionData(functionFragment: "getE18PriceForSqrtX96Price", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "getPriceForTick", values: [BigNumberish, boolean]): string;
+    encodeFunctionData(functionFragment: "getRealHueCountForSinglePoolPosition", values: [
+        string,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish
+    ]): string;
+    encodeFunctionData(functionFragment: "getTickForCumulators", values: [BigNumberish, BigNumberish, BigNumberish]): string;
     encodeFunctionData(functionFragment: "governor", values?: undefined): string;
     encodeFunctionData(functionFragment: "hue", values?: undefined): string;
+    encodeFunctionData(functionFragment: "hueTcpPrice", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "init", values?: undefined): string;
+    encodeFunctionData(functionFragment: "initializePool", values: [string]): string;
+    encodeFunctionData(functionFragment: "initializeWethPool", values: [string]): string;
+    encodeFunctionData(functionFragment: "isPoolInitialized", values: [string]): string;
     encodeFunctionData(functionFragment: "normalizeDecimals", values: [BigNumberish, PriceInfoStruct]): string;
-    encodeFunctionData(functionFragment: "referencePriceInfo", values: [string]): string;
-    encodeFunctionData(functionFragment: "setCollateralPoolMaxTwapTime", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setCollateralPoolMinTwapTime", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "priceInfo", values: [string]): string;
+    encodeFunctionData(functionFragment: "protocolPool", values?: undefined): string;
+    encodeFunctionData(functionFragment: "requireValidPool", values: [boolean]): string;
     encodeFunctionData(functionFragment: "stop", values?: undefined): string;
     encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
-    encodeFunctionData(functionFragment: "systemInitializeReferencePool", values: [string]): string;
-    encodeFunctionData(functionFragment: "systemObtainCollateralPrice", values?: undefined): string;
     encodeFunctionData(functionFragment: "systemObtainReferencePrice", values: [string]): string;
-    encodeFunctionData(functionFragment: "updateCollateralPrice", values?: undefined): string;
+    encodeFunctionData(functionFragment: "tcp", values?: undefined): string;
     encodeFunctionData(functionFragment: "validUpdate", values: [BytesLike]): string;
-    encodeFunctionData(functionFragment: "viewCurrentTwappedReferencePrice", values: [string]): string;
     encodeFunctionData(functionFragment: "weth", values?: undefined): string;
+    decodeFunctionResult(functionFragment: "__now", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "calculate64To32", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "calculateInstantCollateralPrice", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "calculateInstantTwappedPrice", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "calculateInstantTwappedTick", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "calculateTwappedPrice", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "collateralPool", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "collateralPoolMaxTwapTime", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "collateralPoolMinTwapTime", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "collateralPriceInfo", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "deployer", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "getE18PriceForSqrtX96Price", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "getPriceForTick", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "getRealHueCountForSinglePoolPosition", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "getTickForCumulators", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "hue", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "hueTcpPrice", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "initializePool", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "initializeWethPool", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "isPoolInitialized", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "normalizeDecimals", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "referencePriceInfo", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setCollateralPoolMaxTwapTime", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setCollateralPoolMinTwapTime", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "priceInfo", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "protocolPool", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "requireValidPool", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "stop", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "stopped", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "systemInitializeReferencePool", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "systemObtainCollateralPrice", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "systemObtainReferencePrice", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "updateCollateralPrice", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "tcp", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "validUpdate", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "viewCurrentTwappedReferencePrice", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "weth", data: BytesLike): Result;
     events: {
-        "CollateralMaxTwapTimeUpdated(uint64)": EventFragment;
-        "CollateralMinTwapTimeUpdated(uint64)": EventFragment;
+        "PriceUpdated(address,uint256,int24)": EventFragment;
         "Stopped()": EventFragment;
     };
-    getEvent(nameOrSignatureOrTopic: "CollateralMaxTwapTimeUpdated"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "CollateralMinTwapTimeUpdated"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "PriceUpdated"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "Stopped"): EventFragment;
 }
-export declare type CollateralMaxTwapTimeUpdatedEvent = TypedEvent<[
-    BigNumber
+export declare type PriceUpdatedEvent = TypedEvent<[
+    string,
+    BigNumber,
+    number
 ], {
-    time: BigNumber;
+    pool: string;
+    price: BigNumber;
+    tick: number;
 }>;
-export declare type CollateralMaxTwapTimeUpdatedEventFilter = TypedEventFilter<CollateralMaxTwapTimeUpdatedEvent>;
-export declare type CollateralMinTwapTimeUpdatedEvent = TypedEvent<[
-    BigNumber
-], {
-    time: BigNumber;
-}>;
-export declare type CollateralMinTwapTimeUpdatedEventFilter = TypedEventFilter<CollateralMinTwapTimeUpdatedEvent>;
+export declare type PriceUpdatedEventFilter = TypedEventFilter<PriceUpdatedEvent>;
 export declare type StoppedEvent = TypedEvent<[], {}>;
 export declare type StoppedEventFilter = TypedEventFilter<StoppedEvent>;
 export interface PricesTestable extends BaseContract {
@@ -146,262 +179,254 @@ export interface PricesTestable extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        collateralPool(overrides?: CallOverrides): Promise<[string]>;
-        collateralPoolMaxTwapTime(overrides?: CallOverrides): Promise<[BigNumber]>;
-        collateralPoolMinTwapTime(overrides?: CallOverrides): Promise<[BigNumber]>;
-        collateralPriceInfo(overrides?: CallOverrides): Promise<[
-            BigNumber,
-            number,
-            number,
-            number,
-            boolean
-        ] & {
-            cumulative: BigNumber;
-            time: number;
-            t0Decimals: number;
-            t1Decimals: number;
-            hueOrWethIsToken0: boolean;
+        __now(overrides?: CallOverrides): Promise<[number[]] & {
+            times: number[];
         }>;
+        calculate64To32(input: BigNumberish, overrides?: CallOverrides): Promise<[number]>;
+        calculateInstantCollateralPrice(twapDuration: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        calculateInstantTwappedPrice(pool: string, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        calculateInstantTwappedTick(pool: string, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<[number] & {
+            tick: number;
+        }>;
+        calculateTwappedPrice(pool: string, normalizeDecimals: boolean, overrides?: CallOverrides): Promise<[BigNumber] & {
+            price: BigNumber;
+        }>;
+        collateralPool(overrides?: CallOverrides): Promise<[string]>;
         deployer(overrides?: CallOverrides): Promise<[string]>;
+        getE18PriceForSqrtX96Price(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getPriceForTick(tick: BigNumberish, isToken0: boolean, overrides?: CallOverrides): Promise<[BigNumber] & {
+            price: BigNumber;
+        }>;
+        getRealHueCountForSinglePoolPosition(pool: string, tick: BigNumberish, tickLower: BigNumberish, tickUpper: BigNumberish, liquidity: BigNumberish, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getTickForCumulators(tickCumulative0: BigNumberish, tickCumulative1: BigNumberish, timeElapsed: BigNumberish, overrides?: CallOverrides): Promise<[number] & {
+            tick: number;
+        }>;
         governor(overrides?: CallOverrides): Promise<[string]>;
         hue(overrides?: CallOverrides): Promise<[string]>;
+        hueTcpPrice(twapDuration: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
         init(overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
+        initializePool(pool: string, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<ContractTransaction>;
+        initializeWethPool(pool: string, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<ContractTransaction>;
+        isPoolInitialized(pool: string, overrides?: CallOverrides): Promise<[boolean]>;
         normalizeDecimals(price: BigNumberish, pi: PriceInfoStruct, overrides?: CallOverrides): Promise<[BigNumber]>;
-        referencePriceInfo(arg0: string, overrides?: CallOverrides): Promise<[
+        priceInfo(arg0: string, overrides?: CallOverrides): Promise<[
+            BigNumber,
             BigNumber,
             number,
             number,
-            number,
+            boolean,
             boolean
         ] & {
-            cumulative: BigNumber;
-            time: number;
-            t0Decimals: number;
-            t1Decimals: number;
-            hueOrWethIsToken0: boolean;
+            startTime: BigNumber;
+            tickCumulative: BigNumber;
+            tick: number;
+            otherTokenDecimals: number;
+            isToken0: boolean;
+            valid: boolean;
         }>;
-        setCollateralPoolMaxTwapTime(time: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        setCollateralPoolMinTwapTime(time: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
+        protocolPool(overrides?: CallOverrides): Promise<[string]>;
+        requireValidPool(valid: boolean, overrides?: CallOverrides): Promise<[void]>;
         stop(overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         stopped(overrides?: CallOverrides): Promise<[boolean]>;
-        systemInitializeReferencePool(pool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        systemObtainCollateralPrice(overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
         systemObtainReferencePrice(pool: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        updateCollateralPrice(overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
+        tcp(overrides?: CallOverrides): Promise<[string]>;
         validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
-        viewCurrentTwappedReferencePrice(pool: string, overrides?: CallOverrides): Promise<[BigNumber] & {
-            price: BigNumber;
-        }>;
         weth(overrides?: CallOverrides): Promise<[string]>;
     };
+    __now(overrides?: CallOverrides): Promise<number[]>;
+    calculate64To32(input: BigNumberish, overrides?: CallOverrides): Promise<number>;
+    calculateInstantCollateralPrice(twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    calculateInstantTwappedPrice(pool: string, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    calculateInstantTwappedTick(pool: string, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<number>;
+    calculateTwappedPrice(pool: string, normalizeDecimals: boolean, overrides?: CallOverrides): Promise<BigNumber>;
     collateralPool(overrides?: CallOverrides): Promise<string>;
-    collateralPoolMaxTwapTime(overrides?: CallOverrides): Promise<BigNumber>;
-    collateralPoolMinTwapTime(overrides?: CallOverrides): Promise<BigNumber>;
-    collateralPriceInfo(overrides?: CallOverrides): Promise<[
-        BigNumber,
-        number,
-        number,
-        number,
-        boolean
-    ] & {
-        cumulative: BigNumber;
-        time: number;
-        t0Decimals: number;
-        t1Decimals: number;
-        hueOrWethIsToken0: boolean;
-    }>;
     deployer(overrides?: CallOverrides): Promise<string>;
+    getE18PriceForSqrtX96Price(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getPriceForTick(tick: BigNumberish, isToken0: boolean, overrides?: CallOverrides): Promise<BigNumber>;
+    getRealHueCountForSinglePoolPosition(pool: string, tick: BigNumberish, tickLower: BigNumberish, tickUpper: BigNumberish, liquidity: BigNumberish, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getTickForCumulators(tickCumulative0: BigNumberish, tickCumulative1: BigNumberish, timeElapsed: BigNumberish, overrides?: CallOverrides): Promise<number>;
     governor(overrides?: CallOverrides): Promise<string>;
     hue(overrides?: CallOverrides): Promise<string>;
+    hueTcpPrice(twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
     init(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
+    initializePool(pool: string, overrides?: Overrides & {
+        from?: string | Promise<string>;
+    }): Promise<ContractTransaction>;
+    initializeWethPool(pool: string, overrides?: Overrides & {
+        from?: string | Promise<string>;
+    }): Promise<ContractTransaction>;
+    isPoolInitialized(pool: string, overrides?: CallOverrides): Promise<boolean>;
     normalizeDecimals(price: BigNumberish, pi: PriceInfoStruct, overrides?: CallOverrides): Promise<BigNumber>;
-    referencePriceInfo(arg0: string, overrides?: CallOverrides): Promise<[
+    priceInfo(arg0: string, overrides?: CallOverrides): Promise<[
+        BigNumber,
         BigNumber,
         number,
         number,
-        number,
+        boolean,
         boolean
     ] & {
-        cumulative: BigNumber;
-        time: number;
-        t0Decimals: number;
-        t1Decimals: number;
-        hueOrWethIsToken0: boolean;
+        startTime: BigNumber;
+        tickCumulative: BigNumber;
+        tick: number;
+        otherTokenDecimals: number;
+        isToken0: boolean;
+        valid: boolean;
     }>;
-    setCollateralPoolMaxTwapTime(time: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    setCollateralPoolMinTwapTime(time: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
+    protocolPool(overrides?: CallOverrides): Promise<string>;
+    requireValidPool(valid: boolean, overrides?: CallOverrides): Promise<void>;
     stop(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     stopped(overrides?: CallOverrides): Promise<boolean>;
-    systemInitializeReferencePool(pool: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    systemObtainCollateralPrice(overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
     systemObtainReferencePrice(pool: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    updateCollateralPrice(overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
+    tcp(overrides?: CallOverrides): Promise<string>;
     validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
-    viewCurrentTwappedReferencePrice(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
     weth(overrides?: CallOverrides): Promise<string>;
     callStatic: {
+        __now(overrides?: CallOverrides): Promise<number[]>;
+        calculate64To32(input: BigNumberish, overrides?: CallOverrides): Promise<number>;
+        calculateInstantCollateralPrice(twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        calculateInstantTwappedPrice(pool: string, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        calculateInstantTwappedTick(pool: string, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<number>;
+        calculateTwappedPrice(pool: string, normalizeDecimals: boolean, overrides?: CallOverrides): Promise<BigNumber>;
         collateralPool(overrides?: CallOverrides): Promise<string>;
-        collateralPoolMaxTwapTime(overrides?: CallOverrides): Promise<BigNumber>;
-        collateralPoolMinTwapTime(overrides?: CallOverrides): Promise<BigNumber>;
-        collateralPriceInfo(overrides?: CallOverrides): Promise<[
-            BigNumber,
-            number,
-            number,
-            number,
-            boolean
-        ] & {
-            cumulative: BigNumber;
-            time: number;
-            t0Decimals: number;
-            t1Decimals: number;
-            hueOrWethIsToken0: boolean;
-        }>;
         deployer(overrides?: CallOverrides): Promise<string>;
+        getE18PriceForSqrtX96Price(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getPriceForTick(tick: BigNumberish, isToken0: boolean, overrides?: CallOverrides): Promise<BigNumber>;
+        getRealHueCountForSinglePoolPosition(pool: string, tick: BigNumberish, tickLower: BigNumberish, tickUpper: BigNumberish, liquidity: BigNumberish, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getTickForCumulators(tickCumulative0: BigNumberish, tickCumulative1: BigNumberish, timeElapsed: BigNumberish, overrides?: CallOverrides): Promise<number>;
         governor(overrides?: CallOverrides): Promise<string>;
         hue(overrides?: CallOverrides): Promise<string>;
+        hueTcpPrice(twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         init(overrides?: CallOverrides): Promise<void>;
+        initializePool(pool: string, overrides?: CallOverrides): Promise<void>;
+        initializeWethPool(pool: string, overrides?: CallOverrides): Promise<void>;
+        isPoolInitialized(pool: string, overrides?: CallOverrides): Promise<boolean>;
         normalizeDecimals(price: BigNumberish, pi: PriceInfoStruct, overrides?: CallOverrides): Promise<BigNumber>;
-        referencePriceInfo(arg0: string, overrides?: CallOverrides): Promise<[
+        priceInfo(arg0: string, overrides?: CallOverrides): Promise<[
+            BigNumber,
             BigNumber,
             number,
             number,
-            number,
+            boolean,
             boolean
         ] & {
-            cumulative: BigNumber;
-            time: number;
-            t0Decimals: number;
-            t1Decimals: number;
-            hueOrWethIsToken0: boolean;
+            startTime: BigNumber;
+            tickCumulative: BigNumber;
+            tick: number;
+            otherTokenDecimals: number;
+            isToken0: boolean;
+            valid: boolean;
         }>;
-        setCollateralPoolMaxTwapTime(time: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setCollateralPoolMinTwapTime(time: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        protocolPool(overrides?: CallOverrides): Promise<string>;
+        requireValidPool(valid: boolean, overrides?: CallOverrides): Promise<void>;
         stop(overrides?: CallOverrides): Promise<void>;
         stopped(overrides?: CallOverrides): Promise<boolean>;
-        systemInitializeReferencePool(pool: string, overrides?: CallOverrides): Promise<void>;
-        systemObtainCollateralPrice(overrides?: CallOverrides): Promise<BigNumber>;
         systemObtainReferencePrice(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
-        updateCollateralPrice(overrides?: CallOverrides): Promise<void>;
+        tcp(overrides?: CallOverrides): Promise<string>;
         validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
-        viewCurrentTwappedReferencePrice(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
         weth(overrides?: CallOverrides): Promise<string>;
     };
     filters: {
-        "CollateralMaxTwapTimeUpdated(uint64)"(time?: BigNumberish | null): CollateralMaxTwapTimeUpdatedEventFilter;
-        CollateralMaxTwapTimeUpdated(time?: BigNumberish | null): CollateralMaxTwapTimeUpdatedEventFilter;
-        "CollateralMinTwapTimeUpdated(uint64)"(time?: BigNumberish | null): CollateralMinTwapTimeUpdatedEventFilter;
-        CollateralMinTwapTimeUpdated(time?: BigNumberish | null): CollateralMinTwapTimeUpdatedEventFilter;
+        "PriceUpdated(address,uint256,int24)"(pool?: string | null, price?: null, tick?: null): PriceUpdatedEventFilter;
+        PriceUpdated(pool?: string | null, price?: null, tick?: null): PriceUpdatedEventFilter;
         "Stopped()"(): StoppedEventFilter;
         Stopped(): StoppedEventFilter;
     };
     estimateGas: {
+        __now(overrides?: CallOverrides): Promise<BigNumber>;
+        calculate64To32(input: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        calculateInstantCollateralPrice(twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        calculateInstantTwappedPrice(pool: string, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        calculateInstantTwappedTick(pool: string, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        calculateTwappedPrice(pool: string, normalizeDecimals: boolean, overrides?: CallOverrides): Promise<BigNumber>;
         collateralPool(overrides?: CallOverrides): Promise<BigNumber>;
-        collateralPoolMaxTwapTime(overrides?: CallOverrides): Promise<BigNumber>;
-        collateralPoolMinTwapTime(overrides?: CallOverrides): Promise<BigNumber>;
-        collateralPriceInfo(overrides?: CallOverrides): Promise<BigNumber>;
         deployer(overrides?: CallOverrides): Promise<BigNumber>;
+        getE18PriceForSqrtX96Price(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getPriceForTick(tick: BigNumberish, isToken0: boolean, overrides?: CallOverrides): Promise<BigNumber>;
+        getRealHueCountForSinglePoolPosition(pool: string, tick: BigNumberish, tickLower: BigNumberish, tickUpper: BigNumberish, liquidity: BigNumberish, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getTickForCumulators(tickCumulative0: BigNumberish, tickCumulative1: BigNumberish, timeElapsed: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         governor(overrides?: CallOverrides): Promise<BigNumber>;
         hue(overrides?: CallOverrides): Promise<BigNumber>;
+        hueTcpPrice(twapDuration: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         init(overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
+        initializePool(pool: string, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<BigNumber>;
+        initializeWethPool(pool: string, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<BigNumber>;
+        isPoolInitialized(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
         normalizeDecimals(price: BigNumberish, pi: PriceInfoStruct, overrides?: CallOverrides): Promise<BigNumber>;
-        referencePriceInfo(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-        setCollateralPoolMaxTwapTime(time: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        setCollateralPoolMinTwapTime(time: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
+        priceInfo(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+        protocolPool(overrides?: CallOverrides): Promise<BigNumber>;
+        requireValidPool(valid: boolean, overrides?: CallOverrides): Promise<BigNumber>;
         stop(overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         stopped(overrides?: CallOverrides): Promise<BigNumber>;
-        systemInitializeReferencePool(pool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        systemObtainCollateralPrice(overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
         systemObtainReferencePrice(pool: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        updateCollateralPrice(overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
+        tcp(overrides?: CallOverrides): Promise<BigNumber>;
         validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-        viewCurrentTwappedReferencePrice(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
         weth(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
+        __now(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        calculate64To32(input: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        calculateInstantCollateralPrice(twapDuration: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        calculateInstantTwappedPrice(pool: string, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        calculateInstantTwappedTick(pool: string, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        calculateTwappedPrice(pool: string, normalizeDecimals: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         collateralPool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        collateralPoolMaxTwapTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        collateralPoolMinTwapTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        collateralPriceInfo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         deployer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getE18PriceForSqrtX96Price(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getPriceForTick(tick: BigNumberish, isToken0: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getRealHueCountForSinglePoolPosition(pool: string, tick: BigNumberish, tickLower: BigNumberish, tickUpper: BigNumberish, liquidity: BigNumberish, twapDuration: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getTickForCumulators(tickCumulative0: BigNumberish, tickCumulative1: BigNumberish, timeElapsed: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         hue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        hueTcpPrice(twapDuration: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         init(overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
+        initializePool(pool: string, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<PopulatedTransaction>;
+        initializeWethPool(pool: string, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<PopulatedTransaction>;
+        isPoolInitialized(pool: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         normalizeDecimals(price: BigNumberish, pi: PriceInfoStruct, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        referencePriceInfo(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setCollateralPoolMaxTwapTime(time: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        setCollateralPoolMinTwapTime(time: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
+        priceInfo(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        protocolPool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        requireValidPool(valid: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         stop(overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        systemInitializeReferencePool(pool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        systemObtainCollateralPrice(overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
         systemObtainReferencePrice(pool: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        updateCollateralPrice(overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
+        tcp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        viewCurrentTwappedReferencePrice(pool: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         weth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

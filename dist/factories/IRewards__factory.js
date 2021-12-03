@@ -315,7 +315,7 @@ var _abi = [
     {
         inputs: [
             {
-                internalType: "contract IUniswapV2Pair",
+                internalType: "contract IUniswapV3Pool",
                 name: "pool",
                 type: "address",
             },
