@@ -159,7 +159,7 @@ export interface AccountingTestableInterface extends utils.Interface {
         "getPoolPosition(uint256)": FunctionFragment;
         "getPoolPositionNftIdsByOwner(address)": FunctionFragment;
         "getPosition(uint64)": FunctionFragment;
-        "getRewardStatus(uint16)": FunctionFragment;
+        "getRewardStatus(address)": FunctionFragment;
         "getSystemDebtInfo()": FunctionFragment;
         "getTick(uint256,uint256)": FunctionFragment;
         "getUIs(uint32,uint32)": FunctionFragment;
@@ -183,7 +183,7 @@ export interface AccountingTestableInterface extends utils.Interface {
         "sendLentHue(address,uint256)": FunctionFragment;
         "setPoolPosition(uint256,(address,uint16,uint256,uint256,uint256,uint128,uint64,int24,int24,uint32,address,uint64))": FunctionFragment;
         "setPosition(uint64,(uint256,uint256,uint256,uint256,uint256,uint64,uint64,int24,bool,uint64,uint32,address,uint64))": FunctionFragment;
-        "setRewardStatus(uint16,(uint256,uint256))": FunctionFragment;
+        "setRewardStatus(address,(uint256,uint256))": FunctionFragment;
         "setSystemDebtInfo((uint256,uint256,uint256,uint256))": FunctionFragment;
         "snapRawTickToSpacing(int24,int24)": FunctionFragment;
         "stopIndexingDebtPositions()": FunctionFragment;
@@ -208,7 +208,7 @@ export interface AccountingTestableInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "getPoolPosition", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getPoolPositionNftIdsByOwner", values: [string]): string;
     encodeFunctionData(functionFragment: "getPosition", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getRewardStatus", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "getRewardStatus", values: [string]): string;
     encodeFunctionData(functionFragment: "getSystemDebtInfo", values?: undefined): string;
     encodeFunctionData(functionFragment: "getTick", values: [BigNumberish, BigNumberish]): string;
     encodeFunctionData(functionFragment: "getUIs", values: [BigNumberish, BigNumberish]): string;
@@ -232,7 +232,7 @@ export interface AccountingTestableInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "sendLentHue", values: [string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "setPoolPosition", values: [BigNumberish, PoolPositionStruct]): string;
     encodeFunctionData(functionFragment: "setPosition", values: [BigNumberish, DebtPositionStruct]): string;
-    encodeFunctionData(functionFragment: "setRewardStatus", values: [BigNumberish, RewardStatusStruct]): string;
+    encodeFunctionData(functionFragment: "setRewardStatus", values: [string, RewardStatusStruct]): string;
     encodeFunctionData(functionFragment: "setSystemDebtInfo", values: [SystemDebtInfoStruct]): string;
     encodeFunctionData(functionFragment: "snapRawTickToSpacing", values: [BigNumberish, BigNumberish]): string;
     encodeFunctionData(functionFragment: "stopIndexingDebtPositions", values?: undefined): string;
@@ -396,7 +396,7 @@ export interface AccountingTestable extends BaseContract {
         getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<[DebtPositionStructOutput] & {
             dp: DebtPositionStructOutput;
         }>;
-        getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<[RewardStatusStructOutput]>;
+        getRewardStatus(pool: string, overrides?: CallOverrides): Promise<[RewardStatusStructOutput]>;
         getSystemDebtInfo(overrides?: CallOverrides): Promise<[SystemDebtInfoStructOutput]>;
         getTick(collateralCount: BigNumberish, debtCount: BigNumberish, overrides?: CallOverrides): Promise<[number]>;
         getUIs(start: BigNumberish, end: BigNumberish, overrides?: CallOverrides): Promise<[
@@ -446,7 +446,7 @@ export interface AccountingTestable extends BaseContract {
         setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        setRewardStatus(poolID: BigNumberish, rs: RewardStatusStruct, overrides?: Overrides & {
+        setRewardStatus(pool: string, rs: RewardStatusStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         setSystemDebtInfo(_sdi: SystemDebtInfoStruct, overrides?: Overrides & {
@@ -513,7 +513,7 @@ export interface AccountingTestable extends BaseContract {
     getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<PoolPositionStructOutput>;
     getPoolPositionNftIdsByOwner(owner: string, overrides?: CallOverrides): Promise<BigNumber[]>;
     getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<DebtPositionStructOutput>;
-    getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<RewardStatusStructOutput>;
+    getRewardStatus(pool: string, overrides?: CallOverrides): Promise<RewardStatusStructOutput>;
     getSystemDebtInfo(overrides?: CallOverrides): Promise<SystemDebtInfoStructOutput>;
     getTick(collateralCount: BigNumberish, debtCount: BigNumberish, overrides?: CallOverrides): Promise<number>;
     getUIs(start: BigNumberish, end: BigNumberish, overrides?: CallOverrides): Promise<UserInterfaceStructOutput[]>;
@@ -559,7 +559,7 @@ export interface AccountingTestable extends BaseContract {
     setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    setRewardStatus(poolID: BigNumberish, rs: RewardStatusStruct, overrides?: Overrides & {
+    setRewardStatus(pool: string, rs: RewardStatusStruct, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     setSystemDebtInfo(_sdi: SystemDebtInfoStruct, overrides?: Overrides & {
@@ -612,7 +612,7 @@ export interface AccountingTestable extends BaseContract {
         getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<PoolPositionStructOutput>;
         getPoolPositionNftIdsByOwner(owner: string, overrides?: CallOverrides): Promise<BigNumber[]>;
         getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<DebtPositionStructOutput>;
-        getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<RewardStatusStructOutput>;
+        getRewardStatus(pool: string, overrides?: CallOverrides): Promise<RewardStatusStructOutput>;
         getSystemDebtInfo(overrides?: CallOverrides): Promise<SystemDebtInfoStructOutput>;
         getTick(collateralCount: BigNumberish, debtCount: BigNumberish, overrides?: CallOverrides): Promise<number>;
         getUIs(start: BigNumberish, end: BigNumberish, overrides?: CallOverrides): Promise<UserInterfaceStructOutput[]>;
@@ -636,7 +636,7 @@ export interface AccountingTestable extends BaseContract {
         sendLentHue(dest: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
         setPoolPosition(nftID: BigNumberish, pp: PoolPositionStruct, overrides?: CallOverrides): Promise<void>;
         setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: CallOverrides): Promise<void>;
-        setRewardStatus(poolID: BigNumberish, rs: RewardStatusStruct, overrides?: CallOverrides): Promise<void>;
+        setRewardStatus(pool: string, rs: RewardStatusStruct, overrides?: CallOverrides): Promise<void>;
         setSystemDebtInfo(_sdi: SystemDebtInfoStruct, overrides?: CallOverrides): Promise<void>;
         snapRawTickToSpacing(rawTick: BigNumberish, tickSpacing: BigNumberish, overrides?: CallOverrides): Promise<number>;
         stopIndexingDebtPositions(overrides?: CallOverrides): Promise<void>;
@@ -704,7 +704,7 @@ export interface AccountingTestable extends BaseContract {
         getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         getPoolPositionNftIdsByOwner(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
         getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getRewardStatus(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
         getSystemDebtInfo(overrides?: CallOverrides): Promise<BigNumber>;
         getTick(collateralCount: BigNumberish, debtCount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         getUIs(start: BigNumberish, end: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
@@ -750,7 +750,7 @@ export interface AccountingTestable extends BaseContract {
         setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        setRewardStatus(poolID: BigNumberish, rs: RewardStatusStruct, overrides?: Overrides & {
+        setRewardStatus(pool: string, rs: RewardStatusStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         setSystemDebtInfo(_sdi: SystemDebtInfoStruct, overrides?: Overrides & {
@@ -800,7 +800,7 @@ export interface AccountingTestable extends BaseContract {
         getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getPoolPositionNftIdsByOwner(owner: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getRewardStatus(pool: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getSystemDebtInfo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getTick(collateralCount: BigNumberish, debtCount: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getUIs(start: BigNumberish, end: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -846,7 +846,7 @@ export interface AccountingTestable extends BaseContract {
         setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        setRewardStatus(poolID: BigNumberish, rs: RewardStatusStruct, overrides?: Overrides & {
+        setRewardStatus(pool: string, rs: RewardStatusStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         setSystemDebtInfo(_sdi: SystemDebtInfoStruct, overrides?: Overrides & {

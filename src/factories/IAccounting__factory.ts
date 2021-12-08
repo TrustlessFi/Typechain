@@ -396,9 +396,9 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint16",
-        name: "poolID",
-        type: "uint16",
+        internalType: "contract IUniswapV3Pool",
+        name: "pool",
+        type: "address",
       },
     ],
     name: "getRewardStatus",
@@ -752,9 +752,9 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint16",
-        name: "poolID",
-        type: "uint16",
+        internalType: "contract IUniswapV3Pool",
+        name: "pool",
+        type: "address",
       },
       {
         components: [

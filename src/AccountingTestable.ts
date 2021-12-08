@@ -186,7 +186,7 @@ export interface AccountingTestableInterface extends utils.Interface {
     "getPoolPosition(uint256)": FunctionFragment;
     "getPoolPositionNftIdsByOwner(address)": FunctionFragment;
     "getPosition(uint64)": FunctionFragment;
-    "getRewardStatus(uint16)": FunctionFragment;
+    "getRewardStatus(address)": FunctionFragment;
     "getSystemDebtInfo()": FunctionFragment;
     "getTick(uint256,uint256)": FunctionFragment;
     "getUIs(uint32,uint32)": FunctionFragment;
@@ -210,7 +210,7 @@ export interface AccountingTestableInterface extends utils.Interface {
     "sendLentHue(address,uint256)": FunctionFragment;
     "setPoolPosition(uint256,(address,uint16,uint256,uint256,uint256,uint128,uint64,int24,int24,uint32,address,uint64))": FunctionFragment;
     "setPosition(uint64,(uint256,uint256,uint256,uint256,uint256,uint64,uint64,int24,bool,uint64,uint32,address,uint64))": FunctionFragment;
-    "setRewardStatus(uint16,(uint256,uint256))": FunctionFragment;
+    "setRewardStatus(address,(uint256,uint256))": FunctionFragment;
     "setSystemDebtInfo((uint256,uint256,uint256,uint256))": FunctionFragment;
     "snapRawTickToSpacing(int24,int24)": FunctionFragment;
     "stopIndexingDebtPositions()": FunctionFragment;
@@ -277,7 +277,7 @@ export interface AccountingTestableInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getRewardStatus",
-    values: [BigNumberish]
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "getSystemDebtInfo",
@@ -361,7 +361,7 @@ export interface AccountingTestableInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setRewardStatus",
-    values: [BigNumberish, RewardStatusStruct]
+    values: [string, RewardStatusStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "setSystemDebtInfo",
@@ -710,7 +710,7 @@ export interface AccountingTestable extends BaseContract {
     ): Promise<[DebtPositionStructOutput] & { dp: DebtPositionStructOutput }>;
 
     getRewardStatus(
-      poolID: BigNumberish,
+      pool: string,
       overrides?: CallOverrides
     ): Promise<[RewardStatusStructOutput]>;
 
@@ -824,7 +824,7 @@ export interface AccountingTestable extends BaseContract {
     ): Promise<ContractTransaction>;
 
     setRewardStatus(
-      poolID: BigNumberish,
+      pool: string,
       rs: RewardStatusStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -942,7 +942,7 @@ export interface AccountingTestable extends BaseContract {
   ): Promise<DebtPositionStructOutput>;
 
   getRewardStatus(
-    poolID: BigNumberish,
+    pool: string,
     overrides?: CallOverrides
   ): Promise<RewardStatusStructOutput>;
 
@@ -1051,7 +1051,7 @@ export interface AccountingTestable extends BaseContract {
   ): Promise<ContractTransaction>;
 
   setRewardStatus(
-    poolID: BigNumberish,
+    pool: string,
     rs: RewardStatusStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -1163,7 +1163,7 @@ export interface AccountingTestable extends BaseContract {
     ): Promise<DebtPositionStructOutput>;
 
     getRewardStatus(
-      poolID: BigNumberish,
+      pool: string,
       overrides?: CallOverrides
     ): Promise<RewardStatusStructOutput>;
 
@@ -1267,7 +1267,7 @@ export interface AccountingTestable extends BaseContract {
     ): Promise<void>;
 
     setRewardStatus(
-      poolID: BigNumberish,
+      pool: string,
       rs: RewardStatusStruct,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -1416,7 +1416,7 @@ export interface AccountingTestable extends BaseContract {
     ): Promise<BigNumber>;
 
     getRewardStatus(
-      poolID: BigNumberish,
+      pool: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1523,7 +1523,7 @@ export interface AccountingTestable extends BaseContract {
     ): Promise<BigNumber>;
 
     setRewardStatus(
-      poolID: BigNumberish,
+      pool: string,
       rs: RewardStatusStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1631,7 +1631,7 @@ export interface AccountingTestable extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     getRewardStatus(
-      poolID: BigNumberish,
+      pool: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1747,7 +1747,7 @@ export interface AccountingTestable extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setRewardStatus(
-      poolID: BigNumberish,
+      pool: string,
       rs: RewardStatusStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

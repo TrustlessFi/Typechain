@@ -124,7 +124,7 @@ export interface IAccountingInterface extends utils.Interface {
         "getBasicPositionInfo(uint64)": FunctionFragment;
         "getPoolPosition(uint256)": FunctionFragment;
         "getPosition(uint64)": FunctionFragment;
-        "getRewardStatus(uint16)": FunctionFragment;
+        "getRewardStatus(address)": FunctionFragment;
         "getSystemDebtInfo()": FunctionFragment;
         "increaseDebt(uint256)": FunctionFragment;
         "increaseLentHue(uint256)": FunctionFragment;
@@ -136,7 +136,7 @@ export interface IAccountingInterface extends utils.Interface {
         "sendLentHue(address,uint256)": FunctionFragment;
         "setPoolPosition(uint256,(address,uint16,uint256,uint256,uint256,uint128,uint64,int24,int24,uint32,address,uint64))": FunctionFragment;
         "setPosition(uint64,(uint256,uint256,uint256,uint256,uint256,uint64,uint64,int24,bool,uint64,uint32,address,uint64))": FunctionFragment;
-        "setRewardStatus(uint16,(uint256,uint256))": FunctionFragment;
+        "setRewardStatus(address,(uint256,uint256))": FunctionFragment;
         "setSystemDebtInfo((uint256,uint256,uint256,uint256))": FunctionFragment;
     };
     encodeFunctionData(functionFragment: "addPositionToIndex", values: [string, BigNumberish]): string;
@@ -149,7 +149,7 @@ export interface IAccountingInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "getBasicPositionInfo", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getPoolPosition", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getPosition", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getRewardStatus", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "getRewardStatus", values: [string]): string;
     encodeFunctionData(functionFragment: "getSystemDebtInfo", values?: undefined): string;
     encodeFunctionData(functionFragment: "increaseDebt", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "increaseLentHue", values: [BigNumberish]): string;
@@ -161,7 +161,7 @@ export interface IAccountingInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "sendLentHue", values: [string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "setPoolPosition", values: [BigNumberish, PoolPositionStruct]): string;
     encodeFunctionData(functionFragment: "setPosition", values: [BigNumberish, DebtPositionStruct]): string;
-    encodeFunctionData(functionFragment: "setRewardStatus", values: [BigNumberish, RewardStatusStruct]): string;
+    encodeFunctionData(functionFragment: "setRewardStatus", values: [string, RewardStatusStruct]): string;
     encodeFunctionData(functionFragment: "setSystemDebtInfo", values: [SystemDebtInfoStruct]): string;
     decodeFunctionResult(functionFragment: "addPositionToIndex", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "approveUIs", data: BytesLike): Result;
@@ -283,7 +283,7 @@ export interface IAccounting extends BaseContract {
         getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<[DebtPositionStructOutput] & {
             acct: DebtPositionStructOutput;
         }>;
-        getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<[RewardStatusStructOutput] & {
+        getRewardStatus(pool: string, overrides?: CallOverrides): Promise<[RewardStatusStructOutput] & {
             rs: RewardStatusStructOutput;
         }>;
         getSystemDebtInfo(overrides?: CallOverrides): Promise<[SystemDebtInfoStructOutput]>;
@@ -315,7 +315,7 @@ export interface IAccounting extends BaseContract {
         setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        setRewardStatus(poolID: BigNumberish, rs: RewardStatusStruct, overrides?: Overrides & {
+        setRewardStatus(pool: string, rs: RewardStatusStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         setSystemDebtInfo(_systemDebtInfo: SystemDebtInfoStruct, overrides?: Overrides & {
@@ -350,7 +350,7 @@ export interface IAccounting extends BaseContract {
     }>;
     getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<PoolPositionStructOutput>;
     getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<DebtPositionStructOutput>;
-    getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<RewardStatusStructOutput>;
+    getRewardStatus(pool: string, overrides?: CallOverrides): Promise<RewardStatusStructOutput>;
     getSystemDebtInfo(overrides?: CallOverrides): Promise<SystemDebtInfoStructOutput>;
     increaseDebt(count: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
@@ -378,7 +378,7 @@ export interface IAccounting extends BaseContract {
     setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    setRewardStatus(poolID: BigNumberish, rs: RewardStatusStruct, overrides?: Overrides & {
+    setRewardStatus(pool: string, rs: RewardStatusStruct, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     setSystemDebtInfo(_systemDebtInfo: SystemDebtInfoStruct, overrides?: Overrides & {
@@ -401,7 +401,7 @@ export interface IAccounting extends BaseContract {
         }>;
         getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<PoolPositionStructOutput>;
         getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<DebtPositionStructOutput>;
-        getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<RewardStatusStructOutput>;
+        getRewardStatus(pool: string, overrides?: CallOverrides): Promise<RewardStatusStructOutput>;
         getSystemDebtInfo(overrides?: CallOverrides): Promise<SystemDebtInfoStructOutput>;
         increaseDebt(count: BigNumberish, overrides?: CallOverrides): Promise<void>;
         increaseLentHue(count: BigNumberish, overrides?: CallOverrides): Promise<void>;
@@ -413,7 +413,7 @@ export interface IAccounting extends BaseContract {
         sendLentHue(dest: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
         setPoolPosition(nftID: BigNumberish, pt: PoolPositionStruct, overrides?: CallOverrides): Promise<void>;
         setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: CallOverrides): Promise<void>;
-        setRewardStatus(poolID: BigNumberish, rs: RewardStatusStruct, overrides?: CallOverrides): Promise<void>;
+        setRewardStatus(pool: string, rs: RewardStatusStruct, overrides?: CallOverrides): Promise<void>;
         setSystemDebtInfo(_systemDebtInfo: SystemDebtInfoStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
@@ -453,7 +453,7 @@ export interface IAccounting extends BaseContract {
         getBasicPositionInfo(positionID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getRewardStatus(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
         getSystemDebtInfo(overrides?: CallOverrides): Promise<BigNumber>;
         increaseDebt(count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
@@ -481,7 +481,7 @@ export interface IAccounting extends BaseContract {
         setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        setRewardStatus(poolID: BigNumberish, rs: RewardStatusStruct, overrides?: Overrides & {
+        setRewardStatus(pool: string, rs: RewardStatusStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         setSystemDebtInfo(_systemDebtInfo: SystemDebtInfoStruct, overrides?: Overrides & {
@@ -511,7 +511,7 @@ export interface IAccounting extends BaseContract {
         getBasicPositionInfo(positionID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getPoolPosition(nftID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getRewardStatus(poolID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getRewardStatus(pool: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getSystemDebtInfo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         increaseDebt(count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
@@ -539,7 +539,7 @@ export interface IAccounting extends BaseContract {
         setPosition(positionID: BigNumberish, dp: DebtPositionStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        setRewardStatus(poolID: BigNumberish, rs: RewardStatusStruct, overrides?: Overrides & {
+        setRewardStatus(pool: string, rs: RewardStatusStruct, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         setSystemDebtInfo(_systemDebtInfo: SystemDebtInfoStruct, overrides?: Overrides & {
