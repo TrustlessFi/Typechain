@@ -111,7 +111,7 @@ export interface RewardsInterface extends utils.Interface {
         "accounting()": FunctionFragment;
         "accrueRewards()": FunctionFragment;
         "addIncentivePool(address,uint64)": FunctionFragment;
-        "claimRewards(uint256,uint32)": FunctionFragment;
+        "claimAllRewards(uint256[],uint32)": FunctionFragment;
         "countPools()": FunctionFragment;
         "createLiquidityPosition((address,address,uint24,int24,int24,uint256,uint256,uint256,uint256,address,uint256),uint32)": FunctionFragment;
         "currentPeriod()": FunctionFragment;
@@ -148,7 +148,7 @@ export interface RewardsInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "accounting", values?: undefined): string;
     encodeFunctionData(functionFragment: "accrueRewards", values?: undefined): string;
     encodeFunctionData(functionFragment: "addIncentivePool", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "claimRewards", values: [BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "claimAllRewards", values: [BigNumberish[], BigNumberish]): string;
     encodeFunctionData(functionFragment: "countPools", values?: undefined): string;
     encodeFunctionData(functionFragment: "createLiquidityPosition", values: [MintParamsStruct, BigNumberish]): string;
     encodeFunctionData(functionFragment: "currentPeriod", values?: undefined): string;
@@ -184,7 +184,7 @@ export interface RewardsInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "accounting", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "accrueRewards", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "addIncentivePool", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "claimRewards", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "claimAllRewards", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "countPools", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "createLiquidityPosition", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "currentPeriod", data: BytesLike): Result;
@@ -398,7 +398,7 @@ export interface Rewards extends BaseContract {
         addIncentivePool(pool: string, rewardsPortion: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        claimRewards(nftTokenID: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
+        claimAllRewards(nftTokenIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         countPools(overrides?: CallOverrides): Promise<[number]>;
@@ -481,7 +481,7 @@ export interface Rewards extends BaseContract {
     addIncentivePool(pool: string, rewardsPortion: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    claimRewards(nftTokenID: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
+    claimAllRewards(nftTokenIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     countPools(overrides?: CallOverrides): Promise<number>;
@@ -555,12 +555,12 @@ export interface Rewards extends BaseContract {
         accounting(overrides?: CallOverrides): Promise<string>;
         accrueRewards(overrides?: CallOverrides): Promise<void>;
         addIncentivePool(pool: string, rewardsPortion: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        claimRewards(nftTokenID: BigNumberish, ui: BigNumberish, overrides?: CallOverrides): Promise<[
+        claimAllRewards(nftTokenIDs: BigNumberish[], ui: BigNumberish, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
-            amount0: BigNumber;
-            amount1: BigNumber;
+            totalAmount0: BigNumber;
+            totalAmount1: BigNumber;
         }>;
         countPools(overrides?: CallOverrides): Promise<number>;
         createLiquidityPosition(params: MintParamsStruct, ui: BigNumberish, overrides?: CallOverrides): Promise<[
@@ -665,7 +665,7 @@ export interface Rewards extends BaseContract {
         addIncentivePool(pool: string, rewardsPortion: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        claimRewards(nftTokenID: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
+        claimAllRewards(nftTokenIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         countPools(overrides?: CallOverrides): Promise<BigNumber>;
@@ -735,7 +735,7 @@ export interface Rewards extends BaseContract {
         addIncentivePool(pool: string, rewardsPortion: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        claimRewards(nftTokenID: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
+        claimAllRewards(nftTokenIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         countPools(overrides?: CallOverrides): Promise<PopulatedTransaction>;

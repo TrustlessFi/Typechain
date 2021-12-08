@@ -113,7 +113,6 @@ export interface MarketTestableInterface extends utils.Interface {
         "adjustPosition(uint64,int256,uint256,uint32)": FunctionFragment;
         "calculateInterest((uint256,uint256,uint256,uint256),uint64,uint256,bool,uint256,uint256)": FunctionFragment;
         "claimAllRewards(uint64[],uint32)": FunctionFragment;
-        "claimRewards(uint64,uint32)": FunctionFragment;
         "collateralizationRequirement()": FunctionFragment;
         "createPosition(uint256,uint32)": FunctionFragment;
         "currentPeriod()": FunctionFragment;
@@ -155,7 +154,6 @@ export interface MarketTestableInterface extends utils.Interface {
         BigNumberish
     ]): string;
     encodeFunctionData(functionFragment: "claimAllRewards", values: [BigNumberish[], BigNumberish]): string;
-    encodeFunctionData(functionFragment: "claimRewards", values: [BigNumberish, BigNumberish]): string;
     encodeFunctionData(functionFragment: "collateralizationRequirement", values?: undefined): string;
     encodeFunctionData(functionFragment: "createPosition", values: [BigNumberish, BigNumberish]): string;
     encodeFunctionData(functionFragment: "currentPeriod", values?: undefined): string;
@@ -189,7 +187,6 @@ export interface MarketTestableInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "adjustPosition", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "calculateInterest", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "claimAllRewards", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "claimRewards", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "collateralizationRequirement", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "createPosition", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "currentPeriod", data: BytesLike): Result;
@@ -387,9 +384,6 @@ export interface MarketTestable extends BaseContract {
         claimAllRewards(positionIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        claimRewards(positionID: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
         collateralizationRequirement(overrides?: CallOverrides): Promise<[BigNumber]>;
         createPosition(initialDebt: BigNumberish, ui: BigNumberish, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
@@ -460,9 +454,6 @@ export interface MarketTestable extends BaseContract {
     claimAllRewards(positionIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    claimRewards(positionID: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
     collateralizationRequirement(overrides?: CallOverrides): Promise<BigNumber>;
     createPosition(initialDebt: BigNumberish, ui: BigNumberish, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
@@ -525,7 +516,6 @@ export interface MarketTestable extends BaseContract {
         adjustPosition(positionID: BigNumberish, debtChange: BigNumberish, collateralDecrease: BigNumberish, ui: BigNumberish, overrides?: CallOverrides): Promise<void>;
         calculateInterest(sdi: SystemDebtInfoStruct, periods: BigNumberish, annualInterestRate: BigNumberish, positiveInterestRate: boolean, reserves: BigNumberish, _interestPortionToLenders: BigNumberish, overrides?: CallOverrides): Promise<CalculatedInterestInfoStructOutput>;
         claimAllRewards(positionIDs: BigNumberish[], ui: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        claimRewards(positionID: BigNumberish, ui: BigNumberish, overrides?: CallOverrides): Promise<void>;
         collateralizationRequirement(overrides?: CallOverrides): Promise<BigNumber>;
         createPosition(initialDebt: BigNumberish, ui: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
@@ -599,9 +589,6 @@ export interface MarketTestable extends BaseContract {
         claimAllRewards(positionIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        claimRewards(positionID: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
         collateralizationRequirement(overrides?: CallOverrides): Promise<BigNumber>;
         createPosition(initialDebt: BigNumberish, ui: BigNumberish, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
@@ -663,9 +650,6 @@ export interface MarketTestable extends BaseContract {
         }): Promise<PopulatedTransaction>;
         calculateInterest(sdi: SystemDebtInfoStruct, periods: BigNumberish, annualInterestRate: BigNumberish, positiveInterestRate: boolean, reserves: BigNumberish, _interestPortionToLenders: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         claimAllRewards(positionIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        claimRewards(positionID: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         collateralizationRequirement(overrides?: CallOverrides): Promise<PopulatedTransaction>;

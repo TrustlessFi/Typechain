@@ -135,7 +135,7 @@ export interface RewardsInterface extends utils.Interface {
     "accounting()": FunctionFragment;
     "accrueRewards()": FunctionFragment;
     "addIncentivePool(address,uint64)": FunctionFragment;
-    "claimRewards(uint256,uint32)": FunctionFragment;
+    "claimAllRewards(uint256[],uint32)": FunctionFragment;
     "countPools()": FunctionFragment;
     "createLiquidityPosition((address,address,uint24,int24,int24,uint256,uint256,uint256,uint256,address,uint256),uint32)": FunctionFragment;
     "currentPeriod()": FunctionFragment;
@@ -183,8 +183,8 @@ export interface RewardsInterface extends utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "claimRewards",
-    values: [BigNumberish, BigNumberish]
+    functionFragment: "claimAllRewards",
+    values: [BigNumberish[], BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "countPools",
@@ -310,7 +310,7 @@ export interface RewardsInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "claimRewards",
+    functionFragment: "claimAllRewards",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "countPools", data: BytesLike): Result;
@@ -626,8 +626,8 @@ export interface Rewards extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    claimRewards(
-      nftTokenID: BigNumberish,
+    claimAllRewards(
+      nftTokenIDs: BigNumberish[],
       ui: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -769,8 +769,8 @@ export interface Rewards extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  claimRewards(
-    nftTokenID: BigNumberish,
+  claimAllRewards(
+    nftTokenIDs: BigNumberish[],
     ui: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -904,12 +904,15 @@ export interface Rewards extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    claimRewards(
-      nftTokenID: BigNumberish,
+    claimAllRewards(
+      nftTokenIDs: BigNumberish[],
       ui: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
+      [BigNumber, BigNumber] & {
+        totalAmount0: BigNumber;
+        totalAmount1: BigNumber;
+      }
     >;
 
     countPools(overrides?: CallOverrides): Promise<number>;
@@ -1190,8 +1193,8 @@ export interface Rewards extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    claimRewards(
-      nftTokenID: BigNumberish,
+    claimAllRewards(
+      nftTokenIDs: BigNumberish[],
       ui: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1328,8 +1331,8 @@ export interface Rewards extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    claimRewards(
-      nftTokenID: BigNumberish,
+    claimAllRewards(
+      nftTokenIDs: BigNumberish[],
       ui: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
