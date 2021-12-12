@@ -21,19 +21,12 @@ export type ConstructorParamsStruct = {
   Governor: string;
   ProtocolLock: string;
   CollateralPool: string;
-  ReferencePools: string[];
 };
 
-export type ConstructorParamsStructOutput = [
-  string,
-  string,
-  string,
-  string[]
-] & {
+export type ConstructorParamsStructOutput = [string, string, string] & {
   Governor: string;
   ProtocolLock: string;
   CollateralPool: string;
-  ReferencePools: string[];
 };
 
 export type InterestRateParametersStruct = {

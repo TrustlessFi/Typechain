@@ -6,18 +6,11 @@ export declare type ConstructorParamsStruct = {
     Governor: string;
     ProtocolLock: string;
     CollateralPool: string;
-    ReferencePools: string[];
 };
-export declare type ConstructorParamsStructOutput = [
-    string,
-    string,
-    string,
-    string[]
-] & {
+export declare type ConstructorParamsStructOutput = [string, string, string] & {
     Governor: string;
     ProtocolLock: string;
     CollateralPool: string;
-    ReferencePools: string[];
 };
 export interface RatesInterface extends utils.Interface {
     functions: {

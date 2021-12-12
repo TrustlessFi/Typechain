@@ -20,7 +20,7 @@ import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export interface ITcpAllocationInterface extends utils.Interface {
   functions: {
     "getTokens(address,uint128)": FunctionFragment;
-    "incentiveGuardian()": FunctionFragment;
+    "incentiveAllocation()": FunctionFragment;
     "increaseAllocation(address,uint128)": FunctionFragment;
     "lockTokensIntoDao(address,uint128,uint8)": FunctionFragment;
   };
@@ -30,7 +30,7 @@ export interface ITcpAllocationInterface extends utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "incentiveGuardian",
+    functionFragment: "incentiveAllocation",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -44,7 +44,7 @@ export interface ITcpAllocationInterface extends utils.Interface {
 
   decodeFunctionResult(functionFragment: "getTokens", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "incentiveGuardian",
+    functionFragment: "incentiveAllocation",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -92,7 +92,7 @@ export interface ITcpAllocation extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    incentiveGuardian(overrides?: CallOverrides): Promise<[string]>;
+    incentiveAllocation(overrides?: CallOverrides): Promise<[string]>;
 
     increaseAllocation(
       allocatee: string,
@@ -114,7 +114,7 @@ export interface ITcpAllocation extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  incentiveGuardian(overrides?: CallOverrides): Promise<string>;
+  incentiveAllocation(overrides?: CallOverrides): Promise<string>;
 
   increaseAllocation(
     allocatee: string,
@@ -136,7 +136,7 @@ export interface ITcpAllocation extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    incentiveGuardian(overrides?: CallOverrides): Promise<string>;
+    incentiveAllocation(overrides?: CallOverrides): Promise<string>;
 
     increaseAllocation(
       allocatee: string,
@@ -161,7 +161,7 @@ export interface ITcpAllocation extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    incentiveGuardian(overrides?: CallOverrides): Promise<BigNumber>;
+    incentiveAllocation(overrides?: CallOverrides): Promise<BigNumber>;
 
     increaseAllocation(
       allocatee: string,
@@ -184,7 +184,9 @@ export interface ITcpAllocation extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    incentiveGuardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    incentiveAllocation(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     increaseAllocation(
       allocatee: string,

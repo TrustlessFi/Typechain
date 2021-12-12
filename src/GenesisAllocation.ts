@@ -69,7 +69,7 @@ export interface GenesisAllocationInterface extends utils.Interface {
     "getMessage(address,uint16,uint128)": FunctionFragment;
     "guardian()": FunctionFragment;
     "tcpAllocation()": FunctionFragment;
-    "transferAllocationToIncentiveGuardian(uint128)": FunctionFragment;
+    "transferAllocationToIncentiveAllocation(uint128)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "NAME", values?: undefined): string;
@@ -102,7 +102,7 @@ export interface GenesisAllocationInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "transferAllocationToIncentiveGuardian",
+    functionFragment: "transferAllocationToIncentiveAllocation",
     values: [BigNumberish]
   ): string;
 
@@ -130,20 +130,20 @@ export interface GenesisAllocationInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "transferAllocationToIncentiveGuardian",
+    functionFragment: "transferAllocationToIncentiveAllocation",
     data: BytesLike
   ): Result;
 
   events: {
     "DeadlineSet(uint64)": EventFragment;
     "SignatureProcessed(address,uint16,uint128)": EventFragment;
-    "TokensTransferredToIncentiveGuardian(uint128)": EventFragment;
+    "TokensTransferredToIncentiveAllocation(uint128)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "DeadlineSet"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SignatureProcessed"): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "TokensTransferredToIncentiveGuardian"
+    nameOrSignatureOrTopic: "TokensTransferredToIncentiveAllocation"
   ): EventFragment;
 }
 
@@ -159,13 +159,13 @@ export type SignatureProcessedEvent = TypedEvent<
 export type SignatureProcessedEventFilter =
   TypedEventFilter<SignatureProcessedEvent>;
 
-export type TokensTransferredToIncentiveGuardianEvent = TypedEvent<
+export type TokensTransferredToIncentiveAllocationEvent = TypedEvent<
   [BigNumber],
   { count: BigNumber }
 >;
 
-export type TokensTransferredToIncentiveGuardianEventFilter =
-  TypedEventFilter<TokensTransferredToIncentiveGuardianEvent>;
+export type TokensTransferredToIncentiveAllocationEventFilter =
+  TypedEventFilter<TokensTransferredToIncentiveAllocationEvent>;
 
 export interface GenesisAllocation extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -237,7 +237,7 @@ export interface GenesisAllocation extends BaseContract {
 
     tcpAllocation(overrides?: CallOverrides): Promise<[string]>;
 
-    transferAllocationToIncentiveGuardian(
+    transferAllocationToIncentiveAllocation(
       count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -284,7 +284,7 @@ export interface GenesisAllocation extends BaseContract {
 
   tcpAllocation(overrides?: CallOverrides): Promise<string>;
 
-  transferAllocationToIncentiveGuardian(
+  transferAllocationToIncentiveAllocation(
     count: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -329,7 +329,7 @@ export interface GenesisAllocation extends BaseContract {
 
     tcpAllocation(overrides?: CallOverrides): Promise<string>;
 
-    transferAllocationToIncentiveGuardian(
+    transferAllocationToIncentiveAllocation(
       count: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -350,12 +350,12 @@ export interface GenesisAllocation extends BaseContract {
       count?: null
     ): SignatureProcessedEventFilter;
 
-    "TokensTransferredToIncentiveGuardian(uint128)"(
+    "TokensTransferredToIncentiveAllocation(uint128)"(
       count?: null
-    ): TokensTransferredToIncentiveGuardianEventFilter;
-    TokensTransferredToIncentiveGuardian(
+    ): TokensTransferredToIncentiveAllocationEventFilter;
+    TokensTransferredToIncentiveAllocation(
       count?: null
-    ): TokensTransferredToIncentiveGuardianEventFilter;
+    ): TokensTransferredToIncentiveAllocationEventFilter;
   };
 
   estimateGas: {
@@ -400,7 +400,7 @@ export interface GenesisAllocation extends BaseContract {
 
     tcpAllocation(overrides?: CallOverrides): Promise<BigNumber>;
 
-    transferAllocationToIncentiveGuardian(
+    transferAllocationToIncentiveAllocation(
       count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -448,7 +448,7 @@ export interface GenesisAllocation extends BaseContract {
 
     tcpAllocation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    transferAllocationToIncentiveGuardian(
+    transferAllocationToIncentiveAllocation(
       count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

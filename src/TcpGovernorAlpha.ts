@@ -111,7 +111,7 @@ export interface TcpGovernorAlphaInterface extends utils.Interface {
     "cancel(uint256)": FunctionFragment;
     "castVote(uint256,bool)": FunctionFragment;
     "castVoteBySig(uint256,bool,uint8,bytes32,bytes32)": FunctionFragment;
-    "claimVotingRewards(uint256)": FunctionFragment;
+    "claimVotingRewards(uint256[])": FunctionFragment;
     "execute(uint256)": FunctionFragment;
     "getActions(uint256)": FunctionFragment;
     "getAllProposals(address)": FunctionFragment;
@@ -166,7 +166,7 @@ export interface TcpGovernorAlphaInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "claimVotingRewards",
-    values: [BigNumberish]
+    values: [BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "execute",
@@ -432,7 +432,7 @@ export interface TcpGovernorAlpha extends BaseContract {
     ): Promise<ContractTransaction>;
 
     claimVotingRewards(
-      proposalID: BigNumberish,
+      proposalIDs: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -583,7 +583,7 @@ export interface TcpGovernorAlpha extends BaseContract {
   ): Promise<ContractTransaction>;
 
   claimVotingRewards(
-    proposalID: BigNumberish,
+    proposalIDs: BigNumberish[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -724,7 +724,7 @@ export interface TcpGovernorAlpha extends BaseContract {
     ): Promise<void>;
 
     claimVotingRewards(
-      proposalID: BigNumberish,
+      proposalIDs: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -919,7 +919,7 @@ export interface TcpGovernorAlpha extends BaseContract {
     ): Promise<BigNumber>;
 
     claimVotingRewards(
-      proposalID: BigNumberish,
+      proposalIDs: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1035,7 +1035,7 @@ export interface TcpGovernorAlpha extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     claimVotingRewards(
-      proposalID: BigNumberish,
+      proposalIDs: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

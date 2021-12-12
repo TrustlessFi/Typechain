@@ -23,7 +23,7 @@ var _abi = [
     },
     {
         inputs: [],
-        name: "incentiveGuardian",
+        name: "incentiveAllocation",
         outputs: [
             {
                 internalType: "address",

@@ -89,8 +89,8 @@ export interface TDaoGovernorAlphaInterface extends utils.Interface {
     "cancel(uint256)": FunctionFragment;
     "castVote(uint256,bool)": FunctionFragment;
     "castVoteBySig(uint256,bool,uint8,bytes32,bytes32)": FunctionFragment;
-    "claimUnderlyingVotingRewards(uint256)": FunctionFragment;
-    "claimVotingRewards(uint256)": FunctionFragment;
+    "claimUnderlyingVotingRewards(uint256[])": FunctionFragment;
+    "claimVotingRewards(uint256[])": FunctionFragment;
     "execute(uint256)": FunctionFragment;
     "getActions(uint256)": FunctionFragment;
     "getAllProposals(address)": FunctionFragment;
@@ -148,11 +148,11 @@ export interface TDaoGovernorAlphaInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "claimUnderlyingVotingRewards",
-    values: [BigNumberish]
+    values: [BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "claimVotingRewards",
-    values: [BigNumberish]
+    values: [BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "execute",
@@ -458,12 +458,12 @@ export interface TDaoGovernorAlpha extends BaseContract {
     ): Promise<ContractTransaction>;
 
     claimUnderlyingVotingRewards(
-      proposalID: BigNumberish,
+      proposalIDs: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     claimVotingRewards(
-      proposalID: BigNumberish,
+      proposalIDs: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -637,12 +637,12 @@ export interface TDaoGovernorAlpha extends BaseContract {
   ): Promise<ContractTransaction>;
 
   claimUnderlyingVotingRewards(
-    proposalID: BigNumberish,
+    proposalIDs: BigNumberish[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   claimVotingRewards(
-    proposalID: BigNumberish,
+    proposalIDs: BigNumberish[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -806,12 +806,12 @@ export interface TDaoGovernorAlpha extends BaseContract {
     ): Promise<void>;
 
     claimUnderlyingVotingRewards(
-      proposalID: BigNumberish,
+      proposalIDs: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     claimVotingRewards(
-      proposalID: BigNumberish,
+      proposalIDs: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1038,12 +1038,12 @@ export interface TDaoGovernorAlpha extends BaseContract {
     ): Promise<BigNumber>;
 
     claimUnderlyingVotingRewards(
-      proposalID: BigNumberish,
+      proposalIDs: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     claimVotingRewards(
-      proposalID: BigNumberish,
+      proposalIDs: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1176,12 +1176,12 @@ export interface TDaoGovernorAlpha extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     claimUnderlyingVotingRewards(
-      proposalID: BigNumberish,
+      proposalIDs: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     claimVotingRewards(
-      proposalID: BigNumberish,
+      proposalIDs: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

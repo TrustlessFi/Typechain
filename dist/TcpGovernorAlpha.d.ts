@@ -90,7 +90,7 @@ export interface TcpGovernorAlphaInterface extends utils.Interface {
         "cancel(uint256)": FunctionFragment;
         "castVote(uint256,bool)": FunctionFragment;
         "castVoteBySig(uint256,bool,uint8,bytes32,bytes32)": FunctionFragment;
-        "claimVotingRewards(uint256)": FunctionFragment;
+        "claimVotingRewards(uint256[])": FunctionFragment;
         "execute(uint256)": FunctionFragment;
         "getActions(uint256)": FunctionFragment;
         "getAllProposals(address)": FunctionFragment;
@@ -121,7 +121,7 @@ export interface TcpGovernorAlphaInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "cancel", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "castVote", values: [BigNumberish, boolean]): string;
     encodeFunctionData(functionFragment: "castVoteBySig", values: [BigNumberish, boolean, BigNumberish, BytesLike, BytesLike]): string;
-    encodeFunctionData(functionFragment: "claimVotingRewards", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "claimVotingRewards", values: [BigNumberish[]]): string;
     encodeFunctionData(functionFragment: "execute", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getActions", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getAllProposals", values: [string]): string;
@@ -263,7 +263,7 @@ export interface TcpGovernorAlpha extends BaseContract {
         castVoteBySig(proposalId: BigNumberish, support: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        claimVotingRewards(proposalID: BigNumberish, overrides?: Overrides & {
+        claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         execute(proposalId: BigNumberish, overrides?: Overrides & {
@@ -350,7 +350,7 @@ export interface TcpGovernorAlpha extends BaseContract {
     castVoteBySig(proposalId: BigNumberish, support: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    claimVotingRewards(proposalID: BigNumberish, overrides?: Overrides & {
+    claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     execute(proposalId: BigNumberish, overrides?: Overrides & {
@@ -429,7 +429,7 @@ export interface TcpGovernorAlpha extends BaseContract {
         cancel(proposalId: BigNumberish, overrides?: CallOverrides): Promise<void>;
         castVote(proposalId: BigNumberish, support: boolean, overrides?: CallOverrides): Promise<void>;
         castVoteBySig(proposalId: BigNumberish, support: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: CallOverrides): Promise<void>;
-        claimVotingRewards(proposalID: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        claimVotingRewards(proposalIDs: BigNumberish[], overrides?: CallOverrides): Promise<void>;
         execute(proposalId: BigNumberish, overrides?: CallOverrides): Promise<void>;
         getActions(proposalId: BigNumberish, overrides?: CallOverrides): Promise<[
             string[],
@@ -523,7 +523,7 @@ export interface TcpGovernorAlpha extends BaseContract {
         castVoteBySig(proposalId: BigNumberish, support: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        claimVotingRewards(proposalID: BigNumberish, overrides?: Overrides & {
+        claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         execute(proposalId: BigNumberish, overrides?: Overrides & {
@@ -571,7 +571,7 @@ export interface TcpGovernorAlpha extends BaseContract {
         castVoteBySig(proposalId: BigNumberish, support: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        claimVotingRewards(proposalID: BigNumberish, overrides?: Overrides & {
+        claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         execute(proposalId: BigNumberish, overrides?: Overrides & {

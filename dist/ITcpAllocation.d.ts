@@ -5,16 +5,16 @@ import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export interface ITcpAllocationInterface extends utils.Interface {
     functions: {
         "getTokens(address,uint128)": FunctionFragment;
-        "incentiveGuardian()": FunctionFragment;
+        "incentiveAllocation()": FunctionFragment;
         "increaseAllocation(address,uint128)": FunctionFragment;
         "lockTokensIntoDao(address,uint128,uint8)": FunctionFragment;
     };
     encodeFunctionData(functionFragment: "getTokens", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "incentiveGuardian", values?: undefined): string;
+    encodeFunctionData(functionFragment: "incentiveAllocation", values?: undefined): string;
     encodeFunctionData(functionFragment: "increaseAllocation", values: [string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "lockTokensIntoDao", values: [string, BigNumberish, BigNumberish]): string;
     decodeFunctionResult(functionFragment: "getTokens", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "incentiveGuardian", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "incentiveAllocation", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "increaseAllocation", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "lockTokensIntoDao", data: BytesLike): Result;
     events: {};
@@ -37,7 +37,7 @@ export interface ITcpAllocation extends BaseContract {
         getTokens(dest: string, count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        incentiveGuardian(overrides?: CallOverrides): Promise<[string]>;
+        incentiveAllocation(overrides?: CallOverrides): Promise<[string]>;
         increaseAllocation(allocatee: string, count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
@@ -48,7 +48,7 @@ export interface ITcpAllocation extends BaseContract {
     getTokens(dest: string, count: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    incentiveGuardian(overrides?: CallOverrides): Promise<string>;
+    incentiveAllocation(overrides?: CallOverrides): Promise<string>;
     increaseAllocation(allocatee: string, count: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
@@ -57,7 +57,7 @@ export interface ITcpAllocation extends BaseContract {
     }): Promise<ContractTransaction>;
     callStatic: {
         getTokens(dest: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        incentiveGuardian(overrides?: CallOverrides): Promise<string>;
+        incentiveAllocation(overrides?: CallOverrides): Promise<string>;
         increaseAllocation(allocatee: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
         lockTokensIntoDao(dest: string, count: BigNumberish, lockDurationMonths: BigNumberish, overrides?: CallOverrides): Promise<void>;
     };
@@ -66,7 +66,7 @@ export interface ITcpAllocation extends BaseContract {
         getTokens(dest: string, count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        incentiveGuardian(overrides?: CallOverrides): Promise<BigNumber>;
+        incentiveAllocation(overrides?: CallOverrides): Promise<BigNumber>;
         increaseAllocation(allocatee: string, count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
@@ -78,7 +78,7 @@ export interface ITcpAllocation extends BaseContract {
         getTokens(dest: string, count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        incentiveGuardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        incentiveAllocation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         increaseAllocation(allocatee: string, count: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;

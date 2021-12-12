@@ -237,9 +237,9 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "proposalID",
-        type: "uint256",
+        internalType: "uint256[]",
+        name: "proposalIDs",
+        type: "uint256[]",
       },
     ],
     name: "claimVotingRewards",

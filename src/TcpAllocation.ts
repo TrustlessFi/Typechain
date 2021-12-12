@@ -34,7 +34,7 @@ export type InitParamsStruct = {
   governorAllocationCount: BigNumberish;
   genesisAllocation: string;
   genesisAllocationCount: BigNumberish;
-  incentiveGuardian: string;
+  incentiveAllocation: string;
   incentiveAllocationCount: BigNumberish;
   allocationReceivers: string[];
   allocationAmounts: BigNumberish[];
@@ -54,7 +54,7 @@ export type InitParamsStructOutput = [
   governorAllocationCount: BigNumber;
   genesisAllocation: string;
   genesisAllocationCount: BigNumber;
-  incentiveGuardian: string;
+  incentiveAllocation: string;
   incentiveAllocationCount: BigNumber;
   allocationReceivers: string[];
   allocationAmounts: BigNumber[];
@@ -68,7 +68,7 @@ export interface TcpAllocationInterface extends utils.Interface {
     "deployer()": FunctionFragment;
     "getTokens(address,uint128)": FunctionFragment;
     "guardian()": FunctionFragment;
-    "incentiveGuardian()": FunctionFragment;
+    "incentiveAllocation()": FunctionFragment;
     "increaseAllocation(address,uint128)": FunctionFragment;
     "init((address,uint256,address,uint256,address,uint128,address[],uint128[]))": FunctionFragment;
     "lockPositions(address)": FunctionFragment;
@@ -94,7 +94,7 @@ export interface TcpAllocationInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "guardian", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "incentiveGuardian",
+    functionFragment: "incentiveAllocation",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -139,7 +139,7 @@ export interface TcpAllocationInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "getTokens", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "guardian", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "incentiveGuardian",
+    functionFragment: "incentiveAllocation",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -253,7 +253,7 @@ export interface TcpAllocation extends BaseContract {
 
     guardian(overrides?: CallOverrides): Promise<[string]>;
 
-    incentiveGuardian(overrides?: CallOverrides): Promise<[string]>;
+    incentiveAllocation(overrides?: CallOverrides): Promise<[string]>;
 
     increaseAllocation(
       allocatee: string,
@@ -322,7 +322,7 @@ export interface TcpAllocation extends BaseContract {
 
   guardian(overrides?: CallOverrides): Promise<string>;
 
-  incentiveGuardian(overrides?: CallOverrides): Promise<string>;
+  incentiveAllocation(overrides?: CallOverrides): Promise<string>;
 
   increaseAllocation(
     allocatee: string,
@@ -389,7 +389,7 @@ export interface TcpAllocation extends BaseContract {
 
     guardian(overrides?: CallOverrides): Promise<string>;
 
-    incentiveGuardian(overrides?: CallOverrides): Promise<string>;
+    incentiveAllocation(overrides?: CallOverrides): Promise<string>;
 
     increaseAllocation(
       allocatee: string,
@@ -484,7 +484,7 @@ export interface TcpAllocation extends BaseContract {
 
     guardian(overrides?: CallOverrides): Promise<BigNumber>;
 
-    incentiveGuardian(overrides?: CallOverrides): Promise<BigNumber>;
+    incentiveAllocation(overrides?: CallOverrides): Promise<BigNumber>;
 
     increaseAllocation(
       allocatee: string,
@@ -547,7 +547,9 @@ export interface TcpAllocation extends BaseContract {
 
     guardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    incentiveGuardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    incentiveAllocation(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     increaseAllocation(
       allocatee: string,
