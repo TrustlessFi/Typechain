@@ -6,9 +6,9 @@ var _abi = [
     {
         inputs: [
             {
-                internalType: "contract IERC20",
-                name: "token",
-                type: "address",
+                internalType: "uint16",
+                name: "tokenID",
+                type: "uint16",
             },
             {
                 internalType: "uint256",

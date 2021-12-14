@@ -19,12 +19,12 @@ import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
 export interface ITokenLockDaoInterface extends utils.Interface {
   functions: {
-    "lockTokens(address,uint256,uint8,address)": FunctionFragment;
+    "lockTokens(uint16,uint256,uint8,address)": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "lockTokens",
-    values: [string, BigNumberish, BigNumberish, string]
+    values: [BigNumberish, BigNumberish, BigNumberish, string]
   ): string;
 
   decodeFunctionResult(functionFragment: "lockTokens", data: BytesLike): Result;
@@ -60,7 +60,7 @@ export interface ITokenLockDao extends BaseContract {
 
   functions: {
     lockTokens(
-      token: string,
+      tokenID: BigNumberish,
       count: BigNumberish,
       lockDurationMonths: BigNumberish,
       to: string,
@@ -69,7 +69,7 @@ export interface ITokenLockDao extends BaseContract {
   };
 
   lockTokens(
-    token: string,
+    tokenID: BigNumberish,
     count: BigNumberish,
     lockDurationMonths: BigNumberish,
     to: string,
@@ -78,7 +78,7 @@ export interface ITokenLockDao extends BaseContract {
 
   callStatic: {
     lockTokens(
-      token: string,
+      tokenID: BigNumberish,
       count: BigNumberish,
       lockDurationMonths: BigNumberish,
       to: string,
@@ -90,7 +90,7 @@ export interface ITokenLockDao extends BaseContract {
 
   estimateGas: {
     lockTokens(
-      token: string,
+      tokenID: BigNumberish,
       count: BigNumberish,
       lockDurationMonths: BigNumberish,
       to: string,
@@ -100,7 +100,7 @@ export interface ITokenLockDao extends BaseContract {
 
   populateTransaction: {
     lockTokens(
-      token: string,
+      tokenID: BigNumberish,
       count: BigNumberish,
       lockDurationMonths: BigNumberish,
       to: string,

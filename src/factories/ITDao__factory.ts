@@ -231,7 +231,7 @@ const _abi = [
     inputs: [
       {
         internalType: "uint16",
-        name: "id",
+        name: "tokenID",
         type: "uint16",
       },
     ],
@@ -249,9 +249,9 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "contract IERC20",
-        name: "token",
-        type: "address",
+        internalType: "uint16",
+        name: "tokenID",
+        type: "uint16",
       },
       {
         internalType: "uint256",
@@ -362,6 +362,25 @@ const _abi = [
     name: "sendUnderlyingVotingRewards",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IERC20",
+        name: "token",
+        type: "address",
+      },
+    ],
+    name: "tokenToID",
+    outputs: [
+      {
+        internalType: "uint16",
+        name: "",
+        type: "uint16",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
 ];

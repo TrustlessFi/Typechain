@@ -49,11 +49,12 @@ export interface ITDaoInterface extends utils.Interface {
   functions: {
     "getPosition(uint64)": FunctionFragment;
     "idToToken(uint16)": FunctionFragment;
-    "lockTokens(address,uint256,uint8,address)": FunctionFragment;
+    "lockTokens(uint16,uint256,uint8,address)": FunctionFragment;
     "mintVotingRewards(address,uint256)": FunctionFragment;
     "periodToTime(uint64)": FunctionFragment;
     "positionIsAbleToBeUnlocked(uint64)": FunctionFragment;
     "sendUnderlyingVotingRewards(address,uint256,address,uint256)": FunctionFragment;
+    "tokenToID(address)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -66,7 +67,7 @@ export interface ITDaoInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "lockTokens",
-    values: [string, BigNumberish, BigNumberish, string]
+    values: [BigNumberish, BigNumberish, BigNumberish, string]
   ): string;
   encodeFunctionData(
     functionFragment: "mintVotingRewards",
@@ -84,6 +85,7 @@ export interface ITDaoInterface extends utils.Interface {
     functionFragment: "sendUnderlyingVotingRewards",
     values: [string, BigNumberish, string, BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: "tokenToID", values: [string]): string;
 
   decodeFunctionResult(
     functionFragment: "getPosition",
@@ -107,6 +109,7 @@ export interface ITDaoInterface extends utils.Interface {
     functionFragment: "sendUnderlyingVotingRewards",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "tokenToID", data: BytesLike): Result;
 
   events: {
     "IncentiveMinted(address,uint256)": EventFragment;
@@ -230,10 +233,13 @@ export interface ITDao extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[TokenPositionStructOutput]>;
 
-    idToToken(id: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+    idToToken(
+      tokenID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     lockTokens(
-      token: string,
+      tokenID: BigNumberish,
       count: BigNumberish,
       lockDurationMonths: BigNumberish,
       to: string,
@@ -263,6 +269,8 @@ export interface ITDao extends BaseContract {
       votePortion: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    tokenToID(token: string, overrides?: CallOverrides): Promise<[number]>;
   };
 
   getPosition(
@@ -270,10 +278,10 @@ export interface ITDao extends BaseContract {
     overrides?: CallOverrides
   ): Promise<TokenPositionStructOutput>;
 
-  idToToken(id: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  idToToken(tokenID: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   lockTokens(
-    token: string,
+    tokenID: BigNumberish,
     count: BigNumberish,
     lockDurationMonths: BigNumberish,
     to: string,
@@ -304,16 +312,21 @@ export interface ITDao extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  tokenToID(token: string, overrides?: CallOverrides): Promise<number>;
+
   callStatic: {
     getPosition(
       positionNFTTokenID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<TokenPositionStructOutput>;
 
-    idToToken(id: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    idToToken(
+      tokenID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     lockTokens(
-      token: string,
+      tokenID: BigNumberish,
       count: BigNumberish,
       lockDurationMonths: BigNumberish,
       to: string,
@@ -343,6 +356,8 @@ export interface ITDao extends BaseContract {
       votePortion: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    tokenToID(token: string, overrides?: CallOverrides): Promise<number>;
   };
 
   filters: {
@@ -426,10 +441,13 @@ export interface ITDao extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    idToToken(id: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    idToToken(
+      tokenID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     lockTokens(
-      token: string,
+      tokenID: BigNumberish,
       count: BigNumberish,
       lockDurationMonths: BigNumberish,
       to: string,
@@ -459,6 +477,8 @@ export interface ITDao extends BaseContract {
       votePortion: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    tokenToID(token: string, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -468,12 +488,12 @@ export interface ITDao extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     idToToken(
-      id: BigNumberish,
+      tokenID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     lockTokens(
-      token: string,
+      tokenID: BigNumberish,
       count: BigNumberish,
       lockDurationMonths: BigNumberish,
       to: string,
@@ -502,6 +522,11 @@ export interface ITDao extends BaseContract {
       voter: string,
       votePortion: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    tokenToID(
+      token: string,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

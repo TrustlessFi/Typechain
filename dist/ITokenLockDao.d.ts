@@ -4,9 +4,9 @@ import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export interface ITokenLockDaoInterface extends utils.Interface {
     functions: {
-        "lockTokens(address,uint256,uint8,address)": FunctionFragment;
+        "lockTokens(uint16,uint256,uint8,address)": FunctionFragment;
     };
-    encodeFunctionData(functionFragment: "lockTokens", values: [string, BigNumberish, BigNumberish, string]): string;
+    encodeFunctionData(functionFragment: "lockTokens", values: [BigNumberish, BigNumberish, BigNumberish, string]): string;
     decodeFunctionResult(functionFragment: "lockTokens", data: BytesLike): Result;
     events: {};
 }
@@ -25,24 +25,24 @@ export interface ITokenLockDao extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        lockTokens(token: string, count: BigNumberish, lockDurationMonths: BigNumberish, to: string, overrides?: Overrides & {
+        lockTokens(tokenID: BigNumberish, count: BigNumberish, lockDurationMonths: BigNumberish, to: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
     };
-    lockTokens(token: string, count: BigNumberish, lockDurationMonths: BigNumberish, to: string, overrides?: Overrides & {
+    lockTokens(tokenID: BigNumberish, count: BigNumberish, lockDurationMonths: BigNumberish, to: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        lockTokens(token: string, count: BigNumberish, lockDurationMonths: BigNumberish, to: string, overrides?: CallOverrides): Promise<BigNumber>;
+        lockTokens(tokenID: BigNumberish, count: BigNumberish, lockDurationMonths: BigNumberish, to: string, overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {};
     estimateGas: {
-        lockTokens(token: string, count: BigNumberish, lockDurationMonths: BigNumberish, to: string, overrides?: Overrides & {
+        lockTokens(tokenID: BigNumberish, count: BigNumberish, lockDurationMonths: BigNumberish, to: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        lockTokens(token: string, count: BigNumberish, lockDurationMonths: BigNumberish, to: string, overrides?: Overrides & {
+        lockTokens(tokenID: BigNumberish, count: BigNumberish, lockDurationMonths: BigNumberish, to: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
     };

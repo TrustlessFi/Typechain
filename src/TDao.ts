@@ -59,6 +59,7 @@ export interface TDaoInterface extends utils.Interface {
   functions: {
     "accrueInflation()": FunctionFragment;
     "addToken(address)": FunctionFragment;
+    "allTokens()": FunctionFragment;
     "blacklistedAction(bytes4)": FunctionFragment;
     "countUnderlyingProtocolTokens()": FunctionFragment;
     "currentPeriod()": FunctionFragment;
@@ -78,15 +79,14 @@ export interface TDaoInterface extends utils.Interface {
     "increaseLockDuration(uint64,uint8)": FunctionFragment;
     "init(address,address,address,address)": FunctionFragment;
     "lastPeriodGlobalInflationUpdated()": FunctionFragment;
-    "lockTokens(address,uint256,uint8,address)": FunctionFragment;
+    "lockTokens(uint16,uint256,uint8,address)": FunctionFragment;
     "mintIncentive(address,uint256)": FunctionFragment;
     "mintVotingRewards(address,uint256)": FunctionFragment;
     "periodLength()": FunctionFragment;
     "periodToTime(uint64)": FunctionFragment;
     "positionIsAbleToBeUnlocked(uint64)": FunctionFragment;
-    "selfDelegate(address)": FunctionFragment;
+    "selfDelegate(uint16)": FunctionFragment;
     "sendUnderlyingVotingRewards(address,uint256,address,uint256)": FunctionFragment;
-    "setFirstToken(address)": FunctionFragment;
     "setIncentiveContract(address)": FunctionFragment;
     "start()": FunctionFragment;
     "startPeriod()": FunctionFragment;
@@ -95,6 +95,7 @@ export interface TDaoInterface extends utils.Interface {
     "tDaoToken()": FunctionFragment;
     "timelock()": FunctionFragment;
     "tokenToID(address)": FunctionFragment;
+    "tokens(uint256)": FunctionFragment;
     "totalIncentivesMinted()": FunctionFragment;
     "underlyingTokenVoteRewardCount(address,uint256)": FunctionFragment;
     "unlockTokens(uint64)": FunctionFragment;
@@ -107,6 +108,7 @@ export interface TDaoInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "addToken", values: [string]): string;
+  encodeFunctionData(functionFragment: "allTokens", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "blacklistedAction",
     values: [BytesLike]
@@ -179,7 +181,7 @@ export interface TDaoInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "lockTokens",
-    values: [string, BigNumberish, BigNumberish, string]
+    values: [BigNumberish, BigNumberish, BigNumberish, string]
   ): string;
   encodeFunctionData(
     functionFragment: "mintIncentive",
@@ -203,15 +205,11 @@ export interface TDaoInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "selfDelegate",
-    values: [string]
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "sendUnderlyingVotingRewards",
     values: [string, BigNumberish, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setFirstToken",
-    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "setIncentiveContract",
@@ -233,6 +231,10 @@ export interface TDaoInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "tDaoToken", values?: undefined): string;
   encodeFunctionData(functionFragment: "timelock", values?: undefined): string;
   encodeFunctionData(functionFragment: "tokenToID", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "tokens",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "totalIncentivesMinted",
     values?: undefined
@@ -259,6 +261,7 @@ export interface TDaoInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "addToken", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "allTokens", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "blacklistedAction",
     data: BytesLike
@@ -347,10 +350,6 @@ export interface TDaoInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setFirstToken",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "setIncentiveContract",
     data: BytesLike
   ): Result;
@@ -370,6 +369,7 @@ export interface TDaoInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "tDaoToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "timelock", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "tokenToID", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "tokens", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "totalIncentivesMinted",
     data: BytesLike
@@ -517,12 +517,16 @@ export interface TDao extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    allTokens(overrides?: CallOverrides): Promise<[string[]]>;
+
     blacklistedAction(
       arg0: BytesLike,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    countUnderlyingProtocolTokens(overrides?: CallOverrides): Promise<[number]>;
+    countUnderlyingProtocolTokens(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     currentPeriod(
       overrides?: CallOverrides
@@ -559,13 +563,16 @@ export interface TDao extends BaseContract {
     ): Promise<ContractTransaction>;
 
     getRewardsStatus(
-      _tokenID: BigNumberish,
+      tokenID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[TokenRewardsStatusStructOutput]>;
 
     guardian(overrides?: CallOverrides): Promise<[string]>;
 
-    idToToken(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+    idToToken(
+      tokenID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     incentiveContract(overrides?: CallOverrides): Promise<[string]>;
 
@@ -596,7 +603,7 @@ export interface TDao extends BaseContract {
     ): Promise<[BigNumber]>;
 
     lockTokens(
-      token: string,
+      tokenID: BigNumberish,
       count: BigNumberish,
       lockDurationMonths: BigNumberish,
       to: string,
@@ -628,7 +635,7 @@ export interface TDao extends BaseContract {
     ): Promise<[boolean]>;
 
     selfDelegate(
-      token: string,
+      tokenID: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -637,11 +644,6 @@ export interface TDao extends BaseContract {
       proposalID: BigNumberish,
       voter: string,
       votePortion: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    setFirstToken(
-      firstToken: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -664,7 +666,9 @@ export interface TDao extends BaseContract {
 
     timelock(overrides?: CallOverrides): Promise<[string]>;
 
-    tokenToID(arg0: string, overrides?: CallOverrides): Promise<[number]>;
+    tokenToID(token: string, overrides?: CallOverrides): Promise<[number]>;
+
+    tokens(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
 
     totalIncentivesMinted(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -696,12 +700,14 @@ export interface TDao extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  allTokens(overrides?: CallOverrides): Promise<string[]>;
+
   blacklistedAction(
     arg0: BytesLike,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  countUnderlyingProtocolTokens(overrides?: CallOverrides): Promise<number>;
+  countUnderlyingProtocolTokens(overrides?: CallOverrides): Promise<BigNumber>;
 
   currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -736,13 +742,13 @@ export interface TDao extends BaseContract {
   ): Promise<ContractTransaction>;
 
   getRewardsStatus(
-    _tokenID: BigNumberish,
+    tokenID: BigNumberish,
     overrides?: CallOverrides
   ): Promise<TokenRewardsStatusStructOutput>;
 
   guardian(overrides?: CallOverrides): Promise<string>;
 
-  idToToken(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  idToToken(tokenID: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   incentiveContract(overrides?: CallOverrides): Promise<string>;
 
@@ -773,7 +779,7 @@ export interface TDao extends BaseContract {
   ): Promise<BigNumber>;
 
   lockTokens(
-    token: string,
+    tokenID: BigNumberish,
     count: BigNumberish,
     lockDurationMonths: BigNumberish,
     to: string,
@@ -805,7 +811,7 @@ export interface TDao extends BaseContract {
   ): Promise<boolean>;
 
   selfDelegate(
-    token: string,
+    tokenID: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -814,11 +820,6 @@ export interface TDao extends BaseContract {
     proposalID: BigNumberish,
     voter: string,
     votePortion: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  setFirstToken(
-    firstToken: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -841,7 +842,9 @@ export interface TDao extends BaseContract {
 
   timelock(overrides?: CallOverrides): Promise<string>;
 
-  tokenToID(arg0: string, overrides?: CallOverrides): Promise<number>;
+  tokenToID(token: string, overrides?: CallOverrides): Promise<number>;
+
+  tokens(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   totalIncentivesMinted(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -868,12 +871,16 @@ export interface TDao extends BaseContract {
 
     addToken(token: string, overrides?: CallOverrides): Promise<void>;
 
+    allTokens(overrides?: CallOverrides): Promise<string[]>;
+
     blacklistedAction(
       arg0: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    countUnderlyingProtocolTokens(overrides?: CallOverrides): Promise<number>;
+    countUnderlyingProtocolTokens(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -908,13 +915,16 @@ export interface TDao extends BaseContract {
     ): Promise<void>;
 
     getRewardsStatus(
-      _tokenID: BigNumberish,
+      tokenID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<TokenRewardsStatusStructOutput>;
 
     guardian(overrides?: CallOverrides): Promise<string>;
 
-    idToToken(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    idToToken(
+      tokenID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     incentiveContract(overrides?: CallOverrides): Promise<string>;
 
@@ -945,7 +955,7 @@ export interface TDao extends BaseContract {
     ): Promise<BigNumber>;
 
     lockTokens(
-      token: string,
+      tokenID: BigNumberish,
       count: BigNumberish,
       lockDurationMonths: BigNumberish,
       to: string,
@@ -976,7 +986,10 @@ export interface TDao extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    selfDelegate(token: string, overrides?: CallOverrides): Promise<void>;
+    selfDelegate(
+      tokenID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     sendUnderlyingVotingRewards(
       governorAlpha: string,
@@ -985,8 +998,6 @@ export interface TDao extends BaseContract {
       votePortion: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    setFirstToken(firstToken: string, overrides?: CallOverrides): Promise<void>;
 
     setIncentiveContract(
       _contract: string,
@@ -1005,7 +1016,9 @@ export interface TDao extends BaseContract {
 
     timelock(overrides?: CallOverrides): Promise<string>;
 
-    tokenToID(arg0: string, overrides?: CallOverrides): Promise<number>;
+    tokenToID(token: string, overrides?: CallOverrides): Promise<number>;
+
+    tokens(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     totalIncentivesMinted(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1113,6 +1126,8 @@ export interface TDao extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    allTokens(overrides?: CallOverrides): Promise<BigNumber>;
+
     blacklistedAction(
       arg0: BytesLike,
       overrides?: CallOverrides
@@ -1155,14 +1170,14 @@ export interface TDao extends BaseContract {
     ): Promise<BigNumber>;
 
     getRewardsStatus(
-      _tokenID: BigNumberish,
+      tokenID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     guardian(overrides?: CallOverrides): Promise<BigNumber>;
 
     idToToken(
-      arg0: BigNumberish,
+      tokenID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1195,7 +1210,7 @@ export interface TDao extends BaseContract {
     ): Promise<BigNumber>;
 
     lockTokens(
-      token: string,
+      tokenID: BigNumberish,
       count: BigNumberish,
       lockDurationMonths: BigNumberish,
       to: string,
@@ -1227,7 +1242,7 @@ export interface TDao extends BaseContract {
     ): Promise<BigNumber>;
 
     selfDelegate(
-      token: string,
+      tokenID: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1236,11 +1251,6 @@ export interface TDao extends BaseContract {
       proposalID: BigNumberish,
       voter: string,
       votePortion: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    setFirstToken(
-      firstToken: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1263,7 +1273,9 @@ export interface TDao extends BaseContract {
 
     timelock(overrides?: CallOverrides): Promise<BigNumber>;
 
-    tokenToID(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    tokenToID(token: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    tokens(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     totalIncentivesMinted(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1295,6 +1307,8 @@ export interface TDao extends BaseContract {
       token: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    allTokens(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     blacklistedAction(
       arg0: BytesLike,
@@ -1338,14 +1352,14 @@ export interface TDao extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     getRewardsStatus(
-      _tokenID: BigNumberish,
+      tokenID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     guardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     idToToken(
-      arg0: BigNumberish,
+      tokenID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1380,7 +1394,7 @@ export interface TDao extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     lockTokens(
-      token: string,
+      tokenID: BigNumberish,
       count: BigNumberish,
       lockDurationMonths: BigNumberish,
       to: string,
@@ -1412,7 +1426,7 @@ export interface TDao extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     selfDelegate(
-      token: string,
+      tokenID: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1421,11 +1435,6 @@ export interface TDao extends BaseContract {
       proposalID: BigNumberish,
       voter: string,
       votePortion: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setFirstToken(
-      firstToken: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1449,7 +1458,12 @@ export interface TDao extends BaseContract {
     timelock(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     tokenToID(
-      arg0: string,
+      token: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    tokens(
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

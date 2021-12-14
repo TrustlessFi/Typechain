@@ -94,6 +94,47 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+    ],
+    name: "getUserAllocation",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint128",
+            name: "totalAllocation",
+            type: "uint128",
+          },
+          {
+            internalType: "uint128",
+            name: "minimumAverageTokensAllocatedxLockYears",
+            type: "uint128",
+          },
+          {
+            internalType: "uint128",
+            name: "tokensAllocated",
+            type: "uint128",
+          },
+          {
+            internalType: "uint128",
+            name: "cumulativeTokensAllocatedxLockYears",
+            type: "uint128",
+          },
+        ],
+        internalType: "struct MinAverageLockDuration.UserAllocation",
+        name: "_userAllocation",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "guardian",
     outputs: [
@@ -101,40 +142,6 @@ const _abi = [
         internalType: "address",
         name: "",
         type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "lockPositions",
-    outputs: [
-      {
-        internalType: "uint128",
-        name: "totalAllocation",
-        type: "uint128",
-      },
-      {
-        internalType: "uint128",
-        name: "minimumAverageTokensAllocatedxLockYears",
-        type: "uint128",
-      },
-      {
-        internalType: "uint128",
-        name: "tokensAllocated",
-        type: "uint128",
-      },
-      {
-        internalType: "uint128",
-        name: "cumulativeTokensAllocatedxLockYears",
-        type: "uint128",
       },
     ],
     stateMutability: "view",
