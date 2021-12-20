@@ -22,7 +22,7 @@ export declare type ConstructorParamsStructOutput = [
     VoteBlockCount: number;
     Governor: string;
 };
-export declare type ProposalStruct = {
+export declare type ProposalInfoStruct = {
     targets: string[];
     signatures: string[];
     calldatas: BytesLike[];
@@ -38,8 +38,14 @@ export declare type ProposalStruct = {
     executed: boolean;
     againstVotes: BigNumberish;
     initialSupply: BigNumberish;
+    state: BigNumberish;
+    hasVoted: boolean;
+    support: boolean;
+    rewardReceived: boolean;
+    votes: BigNumberish;
+    votingPower: BigNumberish;
 };
-export declare type ProposalStructOutput = [
+export declare type ProposalInfoStructOutput = [
     string[],
     string[],
     string[],
@@ -51,6 +57,12 @@ export declare type ProposalStructOutput = [
     BigNumber,
     number,
     number,
+    boolean,
+    boolean,
+    BigNumber,
+    BigNumber,
+    number,
+    boolean,
     boolean,
     boolean,
     BigNumber,
@@ -71,6 +83,12 @@ export declare type ProposalStructOutput = [
     executed: boolean;
     againstVotes: BigNumber;
     initialSupply: BigNumber;
+    state: number;
+    hasVoted: boolean;
+    support: boolean;
+    rewardReceived: boolean;
+    votes: BigNumber;
+    votingPower: BigNumber;
 };
 export declare type ReceiptStruct = {
     hasVoted: boolean;
@@ -94,9 +112,10 @@ export interface TcpGovernorAlphaInterface extends utils.Interface {
         "castVote(uint256,bool)": FunctionFragment;
         "castVoteBySig(uint256,bool,uint8,bytes32,bytes32)": FunctionFragment;
         "claimVotingRewards(uint256[])": FunctionFragment;
+        "countVotingRewards(uint256,address)": FunctionFragment;
         "execute(uint256)": FunctionFragment;
         "getActions(uint256)": FunctionFragment;
-        "getAllProposals(address)": FunctionFragment;
+        "getProposalInfo(uint256,address)": FunctionFragment;
         "getReceipt(uint256,address)": FunctionFragment;
         "governor()": FunctionFragment;
         "guardian()": FunctionFragment;
@@ -125,9 +144,10 @@ export interface TcpGovernorAlphaInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "castVote", values: [BigNumberish, boolean]): string;
     encodeFunctionData(functionFragment: "castVoteBySig", values: [BigNumberish, boolean, BigNumberish, BytesLike, BytesLike]): string;
     encodeFunctionData(functionFragment: "claimVotingRewards", values: [BigNumberish[]]): string;
+    encodeFunctionData(functionFragment: "countVotingRewards", values: [BigNumberish, string]): string;
     encodeFunctionData(functionFragment: "execute", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getActions", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getAllProposals", values: [string]): string;
+    encodeFunctionData(functionFragment: "getProposalInfo", values: [BigNumberish, string]): string;
     encodeFunctionData(functionFragment: "getReceipt", values: [BigNumberish, string]): string;
     encodeFunctionData(functionFragment: "governor", values?: undefined): string;
     encodeFunctionData(functionFragment: "guardian", values?: undefined): string;
@@ -155,9 +175,10 @@ export interface TcpGovernorAlphaInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "castVote", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "castVoteBySig", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "claimVotingRewards", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "countVotingRewards", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "execute", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getActions", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "getAllProposals", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "getProposalInfo", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getReceipt", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "guardian", data: BytesLike): Result;
@@ -269,6 +290,7 @@ export interface TcpGovernorAlpha extends BaseContract {
         claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
+        countVotingRewards(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<[BigNumber]>;
         execute(proposalId: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
@@ -281,15 +303,7 @@ export interface TcpGovernorAlpha extends BaseContract {
             signatures: string[];
             calldatas: string[];
         }>;
-        getAllProposals(voter: string, overrides?: CallOverrides): Promise<[
-            ProposalStructOutput[],
-            number[],
-            ReceiptStructOutput[]
-        ] & {
-            _proposals: ProposalStructOutput[];
-            _proposalStates: number[];
-            _receipts: ReceiptStructOutput[];
-        }>;
+        getProposalInfo(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<[ProposalInfoStructOutput]>;
         getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<[ReceiptStructOutput]>;
         governor(overrides?: CallOverrides): Promise<[string]>;
         guardian(overrides?: CallOverrides): Promise<[string]>;
@@ -358,6 +372,7 @@ export interface TcpGovernorAlpha extends BaseContract {
     claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
+    countVotingRewards(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<BigNumber>;
     execute(proposalId: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
@@ -370,15 +385,7 @@ export interface TcpGovernorAlpha extends BaseContract {
         signatures: string[];
         calldatas: string[];
     }>;
-    getAllProposals(voter: string, overrides?: CallOverrides): Promise<[
-        ProposalStructOutput[],
-        number[],
-        ReceiptStructOutput[]
-    ] & {
-        _proposals: ProposalStructOutput[];
-        _proposalStates: number[];
-        _receipts: ReceiptStructOutput[];
-    }>;
+    getProposalInfo(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<ProposalInfoStructOutput>;
     getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<ReceiptStructOutput>;
     governor(overrides?: CallOverrides): Promise<string>;
     guardian(overrides?: CallOverrides): Promise<string>;
@@ -437,6 +444,7 @@ export interface TcpGovernorAlpha extends BaseContract {
         castVote(proposalId: BigNumberish, support: boolean, overrides?: CallOverrides): Promise<void>;
         castVoteBySig(proposalId: BigNumberish, support: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: CallOverrides): Promise<void>;
         claimVotingRewards(proposalIDs: BigNumberish[], overrides?: CallOverrides): Promise<void>;
+        countVotingRewards(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<BigNumber>;
         execute(proposalId: BigNumberish, overrides?: CallOverrides): Promise<void>;
         getActions(proposalId: BigNumberish, overrides?: CallOverrides): Promise<[
             string[],
@@ -447,15 +455,7 @@ export interface TcpGovernorAlpha extends BaseContract {
             signatures: string[];
             calldatas: string[];
         }>;
-        getAllProposals(voter: string, overrides?: CallOverrides): Promise<[
-            ProposalStructOutput[],
-            number[],
-            ReceiptStructOutput[]
-        ] & {
-            _proposals: ProposalStructOutput[];
-            _proposalStates: number[];
-            _receipts: ReceiptStructOutput[];
-        }>;
+        getProposalInfo(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<ProposalInfoStructOutput>;
         getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<ReceiptStructOutput>;
         governor(overrides?: CallOverrides): Promise<string>;
         guardian(overrides?: CallOverrides): Promise<string>;
@@ -535,11 +535,12 @@ export interface TcpGovernorAlpha extends BaseContract {
         claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
+        countVotingRewards(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<BigNumber>;
         execute(proposalId: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         getActions(proposalId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getAllProposals(voter: string, overrides?: CallOverrides): Promise<BigNumber>;
+        getProposalInfo(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<BigNumber>;
         getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<BigNumber>;
         governor(overrides?: CallOverrides): Promise<BigNumber>;
         guardian(overrides?: CallOverrides): Promise<BigNumber>;
@@ -583,11 +584,12 @@ export interface TcpGovernorAlpha extends BaseContract {
         claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
+        countVotingRewards(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         execute(proposalId: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         getActions(proposalId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getAllProposals(voter: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getProposalInfo(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         guardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;

@@ -24,7 +24,7 @@ var _abi = [
                 type: "uint16",
             },
         ],
-        name: "poolConfigForPoolID",
+        name: "getPoolConfigForPoolID",
         outputs: [
             {
                 components: [

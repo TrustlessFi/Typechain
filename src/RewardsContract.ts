@@ -25,7 +25,7 @@ export type PoolConfigStructOutput = [string, BigNumber] & {
 export interface RewardsContractInterface extends utils.Interface {
   functions: {
     "countPools()": FunctionFragment;
-    "poolConfigForPoolID(uint16)": FunctionFragment;
+    "getPoolConfigForPoolID(uint16)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -33,13 +33,13 @@ export interface RewardsContractInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "poolConfigForPoolID",
+    functionFragment: "getPoolConfigForPoolID",
     values: [BigNumberish]
   ): string;
 
   decodeFunctionResult(functionFragment: "countPools", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "poolConfigForPoolID",
+    functionFragment: "getPoolConfigForPoolID",
     data: BytesLike
   ): Result;
 
@@ -75,7 +75,7 @@ export interface RewardsContract extends BaseContract {
   functions: {
     countPools(overrides?: CallOverrides): Promise<[number]>;
 
-    poolConfigForPoolID(
+    getPoolConfigForPoolID(
       poolID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[PoolConfigStructOutput]>;
@@ -83,7 +83,7 @@ export interface RewardsContract extends BaseContract {
 
   countPools(overrides?: CallOverrides): Promise<number>;
 
-  poolConfigForPoolID(
+  getPoolConfigForPoolID(
     poolID: BigNumberish,
     overrides?: CallOverrides
   ): Promise<PoolConfigStructOutput>;
@@ -91,7 +91,7 @@ export interface RewardsContract extends BaseContract {
   callStatic: {
     countPools(overrides?: CallOverrides): Promise<number>;
 
-    poolConfigForPoolID(
+    getPoolConfigForPoolID(
       poolID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PoolConfigStructOutput>;
@@ -102,7 +102,7 @@ export interface RewardsContract extends BaseContract {
   estimateGas: {
     countPools(overrides?: CallOverrides): Promise<BigNumber>;
 
-    poolConfigForPoolID(
+    getPoolConfigForPoolID(
       poolID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -111,7 +111,7 @@ export interface RewardsContract extends BaseContract {
   populateTransaction: {
     countPools(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    poolConfigForPoolID(
+    getPoolConfigForPoolID(
       poolID: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

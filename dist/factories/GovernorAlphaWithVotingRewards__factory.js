@@ -244,6 +244,30 @@ var _abi = [
         inputs: [
             {
                 internalType: "uint256",
+                name: "proposalID",
+                type: "uint256",
+            },
+            {
+                internalType: "address",
+                name: "voter",
+                type: "address",
+            },
+        ],
+        name: "countVotingRewards",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+    },
+    {
+        inputs: [
+            {
+                internalType: "uint256",
                 name: "proposalId",
                 type: "uint256",
             },
@@ -285,12 +309,17 @@ var _abi = [
     {
         inputs: [
             {
+                internalType: "uint256",
+                name: "proposalID",
+                type: "uint256",
+            },
+            {
                 internalType: "address",
                 name: "voter",
                 type: "address",
             },
         ],
-        name: "getAllProposals",
+        name: "getProposalInfo",
         outputs: [
             {
                 components: [
@@ -369,18 +398,11 @@ var _abi = [
                         name: "initialSupply",
                         type: "uint128",
                     },
-                ],
-                internalType: "struct GovernorAlpha.Proposal[]",
-                name: "_proposals",
-                type: "tuple[]",
-            },
-            {
-                internalType: "enum GovernorAlpha.ProposalState[]",
-                name: "_proposalStates",
-                type: "uint8[]",
-            },
-            {
-                components: [
+                    {
+                        internalType: "enum GovernorAlpha.ProposalState",
+                        name: "state",
+                        type: "uint8",
+                    },
                     {
                         internalType: "bool",
                         name: "hasVoted",
@@ -401,10 +423,15 @@ var _abi = [
                         name: "votes",
                         type: "uint184",
                     },
+                    {
+                        internalType: "uint256",
+                        name: "votingPower",
+                        type: "uint256",
+                    },
                 ],
-                internalType: "struct GovernorAlpha.Receipt[]",
-                name: "_receipts",
-                type: "tuple[]",
+                internalType: "struct GovernorAlpha.ProposalInfo",
+                name: "",
+                type: "tuple",
             },
         ],
         stateMutability: "view",
