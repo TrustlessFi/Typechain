@@ -270,6 +270,11 @@ const _abi = [
           },
           {
             internalType: "string",
+            name: "title",
+            type: "string",
+          },
+          {
+            internalType: "string",
             name: "ipfsHash",
             type: "string",
           },
@@ -506,6 +511,11 @@ const _abi = [
     outputs: [
       {
         internalType: "string",
+        name: "title",
+        type: "string",
+      },
+      {
+        internalType: "string",
         name: "ipfsHash",
         type: "string",
       },
@@ -579,6 +589,11 @@ const _abi = [
         internalType: "bytes[]",
         name: "calldatas",
         type: "bytes[]",
+      },
+      {
+        internalType: "string",
+        name: "title",
+        type: "string",
       },
       {
         internalType: "string",

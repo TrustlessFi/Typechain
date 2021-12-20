@@ -6,6 +6,7 @@ export declare type ProposalStruct = {
     targets: string[];
     signatures: string[];
     calldatas: BytesLike[];
+    title: string;
     ipfsHash: string;
     proposer: string;
     eta: BigNumberish;
@@ -24,6 +25,7 @@ export declare type ProposalStructOutput = [
     string[],
     string,
     string,
+    string,
     number,
     number,
     BigNumber,
@@ -37,6 +39,7 @@ export declare type ProposalStructOutput = [
     targets: string[];
     signatures: string[];
     calldatas: string[];
+    title: string;
     ipfsHash: string;
     proposer: string;
     eta: number;
@@ -80,7 +83,7 @@ export interface GovernorAlphaInterface extends utils.Interface {
         "proposalMaxOperations()": FunctionFragment;
         "proposalThreshold()": FunctionFragment;
         "proposals(uint256)": FunctionFragment;
-        "propose(address[],string[],bytes[],string)": FunctionFragment;
+        "propose(address[],string[],bytes[],string,string)": FunctionFragment;
         "queue(uint256)": FunctionFragment;
         "quorumVotes()": FunctionFragment;
         "state(uint256)": FunctionFragment;
@@ -107,7 +110,7 @@ export interface GovernorAlphaInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "proposalMaxOperations", values?: undefined): string;
     encodeFunctionData(functionFragment: "proposalThreshold", values?: undefined): string;
     encodeFunctionData(functionFragment: "proposals", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "propose", values: [string[], string[], BytesLike[], string]): string;
+    encodeFunctionData(functionFragment: "propose", values: [string[], string[], BytesLike[], string, string]): string;
     encodeFunctionData(functionFragment: "queue", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "quorumVotes", values?: undefined): string;
     encodeFunctionData(functionFragment: "state", values: [BigNumberish]): string;
@@ -251,6 +254,7 @@ export interface GovernorAlpha extends BaseContract {
         proposals(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
             string,
             string,
+            string,
             number,
             number,
             BigNumber,
@@ -261,6 +265,7 @@ export interface GovernorAlpha extends BaseContract {
             BigNumber,
             BigNumber
         ] & {
+            title: string;
             ipfsHash: string;
             proposer: string;
             eta: number;
@@ -273,7 +278,7 @@ export interface GovernorAlpha extends BaseContract {
             againstVotes: BigNumber;
             initialSupply: BigNumber;
         }>;
-        propose(targets: string[], signatures: string[], calldatas: BytesLike[], ipfsHash: string, overrides?: Overrides & {
+        propose(targets: string[], signatures: string[], calldatas: BytesLike[], title: string, ipfsHash: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         queue(proposalId: BigNumberish, overrides?: Overrides & {
@@ -332,6 +337,7 @@ export interface GovernorAlpha extends BaseContract {
     proposals(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
         string,
         string,
+        string,
         number,
         number,
         BigNumber,
@@ -342,6 +348,7 @@ export interface GovernorAlpha extends BaseContract {
         BigNumber,
         BigNumber
     ] & {
+        title: string;
         ipfsHash: string;
         proposer: string;
         eta: number;
@@ -354,7 +361,7 @@ export interface GovernorAlpha extends BaseContract {
         againstVotes: BigNumber;
         initialSupply: BigNumber;
     }>;
-    propose(targets: string[], signatures: string[], calldatas: BytesLike[], ipfsHash: string, overrides?: Overrides & {
+    propose(targets: string[], signatures: string[], calldatas: BytesLike[], title: string, ipfsHash: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     queue(proposalId: BigNumberish, overrides?: Overrides & {
@@ -403,6 +410,7 @@ export interface GovernorAlpha extends BaseContract {
         proposals(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
             string,
             string,
+            string,
             number,
             number,
             BigNumber,
@@ -413,6 +421,7 @@ export interface GovernorAlpha extends BaseContract {
             BigNumber,
             BigNumber
         ] & {
+            title: string;
             ipfsHash: string;
             proposer: string;
             eta: number;
@@ -425,7 +434,7 @@ export interface GovernorAlpha extends BaseContract {
             againstVotes: BigNumber;
             initialSupply: BigNumber;
         }>;
-        propose(targets: string[], signatures: string[], calldatas: BytesLike[], ipfsHash: string, overrides?: CallOverrides): Promise<BigNumber>;
+        propose(targets: string[], signatures: string[], calldatas: BytesLike[], title: string, ipfsHash: string, overrides?: CallOverrides): Promise<BigNumber>;
         queue(proposalId: BigNumberish, overrides?: CallOverrides): Promise<void>;
         quorumVotes(overrides?: CallOverrides): Promise<BigNumber>;
         state(proposalId: BigNumberish, overrides?: CallOverrides): Promise<number>;
@@ -475,7 +484,7 @@ export interface GovernorAlpha extends BaseContract {
         proposalMaxOperations(overrides?: CallOverrides): Promise<BigNumber>;
         proposalThreshold(overrides?: CallOverrides): Promise<BigNumber>;
         proposals(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        propose(targets: string[], signatures: string[], calldatas: BytesLike[], ipfsHash: string, overrides?: Overrides & {
+        propose(targets: string[], signatures: string[], calldatas: BytesLike[], title: string, ipfsHash: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         queue(proposalId: BigNumberish, overrides?: Overrides & {
@@ -517,7 +526,7 @@ export interface GovernorAlpha extends BaseContract {
         proposalMaxOperations(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         proposalThreshold(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         proposals(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        propose(targets: string[], signatures: string[], calldatas: BytesLike[], ipfsHash: string, overrides?: Overrides & {
+        propose(targets: string[], signatures: string[], calldatas: BytesLike[], title: string, ipfsHash: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         queue(proposalId: BigNumberish, overrides?: Overrides & {

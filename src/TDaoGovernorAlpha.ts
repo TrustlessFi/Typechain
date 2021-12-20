@@ -21,6 +21,7 @@ export type ProposalStruct = {
   targets: string[];
   signatures: string[];
   calldatas: BytesLike[];
+  title: string;
   ipfsHash: string;
   proposer: string;
   eta: BigNumberish;
@@ -40,6 +41,7 @@ export type ProposalStructOutput = [
   string[],
   string,
   string,
+  string,
   number,
   number,
   BigNumber,
@@ -53,6 +55,7 @@ export type ProposalStructOutput = [
   targets: string[];
   signatures: string[];
   calldatas: string[];
+  title: string;
   ipfsHash: string;
   proposer: string;
   eta: number;
@@ -105,7 +108,7 @@ export interface TDaoGovernorAlphaInterface extends utils.Interface {
     "proposalMaxOperations()": FunctionFragment;
     "proposalThreshold()": FunctionFragment;
     "proposals(uint256)": FunctionFragment;
-    "propose(address[],string[],bytes[],string)": FunctionFragment;
+    "propose(address[],string[],bytes[],string,string)": FunctionFragment;
     "queue(uint256)": FunctionFragment;
     "quorumVotes()": FunctionFragment;
     "state(uint256)": FunctionFragment;
@@ -206,7 +209,7 @@ export interface TDaoGovernorAlphaInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "propose",
-    values: [string[], string[], BytesLike[], string]
+    values: [string[], string[], BytesLike[], string, string]
   ): string;
   encodeFunctionData(functionFragment: "queue", values: [BigNumberish]): string;
   encodeFunctionData(
@@ -543,6 +546,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
       [
         string,
         string,
+        string,
         number,
         number,
         BigNumber,
@@ -553,6 +557,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
         BigNumber,
         BigNumber
       ] & {
+        title: string;
         ipfsHash: string;
         proposer: string;
         eta: number;
@@ -571,6 +576,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
       targets: string[],
       signatures: string[],
       calldatas: BytesLike[],
+      title: string,
       ipfsHash: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -720,6 +726,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
     [
       string,
       string,
+      string,
       number,
       number,
       BigNumber,
@@ -730,6 +737,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
       BigNumber,
       BigNumber
     ] & {
+      title: string;
       ipfsHash: string;
       proposer: string;
       eta: number;
@@ -748,6 +756,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
     targets: string[],
     signatures: string[],
     calldatas: BytesLike[],
+    title: string,
     ipfsHash: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -888,6 +897,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
       [
         string,
         string,
+        string,
         number,
         number,
         BigNumber,
@@ -898,6 +908,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
         BigNumber,
         BigNumber
       ] & {
+        title: string;
         ipfsHash: string;
         proposer: string;
         eta: number;
@@ -916,6 +927,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
       targets: string[],
       signatures: string[],
       calldatas: BytesLike[],
+      title: string,
       ipfsHash: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1107,6 +1119,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
       targets: string[],
       signatures: string[],
       calldatas: BytesLike[],
+      title: string,
       ipfsHash: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1247,6 +1260,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
       targets: string[],
       signatures: string[],
       calldatas: BytesLike[],
+      title: string,
       ipfsHash: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

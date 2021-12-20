@@ -158,6 +158,13 @@ export type DecreaseLiquidityParamsStructOutput = [
   deadline: BigNumber;
 };
 
+export type PoolConfigStruct = { pool: string; rewardsPortion: BigNumberish };
+
+export type PoolConfigStructOutput = [string, BigNumber] & {
+  pool: string;
+  rewardsPortion: BigNumber;
+};
+
 export type IncreaseLiquidityParamsStruct = {
   tokenId: BigNumberish;
   amount0Desired: BigNumberish;
@@ -196,6 +203,7 @@ export interface RewardsTestableInterface extends utils.Interface {
     "decreaseLiquidityPosition((uint256,uint128,uint256,uint256,uint256),uint32)": FunctionFragment;
     "deployer()": FunctionFragment;
     "firstPeriod()": FunctionFragment;
+    "getPoolConfigForPoolID(uint16)": FunctionFragment;
     "governor()": FunctionFragment;
     "increaseLiquidityPosition((uint256,uint256,uint256,uint256,uint256,uint256),uint32)": FunctionFragment;
     "init(address,address)": FunctionFragment;
@@ -208,7 +216,6 @@ export interface RewardsTestableInterface extends utils.Interface {
     "minHueCountPerPosition()": FunctionFragment;
     "nftPositionManager()": FunctionFragment;
     "periodLength()": FunctionFragment;
-    "poolConfigForPoolID(uint16)": FunctionFragment;
     "poolIDForPool(address)": FunctionFragment;
     "removeKickback(uint256)": FunctionFragment;
     "removeLiquidityPosition((uint256,uint128,uint256,uint256,uint256))": FunctionFragment;
@@ -267,6 +274,10 @@ export interface RewardsTestableInterface extends utils.Interface {
     functionFragment: "firstPeriod",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "getPoolConfigForPoolID",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "governor", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "increaseLiquidityPosition",
@@ -311,10 +322,6 @@ export interface RewardsTestableInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "periodLength",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "poolConfigForPoolID",
-    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "poolIDForPool",
@@ -403,6 +410,10 @@ export interface RewardsTestableInterface extends utils.Interface {
     functionFragment: "firstPeriod",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPoolConfigForPoolID",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "increaseLiquidityPosition",
@@ -443,10 +454,6 @@ export interface RewardsTestableInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "periodLength",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "poolConfigForPoolID",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -746,6 +753,13 @@ export interface RewardsTestable extends BaseContract {
 
     firstPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    getPoolConfigForPoolID(
+      poolID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [PoolConfigStructOutput] & { poolConfig: PoolConfigStructOutput }
+    >;
+
     governor(overrides?: CallOverrides): Promise<[string]>;
 
     increaseLiquidityPosition(
@@ -794,13 +808,6 @@ export interface RewardsTestable extends BaseContract {
     nftPositionManager(overrides?: CallOverrides): Promise<[string]>;
 
     periodLength(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    poolConfigForPoolID(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, BigNumber] & { pool: string; rewardsPortion: BigNumber }
-    >;
 
     poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<[number]>;
 
@@ -910,6 +917,11 @@ export interface RewardsTestable extends BaseContract {
 
   firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
+  getPoolConfigForPoolID(
+    poolID: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<PoolConfigStructOutput>;
+
   governor(overrides?: CallOverrides): Promise<string>;
 
   increaseLiquidityPosition(
@@ -956,11 +968,6 @@ export interface RewardsTestable extends BaseContract {
   nftPositionManager(overrides?: CallOverrides): Promise<string>;
 
   periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-
-  poolConfigForPoolID(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<[string, BigNumber] & { pool: string; rewardsPortion: BigNumber }>;
 
   poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<number>;
 
@@ -1077,6 +1084,11 @@ export interface RewardsTestable extends BaseContract {
 
     firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getPoolConfigForPoolID(
+      poolID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PoolConfigStructOutput>;
+
     governor(overrides?: CallOverrides): Promise<string>;
 
     increaseLiquidityPosition(
@@ -1125,13 +1137,6 @@ export interface RewardsTestable extends BaseContract {
     nftPositionManager(overrides?: CallOverrides): Promise<string>;
 
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-
-    poolConfigForPoolID(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, BigNumber] & { pool: string; rewardsPortion: BigNumber }
-    >;
 
     poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<number>;
 
@@ -1375,6 +1380,11 @@ export interface RewardsTestable extends BaseContract {
 
     firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getPoolConfigForPoolID(
+      poolID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     governor(overrides?: CallOverrides): Promise<BigNumber>;
 
     increaseLiquidityPosition(
@@ -1421,11 +1431,6 @@ export interface RewardsTestable extends BaseContract {
     nftPositionManager(overrides?: CallOverrides): Promise<BigNumber>;
 
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-
-    poolConfigForPoolID(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1531,6 +1536,11 @@ export interface RewardsTestable extends BaseContract {
 
     firstPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    getPoolConfigForPoolID(
+      poolID: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     increaseLiquidityPosition(
@@ -1583,11 +1593,6 @@ export interface RewardsTestable extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     periodLength(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    poolConfigForPoolID(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     poolIDForPool(
       arg0: string,

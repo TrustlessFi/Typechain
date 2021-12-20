@@ -132,6 +132,14 @@ export declare type DecreaseLiquidityParamsStructOutput = [
     amount1Min: BigNumber;
     deadline: BigNumber;
 };
+export declare type PoolConfigStruct = {
+    pool: string;
+    rewardsPortion: BigNumberish;
+};
+export declare type PoolConfigStructOutput = [string, BigNumber] & {
+    pool: string;
+    rewardsPortion: BigNumber;
+};
 export declare type IncreaseLiquidityParamsStruct = {
     tokenId: BigNumberish;
     amount0Desired: BigNumberish;
@@ -168,6 +176,7 @@ export interface RewardsTestableInterface extends utils.Interface {
         "decreaseLiquidityPosition((uint256,uint128,uint256,uint256,uint256),uint32)": FunctionFragment;
         "deployer()": FunctionFragment;
         "firstPeriod()": FunctionFragment;
+        "getPoolConfigForPoolID(uint16)": FunctionFragment;
         "governor()": FunctionFragment;
         "increaseLiquidityPosition((uint256,uint256,uint256,uint256,uint256,uint256),uint32)": FunctionFragment;
         "init(address,address)": FunctionFragment;
@@ -180,7 +189,6 @@ export interface RewardsTestableInterface extends utils.Interface {
         "minHueCountPerPosition()": FunctionFragment;
         "nftPositionManager()": FunctionFragment;
         "periodLength()": FunctionFragment;
-        "poolConfigForPoolID(uint16)": FunctionFragment;
         "poolIDForPool(address)": FunctionFragment;
         "removeKickback(uint256)": FunctionFragment;
         "removeLiquidityPosition((uint256,uint128,uint256,uint256,uint256))": FunctionFragment;
@@ -208,6 +216,7 @@ export interface RewardsTestableInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "decreaseLiquidityPosition", values: [DecreaseLiquidityParamsStruct, BigNumberish]): string;
     encodeFunctionData(functionFragment: "deployer", values?: undefined): string;
     encodeFunctionData(functionFragment: "firstPeriod", values?: undefined): string;
+    encodeFunctionData(functionFragment: "getPoolConfigForPoolID", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "governor", values?: undefined): string;
     encodeFunctionData(functionFragment: "increaseLiquidityPosition", values: [IncreaseLiquidityParamsStruct, BigNumberish]): string;
     encodeFunctionData(functionFragment: "init", values: [string, string]): string;
@@ -220,7 +229,6 @@ export interface RewardsTestableInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "minHueCountPerPosition", values?: undefined): string;
     encodeFunctionData(functionFragment: "nftPositionManager", values?: undefined): string;
     encodeFunctionData(functionFragment: "periodLength", values?: undefined): string;
-    encodeFunctionData(functionFragment: "poolConfigForPoolID", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "poolIDForPool", values: [string]): string;
     encodeFunctionData(functionFragment: "removeKickback", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "removeLiquidityPosition", values: [DecreaseLiquidityParamsStruct]): string;
@@ -247,6 +255,7 @@ export interface RewardsTestableInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "decreaseLiquidityPosition", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "deployer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "firstPeriod", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "getPoolConfigForPoolID", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "increaseLiquidityPosition", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
@@ -259,7 +268,6 @@ export interface RewardsTestableInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "minHueCountPerPosition", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "nftPositionManager", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "periodLength", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "poolConfigForPoolID", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "poolIDForPool", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "removeKickback", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "removeLiquidityPosition", data: BytesLike): Result;
@@ -478,6 +486,11 @@ export interface RewardsTestable extends BaseContract {
         }): Promise<ContractTransaction>;
         deployer(overrides?: CallOverrides): Promise<[string]>;
         firstPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
+        getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<[
+            PoolConfigStructOutput
+        ] & {
+            poolConfig: PoolConfigStructOutput;
+        }>;
         governor(overrides?: CallOverrides): Promise<[string]>;
         increaseLiquidityPosition(params: IncreaseLiquidityParamsStruct, ui: BigNumberish, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
@@ -502,13 +515,6 @@ export interface RewardsTestable extends BaseContract {
         minHueCountPerPosition(overrides?: CallOverrides): Promise<[BigNumber]>;
         nftPositionManager(overrides?: CallOverrides): Promise<[string]>;
         periodLength(overrides?: CallOverrides): Promise<[BigNumber]>;
-        poolConfigForPoolID(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
-            string,
-            BigNumber
-        ] & {
-            pool: string;
-            rewardsPortion: BigNumber;
-        }>;
         poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<[number]>;
         removeKickback(nftTokenID: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
@@ -568,6 +574,7 @@ export interface RewardsTestable extends BaseContract {
     }): Promise<ContractTransaction>;
     deployer(overrides?: CallOverrides): Promise<string>;
     firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
+    getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<PoolConfigStructOutput>;
     governor(overrides?: CallOverrides): Promise<string>;
     increaseLiquidityPosition(params: IncreaseLiquidityParamsStruct, ui: BigNumberish, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
@@ -592,10 +599,6 @@ export interface RewardsTestable extends BaseContract {
     minHueCountPerPosition(overrides?: CallOverrides): Promise<BigNumber>;
     nftPositionManager(overrides?: CallOverrides): Promise<string>;
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-    poolConfigForPoolID(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string, BigNumber] & {
-        pool: string;
-        rewardsPortion: BigNumber;
-    }>;
     poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<number>;
     removeKickback(nftTokenID: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
@@ -663,6 +666,7 @@ export interface RewardsTestable extends BaseContract {
         }>;
         deployer(overrides?: CallOverrides): Promise<string>;
         firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
+        getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<PoolConfigStructOutput>;
         governor(overrides?: CallOverrides): Promise<string>;
         increaseLiquidityPosition(params: IncreaseLiquidityParamsStruct, ui: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         init(_collateralPool: string, _protocolPool: string, overrides?: CallOverrides): Promise<void>;
@@ -681,13 +685,6 @@ export interface RewardsTestable extends BaseContract {
         minHueCountPerPosition(overrides?: CallOverrides): Promise<BigNumber>;
         nftPositionManager(overrides?: CallOverrides): Promise<string>;
         periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-        poolConfigForPoolID(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
-            string,
-            BigNumber
-        ] & {
-            pool: string;
-            rewardsPortion: BigNumber;
-        }>;
         poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<number>;
         removeKickback(nftTokenID: BigNumberish, overrides?: CallOverrides): Promise<void>;
         removeLiquidityPosition(params: DecreaseLiquidityParamsStruct, overrides?: CallOverrides): Promise<[
@@ -764,6 +761,7 @@ export interface RewardsTestable extends BaseContract {
         }): Promise<BigNumber>;
         deployer(overrides?: CallOverrides): Promise<BigNumber>;
         firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
+        getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         governor(overrides?: CallOverrides): Promise<BigNumber>;
         increaseLiquidityPosition(params: IncreaseLiquidityParamsStruct, ui: BigNumberish, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
@@ -782,7 +780,6 @@ export interface RewardsTestable extends BaseContract {
         minHueCountPerPosition(overrides?: CallOverrides): Promise<BigNumber>;
         nftPositionManager(overrides?: CallOverrides): Promise<BigNumber>;
         periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-        poolConfigForPoolID(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
         removeKickback(nftTokenID: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
@@ -837,6 +834,7 @@ export interface RewardsTestable extends BaseContract {
         }): Promise<PopulatedTransaction>;
         deployer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         firstPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         increaseLiquidityPosition(params: IncreaseLiquidityParamsStruct, ui: BigNumberish, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
@@ -855,7 +853,6 @@ export interface RewardsTestable extends BaseContract {
         minHueCountPerPosition(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         nftPositionManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         periodLength(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        poolConfigForPoolID(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         removeKickback(nftTokenID: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
