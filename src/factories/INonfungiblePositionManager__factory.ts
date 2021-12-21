@@ -179,45 +179,6 @@ const _abi = [
     type: "event",
   },
   {
-    inputs: [],
-    name: "DOMAIN_SEPARATOR",
-    outputs: [
-      {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "PERMIT_TYPEHASH",
-    outputs: [
-      {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32",
-      },
-    ],
-    stateMutability: "pure",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "WETH9",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [
       {
         internalType: "address",
@@ -316,40 +277,6 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "token0",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "token1",
-        type: "address",
-      },
-      {
-        internalType: "uint24",
-        name: "fee",
-        type: "uint24",
-      },
-      {
-        internalType: "uint160",
-        name: "sqrtPriceX96",
-        type: "uint160",
-      },
-    ],
-    name: "createAndInitializePoolIfNecessary",
-    outputs: [
-      {
-        internalType: "address",
-        name: "pool",
-        type: "address",
-      },
-    ],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         components: [
           {
             internalType: "uint256",
@@ -397,19 +324,6 @@ const _abi = [
       },
     ],
     stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "factory",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -638,44 +552,6 @@ const _abi = [
       },
     ],
     stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "deadline",
-        type: "uint256",
-      },
-      {
-        internalType: "uint8",
-        name: "v",
-        type: "uint8",
-      },
-      {
-        internalType: "bytes32",
-        name: "r",
-        type: "bytes32",
-      },
-      {
-        internalType: "bytes32",
-        name: "s",
-        type: "bytes32",
-      },
-    ],
-    name: "permit",
-    outputs: [],
-    stateMutability: "payable",
     type: "function",
   },
   {

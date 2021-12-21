@@ -102,23 +102,17 @@ export declare type MintParamsStructOutput = [
 };
 export interface INonfungiblePositionManagerInterface extends utils.Interface {
     functions: {
-        "DOMAIN_SEPARATOR()": FunctionFragment;
-        "PERMIT_TYPEHASH()": FunctionFragment;
-        "WETH9()": FunctionFragment;
         "approve(address,uint256)": FunctionFragment;
         "balanceOf(address)": FunctionFragment;
         "burn(uint256)": FunctionFragment;
         "collect((uint256,address,uint128,uint128))": FunctionFragment;
-        "createAndInitializePoolIfNecessary(address,address,uint24,uint160)": FunctionFragment;
         "decreaseLiquidity((uint256,uint128,uint256,uint256,uint256))": FunctionFragment;
-        "factory()": FunctionFragment;
         "getApproved(uint256)": FunctionFragment;
         "increaseLiquidity((uint256,uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
         "isApprovedForAll(address,address)": FunctionFragment;
         "mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint256,address,uint256))": FunctionFragment;
         "name()": FunctionFragment;
         "ownerOf(uint256)": FunctionFragment;
-        "permit(address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
         "positions(uint256)": FunctionFragment;
         "refundETH()": FunctionFragment;
         "safeTransferFrom(address,address,uint256)": FunctionFragment;
@@ -133,30 +127,17 @@ export interface INonfungiblePositionManagerInterface extends utils.Interface {
         "transferFrom(address,address,uint256)": FunctionFragment;
         "unwrapWETH9(uint256,address)": FunctionFragment;
     };
-    encodeFunctionData(functionFragment: "DOMAIN_SEPARATOR", values?: undefined): string;
-    encodeFunctionData(functionFragment: "PERMIT_TYPEHASH", values?: undefined): string;
-    encodeFunctionData(functionFragment: "WETH9", values?: undefined): string;
     encodeFunctionData(functionFragment: "approve", values: [string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
     encodeFunctionData(functionFragment: "burn", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "collect", values: [CollectParamsStruct]): string;
-    encodeFunctionData(functionFragment: "createAndInitializePoolIfNecessary", values: [string, string, BigNumberish, BigNumberish]): string;
     encodeFunctionData(functionFragment: "decreaseLiquidity", values: [DecreaseLiquidityParamsStruct]): string;
-    encodeFunctionData(functionFragment: "factory", values?: undefined): string;
     encodeFunctionData(functionFragment: "getApproved", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "increaseLiquidity", values: [IncreaseLiquidityParamsStruct]): string;
     encodeFunctionData(functionFragment: "isApprovedForAll", values: [string, string]): string;
     encodeFunctionData(functionFragment: "mint", values: [MintParamsStruct]): string;
     encodeFunctionData(functionFragment: "name", values?: undefined): string;
     encodeFunctionData(functionFragment: "ownerOf", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "permit", values: [
-        string,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BytesLike,
-        BytesLike
-    ]): string;
     encodeFunctionData(functionFragment: "positions", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "refundETH", values?: undefined): string;
     encodeFunctionData(functionFragment: "safeTransferFrom", values: [string, string, BigNumberish]): string;
@@ -170,23 +151,17 @@ export interface INonfungiblePositionManagerInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "totalSupply", values?: undefined): string;
     encodeFunctionData(functionFragment: "transferFrom", values: [string, string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "unwrapWETH9", values: [BigNumberish, string]): string;
-    decodeFunctionResult(functionFragment: "DOMAIN_SEPARATOR", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "PERMIT_TYPEHASH", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "WETH9", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "collect", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "createAndInitializePoolIfNecessary", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "decreaseLiquidity", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getApproved", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "increaseLiquidity", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "isApprovedForAll", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "positions", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "refundETH", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "safeTransferFrom", data: BytesLike): Result;
@@ -296,9 +271,6 @@ export interface INonfungiblePositionManager extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
-        PERMIT_TYPEHASH(overrides?: CallOverrides): Promise<[string]>;
-        WETH9(overrides?: CallOverrides): Promise<[string]>;
         approve(to: string, tokenId: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
@@ -311,13 +283,9 @@ export interface INonfungiblePositionManager extends BaseContract {
         collect(params: CollectParamsStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        createAndInitializePoolIfNecessary(token0: string, token1: string, fee: BigNumberish, sqrtPriceX96: BigNumberish, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
         decreaseLiquidity(params: DecreaseLiquidityParamsStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        factory(overrides?: CallOverrides): Promise<[string]>;
         getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<[string] & {
             operator: string;
         }>;
@@ -332,9 +300,6 @@ export interface INonfungiblePositionManager extends BaseContract {
         ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<[string] & {
             owner: string;
         }>;
-        permit(spender: string, tokenId: BigNumberish, deadline: BigNumberish, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
         positions(tokenId: BigNumberish, overrides?: CallOverrides): Promise<[
             BigNumber,
             string,
@@ -392,9 +357,6 @@ export interface INonfungiblePositionManager extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
     };
-    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
-    PERMIT_TYPEHASH(overrides?: CallOverrides): Promise<string>;
-    WETH9(overrides?: CallOverrides): Promise<string>;
     approve(to: string, tokenId: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
@@ -405,13 +367,9 @@ export interface INonfungiblePositionManager extends BaseContract {
     collect(params: CollectParamsStruct, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    createAndInitializePoolIfNecessary(token0: string, token1: string, fee: BigNumberish, sqrtPriceX96: BigNumberish, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
     decreaseLiquidity(params: DecreaseLiquidityParamsStruct, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    factory(overrides?: CallOverrides): Promise<string>;
     getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
     increaseLiquidity(params: IncreaseLiquidityParamsStruct, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
@@ -422,9 +380,6 @@ export interface INonfungiblePositionManager extends BaseContract {
     }): Promise<ContractTransaction>;
     name(overrides?: CallOverrides): Promise<string>;
     ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-    permit(spender: string, tokenId: BigNumberish, deadline: BigNumberish, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
     positions(tokenId: BigNumberish, overrides?: CallOverrides): Promise<[
         BigNumber,
         string,
@@ -480,9 +435,6 @@ export interface INonfungiblePositionManager extends BaseContract {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
-        PERMIT_TYPEHASH(overrides?: CallOverrides): Promise<string>;
-        WETH9(overrides?: CallOverrides): Promise<string>;
         approve(to: string, tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
         balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
         burn(tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
@@ -493,7 +445,6 @@ export interface INonfungiblePositionManager extends BaseContract {
             amount0: BigNumber;
             amount1: BigNumber;
         }>;
-        createAndInitializePoolIfNecessary(token0: string, token1: string, fee: BigNumberish, sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<string>;
         decreaseLiquidity(params: DecreaseLiquidityParamsStruct, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
@@ -501,7 +452,6 @@ export interface INonfungiblePositionManager extends BaseContract {
             amount0: BigNumber;
             amount1: BigNumber;
         }>;
-        factory(overrides?: CallOverrides): Promise<string>;
         getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
         increaseLiquidity(params: IncreaseLiquidityParamsStruct, overrides?: CallOverrides): Promise<[
             BigNumber,
@@ -526,7 +476,6 @@ export interface INonfungiblePositionManager extends BaseContract {
         }>;
         name(overrides?: CallOverrides): Promise<string>;
         ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-        permit(spender: string, tokenId: BigNumberish, deadline: BigNumberish, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: CallOverrides): Promise<void>;
         positions(tokenId: BigNumberish, overrides?: CallOverrides): Promise<[
             BigNumber,
             string,
@@ -583,9 +532,6 @@ export interface INonfungiblePositionManager extends BaseContract {
         Transfer(from?: string | null, to?: string | null, tokenId?: BigNumberish | null): TransferEventFilter;
     };
     estimateGas: {
-        DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
-        PERMIT_TYPEHASH(overrides?: CallOverrides): Promise<BigNumber>;
-        WETH9(overrides?: CallOverrides): Promise<BigNumber>;
         approve(to: string, tokenId: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
@@ -596,13 +542,9 @@ export interface INonfungiblePositionManager extends BaseContract {
         collect(params: CollectParamsStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        createAndInitializePoolIfNecessary(token0: string, token1: string, fee: BigNumberish, sqrtPriceX96: BigNumberish, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
         decreaseLiquidity(params: DecreaseLiquidityParamsStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        factory(overrides?: CallOverrides): Promise<BigNumber>;
         getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         increaseLiquidity(params: IncreaseLiquidityParamsStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
@@ -613,9 +555,6 @@ export interface INonfungiblePositionManager extends BaseContract {
         }): Promise<BigNumber>;
         name(overrides?: CallOverrides): Promise<BigNumber>;
         ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        permit(spender: string, tokenId: BigNumberish, deadline: BigNumberish, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
         positions(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         refundETH(overrides?: PayableOverrides & {
             from?: string | Promise<string>;
@@ -646,9 +585,6 @@ export interface INonfungiblePositionManager extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        PERMIT_TYPEHASH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        WETH9(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         approve(to: string, tokenId: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
@@ -659,13 +595,9 @@ export interface INonfungiblePositionManager extends BaseContract {
         collect(params: CollectParamsStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        createAndInitializePoolIfNecessary(token0: string, token1: string, fee: BigNumberish, sqrtPriceX96: BigNumberish, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
         decreaseLiquidity(params: DecreaseLiquidityParamsStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         increaseLiquidity(params: IncreaseLiquidityParamsStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
@@ -676,9 +608,6 @@ export interface INonfungiblePositionManager extends BaseContract {
         }): Promise<PopulatedTransaction>;
         name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        permit(spender: string, tokenId: BigNumberish, deadline: BigNumberish, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
         positions(tokenId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         refundETH(overrides?: PayableOverrides & {
             from?: string | Promise<string>;

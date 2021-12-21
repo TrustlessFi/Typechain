@@ -24,6 +24,13 @@ export type CallStructOutput = [string, string] & {
   callData: string;
 };
 
+export type ResultStruct = { success: boolean; returnData: BytesLike };
+
+export type ResultStructOutput = [boolean, string] & {
+  success: boolean;
+  returnData: string;
+};
+
 export interface TrustlessMulticallInterface extends utils.Interface {
   functions: {
     "all((address,bytes)[])": FunctionFragment;
@@ -202,7 +209,10 @@ export interface TrustlessMulticall extends BaseContract {
       calls: CallStruct[],
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, string[]] & { blockNumber: BigNumber; returnData: string[] }
+      [BigNumber, ResultStructOutput[]] & {
+        blockNumber: BigNumber;
+        results: ResultStructOutput[];
+      }
     >;
 
     getBlockHash(

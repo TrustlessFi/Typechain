@@ -37,11 +37,21 @@ export declare class GovernorAlphaWithVotingRewards__factory {
         }[];
         name: string;
         outputs: {
-            components: {
+            components: ({
                 internalType: string;
                 name: string;
                 type: string;
-            }[];
+                components?: undefined;
+            } | {
+                components: {
+                    internalType: string;
+                    name: string;
+                    type: string;
+                }[];
+                internalType: string;
+                name: string;
+                type: string;
+            })[];
             internalType: string;
             name: string;
             type: string;

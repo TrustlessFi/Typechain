@@ -120,19 +120,6 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "baseURI",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [
       {
         internalType: "uint64",

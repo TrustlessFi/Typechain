@@ -10,6 +10,14 @@ export declare type CallStructOutput = [string, string] & {
     target: string;
     callData: string;
 };
+export declare type ResultStruct = {
+    success: boolean;
+    returnData: BytesLike;
+};
+export declare type ResultStructOutput = [boolean, string] & {
+    success: boolean;
+    returnData: string;
+};
 export interface TrustlessMulticallViewOnlyInterface extends utils.Interface {
     functions: {
         "all((address,bytes)[])": FunctionFragment;
@@ -62,27 +70,45 @@ export interface TrustlessMulticallViewOnly extends BaseContract {
     functions: {
         all(calls: CallStruct[], overrides?: CallOverrides): Promise<[
             BigNumber,
-            string[]
+            ResultStructOutput[]
         ] & {
             blockNumber: BigNumber;
-            returnData: string[];
+            results: ResultStructOutput[];
         }>;
-        getBlockHash(blockNumber: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
-        getBlockNumber(overrides?: CallOverrides): Promise<[BigNumber]>;
-        getChainId(overrides?: CallOverrides): Promise<[BigNumber]>;
-        getCurrentBlockCoinbase(overrides?: CallOverrides): Promise<[string]>;
-        getCurrentBlockDifficulty(overrides?: CallOverrides): Promise<[BigNumber]>;
-        getCurrentBlockGasLimit(overrides?: CallOverrides): Promise<[BigNumber]>;
-        getCurrentBlockTimestamp(overrides?: CallOverrides): Promise<[BigNumber]>;
-        getEthBalance(addr: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        getLastBlockHash(overrides?: CallOverrides): Promise<[string]>;
+        getBlockHash(blockNumber: BigNumberish, overrides?: CallOverrides): Promise<[string] & {
+            blockHash: string;
+        }>;
+        getBlockNumber(overrides?: CallOverrides): Promise<[BigNumber] & {
+            blockNumber: BigNumber;
+        }>;
+        getChainId(overrides?: CallOverrides): Promise<[BigNumber] & {
+            chainId: BigNumber;
+        }>;
+        getCurrentBlockCoinbase(overrides?: CallOverrides): Promise<[string] & {
+            blockCoinbase: string;
+        }>;
+        getCurrentBlockDifficulty(overrides?: CallOverrides): Promise<[BigNumber] & {
+            blockDifficulty: BigNumber;
+        }>;
+        getCurrentBlockGasLimit(overrides?: CallOverrides): Promise<[BigNumber] & {
+            blockGasLimit: BigNumber;
+        }>;
+        getCurrentBlockTimestamp(overrides?: CallOverrides): Promise<[BigNumber] & {
+            blockTimestamp: BigNumber;
+        }>;
+        getEthBalance(addr: string, overrides?: CallOverrides): Promise<[BigNumber] & {
+            ethBalances: BigNumber;
+        }>;
+        getLastBlockHash(overrides?: CallOverrides): Promise<[string] & {
+            blockHash: string;
+        }>;
     };
     all(calls: CallStruct[], overrides?: CallOverrides): Promise<[
         BigNumber,
-        string[]
+        ResultStructOutput[]
     ] & {
         blockNumber: BigNumber;
-        returnData: string[];
+        results: ResultStructOutput[];
     }>;
     getBlockHash(blockNumber: BigNumberish, overrides?: CallOverrides): Promise<string>;
     getBlockNumber(overrides?: CallOverrides): Promise<BigNumber>;
@@ -96,10 +122,10 @@ export interface TrustlessMulticallViewOnly extends BaseContract {
     callStatic: {
         all(calls: CallStruct[], overrides?: CallOverrides): Promise<[
             BigNumber,
-            string[]
+            ResultStructOutput[]
         ] & {
             blockNumber: BigNumber;
-            returnData: string[];
+            results: ResultStructOutput[];
         }>;
         getBlockHash(blockNumber: BigNumberish, overrides?: CallOverrides): Promise<string>;
         getBlockNumber(overrides?: CallOverrides): Promise<BigNumber>;

@@ -12,7 +12,6 @@ export interface HuePositionNFTInterface extends utils.Interface {
     functions: {
         "approve(address,uint256)": FunctionFragment;
         "balanceOf(address)": FunctionFragment;
-        "baseURI()": FunctionFragment;
         "burn(uint64)": FunctionFragment;
         "getApproved(uint256)": FunctionFragment;
         "governor()": FunctionFragment;
@@ -35,7 +34,6 @@ export interface HuePositionNFTInterface extends utils.Interface {
     };
     encodeFunctionData(functionFragment: "approve", values: [string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
-    encodeFunctionData(functionFragment: "baseURI", values?: undefined): string;
     encodeFunctionData(functionFragment: "burn", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getApproved", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "governor", values?: undefined): string;
@@ -57,7 +55,6 @@ export interface HuePositionNFTInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "transferFrom", values: [string, string, BigNumberish]): string;
     decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "baseURI", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getApproved", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
@@ -135,7 +132,6 @@ export interface HuePositionNFT extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         balanceOf(owner: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        baseURI(overrides?: CallOverrides): Promise<[string]>;
         burn(tokenID: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
@@ -175,7 +171,6 @@ export interface HuePositionNFT extends BaseContract {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
-    baseURI(overrides?: CallOverrides): Promise<string>;
     burn(tokenID: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
@@ -211,7 +206,6 @@ export interface HuePositionNFT extends BaseContract {
     callStatic: {
         approve(to: string, tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
         balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
-        baseURI(overrides?: CallOverrides): Promise<string>;
         burn(tokenID: BigNumberish, overrides?: CallOverrides): Promise<void>;
         getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
         governor(overrides?: CallOverrides): Promise<string>;
@@ -246,7 +240,6 @@ export interface HuePositionNFT extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
-        baseURI(overrides?: CallOverrides): Promise<BigNumber>;
         burn(tokenID: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
@@ -285,7 +278,6 @@ export interface HuePositionNFT extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         balanceOf(owner: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        baseURI(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         burn(tokenID: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;

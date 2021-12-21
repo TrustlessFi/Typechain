@@ -21,7 +21,6 @@ export interface PositionNFTInterface extends utils.Interface {
   functions: {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "baseURI()": FunctionFragment;
     "burn(uint64)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
@@ -47,7 +46,6 @@ export interface PositionNFTInterface extends utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
-  encodeFunctionData(functionFragment: "baseURI", values?: undefined): string;
   encodeFunctionData(functionFragment: "burn", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "getApproved",
@@ -108,7 +106,6 @@ export interface PositionNFTInterface extends utils.Interface {
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "baseURI", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getApproved",
@@ -231,8 +228,6 @@ export interface PositionNFT extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    baseURI(overrides?: CallOverrides): Promise<[string]>;
-
     burn(
       tokenID: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -336,8 +331,6 @@ export interface PositionNFT extends BaseContract {
 
   balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  baseURI(overrides?: CallOverrides): Promise<string>;
-
   burn(
     tokenID: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -431,8 +424,6 @@ export interface PositionNFT extends BaseContract {
     ): Promise<void>;
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    baseURI(overrides?: CallOverrides): Promise<string>;
 
     burn(tokenID: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
@@ -561,8 +552,6 @@ export interface PositionNFT extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    baseURI(overrides?: CallOverrides): Promise<BigNumber>;
-
     burn(
       tokenID: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -666,8 +655,6 @@ export interface PositionNFT extends BaseContract {
       owner: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    baseURI(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     burn(
       tokenID: BigNumberish,

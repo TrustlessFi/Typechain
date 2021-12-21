@@ -56,8 +56,6 @@ export type NftPositionTickStatusStructOutput = [
 
 export interface ProtocolDataAggregatorInterface extends utils.Interface {
   functions: {
-    "convertSqrtPriceX96ToTick(uint160)": FunctionFragment;
-    "convertTickToSqrtPriceX96(int24)": FunctionFragment;
     "getIncentivizedPools()": FunctionFragment;
     "getLockedNFTIDs(uint32,uint32)": FunctionFragment;
     "getUniswapPositionTickStatuses(uint256[])": FunctionFragment;
@@ -66,14 +64,6 @@ export interface ProtocolDataAggregatorInterface extends utils.Interface {
     "positionsCollateralization(uint64[])": FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "convertSqrtPriceX96ToTick",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "convertTickToSqrtPriceX96",
-    values: [BigNumberish]
-  ): string;
   encodeFunctionData(
     functionFragment: "getIncentivizedPools",
     values?: undefined
@@ -96,14 +86,6 @@ export interface ProtocolDataAggregatorInterface extends utils.Interface {
     values: [BigNumberish[]]
   ): string;
 
-  decodeFunctionResult(
-    functionFragment: "convertSqrtPriceX96ToTick",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "convertTickToSqrtPriceX96",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "getIncentivizedPools",
     data: BytesLike
@@ -156,16 +138,6 @@ export interface ProtocolDataAggregator extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    convertSqrtPriceX96ToTick(
-      sqrtPriceX96: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[number]>;
-
-    convertTickToSqrtPriceX96(
-      tick: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     getIncentivizedPools(
       overrides?: CallOverrides
     ): Promise<
@@ -197,16 +169,6 @@ export interface ProtocolDataAggregator extends BaseContract {
     ): Promise<[BigNumber[]] & { collateralizations: BigNumber[] }>;
   };
 
-  convertSqrtPriceX96ToTick(
-    sqrtPriceX96: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<number>;
-
-  convertTickToSqrtPriceX96(
-    tick: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   getIncentivizedPools(
     overrides?: CallOverrides
   ): Promise<PoolConfigStructOutput[]>;
@@ -232,16 +194,6 @@ export interface ProtocolDataAggregator extends BaseContract {
   ): Promise<BigNumber[]>;
 
   callStatic: {
-    convertSqrtPriceX96ToTick(
-      sqrtPriceX96: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<number>;
-
-    convertTickToSqrtPriceX96(
-      tick: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     getIncentivizedPools(
       overrides?: CallOverrides
     ): Promise<PoolConfigStructOutput[]>;
@@ -270,16 +222,6 @@ export interface ProtocolDataAggregator extends BaseContract {
   filters: {};
 
   estimateGas: {
-    convertSqrtPriceX96ToTick(
-      sqrtPriceX96: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    convertTickToSqrtPriceX96(
-      tick: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     getIncentivizedPools(overrides?: CallOverrides): Promise<BigNumber>;
 
     getLockedNFTIDs(
@@ -304,16 +246,6 @@ export interface ProtocolDataAggregator extends BaseContract {
   };
 
   populateTransaction: {
-    convertSqrtPriceX96ToTick(
-      sqrtPriceX96: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    convertTickToSqrtPriceX96(
-      tick: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     getIncentivizedPools(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

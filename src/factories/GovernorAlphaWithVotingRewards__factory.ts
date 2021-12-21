@@ -316,17 +316,12 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "proposalID",
-        type: "uint256",
-      },
-      {
         internalType: "address",
         name: "voter",
         type: "address",
       },
     ],
-    name: "getProposalInfo",
+    name: "getProposalsInfo",
     outputs: [
       {
         components: [
@@ -411,34 +406,46 @@ const _abi = [
             type: "uint8",
           },
           {
-            internalType: "bool",
-            name: "hasVoted",
-            type: "bool",
-          },
-          {
-            internalType: "bool",
-            name: "support",
-            type: "bool",
-          },
-          {
-            internalType: "bool",
-            name: "rewardReceived",
-            type: "bool",
-          },
-          {
-            internalType: "uint184",
-            name: "votes",
-            type: "uint184",
+            components: [
+              {
+                internalType: "bool",
+                name: "hasVoted",
+                type: "bool",
+              },
+              {
+                internalType: "bool",
+                name: "support",
+                type: "bool",
+              },
+              {
+                internalType: "bool",
+                name: "rewardReceived",
+                type: "bool",
+              },
+              {
+                internalType: "uint184",
+                name: "votes",
+                type: "uint184",
+              },
+            ],
+            internalType: "struct GovernorAlpha.Receipt",
+            name: "receipt",
+            type: "tuple",
           },
           {
             internalType: "uint256",
             name: "votingPower",
             type: "uint256",
           },
+          {
+            internalType: "uint256",
+            name: "votingRewards",
+            type: "uint256",
+          },
         ],
-        internalType: "struct GovernorAlpha.ProposalInfo",
-        name: "",
-        type: "tuple",
+        internalType: "struct GovernorAlphaWithVotingRewards.ProposalInfo[]",
+        name: "proposalsInfo",
+        type: "tuple[]",
       },
     ],
     stateMutability: "view",

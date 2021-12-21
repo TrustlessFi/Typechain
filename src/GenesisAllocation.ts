@@ -61,7 +61,6 @@ export interface GenesisAllocationInterface extends utils.Interface {
     "NAME()": FunctionFragment;
     "abdicate()": FunctionFragment;
     "authenticator()": FunctionFragment;
-    "chainID()": FunctionFragment;
     "claimAllocations(((uint8,bytes32,bytes32),uint16,uint128)[])": FunctionFragment;
     "claimedSig(address,uint8,bytes32,bytes32)": FunctionFragment;
     "deadline()": FunctionFragment;
@@ -78,7 +77,6 @@ export interface GenesisAllocationInterface extends utils.Interface {
     functionFragment: "authenticator",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "chainID", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "claimAllocations",
     values: [ClaimAllocationDataStruct[]]
@@ -112,7 +110,6 @@ export interface GenesisAllocationInterface extends utils.Interface {
     functionFragment: "authenticator",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "chainID", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "claimAllocations",
     data: BytesLike
@@ -202,10 +199,6 @@ export interface GenesisAllocation extends BaseContract {
 
     authenticator(overrides?: CallOverrides): Promise<[string]>;
 
-    chainID(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { _chainID: BigNumber }>;
-
     claimAllocations(
       claimAllocationData: ClaimAllocationDataStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -251,8 +244,6 @@ export interface GenesisAllocation extends BaseContract {
 
   authenticator(overrides?: CallOverrides): Promise<string>;
 
-  chainID(overrides?: CallOverrides): Promise<BigNumber>;
-
   claimAllocations(
     claimAllocationData: ClaimAllocationDataStruct[],
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -295,8 +286,6 @@ export interface GenesisAllocation extends BaseContract {
     abdicate(overrides?: CallOverrides): Promise<void>;
 
     authenticator(overrides?: CallOverrides): Promise<string>;
-
-    chainID(overrides?: CallOverrides): Promise<BigNumber>;
 
     claimAllocations(
       claimAllocationData: ClaimAllocationDataStruct[],
@@ -367,8 +356,6 @@ export interface GenesisAllocation extends BaseContract {
 
     authenticator(overrides?: CallOverrides): Promise<BigNumber>;
 
-    chainID(overrides?: CallOverrides): Promise<BigNumber>;
-
     claimAllocations(
       claimAllocationData: ClaimAllocationDataStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -414,8 +401,6 @@ export interface GenesisAllocation extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     authenticator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    chainID(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     claimAllocations(
       claimAllocationData: ClaimAllocationDataStruct[],

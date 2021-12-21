@@ -13,41 +13,20 @@ import {
   Signer,
   utils,
 } from "ethers";
-import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import { FunctionFragment, Result } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
 export interface TestUniswapV3CalleeInterface extends utils.Interface {
   functions: {
-    "flash(address,address,uint256,uint256,uint256,uint256)": FunctionFragment;
-    "mint(address,address,int24,int24,uint128)": FunctionFragment;
     "swap0ForExact1(address,uint256,address,uint160)": FunctionFragment;
     "swap1ForExact0(address,uint256,address,uint160)": FunctionFragment;
     "swapExact0For1(address,uint256,address,uint160)": FunctionFragment;
     "swapExact1For0(address,uint256,address,uint160)": FunctionFragment;
-    "swapToHigherSqrtPrice(address,uint160,address)": FunctionFragment;
-    "swapToLowerSqrtPrice(address,uint160,address)": FunctionFragment;
-    "uniswapV3FlashCallback(uint256,uint256,bytes)": FunctionFragment;
-    "uniswapV3MintCallback(uint256,uint256,bytes)": FunctionFragment;
     "uniswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "flash",
-    values: [
-      string,
-      string,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "mint",
-    values: [string, string, BigNumberish, BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "swap0ForExact1",
     values: [string, BigNumberish, string, BigNumberish]
   ): string;
@@ -64,28 +43,10 @@ export interface TestUniswapV3CalleeInterface extends utils.Interface {
     values: [string, BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapToHigherSqrtPrice",
-    values: [string, BigNumberish, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swapToLowerSqrtPrice",
-    values: [string, BigNumberish, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "uniswapV3FlashCallback",
-    values: [BigNumberish, BigNumberish, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "uniswapV3MintCallback",
-    values: [BigNumberish, BigNumberish, BytesLike]
-  ): string;
-  encodeFunctionData(
     functionFragment: "uniswapV3SwapCallback",
     values: [BigNumberish, BigNumberish, BytesLike]
   ): string;
 
-  decodeFunctionResult(functionFragment: "flash", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "swap0ForExact1",
     data: BytesLike
@@ -103,57 +64,12 @@ export interface TestUniswapV3CalleeInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapToHigherSqrtPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "swapToLowerSqrtPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "uniswapV3FlashCallback",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "uniswapV3MintCallback",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "uniswapV3SwapCallback",
     data: BytesLike
   ): Result;
 
-  events: {
-    "FlashCallback(uint256,uint256)": EventFragment;
-    "MintCallback(uint256,uint256)": EventFragment;
-    "SwapCallback(int256,int256)": EventFragment;
-  };
-
-  getEvent(nameOrSignatureOrTopic: "FlashCallback"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "MintCallback"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SwapCallback"): EventFragment;
+  events: {};
 }
-
-export type FlashCallbackEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  { fee0: BigNumber; fee1: BigNumber }
->;
-
-export type FlashCallbackEventFilter = TypedEventFilter<FlashCallbackEvent>;
-
-export type MintCallbackEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  { amount0Owed: BigNumber; amount1Owed: BigNumber }
->;
-
-export type MintCallbackEventFilter = TypedEventFilter<MintCallbackEvent>;
-
-export type SwapCallbackEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  { amount0Delta: BigNumber; amount1Delta: BigNumber }
->;
-
-export type SwapCallbackEventFilter = TypedEventFilter<SwapCallbackEvent>;
 
 export interface TestUniswapV3Callee extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -182,25 +98,6 @@ export interface TestUniswapV3Callee extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    flash(
-      pool: string,
-      recipient: string,
-      amount0: BigNumberish,
-      amount1: BigNumberish,
-      pay0: BigNumberish,
-      pay1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    mint(
-      pool: string,
-      recipient: string,
-      tickLower: BigNumberish,
-      tickUpper: BigNumberish,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     swap0ForExact1(
       pool: string,
       amount1Out: BigNumberish,
@@ -233,34 +130,6 @@ export interface TestUniswapV3Callee extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    swapToHigherSqrtPrice(
-      pool: string,
-      sqrtPriceX96: BigNumberish,
-      recipient: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    swapToLowerSqrtPrice(
-      pool: string,
-      sqrtPriceX96: BigNumberish,
-      recipient: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    uniswapV3FlashCallback(
-      fee0: BigNumberish,
-      fee1: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    uniswapV3MintCallback(
-      amount0Owed: BigNumberish,
-      amount1Owed: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     uniswapV3SwapCallback(
       amount0Delta: BigNumberish,
       amount1Delta: BigNumberish,
@@ -268,25 +137,6 @@ export interface TestUniswapV3Callee extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
-
-  flash(
-    pool: string,
-    recipient: string,
-    amount0: BigNumberish,
-    amount1: BigNumberish,
-    pay0: BigNumberish,
-    pay1: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  mint(
-    pool: string,
-    recipient: string,
-    tickLower: BigNumberish,
-    tickUpper: BigNumberish,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   swap0ForExact1(
     pool: string,
@@ -320,34 +170,6 @@ export interface TestUniswapV3Callee extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  swapToHigherSqrtPrice(
-    pool: string,
-    sqrtPriceX96: BigNumberish,
-    recipient: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  swapToLowerSqrtPrice(
-    pool: string,
-    sqrtPriceX96: BigNumberish,
-    recipient: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  uniswapV3FlashCallback(
-    fee0: BigNumberish,
-    fee1: BigNumberish,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  uniswapV3MintCallback(
-    amount0Owed: BigNumberish,
-    amount1Owed: BigNumberish,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   uniswapV3SwapCallback(
     amount0Delta: BigNumberish,
     amount1Delta: BigNumberish,
@@ -356,25 +178,6 @@ export interface TestUniswapV3Callee extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    flash(
-      pool: string,
-      recipient: string,
-      amount0: BigNumberish,
-      amount1: BigNumberish,
-      pay0: BigNumberish,
-      pay1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    mint(
-      pool: string,
-      recipient: string,
-      tickLower: BigNumberish,
-      tickUpper: BigNumberish,
-      amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     swap0ForExact1(
       pool: string,
       amount1Out: BigNumberish,
@@ -404,34 +207,6 @@ export interface TestUniswapV3Callee extends BaseContract {
       amount1In: BigNumberish,
       recipient: string,
       sqrtPriceLimitX96: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    swapToHigherSqrtPrice(
-      pool: string,
-      sqrtPriceX96: BigNumberish,
-      recipient: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    swapToLowerSqrtPrice(
-      pool: string,
-      sqrtPriceX96: BigNumberish,
-      recipient: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    uniswapV3FlashCallback(
-      fee0: BigNumberish,
-      fee1: BigNumberish,
-      data: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    uniswapV3MintCallback(
-      amount0Owed: BigNumberish,
-      amount1Owed: BigNumberish,
-      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -443,52 +218,9 @@ export interface TestUniswapV3Callee extends BaseContract {
     ): Promise<void>;
   };
 
-  filters: {
-    "FlashCallback(uint256,uint256)"(
-      fee0?: null,
-      fee1?: null
-    ): FlashCallbackEventFilter;
-    FlashCallback(fee0?: null, fee1?: null): FlashCallbackEventFilter;
-
-    "MintCallback(uint256,uint256)"(
-      amount0Owed?: null,
-      amount1Owed?: null
-    ): MintCallbackEventFilter;
-    MintCallback(
-      amount0Owed?: null,
-      amount1Owed?: null
-    ): MintCallbackEventFilter;
-
-    "SwapCallback(int256,int256)"(
-      amount0Delta?: null,
-      amount1Delta?: null
-    ): SwapCallbackEventFilter;
-    SwapCallback(
-      amount0Delta?: null,
-      amount1Delta?: null
-    ): SwapCallbackEventFilter;
-  };
+  filters: {};
 
   estimateGas: {
-    flash(
-      pool: string,
-      recipient: string,
-      amount0: BigNumberish,
-      amount1: BigNumberish,
-      pay0: BigNumberish,
-      pay1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    mint(
-      pool: string,
-      recipient: string,
-      tickLower: BigNumberish,
-      tickUpper: BigNumberish,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     swap0ForExact1(
       pool: string,
       amount1Out: BigNumberish,
@@ -518,34 +250,6 @@ export interface TestUniswapV3Callee extends BaseContract {
       amount1In: BigNumberish,
       recipient: string,
       sqrtPriceLimitX96: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    swapToHigherSqrtPrice(
-      pool: string,
-      sqrtPriceX96: BigNumberish,
-      recipient: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    swapToLowerSqrtPrice(
-      pool: string,
-      sqrtPriceX96: BigNumberish,
-      recipient: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    uniswapV3FlashCallback(
-      fee0: BigNumberish,
-      fee1: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    uniswapV3MintCallback(
-      amount0Owed: BigNumberish,
-      amount1Owed: BigNumberish,
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -558,25 +262,6 @@ export interface TestUniswapV3Callee extends BaseContract {
   };
 
   populateTransaction: {
-    flash(
-      pool: string,
-      recipient: string,
-      amount0: BigNumberish,
-      amount1: BigNumberish,
-      pay0: BigNumberish,
-      pay1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    mint(
-      pool: string,
-      recipient: string,
-      tickLower: BigNumberish,
-      tickUpper: BigNumberish,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     swap0ForExact1(
       pool: string,
       amount1Out: BigNumberish,
@@ -606,34 +291,6 @@ export interface TestUniswapV3Callee extends BaseContract {
       amount1In: BigNumberish,
       recipient: string,
       sqrtPriceLimitX96: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    swapToHigherSqrtPrice(
-      pool: string,
-      sqrtPriceX96: BigNumberish,
-      recipient: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    swapToLowerSqrtPrice(
-      pool: string,
-      sqrtPriceX96: BigNumberish,
-      recipient: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    uniswapV3FlashCallback(
-      fee0: BigNumberish,
-      fee1: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    uniswapV3MintCallback(
-      amount0Owed: BigNumberish,
-      amount1Owed: BigNumberish,
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

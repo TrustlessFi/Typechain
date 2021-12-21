@@ -101,26 +101,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IUniswapV3PoolState__factory>;
     getContractFactory(
-      name: "IERC721Permit",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC721Permit__factory>;
-    getContractFactory(
-      name: "INonfungiblePositionManager",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.INonfungiblePositionManager__factory>;
-    getContractFactory(
-      name: "IPeripheryImmutableState",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IPeripheryImmutableState__factory>;
-    getContractFactory(
-      name: "IPeripheryPayments",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IPeripheryPayments__factory>;
-    getContractFactory(
-      name: "IPoolInitializer",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IPoolInitializer__factory>;
-    getContractFactory(
       name: "DaoPositionCreator",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.DaoPositionCreator__factory>;
@@ -293,6 +273,18 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IWETH9__factory>;
     getContractFactory(
+      name: "INonfungiblePositionManager",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.INonfungiblePositionManager__factory>;
+    getContractFactory(
+      name: "IUniswapV3Factory",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IUniswapV3Factory__factory>;
+    getContractFactory(
+      name: "IUniswapV3Pool",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IUniswapV3Pool__factory>;
+    getContractFactory(
       name: "Auctions",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Auctions__factory>;
@@ -324,98 +316,6 @@ declare module "hardhat/types/runtime" {
       name: "Settlement",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Settlement__factory>;
-    getContractFactory(
-      name: "Accounting",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Accounting__factory>;
-    getContractFactory(
-      name: "ITDao",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ITDao__factory>;
-    getContractFactory(
-      name: "ITDaoPositionNFTDescriptor",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ITDaoPositionNFTDescriptor__factory>;
-    getContractFactory(
-      name: "ITokenLockDao",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ITokenLockDao__factory>;
-    getContractFactory(
-      name: "IGovernorAlpha",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IGovernorAlpha__factory>;
-    getContractFactory(
-      name: "IProtocolToken",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IProtocolToken__factory>;
-    getContractFactory(
-      name: "TDao",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TDao__factory>;
-    getContractFactory(
-      name: "TDaoGovernorAlpha",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TDaoGovernorAlpha__factory>;
-    getContractFactory(
-      name: "TDaoPositionNFT",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TDaoPositionNFT__factory>;
-    getContractFactory(
-      name: "TDaoPositionNFTDescriptor",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TDaoPositionNFTDescriptor__factory>;
-    getContractFactory(
-      name: "TDaoTimelock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TDaoTimelock__factory>;
-    getContractFactory(
-      name: "TDaoToken",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TDaoToken__factory>;
-    getContractFactory(
-      name: "TDaoVotingRewardsSafe",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TDaoVotingRewardsSafe__factory>;
-    getContractFactory(
-      name: "Hue",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Hue__factory>;
-    getContractFactory(
-      name: "HuePositionNFT",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.HuePositionNFT__factory>;
-    getContractFactory(
-      name: "LendHue",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.LendHue__factory>;
-    getContractFactory(
-      name: "PositionNFT",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.PositionNFT__factory>;
-    getContractFactory(
-      name: "ProtocolToken",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ProtocolToken__factory>;
-    getContractFactory(
-      name: "Governed",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Governed__factory>;
-    getContractFactory(
-      name: "LocksProtocol",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.LocksProtocol__factory>;
-    getContractFactory(
-      name: "ProtocolLock",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ProtocolLock__factory>;
-    getContractFactory(
-      name: "TcpSafeMath",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TcpSafeMath__factory>;
-    getContractFactory(
-      name: "PeriodTime",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.PeriodTime__factory>;
     getContractFactory(
       name: "AccountingTestable",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -537,10 +437,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TestnetERC20__factory>;
     getContractFactory(
-      name: "TickConversion",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TickConversion__factory>;
-    getContractFactory(
       name: "TimeTestable",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TimeTestable__factory>;
@@ -548,6 +444,98 @@ declare module "hardhat/types/runtime" {
       name: "WETH9",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.WETH9__factory>;
+    getContractFactory(
+      name: "Accounting",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Accounting__factory>;
+    getContractFactory(
+      name: "ITDao",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ITDao__factory>;
+    getContractFactory(
+      name: "ITDaoPositionNFTDescriptor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ITDaoPositionNFTDescriptor__factory>;
+    getContractFactory(
+      name: "ITokenLockDao",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ITokenLockDao__factory>;
+    getContractFactory(
+      name: "IGovernorAlpha",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IGovernorAlpha__factory>;
+    getContractFactory(
+      name: "IProtocolToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IProtocolToken__factory>;
+    getContractFactory(
+      name: "TDao",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TDao__factory>;
+    getContractFactory(
+      name: "TDaoGovernorAlpha",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TDaoGovernorAlpha__factory>;
+    getContractFactory(
+      name: "TDaoPositionNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TDaoPositionNFT__factory>;
+    getContractFactory(
+      name: "TDaoPositionNFTDescriptor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TDaoPositionNFTDescriptor__factory>;
+    getContractFactory(
+      name: "TDaoTimelock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TDaoTimelock__factory>;
+    getContractFactory(
+      name: "TDaoToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TDaoToken__factory>;
+    getContractFactory(
+      name: "TDaoVotingRewardsSafe",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TDaoVotingRewardsSafe__factory>;
+    getContractFactory(
+      name: "Hue",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Hue__factory>;
+    getContractFactory(
+      name: "HuePositionNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.HuePositionNFT__factory>;
+    getContractFactory(
+      name: "LendHue",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.LendHue__factory>;
+    getContractFactory(
+      name: "PositionNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PositionNFT__factory>;
+    getContractFactory(
+      name: "ProtocolToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ProtocolToken__factory>;
+    getContractFactory(
+      name: "Governed",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Governed__factory>;
+    getContractFactory(
+      name: "LocksProtocol",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.LocksProtocol__factory>;
+    getContractFactory(
+      name: "ProtocolLock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ProtocolLock__factory>;
+    getContractFactory(
+      name: "TcpSafeMath",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TcpSafeMath__factory>;
+    getContractFactory(
+      name: "PeriodTime",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PeriodTime__factory>;
     getContractFactory(
       name: "IUniswapV3FlashCallback",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -956,6 +944,50 @@ declare module "hardhat/types/runtime" {
       name: "V3Migrator",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.V3Migrator__factory>;
+    getContractFactory(
+      name: "ERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20__factory>;
+    getContractFactory(
+      name: "IERC20Metadata",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20Metadata__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "ERC721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721__factory>;
+    getContractFactory(
+      name: "ERC721Enumerable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721Enumerable__factory>;
+    getContractFactory(
+      name: "IERC721Enumerable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721Enumerable__factory>;
+    getContractFactory(
+      name: "IERC721Metadata",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721Metadata__factory>;
+    getContractFactory(
+      name: "IERC721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721__factory>;
+    getContractFactory(
+      name: "IERC721Receiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721Receiver__factory>;
+    getContractFactory(
+      name: "ERC165",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC165__factory>;
+    getContractFactory(
+      name: "IERC165",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC165__factory>;
 
     getContractAt(
       name: "ERC20Permit",
@@ -1067,31 +1099,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IUniswapV3PoolState>;
-    getContractAt(
-      name: "IERC721Permit",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IERC721Permit>;
-    getContractAt(
-      name: "INonfungiblePositionManager",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.INonfungiblePositionManager>;
-    getContractAt(
-      name: "IPeripheryImmutableState",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IPeripheryImmutableState>;
-    getContractAt(
-      name: "IPeripheryPayments",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IPeripheryPayments>;
-    getContractAt(
-      name: "IPoolInitializer",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IPoolInitializer>;
     getContractAt(
       name: "DaoPositionCreator",
       address: string,
@@ -1308,6 +1315,21 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IWETH9>;
     getContractAt(
+      name: "INonfungiblePositionManager",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.INonfungiblePositionManager>;
+    getContractAt(
+      name: "IUniswapV3Factory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IUniswapV3Factory>;
+    getContractAt(
+      name: "IUniswapV3Pool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IUniswapV3Pool>;
+    getContractAt(
       name: "Auctions",
       address: string,
       signer?: ethers.Signer
@@ -1347,121 +1369,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Settlement>;
-    getContractAt(
-      name: "Accounting",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Accounting>;
-    getContractAt(
-      name: "ITDao",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ITDao>;
-    getContractAt(
-      name: "ITDaoPositionNFTDescriptor",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ITDaoPositionNFTDescriptor>;
-    getContractAt(
-      name: "ITokenLockDao",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ITokenLockDao>;
-    getContractAt(
-      name: "IGovernorAlpha",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IGovernorAlpha>;
-    getContractAt(
-      name: "IProtocolToken",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IProtocolToken>;
-    getContractAt(
-      name: "TDao",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TDao>;
-    getContractAt(
-      name: "TDaoGovernorAlpha",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TDaoGovernorAlpha>;
-    getContractAt(
-      name: "TDaoPositionNFT",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TDaoPositionNFT>;
-    getContractAt(
-      name: "TDaoPositionNFTDescriptor",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TDaoPositionNFTDescriptor>;
-    getContractAt(
-      name: "TDaoTimelock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TDaoTimelock>;
-    getContractAt(
-      name: "TDaoToken",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TDaoToken>;
-    getContractAt(
-      name: "TDaoVotingRewardsSafe",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TDaoVotingRewardsSafe>;
-    getContractAt(
-      name: "Hue",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Hue>;
-    getContractAt(
-      name: "HuePositionNFT",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.HuePositionNFT>;
-    getContractAt(
-      name: "LendHue",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.LendHue>;
-    getContractAt(
-      name: "PositionNFT",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.PositionNFT>;
-    getContractAt(
-      name: "ProtocolToken",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ProtocolToken>;
-    getContractAt(
-      name: "Governed",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Governed>;
-    getContractAt(
-      name: "LocksProtocol",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.LocksProtocol>;
-    getContractAt(
-      name: "ProtocolLock",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ProtocolLock>;
-    getContractAt(
-      name: "TcpSafeMath",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TcpSafeMath>;
-    getContractAt(
-      name: "PeriodTime",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.PeriodTime>;
     getContractAt(
       name: "AccountingTestable",
       address: string,
@@ -1613,11 +1520,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.TestnetERC20>;
     getContractAt(
-      name: "TickConversion",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.TickConversion>;
-    getContractAt(
       name: "TimeTestable",
       address: string,
       signer?: ethers.Signer
@@ -1627,6 +1529,121 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.WETH9>;
+    getContractAt(
+      name: "Accounting",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Accounting>;
+    getContractAt(
+      name: "ITDao",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITDao>;
+    getContractAt(
+      name: "ITDaoPositionNFTDescriptor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITDaoPositionNFTDescriptor>;
+    getContractAt(
+      name: "ITokenLockDao",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITokenLockDao>;
+    getContractAt(
+      name: "IGovernorAlpha",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IGovernorAlpha>;
+    getContractAt(
+      name: "IProtocolToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IProtocolToken>;
+    getContractAt(
+      name: "TDao",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TDao>;
+    getContractAt(
+      name: "TDaoGovernorAlpha",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TDaoGovernorAlpha>;
+    getContractAt(
+      name: "TDaoPositionNFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TDaoPositionNFT>;
+    getContractAt(
+      name: "TDaoPositionNFTDescriptor",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TDaoPositionNFTDescriptor>;
+    getContractAt(
+      name: "TDaoTimelock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TDaoTimelock>;
+    getContractAt(
+      name: "TDaoToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TDaoToken>;
+    getContractAt(
+      name: "TDaoVotingRewardsSafe",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TDaoVotingRewardsSafe>;
+    getContractAt(
+      name: "Hue",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Hue>;
+    getContractAt(
+      name: "HuePositionNFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.HuePositionNFT>;
+    getContractAt(
+      name: "LendHue",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LendHue>;
+    getContractAt(
+      name: "PositionNFT",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PositionNFT>;
+    getContractAt(
+      name: "ProtocolToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ProtocolToken>;
+    getContractAt(
+      name: "Governed",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Governed>;
+    getContractAt(
+      name: "LocksProtocol",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LocksProtocol>;
+    getContractAt(
+      name: "ProtocolLock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ProtocolLock>;
+    getContractAt(
+      name: "TcpSafeMath",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TcpSafeMath>;
+    getContractAt(
+      name: "PeriodTime",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PeriodTime>;
     getContractAt(
       name: "IUniswapV3FlashCallback",
       address: string,
@@ -2137,6 +2154,61 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.V3Migrator>;
+    getContractAt(
+      name: "ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20>;
+    getContractAt(
+      name: "IERC20Metadata",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Metadata>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "ERC721",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721>;
+    getContractAt(
+      name: "ERC721Enumerable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721Enumerable>;
+    getContractAt(
+      name: "IERC721Enumerable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721Enumerable>;
+    getContractAt(
+      name: "IERC721Metadata",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721Metadata>;
+    getContractAt(
+      name: "IERC721",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721>;
+    getContractAt(
+      name: "IERC721Receiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721Receiver>;
+    getContractAt(
+      name: "ERC165",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC165>;
+    getContractAt(
+      name: "IERC165",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC165>;
 
     // default types
     getContractFactory(

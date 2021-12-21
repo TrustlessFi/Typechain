@@ -2,6 +2,18 @@ import { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, Contra
 import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+export declare type ReceiptStruct = {
+    hasVoted: boolean;
+    support: boolean;
+    rewardReceived: boolean;
+    votes: BigNumberish;
+};
+export declare type ReceiptStructOutput = [boolean, boolean, boolean, BigNumber] & {
+    hasVoted: boolean;
+    support: boolean;
+    rewardReceived: boolean;
+    votes: BigNumber;
+};
 export declare type ProposalInfoStruct = {
     targets: string[];
     signatures: string[];
@@ -19,11 +31,9 @@ export declare type ProposalInfoStruct = {
     againstVotes: BigNumberish;
     initialSupply: BigNumberish;
     state: BigNumberish;
-    hasVoted: boolean;
-    support: boolean;
-    rewardReceived: boolean;
-    votes: BigNumberish;
+    receipt: ReceiptStruct;
     votingPower: BigNumberish;
+    votingRewards: BigNumberish;
 };
 export declare type ProposalInfoStructOutput = [
     string[],
@@ -42,9 +52,7 @@ export declare type ProposalInfoStructOutput = [
     BigNumber,
     BigNumber,
     number,
-    boolean,
-    boolean,
-    boolean,
+    ReceiptStructOutput,
     BigNumber,
     BigNumber
 ] & {
@@ -64,23 +72,9 @@ export declare type ProposalInfoStructOutput = [
     againstVotes: BigNumber;
     initialSupply: BigNumber;
     state: number;
-    hasVoted: boolean;
-    support: boolean;
-    rewardReceived: boolean;
-    votes: BigNumber;
+    receipt: ReceiptStructOutput;
     votingPower: BigNumber;
-};
-export declare type ReceiptStruct = {
-    hasVoted: boolean;
-    support: boolean;
-    rewardReceived: boolean;
-    votes: BigNumberish;
-};
-export declare type ReceiptStructOutput = [boolean, boolean, boolean, BigNumber] & {
-    hasVoted: boolean;
-    support: boolean;
-    rewardReceived: boolean;
-    votes: BigNumber;
+    votingRewards: BigNumber;
 };
 export interface TDaoGovernorAlphaInterface extends utils.Interface {
     functions: {
@@ -97,7 +91,7 @@ export interface TDaoGovernorAlphaInterface extends utils.Interface {
         "execute(uint256)": FunctionFragment;
         "getActions(uint256)": FunctionFragment;
         "getMetaProposalParameters(uint256)": FunctionFragment;
-        "getProposalInfo(uint256,address)": FunctionFragment;
+        "getProposalsInfo(address)": FunctionFragment;
         "getReceipt(uint256,address)": FunctionFragment;
         "guardian()": FunctionFragment;
         "hasClaimedUnderlyingRewards(uint256,address)": FunctionFragment;
@@ -133,7 +127,7 @@ export interface TDaoGovernorAlphaInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "execute", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getActions", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getMetaProposalParameters", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getProposalInfo", values: [BigNumberish, string]): string;
+    encodeFunctionData(functionFragment: "getProposalsInfo", values: [string]): string;
     encodeFunctionData(functionFragment: "getReceipt", values: [BigNumberish, string]): string;
     encodeFunctionData(functionFragment: "guardian", values?: undefined): string;
     encodeFunctionData(functionFragment: "hasClaimedUnderlyingRewards", values: [BigNumberish, string]): string;
@@ -168,7 +162,7 @@ export interface TDaoGovernorAlphaInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "execute", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getActions", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getMetaProposalParameters", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "getProposalInfo", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "getProposalsInfo", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getReceipt", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "guardian", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "hasClaimedUnderlyingRewards", data: BytesLike): Result;
@@ -317,7 +311,11 @@ export interface TDaoGovernorAlpha extends BaseContract {
             underlyingProposalID: BigNumber;
             moreForThanAgainst: boolean;
         }>;
-        getProposalInfo(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<[ProposalInfoStructOutput]>;
+        getProposalsInfo(voter: string, overrides?: CallOverrides): Promise<[
+            ProposalInfoStructOutput[]
+        ] & {
+            proposalsInfo: ProposalInfoStructOutput[];
+        }>;
         getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<[ReceiptStructOutput]>;
         guardian(overrides?: CallOverrides): Promise<[string]>;
         hasClaimedUnderlyingRewards(arg0: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<[boolean]>;
@@ -413,7 +411,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
         underlyingProposalID: BigNumber;
         moreForThanAgainst: boolean;
     }>;
-    getProposalInfo(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<ProposalInfoStructOutput>;
+    getProposalsInfo(voter: string, overrides?: CallOverrides): Promise<ProposalInfoStructOutput[]>;
     getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<ReceiptStructOutput>;
     guardian(overrides?: CallOverrides): Promise<string>;
     hasClaimedUnderlyingRewards(arg0: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<boolean>;
@@ -495,7 +493,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
             underlyingProposalID: BigNumber;
             moreForThanAgainst: boolean;
         }>;
-        getProposalInfo(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<ProposalInfoStructOutput>;
+        getProposalsInfo(voter: string, overrides?: CallOverrides): Promise<ProposalInfoStructOutput[]>;
         getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<ReceiptStructOutput>;
         guardian(overrides?: CallOverrides): Promise<string>;
         hasClaimedUnderlyingRewards(arg0: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<boolean>;
@@ -588,7 +586,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
         }): Promise<BigNumber>;
         getActions(proposalId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         getMetaProposalParameters(proposalID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getProposalInfo(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<BigNumber>;
+        getProposalsInfo(voter: string, overrides?: CallOverrides): Promise<BigNumber>;
         getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<BigNumber>;
         guardian(overrides?: CallOverrides): Promise<BigNumber>;
         hasClaimedUnderlyingRewards(arg0: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -643,7 +641,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
         }): Promise<PopulatedTransaction>;
         getActions(proposalId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getMetaProposalParameters(proposalID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getProposalInfo(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getProposalsInfo(voter: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         guardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         hasClaimedUnderlyingRewards(arg0: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
