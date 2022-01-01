@@ -36,11 +36,11 @@ export declare type ClaimAllocationDataStruct = {
 };
 export declare type ClaimAllocationDataStructOutput = [
     AuthStructOutput,
-    number,
+    BigNumber,
     BigNumber
 ] & {
     auth: AuthStructOutput;
-    roundID: number;
+    roundID: BigNumber;
     count: BigNumber;
 };
 export interface GenesisAllocationInterface extends utils.Interface {
@@ -48,11 +48,11 @@ export interface GenesisAllocationInterface extends utils.Interface {
         "NAME()": FunctionFragment;
         "abdicate()": FunctionFragment;
         "authenticator()": FunctionFragment;
-        "claimAllocations(((uint8,bytes32,bytes32),uint16,uint128)[])": FunctionFragment;
-        "claimedSig(address,uint8,bytes32,bytes32)": FunctionFragment;
+        "claimAllocations(((uint8,bytes32,bytes32),uint256,uint128)[])": FunctionFragment;
+        "claimedSig(address,uint256)": FunctionFragment;
         "deadline()": FunctionFragment;
         "extendDeadline(uint64)": FunctionFragment;
-        "getMessage(address,uint16,uint128)": FunctionFragment;
+        "getMessage(address,uint256,uint128)": FunctionFragment;
         "guardian()": FunctionFragment;
         "tcpAllocation()": FunctionFragment;
         "transferAllocationToIncentiveAllocation(uint128)": FunctionFragment;
@@ -61,7 +61,7 @@ export interface GenesisAllocationInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "abdicate", values?: undefined): string;
     encodeFunctionData(functionFragment: "authenticator", values?: undefined): string;
     encodeFunctionData(functionFragment: "claimAllocations", values: [ClaimAllocationDataStruct[]]): string;
-    encodeFunctionData(functionFragment: "claimedSig", values: [string, BigNumberish, BytesLike, BytesLike]): string;
+    encodeFunctionData(functionFragment: "claimedSig", values: [string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "deadline", values?: undefined): string;
     encodeFunctionData(functionFragment: "extendDeadline", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getMessage", values: [string, BigNumberish, BigNumberish]): string;
@@ -81,7 +81,7 @@ export interface GenesisAllocationInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "transferAllocationToIncentiveAllocation", data: BytesLike): Result;
     events: {
         "DeadlineSet(uint64)": EventFragment;
-        "SignatureProcessed(address,uint16,uint128)": EventFragment;
+        "SignatureProcessed(address,uint256,uint128)": EventFragment;
         "TokensTransferredToIncentiveAllocation(uint128)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "DeadlineSet"): EventFragment;
@@ -94,11 +94,11 @@ export declare type DeadlineSetEvent = TypedEvent<[BigNumber], {
 export declare type DeadlineSetEventFilter = TypedEventFilter<DeadlineSetEvent>;
 export declare type SignatureProcessedEvent = TypedEvent<[
     string,
-    number,
+    BigNumber,
     BigNumber
 ], {
     receiver: string;
-    roundID: number;
+    roundID: BigNumber;
     count: BigNumber;
 }>;
 export declare type SignatureProcessedEventFilter = TypedEventFilter<SignatureProcessedEvent>;
@@ -131,7 +131,7 @@ export interface GenesisAllocation extends BaseContract {
         claimAllocations(claimAllocationData: ClaimAllocationDataStruct[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        claimedSig(arg0: string, arg1: BigNumberish, arg2: BytesLike, arg3: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
+        claimedSig(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<[boolean]>;
         deadline(overrides?: CallOverrides): Promise<[BigNumber]>;
         extendDeadline(newDeadline: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
@@ -151,7 +151,7 @@ export interface GenesisAllocation extends BaseContract {
     claimAllocations(claimAllocationData: ClaimAllocationDataStruct[], overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    claimedSig(arg0: string, arg1: BigNumberish, arg2: BytesLike, arg3: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    claimedSig(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
     deadline(overrides?: CallOverrides): Promise<BigNumber>;
     extendDeadline(newDeadline: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
@@ -167,7 +167,7 @@ export interface GenesisAllocation extends BaseContract {
         abdicate(overrides?: CallOverrides): Promise<void>;
         authenticator(overrides?: CallOverrides): Promise<string>;
         claimAllocations(claimAllocationData: ClaimAllocationDataStruct[], overrides?: CallOverrides): Promise<void>;
-        claimedSig(arg0: string, arg1: BigNumberish, arg2: BytesLike, arg3: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+        claimedSig(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
         deadline(overrides?: CallOverrides): Promise<BigNumber>;
         extendDeadline(newDeadline: BigNumberish, overrides?: CallOverrides): Promise<void>;
         getMessage(userAddress: string, roundID: BigNumberish, count: BigNumberish, overrides?: CallOverrides): Promise<string>;
@@ -178,7 +178,7 @@ export interface GenesisAllocation extends BaseContract {
     filters: {
         "DeadlineSet(uint64)"(deadline?: null): DeadlineSetEventFilter;
         DeadlineSet(deadline?: null): DeadlineSetEventFilter;
-        "SignatureProcessed(address,uint16,uint128)"(receiver?: string | null, roundID?: BigNumberish | null, count?: null): SignatureProcessedEventFilter;
+        "SignatureProcessed(address,uint256,uint128)"(receiver?: string | null, roundID?: BigNumberish | null, count?: null): SignatureProcessedEventFilter;
         SignatureProcessed(receiver?: string | null, roundID?: BigNumberish | null, count?: null): SignatureProcessedEventFilter;
         "TokensTransferredToIncentiveAllocation(uint128)"(count?: null): TokensTransferredToIncentiveAllocationEventFilter;
         TokensTransferredToIncentiveAllocation(count?: null): TokensTransferredToIncentiveAllocationEventFilter;
@@ -192,7 +192,7 @@ export interface GenesisAllocation extends BaseContract {
         claimAllocations(claimAllocationData: ClaimAllocationDataStruct[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        claimedSig(arg0: string, arg1: BigNumberish, arg2: BytesLike, arg3: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+        claimedSig(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         deadline(overrides?: CallOverrides): Promise<BigNumber>;
         extendDeadline(newDeadline: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
@@ -213,7 +213,7 @@ export interface GenesisAllocation extends BaseContract {
         claimAllocations(claimAllocationData: ClaimAllocationDataStruct[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        claimedSig(arg0: string, arg1: BigNumberish, arg2: BytesLike, arg3: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        claimedSig(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         deadline(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         extendDeadline(newDeadline: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;

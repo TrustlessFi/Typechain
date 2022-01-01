@@ -52,20 +52,20 @@ export type ClaimAllocationDataStruct = {
 
 export type ClaimAllocationDataStructOutput = [
   AuthStructOutput,
-  number,
+  BigNumber,
   BigNumber
-] & { auth: AuthStructOutput; roundID: number; count: BigNumber };
+] & { auth: AuthStructOutput; roundID: BigNumber; count: BigNumber };
 
 export interface GenesisAllocationInterface extends utils.Interface {
   functions: {
     "NAME()": FunctionFragment;
     "abdicate()": FunctionFragment;
     "authenticator()": FunctionFragment;
-    "claimAllocations(((uint8,bytes32,bytes32),uint16,uint128)[])": FunctionFragment;
-    "claimedSig(address,uint8,bytes32,bytes32)": FunctionFragment;
+    "claimAllocations(((uint8,bytes32,bytes32),uint256,uint128)[])": FunctionFragment;
+    "claimedSig(address,uint256)": FunctionFragment;
     "deadline()": FunctionFragment;
     "extendDeadline(uint64)": FunctionFragment;
-    "getMessage(address,uint16,uint128)": FunctionFragment;
+    "getMessage(address,uint256,uint128)": FunctionFragment;
     "guardian()": FunctionFragment;
     "tcpAllocation()": FunctionFragment;
     "transferAllocationToIncentiveAllocation(uint128)": FunctionFragment;
@@ -83,7 +83,7 @@ export interface GenesisAllocationInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "claimedSig",
-    values: [string, BigNumberish, BytesLike, BytesLike]
+    values: [string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "deadline", values?: undefined): string;
   encodeFunctionData(
@@ -133,7 +133,7 @@ export interface GenesisAllocationInterface extends utils.Interface {
 
   events: {
     "DeadlineSet(uint64)": EventFragment;
-    "SignatureProcessed(address,uint16,uint128)": EventFragment;
+    "SignatureProcessed(address,uint256,uint128)": EventFragment;
     "TokensTransferredToIncentiveAllocation(uint128)": EventFragment;
   };
 
@@ -149,8 +149,8 @@ export type DeadlineSetEvent = TypedEvent<[BigNumber], { deadline: BigNumber }>;
 export type DeadlineSetEventFilter = TypedEventFilter<DeadlineSetEvent>;
 
 export type SignatureProcessedEvent = TypedEvent<
-  [string, number, BigNumber],
-  { receiver: string; roundID: number; count: BigNumber }
+  [string, BigNumber, BigNumber],
+  { receiver: string; roundID: BigNumber; count: BigNumber }
 >;
 
 export type SignatureProcessedEventFilter =
@@ -207,8 +207,6 @@ export interface GenesisAllocation extends BaseContract {
     claimedSig(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BytesLike,
-      arg3: BytesLike,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
@@ -252,8 +250,6 @@ export interface GenesisAllocation extends BaseContract {
   claimedSig(
     arg0: string,
     arg1: BigNumberish,
-    arg2: BytesLike,
-    arg3: BytesLike,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
@@ -295,8 +291,6 @@ export interface GenesisAllocation extends BaseContract {
     claimedSig(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BytesLike,
-      arg3: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -328,7 +322,7 @@ export interface GenesisAllocation extends BaseContract {
     "DeadlineSet(uint64)"(deadline?: null): DeadlineSetEventFilter;
     DeadlineSet(deadline?: null): DeadlineSetEventFilter;
 
-    "SignatureProcessed(address,uint16,uint128)"(
+    "SignatureProcessed(address,uint256,uint128)"(
       receiver?: string | null,
       roundID?: BigNumberish | null,
       count?: null
@@ -364,8 +358,6 @@ export interface GenesisAllocation extends BaseContract {
     claimedSig(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BytesLike,
-      arg3: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -410,8 +402,6 @@ export interface GenesisAllocation extends BaseContract {
     claimedSig(
       arg0: string,
       arg1: BigNumberish,
-      arg2: BytesLike,
-      arg3: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
