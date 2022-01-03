@@ -307,14 +307,8 @@ var _abi = [
         type: "function",
     },
     {
-        inputs: [
-            {
-                internalType: "address",
-                name: "voter",
-                type: "address",
-            },
-        ],
-        name: "getProposalsInfo",
+        inputs: [],
+        name: "getProposals",
         outputs: [
             {
                 components: [
@@ -398,6 +392,32 @@ var _abi = [
                         name: "state",
                         type: "uint8",
                     },
+                ],
+                internalType: "struct GovernorAlphaWithVotingRewards.ProposalInfo[]",
+                name: "proposalsInfo",
+                type: "tuple[]",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+    },
+    {
+        inputs: [
+            {
+                internalType: "address",
+                name: "voter",
+                type: "address",
+            },
+        ],
+        name: "getProposalsVoterInfo",
+        outputs: [
+            {
+                components: [
+                    {
+                        internalType: "uint48",
+                        name: "id",
+                        type: "uint48",
+                    },
                     {
                         components: [
                             {
@@ -436,8 +456,8 @@ var _abi = [
                         type: "uint256",
                     },
                 ],
-                internalType: "struct GovernorAlphaWithVotingRewards.ProposalInfo[]",
-                name: "proposalsInfo",
+                internalType: "struct GovernorAlphaWithVotingRewards.ProposalVoterInfo[]",
+                name: "proposalsVoterInfo",
                 type: "tuple[]",
             },
         ],
