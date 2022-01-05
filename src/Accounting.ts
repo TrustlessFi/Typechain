@@ -171,7 +171,6 @@ export type UserInterfaceStructOutput = [
 
 export interface AccountingInterface extends utils.Interface {
   functions: {
-    "TICK_SPACING()": FunctionFragment;
     "addPositionToIndex(address,uint256)": FunctionFragment;
     "approveUIs(uint32[])": FunctionFragment;
     "debt()": FunctionFragment;
@@ -190,7 +189,6 @@ export interface AccountingInterface extends utils.Interface {
     "getTick(uint256,uint256)": FunctionFragment;
     "getUIs(uint32,uint32)": FunctionFragment;
     "governor()": FunctionFragment;
-    "hue()": FunctionFragment;
     "increaseDebt(uint256)": FunctionFragment;
     "increaseLentHue(uint256)": FunctionFragment;
     "increasePoolLiquidity(address,uint256)": FunctionFragment;
@@ -198,7 +196,6 @@ export interface AccountingInterface extends utils.Interface {
     "initializeUI(uint32,string)": FunctionFragment;
     "lentHue()": FunctionFragment;
     "nextUserInterfaceID()": FunctionFragment;
-    "nftPositionManager()": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "onRewardsUpgrade(address)": FunctionFragment;
     "poolLiquidity(address)": FunctionFragment;
@@ -220,10 +217,6 @@ export interface AccountingInterface extends utils.Interface {
     "validUpdate(bytes4)": FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "TICK_SPACING",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "addPositionToIndex",
     values: [string, BigNumberish]
@@ -287,7 +280,6 @@ export interface AccountingInterface extends utils.Interface {
     values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "governor", values?: undefined): string;
-  encodeFunctionData(functionFragment: "hue", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "increaseDebt",
     values: [BigNumberish]
@@ -308,10 +300,6 @@ export interface AccountingInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "lentHue", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "nextUserInterfaceID",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "nftPositionManager",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -386,10 +374,6 @@ export interface AccountingInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "TICK_SPACING",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "addPositionToIndex",
     data: BytesLike
   ): Result;
@@ -443,7 +427,6 @@ export interface AccountingInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "getTick", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getUIs", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "hue", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "increaseDebt",
     data: BytesLike
@@ -464,10 +447,6 @@ export interface AccountingInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "lentHue", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nextUserInterfaceID",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "nftPositionManager",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -629,8 +608,6 @@ export interface Accounting extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    TICK_SPACING(overrides?: CallOverrides): Promise<[number]>;
-
     addPositionToIndex(
       owner: string,
       nftID: BigNumberish,
@@ -719,8 +696,6 @@ export interface Accounting extends BaseContract {
 
     governor(overrides?: CallOverrides): Promise<[string]>;
 
-    hue(overrides?: CallOverrides): Promise<[string]>;
-
     increaseDebt(
       count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -750,8 +725,6 @@ export interface Accounting extends BaseContract {
     lentHue(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     nextUserInterfaceID(overrides?: CallOverrides): Promise<[number]>;
-
-    nftPositionManager(overrides?: CallOverrides): Promise<[string]>;
 
     onERC721Received(
       arg0: string,
@@ -855,8 +828,6 @@ export interface Accounting extends BaseContract {
     validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
   };
 
-  TICK_SPACING(overrides?: CallOverrides): Promise<number>;
-
   addPositionToIndex(
     owner: string,
     nftID: BigNumberish,
@@ -943,8 +914,6 @@ export interface Accounting extends BaseContract {
 
   governor(overrides?: CallOverrides): Promise<string>;
 
-  hue(overrides?: CallOverrides): Promise<string>;
-
   increaseDebt(
     count: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -974,8 +943,6 @@ export interface Accounting extends BaseContract {
   lentHue(overrides?: CallOverrides): Promise<BigNumber>;
 
   nextUserInterfaceID(overrides?: CallOverrides): Promise<number>;
-
-  nftPositionManager(overrides?: CallOverrides): Promise<string>;
 
   onERC721Received(
     arg0: string,
@@ -1076,8 +1043,6 @@ export interface Accounting extends BaseContract {
   validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
   callStatic: {
-    TICK_SPACING(overrides?: CallOverrides): Promise<number>;
-
     addPositionToIndex(
       owner: string,
       nftID: BigNumberish,
@@ -1158,8 +1123,6 @@ export interface Accounting extends BaseContract {
 
     governor(overrides?: CallOverrides): Promise<string>;
 
-    hue(overrides?: CallOverrides): Promise<string>;
-
     increaseDebt(count: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     increaseLentHue(
@@ -1184,8 +1147,6 @@ export interface Accounting extends BaseContract {
     lentHue(overrides?: CallOverrides): Promise<BigNumber>;
 
     nextUserInterfaceID(overrides?: CallOverrides): Promise<number>;
-
-    nftPositionManager(overrides?: CallOverrides): Promise<string>;
 
     onERC721Received(
       arg0: string,
@@ -1322,8 +1283,6 @@ export interface Accounting extends BaseContract {
   };
 
   estimateGas: {
-    TICK_SPACING(overrides?: CallOverrides): Promise<BigNumber>;
-
     addPositionToIndex(
       owner: string,
       nftID: BigNumberish,
@@ -1403,8 +1362,6 @@ export interface Accounting extends BaseContract {
 
     governor(overrides?: CallOverrides): Promise<BigNumber>;
 
-    hue(overrides?: CallOverrides): Promise<BigNumber>;
-
     increaseDebt(
       count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1434,8 +1391,6 @@ export interface Accounting extends BaseContract {
     lentHue(overrides?: CallOverrides): Promise<BigNumber>;
 
     nextUserInterfaceID(overrides?: CallOverrides): Promise<BigNumber>;
-
-    nftPositionManager(overrides?: CallOverrides): Promise<BigNumber>;
 
     onERC721Received(
       arg0: string,
@@ -1529,8 +1484,6 @@ export interface Accounting extends BaseContract {
   };
 
   populateTransaction: {
-    TICK_SPACING(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     addPositionToIndex(
       owner: string,
       nftID: BigNumberish,
@@ -1612,8 +1565,6 @@ export interface Accounting extends BaseContract {
 
     governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    hue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     increaseDebt(
       count: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1643,10 +1594,6 @@ export interface Accounting extends BaseContract {
     lentHue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nextUserInterfaceID(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    nftPositionManager(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
