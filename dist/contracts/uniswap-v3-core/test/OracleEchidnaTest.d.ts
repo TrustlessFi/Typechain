@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface OracleEchidnaTestInterface extends utils.Interface {
     functions: {
         "advanceTime(uint32)": FunctionFragment;
@@ -16,16 +16,24 @@ export interface OracleEchidnaTestInterface extends utils.Interface {
         "update(uint32,int24,uint128)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "advanceTime" | "checkTimeWeightedAveragesAlwaysFitsType" | "checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0" | "echidna_AlwaysInitialized" | "echidna_canAlwaysObserve0IfInitialized" | "echidna_cardinalityAlwaysLteNext" | "echidna_indexAlwaysLtCardinality" | "grow" | "initialize" | "update"): FunctionFragment;
-    encodeFunctionData(functionFragment: "advanceTime", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "checkTimeWeightedAveragesAlwaysFitsType", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "advanceTime", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "checkTimeWeightedAveragesAlwaysFitsType", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "echidna_AlwaysInitialized", values?: undefined): string;
     encodeFunctionData(functionFragment: "echidna_canAlwaysObserve0IfInitialized", values?: undefined): string;
     encodeFunctionData(functionFragment: "echidna_cardinalityAlwaysLteNext", values?: undefined): string;
     encodeFunctionData(functionFragment: "echidna_indexAlwaysLtCardinality", values?: undefined): string;
-    encodeFunctionData(functionFragment: "grow", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "initialize", values: [BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "update", values: [BigNumberish, BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "grow", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "initialize", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "update", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     decodeFunctionResult(functionFragment: "advanceTime", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "checkTimeWeightedAveragesAlwaysFitsType", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0", data: BytesLike): Result;
@@ -53,94 +61,94 @@ export interface OracleEchidnaTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        advanceTime(by: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        advanceTime(by: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        checkTimeWeightedAveragesAlwaysFitsType(secondsAgo: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0(index: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
+        checkTimeWeightedAveragesAlwaysFitsType(secondsAgo: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0(index: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
         echidna_AlwaysInitialized(overrides?: CallOverrides): Promise<[boolean]>;
         echidna_canAlwaysObserve0IfInitialized(overrides?: CallOverrides): Promise<[boolean]>;
         echidna_cardinalityAlwaysLteNext(overrides?: CallOverrides): Promise<[boolean]>;
         echidna_indexAlwaysLtCardinality(overrides?: CallOverrides): Promise<[boolean]>;
-        grow(cardinality: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        grow(cardinality: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        initialize(time: BigNumberish, tick: BigNumberish, liquidity: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        initialize(time: PromiseOrValue<BigNumberish>, tick: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        update(advanceTimeBy: BigNumberish, tick: BigNumberish, liquidity: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        update(advanceTimeBy: PromiseOrValue<BigNumberish>, tick: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    advanceTime(by: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    advanceTime(by: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    checkTimeWeightedAveragesAlwaysFitsType(secondsAgo: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0(index: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    checkTimeWeightedAveragesAlwaysFitsType(secondsAgo: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0(index: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     echidna_AlwaysInitialized(overrides?: CallOverrides): Promise<boolean>;
     echidna_canAlwaysObserve0IfInitialized(overrides?: CallOverrides): Promise<boolean>;
     echidna_cardinalityAlwaysLteNext(overrides?: CallOverrides): Promise<boolean>;
     echidna_indexAlwaysLtCardinality(overrides?: CallOverrides): Promise<boolean>;
-    grow(cardinality: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    grow(cardinality: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    initialize(time: BigNumberish, tick: BigNumberish, liquidity: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    initialize(time: PromiseOrValue<BigNumberish>, tick: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    update(advanceTimeBy: BigNumberish, tick: BigNumberish, liquidity: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    update(advanceTimeBy: PromiseOrValue<BigNumberish>, tick: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        advanceTime(by: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        checkTimeWeightedAveragesAlwaysFitsType(secondsAgo: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0(index: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        advanceTime(by: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        checkTimeWeightedAveragesAlwaysFitsType(secondsAgo: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0(index: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         echidna_AlwaysInitialized(overrides?: CallOverrides): Promise<boolean>;
         echidna_canAlwaysObserve0IfInitialized(overrides?: CallOverrides): Promise<boolean>;
         echidna_cardinalityAlwaysLteNext(overrides?: CallOverrides): Promise<boolean>;
         echidna_indexAlwaysLtCardinality(overrides?: CallOverrides): Promise<boolean>;
-        grow(cardinality: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        initialize(time: BigNumberish, tick: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        update(advanceTimeBy: BigNumberish, tick: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        grow(cardinality: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        initialize(time: PromiseOrValue<BigNumberish>, tick: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        update(advanceTimeBy: PromiseOrValue<BigNumberish>, tick: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        advanceTime(by: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        advanceTime(by: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        checkTimeWeightedAveragesAlwaysFitsType(secondsAgo: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        checkTimeWeightedAveragesAlwaysFitsType(secondsAgo: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0(index: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         echidna_AlwaysInitialized(overrides?: CallOverrides): Promise<BigNumber>;
         echidna_canAlwaysObserve0IfInitialized(overrides?: CallOverrides): Promise<BigNumber>;
         echidna_cardinalityAlwaysLteNext(overrides?: CallOverrides): Promise<BigNumber>;
         echidna_indexAlwaysLtCardinality(overrides?: CallOverrides): Promise<BigNumber>;
-        grow(cardinality: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        grow(cardinality: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        initialize(time: BigNumberish, tick: BigNumberish, liquidity: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        initialize(time: PromiseOrValue<BigNumberish>, tick: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        update(advanceTimeBy: BigNumberish, tick: BigNumberish, liquidity: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        update(advanceTimeBy: PromiseOrValue<BigNumberish>, tick: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        advanceTime(by: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        advanceTime(by: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        checkTimeWeightedAveragesAlwaysFitsType(secondsAgo: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0(index: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkTimeWeightedAveragesAlwaysFitsType(secondsAgo: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkTwoAdjacentObservationsTickCumulativeModTimeElapsedAlways0(index: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         echidna_AlwaysInitialized(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         echidna_canAlwaysObserve0IfInitialized(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         echidna_cardinalityAlwaysLteNext(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         echidna_indexAlwaysLtCardinality(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        grow(cardinality: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        grow(cardinality: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        initialize(time: BigNumberish, tick: BigNumberish, liquidity: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        initialize(time: PromiseOrValue<BigNumberish>, tick: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        update(advanceTimeBy: BigNumberish, tick: BigNumberish, liquidity: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        update(advanceTimeBy: PromiseOrValue<BigNumberish>, tick: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

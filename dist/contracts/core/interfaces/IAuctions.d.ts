@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface IAuctionsInterface extends utils.Interface {
     functions: {
         "latestAuctionCompletionTime()": FunctionFragment;
@@ -205,24 +205,24 @@ export interface IAuctions extends BaseContract {
     functions: {
         latestAuctionCompletionTime(overrides?: CallOverrides): Promise<[BigNumber]>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     latestAuctionCompletionTime(overrides?: CallOverrides): Promise<BigNumber>;
     stop(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         latestAuctionCompletionTime(overrides?: CallOverrides): Promise<BigNumber>;
         stop(overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "DeficitAuctionBid(uint64,address,uint256)"(auctionID?: BigNumberish | null, bidder?: string | null, bid?: null): DeficitAuctionBidEventFilter;
-        DeficitAuctionBid(auctionID?: BigNumberish | null, bidder?: string | null, bid?: null): DeficitAuctionBidEventFilter;
-        "DeficitAuctionSettled(uint64,address)"(auctionID?: BigNumberish | null, winner?: string | null): DeficitAuctionSettledEventFilter;
-        DeficitAuctionSettled(auctionID?: BigNumberish | null, winner?: string | null): DeficitAuctionSettledEventFilter;
-        "DeficitAuctionStarted(uint64,uint256,uint64)"(auctionID?: BigNumberish | null, count?: BigNumberish | null, maxEndTime?: null): DeficitAuctionStartedEventFilter;
-        DeficitAuctionStarted(auctionID?: BigNumberish | null, count?: BigNumberish | null, maxEndTime?: null): DeficitAuctionStartedEventFilter;
+        "DeficitAuctionBid(uint64,address,uint256)"(auctionID?: PromiseOrValue<BigNumberish> | null, bidder?: PromiseOrValue<string> | null, bid?: null): DeficitAuctionBidEventFilter;
+        DeficitAuctionBid(auctionID?: PromiseOrValue<BigNumberish> | null, bidder?: PromiseOrValue<string> | null, bid?: null): DeficitAuctionBidEventFilter;
+        "DeficitAuctionSettled(uint64,address)"(auctionID?: PromiseOrValue<BigNumberish> | null, winner?: PromiseOrValue<string> | null): DeficitAuctionSettledEventFilter;
+        DeficitAuctionSettled(auctionID?: PromiseOrValue<BigNumberish> | null, winner?: PromiseOrValue<string> | null): DeficitAuctionSettledEventFilter;
+        "DeficitAuctionStarted(uint64,uint256,uint64)"(auctionID?: PromiseOrValue<BigNumberish> | null, count?: PromiseOrValue<BigNumberish> | null, maxEndTime?: null): DeficitAuctionStartedEventFilter;
+        DeficitAuctionStarted(auctionID?: PromiseOrValue<BigNumberish> | null, count?: PromiseOrValue<BigNumberish> | null, maxEndTime?: null): DeficitAuctionStartedEventFilter;
         "ExtensionPerBidUpdated(uint64)"(extension?: null): ExtensionPerBidUpdatedEventFilter;
         ExtensionPerBidUpdated(extension?: null): ExtensionPerBidUpdatedEventFilter;
         "MaxAuctionDurationUpdated(uint64)"(duration?: null): MaxAuctionDurationUpdatedEventFilter;
@@ -241,12 +241,12 @@ export interface IAuctions extends BaseContract {
         ReservesBufferLowerBoundUpdated(bound?: null): ReservesBufferLowerBoundUpdatedEventFilter;
         "ReservesBufferUpperBoundUpdated(uint256)"(bound?: null): ReservesBufferUpperBoundUpdatedEventFilter;
         ReservesBufferUpperBoundUpdated(bound?: null): ReservesBufferUpperBoundUpdatedEventFilter;
-        "SurplusAuctionBid(uint64,address,uint256)"(auctionID?: BigNumberish | null, bidder?: string | null, bid?: null): SurplusAuctionBidEventFilter;
-        SurplusAuctionBid(auctionID?: BigNumberish | null, bidder?: string | null, bid?: null): SurplusAuctionBidEventFilter;
-        "SurplusAuctionSettled(uint64,address)"(auctionID?: BigNumberish | null, winner?: string | null): SurplusAuctionSettledEventFilter;
-        SurplusAuctionSettled(auctionID?: BigNumberish | null, winner?: string | null): SurplusAuctionSettledEventFilter;
-        "SurplusAuctionStarted(uint64,uint256,uint64)"(auctionID?: BigNumberish | null, count?: BigNumberish | null, maxEndTime?: null): SurplusAuctionStartedEventFilter;
-        SurplusAuctionStarted(auctionID?: BigNumberish | null, count?: BigNumberish | null, maxEndTime?: null): SurplusAuctionStartedEventFilter;
+        "SurplusAuctionBid(uint64,address,uint256)"(auctionID?: PromiseOrValue<BigNumberish> | null, bidder?: PromiseOrValue<string> | null, bid?: null): SurplusAuctionBidEventFilter;
+        SurplusAuctionBid(auctionID?: PromiseOrValue<BigNumberish> | null, bidder?: PromiseOrValue<string> | null, bid?: null): SurplusAuctionBidEventFilter;
+        "SurplusAuctionSettled(uint64,address)"(auctionID?: PromiseOrValue<BigNumberish> | null, winner?: PromiseOrValue<string> | null): SurplusAuctionSettledEventFilter;
+        SurplusAuctionSettled(auctionID?: PromiseOrValue<BigNumberish> | null, winner?: PromiseOrValue<string> | null): SurplusAuctionSettledEventFilter;
+        "SurplusAuctionStarted(uint64,uint256,uint64)"(auctionID?: PromiseOrValue<BigNumberish> | null, count?: PromiseOrValue<BigNumberish> | null, maxEndTime?: null): SurplusAuctionStartedEventFilter;
+        SurplusAuctionStarted(auctionID?: PromiseOrValue<BigNumberish> | null, count?: PromiseOrValue<BigNumberish> | null, maxEndTime?: null): SurplusAuctionStartedEventFilter;
         "TwapDurationUpdated(uint32)"(duration?: null): TwapDurationUpdatedEventFilter;
         TwapDurationUpdated(duration?: null): TwapDurationUpdatedEventFilter;
         "maxDeficitLotSizeUpdated(uint256)"(size?: null): maxDeficitLotSizeUpdatedEventFilter;
@@ -255,13 +255,13 @@ export interface IAuctions extends BaseContract {
     estimateGas: {
         latestAuctionCompletionTime(overrides?: CallOverrides): Promise<BigNumber>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         latestAuctionCompletionTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

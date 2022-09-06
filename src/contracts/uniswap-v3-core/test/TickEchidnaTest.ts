@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface TickEchidnaTestInterface extends utils.Interface {
@@ -31,7 +32,7 @@ export interface TickEchidnaTestInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "checkTickSpacingToParametersInvariants",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -70,19 +71,19 @@ export interface TickEchidnaTest extends BaseContract {
 
   functions: {
     checkTickSpacingToParametersInvariants(
-      tickSpacing: BigNumberish,
+      tickSpacing: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[void]>;
   };
 
   checkTickSpacingToParametersInvariants(
-    tickSpacing: BigNumberish,
+    tickSpacing: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   callStatic: {
     checkTickSpacingToParametersInvariants(
-      tickSpacing: BigNumberish,
+      tickSpacing: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -91,14 +92,14 @@ export interface TickEchidnaTest extends BaseContract {
 
   estimateGas: {
     checkTickSpacingToParametersInvariants(
-      tickSpacing: BigNumberish,
+      tickSpacing: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     checkTickSpacingToParametersInvariants(
-      tickSpacing: BigNumberish,
+      tickSpacing: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

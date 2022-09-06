@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface PeripheryPaymentsInterface extends utils.Interface {
@@ -45,11 +46,15 @@ export interface PeripheryPaymentsInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "refundETH", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "sweepToken",
-    values: [string, BigNumberish, string]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "unwrapWETH9",
-    values: [BigNumberish, string]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
 
   decodeFunctionResult(functionFragment: "WETH9", data: BytesLike): Result;
@@ -96,20 +101,20 @@ export interface PeripheryPayments extends BaseContract {
     factory(overrides?: CallOverrides): Promise<[string]>;
 
     refundETH(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     sweepToken(
-      token: string,
-      amountMinimum: BigNumberish,
-      recipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     unwrapWETH9(
-      amountMinimum: BigNumberish,
-      recipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
@@ -118,20 +123,20 @@ export interface PeripheryPayments extends BaseContract {
   factory(overrides?: CallOverrides): Promise<string>;
 
   refundETH(
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   sweepToken(
-    token: string,
-    amountMinimum: BigNumberish,
-    recipient: string,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    amountMinimum: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   unwrapWETH9(
-    amountMinimum: BigNumberish,
-    recipient: string,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    amountMinimum: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -142,15 +147,15 @@ export interface PeripheryPayments extends BaseContract {
     refundETH(overrides?: CallOverrides): Promise<void>;
 
     sweepToken(
-      token: string,
-      amountMinimum: BigNumberish,
-      recipient: string,
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     unwrapWETH9(
-      amountMinimum: BigNumberish,
-      recipient: string,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -163,20 +168,20 @@ export interface PeripheryPayments extends BaseContract {
     factory(overrides?: CallOverrides): Promise<BigNumber>;
 
     refundETH(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     sweepToken(
-      token: string,
-      amountMinimum: BigNumberish,
-      recipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     unwrapWETH9(
-      amountMinimum: BigNumberish,
-      recipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -186,20 +191,20 @@ export interface PeripheryPayments extends BaseContract {
     factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     refundETH(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     sweepToken(
-      token: string,
-      amountMinimum: BigNumberish,
-      recipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     unwrapWETH9(
-      amountMinimum: BigNumberish,
-      recipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

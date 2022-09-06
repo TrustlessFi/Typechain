@@ -24,23 +24,24 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export declare namespace IAccounting {
   export type DebtPositionStruct = {
-    startCumulativeDebt: BigNumberish;
-    collateral: BigNumberish;
-    debt: BigNumberish;
-    startDebtExchangeRate: BigNumberish;
-    startTCPRewards: BigNumberish;
-    lastTimeUpdated: BigNumberish;
-    lastBlockPositionIncreased: BigNumberish;
-    tick: BigNumberish;
-    tickSet: boolean;
-    tickIndex: BigNumberish;
-    ui: BigNumberish;
-    kickbackDestination: string;
-    kickbackPortion: BigNumberish;
+    startCumulativeDebt: PromiseOrValue<BigNumberish>;
+    collateral: PromiseOrValue<BigNumberish>;
+    debt: PromiseOrValue<BigNumberish>;
+    startDebtExchangeRate: PromiseOrValue<BigNumberish>;
+    startTCPRewards: PromiseOrValue<BigNumberish>;
+    lastTimeUpdated: PromiseOrValue<BigNumberish>;
+    lastBlockPositionIncreased: PromiseOrValue<BigNumberish>;
+    tick: PromiseOrValue<BigNumberish>;
+    tickSet: PromiseOrValue<boolean>;
+    tickIndex: PromiseOrValue<BigNumberish>;
+    ui: PromiseOrValue<BigNumberish>;
+    kickbackDestination: PromiseOrValue<string>;
+    kickbackPortion: PromiseOrValue<BigNumberish>;
   };
 
   export type DebtPositionStructOutput = [
@@ -107,7 +108,7 @@ export interface IMarketInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "stop", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "systemGetUpdatedPosition",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -325,7 +326,7 @@ export interface IMarket extends BaseContract {
 
   functions: {
     accrueInterest(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     collateralizationRequirement(
@@ -337,17 +338,17 @@ export interface IMarket extends BaseContract {
     ): Promise<[BigNumber] & { period: BigNumber }>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     systemGetUpdatedPosition(
-      positionID: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      positionID: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   accrueInterest(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   collateralizationRequirement(overrides?: CallOverrides): Promise<BigNumber>;
@@ -357,12 +358,12 @@ export interface IMarket extends BaseContract {
   ): Promise<BigNumber>;
 
   stop(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   systemGetUpdatedPosition(
-    positionID: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    positionID: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -377,7 +378,7 @@ export interface IMarket extends BaseContract {
     stop(overrides?: CallOverrides): Promise<void>;
 
     systemGetUpdatedPosition(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<IAccounting.DebtPositionStructOutput>;
   };
@@ -391,7 +392,7 @@ export interface IMarket extends BaseContract {
     ): CollateralizationRequirementUpdatedEventFilter;
 
     "InterestAccrued(uint64,uint64,uint256,uint256,uint256,uint256)"(
-      period?: BigNumberish | null,
+      period?: PromiseOrValue<BigNumberish> | null,
       periods?: null,
       newDebt?: null,
       rewardCount?: null,
@@ -399,7 +400,7 @@ export interface IMarket extends BaseContract {
       debtExchangeRate?: null
     ): InterestAccruedEventFilter;
     InterestAccrued(
-      period?: BigNumberish | null,
+      period?: PromiseOrValue<BigNumberish> | null,
       periods?: null,
       newDebt?: null,
       rewardCount?: null,
@@ -415,12 +416,12 @@ export interface IMarket extends BaseContract {
     ): InterestPortionToLendersUpdatedEventFilter;
 
     "Lend(address,uint256,uint256)"(
-      account?: string | null,
+      account?: PromiseOrValue<string> | null,
       hueCount?: null,
       lendTokenCount?: null
     ): LendEventFilter;
     Lend(
-      account?: string | null,
+      account?: PromiseOrValue<string> | null,
       hueCount?: null,
       lendTokenCount?: null
     ): LendEventFilter;
@@ -431,7 +432,7 @@ export interface IMarket extends BaseContract {
     MinPositionSizeUpdated(size?: null): MinPositionSizeUpdatedEventFilter;
 
     "PositionAdjusted(uint64,uint256,uint256,uint256,uint256,uint256,uint256)"(
-      positionID?: BigNumberish | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
       debtIncrease?: null,
       debtDecrease?: null,
       collateralIncrease?: null,
@@ -440,7 +441,7 @@ export interface IMarket extends BaseContract {
       newCollateral?: null
     ): PositionAdjustedEventFilter;
     PositionAdjusted(
-      positionID?: BigNumberish | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
       debtIncrease?: null,
       debtDecrease?: null,
       collateralIncrease?: null,
@@ -450,37 +451,37 @@ export interface IMarket extends BaseContract {
     ): PositionAdjustedEventFilter;
 
     "PositionCreated(address,uint64,uint256)"(
-      creator?: string | null,
-      positionID?: BigNumberish | null,
+      creator?: PromiseOrValue<string> | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
       initialDebt?: null
     ): PositionCreatedEventFilter;
     PositionCreated(
-      creator?: string | null,
-      positionID?: BigNumberish | null,
+      creator?: PromiseOrValue<string> | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
       initialDebt?: null
     ): PositionCreatedEventFilter;
 
     "PositionUpdated(uint256,uint64,uint256,uint256)"(
-      positionID?: BigNumberish | null,
-      period?: BigNumberish | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
+      period?: PromiseOrValue<BigNumberish> | null,
       debtAfter?: null,
       tcpRewards?: null
     ): PositionUpdatedEventFilter;
     PositionUpdated(
-      positionID?: BigNumberish | null,
-      period?: BigNumberish | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
+      period?: PromiseOrValue<BigNumberish> | null,
       debtAfter?: null,
       tcpRewards?: null
     ): PositionUpdatedEventFilter;
 
     "RewardsDistributed(address,bool,uint256)"(
-      account?: string | null,
-      isKickback?: boolean | null,
+      account?: PromiseOrValue<string> | null,
+      isKickback?: PromiseOrValue<boolean> | null,
       tcpRewards?: null
     ): RewardsDistributedEventFilter;
     RewardsDistributed(
-      account?: string | null,
-      isKickback?: boolean | null,
+      account?: PromiseOrValue<string> | null,
+      isKickback?: PromiseOrValue<boolean> | null,
       tcpRewards?: null
     ): RewardsDistributedEventFilter;
 
@@ -490,12 +491,12 @@ export interface IMarket extends BaseContract {
     TwapDurationUpdated(duration?: null): TwapDurationUpdatedEventFilter;
 
     "Unlend(address,uint256,uint256)"(
-      account?: string | null,
+      account?: PromiseOrValue<string> | null,
       hueCount?: null,
       lendTokenCount?: null
     ): UnlendEventFilter;
     Unlend(
-      account?: string | null,
+      account?: PromiseOrValue<string> | null,
       hueCount?: null,
       lendTokenCount?: null
     ): UnlendEventFilter;
@@ -503,7 +504,7 @@ export interface IMarket extends BaseContract {
 
   estimateGas: {
     accrueInterest(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     collateralizationRequirement(overrides?: CallOverrides): Promise<BigNumber>;
@@ -513,18 +514,18 @@ export interface IMarket extends BaseContract {
     ): Promise<BigNumber>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     systemGetUpdatedPosition(
-      positionID: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      positionID: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     accrueInterest(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     collateralizationRequirement(
@@ -536,12 +537,12 @@ export interface IMarket extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     systemGetUpdatedPosition(
-      positionID: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      positionID: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

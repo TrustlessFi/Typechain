@@ -1,13 +1,17 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export interface IUniswapV3FlashCallbackInterface extends utils.Interface {
     functions: {
         "uniswapV3FlashCallback(uint256,uint256,bytes)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "uniswapV3FlashCallback"): FunctionFragment;
-    encodeFunctionData(functionFragment: "uniswapV3FlashCallback", values: [BigNumberish, BigNumberish, BytesLike]): string;
+    encodeFunctionData(functionFragment: "uniswapV3FlashCallback", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
     decodeFunctionResult(functionFragment: "uniswapV3FlashCallback", data: BytesLike): Result;
     events: {};
 }
@@ -26,25 +30,25 @@ export interface IUniswapV3FlashCallback extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        uniswapV3FlashCallback(fee0: BigNumberish, fee1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3FlashCallback(fee0: PromiseOrValue<BigNumberish>, fee1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    uniswapV3FlashCallback(fee0: BigNumberish, fee1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    uniswapV3FlashCallback(fee0: PromiseOrValue<BigNumberish>, fee1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        uniswapV3FlashCallback(fee0: BigNumberish, fee1: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<void>;
+        uniswapV3FlashCallback(fee0: PromiseOrValue<BigNumberish>, fee1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        uniswapV3FlashCallback(fee0: BigNumberish, fee1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3FlashCallback(fee0: PromiseOrValue<BigNumberish>, fee1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        uniswapV3FlashCallback(fee0: BigNumberish, fee1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3FlashCallback(fee0: PromiseOrValue<BigNumberish>, fee1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

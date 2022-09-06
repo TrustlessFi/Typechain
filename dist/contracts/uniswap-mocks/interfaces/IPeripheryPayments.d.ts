@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface IPeripheryPaymentsInterface extends utils.Interface {
     functions: {
         "refundETH()": FunctionFragment;
@@ -10,8 +10,12 @@ export interface IPeripheryPaymentsInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "refundETH" | "sweepToken" | "unwrapWETH9"): FunctionFragment;
     encodeFunctionData(functionFragment: "refundETH", values?: undefined): string;
-    encodeFunctionData(functionFragment: "sweepToken", values: [string, BigNumberish, string]): string;
-    encodeFunctionData(functionFragment: "unwrapWETH9", values: [BigNumberish, string]): string;
+    encodeFunctionData(functionFragment: "sweepToken", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>
+    ]): string;
+    encodeFunctionData(functionFragment: "unwrapWETH9", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]): string;
     decodeFunctionResult(functionFragment: "refundETH", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "sweepToken", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "unwrapWETH9", data: BytesLike): Result;
@@ -33,50 +37,50 @@ export interface IPeripheryPayments extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         refundETH(overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        sweepToken(token: string, amountMinimum: BigNumberish, recipient: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        sweepToken(token: PromiseOrValue<string>, amountMinimum: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        unwrapWETH9(amountMinimum: BigNumberish, recipient: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        unwrapWETH9(amountMinimum: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     refundETH(overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    sweepToken(token: string, amountMinimum: BigNumberish, recipient: string, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+    sweepToken(token: PromiseOrValue<string>, amountMinimum: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    unwrapWETH9(amountMinimum: BigNumberish, recipient: string, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+    unwrapWETH9(amountMinimum: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         refundETH(overrides?: CallOverrides): Promise<void>;
-        sweepToken(token: string, amountMinimum: BigNumberish, recipient: string, overrides?: CallOverrides): Promise<void>;
-        unwrapWETH9(amountMinimum: BigNumberish, recipient: string, overrides?: CallOverrides): Promise<void>;
+        sweepToken(token: PromiseOrValue<string>, amountMinimum: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        unwrapWETH9(amountMinimum: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
         refundETH(overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        sweepToken(token: string, amountMinimum: BigNumberish, recipient: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        sweepToken(token: PromiseOrValue<string>, amountMinimum: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        unwrapWETH9(amountMinimum: BigNumberish, recipient: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        unwrapWETH9(amountMinimum: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         refundETH(overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        sweepToken(token: string, amountMinimum: BigNumberish, recipient: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        sweepToken(token: PromiseOrValue<string>, amountMinimum: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        unwrapWETH9(amountMinimum: BigNumberish, recipient: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        unwrapWETH9(amountMinimum: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

@@ -1,16 +1,16 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export declare namespace IMarket {
     type ConstructorParamsStruct = {
-        Governor: string;
-        ProtocolLock: string;
-        HuePositionNFT: string;
-        Hue: string;
-        LendHue: string;
-        Accounting: string;
-        TruEth: string;
+        Governor: PromiseOrValue<string>;
+        ProtocolLock: PromiseOrValue<string>;
+        HuePositionNFT: PromiseOrValue<string>;
+        Hue: PromiseOrValue<string>;
+        LendHue: PromiseOrValue<string>;
+        Accounting: PromiseOrValue<string>;
+        TruEth: PromiseOrValue<string>;
     };
     type ConstructorParamsStructOutput = [
         string,
@@ -30,11 +30,11 @@ export declare namespace IMarket {
         TruEth: string;
     };
     type CalculatedInterestInfoStruct = {
-        newDebt: BigNumberish;
-        newExchangeRate: BigNumberish;
-        additionalReserves: BigNumberish;
-        additionalLends: BigNumberish;
-        reducedReserves: BigNumberish;
+        newDebt: PromiseOrValue<BigNumberish>;
+        newExchangeRate: PromiseOrValue<BigNumberish>;
+        additionalReserves: PromiseOrValue<BigNumberish>;
+        additionalLends: PromiseOrValue<BigNumberish>;
+        reducedReserves: PromiseOrValue<BigNumberish>;
     };
     type CalculatedInterestInfoStructOutput = [
         BigNumber,
@@ -52,10 +52,10 @@ export declare namespace IMarket {
 }
 export declare namespace IAccounting {
     type SystemDebtInfoStruct = {
-        debt: BigNumberish;
-        totalTCPRewards: BigNumberish;
-        cumulativeDebt: BigNumberish;
-        debtExchangeRate: BigNumberish;
+        debt: PromiseOrValue<BigNumberish>;
+        totalTCPRewards: PromiseOrValue<BigNumberish>;
+        cumulativeDebt: PromiseOrValue<BigNumberish>;
+        debtExchangeRate: PromiseOrValue<BigNumberish>;
     };
     type SystemDebtInfoStructOutput = [
         BigNumber,
@@ -69,19 +69,19 @@ export declare namespace IAccounting {
         debtExchangeRate: BigNumber;
     };
     type DebtPositionStruct = {
-        startCumulativeDebt: BigNumberish;
-        collateral: BigNumberish;
-        debt: BigNumberish;
-        startDebtExchangeRate: BigNumberish;
-        startTCPRewards: BigNumberish;
-        lastTimeUpdated: BigNumberish;
-        lastBlockPositionIncreased: BigNumberish;
-        tick: BigNumberish;
-        tickSet: boolean;
-        tickIndex: BigNumberish;
-        ui: BigNumberish;
-        kickbackDestination: string;
-        kickbackPortion: BigNumberish;
+        startCumulativeDebt: PromiseOrValue<BigNumberish>;
+        collateral: PromiseOrValue<BigNumberish>;
+        debt: PromiseOrValue<BigNumberish>;
+        startDebtExchangeRate: PromiseOrValue<BigNumberish>;
+        startTCPRewards: PromiseOrValue<BigNumberish>;
+        lastTimeUpdated: PromiseOrValue<BigNumberish>;
+        lastBlockPositionIncreased: PromiseOrValue<BigNumberish>;
+        tick: PromiseOrValue<BigNumberish>;
+        tickSet: PromiseOrValue<boolean>;
+        tickIndex: PromiseOrValue<BigNumberish>;
+        ui: PromiseOrValue<BigNumberish>;
+        kickbackDestination: PromiseOrValue<string>;
+        kickbackPortion: PromiseOrValue<BigNumberish>;
     };
     type DebtPositionStructOutput = [
         BigNumber,
@@ -154,23 +154,27 @@ export interface MarketTestableInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "accounting", values?: undefined): string;
     encodeFunctionData(functionFragment: "accrueInterest", values?: undefined): string;
     encodeFunctionData(functionFragment: "adjustPosition", values: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
     ]): string;
     encodeFunctionData(functionFragment: "calculateInterest", values: [
         IAccounting.SystemDebtInfoStruct,
-        BigNumberish,
-        BigNumberish,
-        boolean,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
     ]): string;
-    encodeFunctionData(functionFragment: "claimAllRewards", values: [BigNumberish[], BigNumberish]): string;
+    encodeFunctionData(functionFragment: "claimAllRewards", values: [PromiseOrValue<BigNumberish>[], PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "collateralizationRequirement", values?: undefined): string;
-    encodeFunctionData(functionFragment: "createPosition", values: [BigNumberish, BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "createPosition", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     encodeFunctionData(functionFragment: "currentPeriod", values?: undefined): string;
     encodeFunctionData(functionFragment: "deployer", values?: undefined): string;
     encodeFunctionData(functionFragment: "firstPeriod", values?: undefined): string;
@@ -180,28 +184,28 @@ export interface MarketTestableInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "init", values?: undefined): string;
     encodeFunctionData(functionFragment: "interestPortionToLenders", values?: undefined): string;
     encodeFunctionData(functionFragment: "lastPeriodGlobalInterestAccrued", values?: undefined): string;
-    encodeFunctionData(functionFragment: "lend", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "lend", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "lendHue", values?: undefined): string;
     encodeFunctionData(functionFragment: "minPositionSize", values?: undefined): string;
     encodeFunctionData(functionFragment: "periodLength", values?: undefined): string;
-    encodeFunctionData(functionFragment: "removeKickback", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setCollateralizationRequirement", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setInterestPortionToLenders", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setMinPositionSize", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setTwapDuration", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "removeKickback", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setCollateralizationRequirement", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setInterestPortionToLenders", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setMinPositionSize", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setTwapDuration", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "stop", values?: undefined): string;
     encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
-    encodeFunctionData(functionFragment: "systemGetUpdatedPosition", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "systemGetUpdatedPosition", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "truEth", values?: undefined): string;
     encodeFunctionData(functionFragment: "twapDuration", values?: undefined): string;
-    encodeFunctionData(functionFragment: "unlend", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "unlend", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "updatePositionImpl", values: [
         IAccounting.DebtPositionStruct,
         IAccounting.SystemDebtInfoStruct,
-        BigNumberish
+        PromiseOrValue<BigNumberish>
     ]): string;
-    encodeFunctionData(functionFragment: "validUpdate", values: [BytesLike]): string;
-    encodeFunctionData(functionFragment: "valueOfLendTokensInHue", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "validUpdate", values: [PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "valueOfLendTokensInHue", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "accounting", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "accrueInterest", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "adjustPosition", data: BytesLike): Result;
@@ -405,22 +409,22 @@ export interface MarketTestable extends BaseContract {
     functions: {
         accounting(overrides?: CallOverrides): Promise<[string]>;
         accrueInterest(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        adjustPosition(positionID: BigNumberish, debtChange: BigNumberish, collateralIncrease: BigNumberish, collateralDecrease: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        adjustPosition(positionID: PromiseOrValue<BigNumberish>, debtChange: PromiseOrValue<BigNumberish>, collateralIncrease: PromiseOrValue<BigNumberish>, collateralDecrease: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        calculateInterest(sdi: IAccounting.SystemDebtInfoStruct, periods: BigNumberish, annualInterestRate: BigNumberish, positiveInterestRate: boolean, reserves: BigNumberish, _interestPortionToLenders: BigNumberish, overrides?: CallOverrides): Promise<[
+        calculateInterest(sdi: IAccounting.SystemDebtInfoStruct, periods: PromiseOrValue<BigNumberish>, annualInterestRate: PromiseOrValue<BigNumberish>, positiveInterestRate: PromiseOrValue<boolean>, reserves: PromiseOrValue<BigNumberish>, _interestPortionToLenders: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             IMarket.CalculatedInterestInfoStructOutput
         ] & {
             cii: IMarket.CalculatedInterestInfoStructOutput;
         }>;
-        claimAllRewards(positionIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimAllRewards(positionIDs: PromiseOrValue<BigNumberish>[], ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         collateralizationRequirement(overrides?: CallOverrides): Promise<[BigNumber]>;
-        createPosition(initialCollateral: BigNumberish, initialDebt: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        createPosition(initialCollateral: PromiseOrValue<BigNumberish>, initialDebt: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         currentPeriod(overrides?: CallOverrides): Promise<[BigNumber] & {
             period: BigNumber;
@@ -431,67 +435,67 @@ export interface MarketTestable extends BaseContract {
         hue(overrides?: CallOverrides): Promise<[string]>;
         huePositionNFT(overrides?: CallOverrides): Promise<[string]>;
         init(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         interestPortionToLenders(overrides?: CallOverrides): Promise<[BigNumber]>;
         lastPeriodGlobalInterestAccrued(overrides?: CallOverrides): Promise<[BigNumber]>;
-        lend(hueCount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        lend(hueCount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         lendHue(overrides?: CallOverrides): Promise<[string]>;
         minPositionSize(overrides?: CallOverrides): Promise<[BigNumber]>;
         periodLength(overrides?: CallOverrides): Promise<[BigNumber]>;
-        removeKickback(positionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        removeKickback(positionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setCollateralizationRequirement(requirement: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setCollateralizationRequirement(requirement: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setInterestPortionToLenders(percentage: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setInterestPortionToLenders(percentage: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setMinPositionSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMinPositionSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setTwapDuration(duration: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setTwapDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         stopped(overrides?: CallOverrides): Promise<[boolean]>;
-        systemGetUpdatedPosition(positionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        systemGetUpdatedPosition(positionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         truEth(overrides?: CallOverrides): Promise<[string]>;
         twapDuration(overrides?: CallOverrides): Promise<[number]>;
-        unlend(lendTokenCount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        unlend(lendTokenCount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        updatePositionImpl(_position: IAccounting.DebtPositionStruct, sdi: IAccounting.SystemDebtInfoStruct, timeNow: BigNumberish, overrides?: CallOverrides): Promise<[
+        updatePositionImpl(_position: IAccounting.DebtPositionStruct, sdi: IAccounting.SystemDebtInfoStruct, timeNow: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             IAccounting.DebtPositionStructOutput,
             BigNumber
         ] & {
             position: IAccounting.DebtPositionStructOutput;
             rewards: BigNumber;
         }>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
-        valueOfLendTokensInHue(lendTokenCount: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
+        valueOfLendTokensInHue(lendTokenCount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
     };
     accounting(overrides?: CallOverrides): Promise<string>;
     accrueInterest(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    adjustPosition(positionID: BigNumberish, debtChange: BigNumberish, collateralIncrease: BigNumberish, collateralDecrease: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    adjustPosition(positionID: PromiseOrValue<BigNumberish>, debtChange: PromiseOrValue<BigNumberish>, collateralIncrease: PromiseOrValue<BigNumberish>, collateralDecrease: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    calculateInterest(sdi: IAccounting.SystemDebtInfoStruct, periods: BigNumberish, annualInterestRate: BigNumberish, positiveInterestRate: boolean, reserves: BigNumberish, _interestPortionToLenders: BigNumberish, overrides?: CallOverrides): Promise<IMarket.CalculatedInterestInfoStructOutput>;
-    claimAllRewards(positionIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    calculateInterest(sdi: IAccounting.SystemDebtInfoStruct, periods: PromiseOrValue<BigNumberish>, annualInterestRate: PromiseOrValue<BigNumberish>, positiveInterestRate: PromiseOrValue<boolean>, reserves: PromiseOrValue<BigNumberish>, _interestPortionToLenders: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<IMarket.CalculatedInterestInfoStructOutput>;
+    claimAllRewards(positionIDs: PromiseOrValue<BigNumberish>[], ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     collateralizationRequirement(overrides?: CallOverrides): Promise<BigNumber>;
-    createPosition(initialCollateral: BigNumberish, initialDebt: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    createPosition(initialCollateral: PromiseOrValue<BigNumberish>, initialDebt: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
     deployer(overrides?: CallOverrides): Promise<string>;
@@ -500,60 +504,60 @@ export interface MarketTestable extends BaseContract {
     hue(overrides?: CallOverrides): Promise<string>;
     huePositionNFT(overrides?: CallOverrides): Promise<string>;
     init(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     interestPortionToLenders(overrides?: CallOverrides): Promise<BigNumber>;
     lastPeriodGlobalInterestAccrued(overrides?: CallOverrides): Promise<BigNumber>;
-    lend(hueCount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    lend(hueCount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     lendHue(overrides?: CallOverrides): Promise<string>;
     minPositionSize(overrides?: CallOverrides): Promise<BigNumber>;
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-    removeKickback(positionID: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    removeKickback(positionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setCollateralizationRequirement(requirement: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setCollateralizationRequirement(requirement: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setInterestPortionToLenders(percentage: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setInterestPortionToLenders(percentage: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setMinPositionSize(size: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setMinPositionSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setTwapDuration(duration: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setTwapDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     stop(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     stopped(overrides?: CallOverrides): Promise<boolean>;
-    systemGetUpdatedPosition(positionID: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    systemGetUpdatedPosition(positionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     truEth(overrides?: CallOverrides): Promise<string>;
     twapDuration(overrides?: CallOverrides): Promise<number>;
-    unlend(lendTokenCount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    unlend(lendTokenCount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    updatePositionImpl(_position: IAccounting.DebtPositionStruct, sdi: IAccounting.SystemDebtInfoStruct, timeNow: BigNumberish, overrides?: CallOverrides): Promise<[
+    updatePositionImpl(_position: IAccounting.DebtPositionStruct, sdi: IAccounting.SystemDebtInfoStruct, timeNow: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         IAccounting.DebtPositionStructOutput,
         BigNumber
     ] & {
         position: IAccounting.DebtPositionStructOutput;
         rewards: BigNumber;
     }>;
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
-    valueOfLendTokensInHue(lendTokenCount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+    valueOfLendTokensInHue(lendTokenCount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     callStatic: {
         accounting(overrides?: CallOverrides): Promise<string>;
         accrueInterest(overrides?: CallOverrides): Promise<void>;
-        adjustPosition(positionID: BigNumberish, debtChange: BigNumberish, collateralIncrease: BigNumberish, collateralDecrease: BigNumberish, ui: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        calculateInterest(sdi: IAccounting.SystemDebtInfoStruct, periods: BigNumberish, annualInterestRate: BigNumberish, positiveInterestRate: boolean, reserves: BigNumberish, _interestPortionToLenders: BigNumberish, overrides?: CallOverrides): Promise<IMarket.CalculatedInterestInfoStructOutput>;
-        claimAllRewards(positionIDs: BigNumberish[], ui: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        adjustPosition(positionID: PromiseOrValue<BigNumberish>, debtChange: PromiseOrValue<BigNumberish>, collateralIncrease: PromiseOrValue<BigNumberish>, collateralDecrease: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        calculateInterest(sdi: IAccounting.SystemDebtInfoStruct, periods: PromiseOrValue<BigNumberish>, annualInterestRate: PromiseOrValue<BigNumberish>, positiveInterestRate: PromiseOrValue<boolean>, reserves: PromiseOrValue<BigNumberish>, _interestPortionToLenders: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<IMarket.CalculatedInterestInfoStructOutput>;
+        claimAllRewards(positionIDs: PromiseOrValue<BigNumberish>[], ui: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         collateralizationRequirement(overrides?: CallOverrides): Promise<BigNumber>;
-        createPosition(initialCollateral: BigNumberish, initialDebt: BigNumberish, ui: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        createPosition(initialCollateral: PromiseOrValue<BigNumberish>, initialDebt: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
         deployer(overrides?: CallOverrides): Promise<string>;
         firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
@@ -563,72 +567,72 @@ export interface MarketTestable extends BaseContract {
         init(overrides?: CallOverrides): Promise<void>;
         interestPortionToLenders(overrides?: CallOverrides): Promise<BigNumber>;
         lastPeriodGlobalInterestAccrued(overrides?: CallOverrides): Promise<BigNumber>;
-        lend(hueCount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        lend(hueCount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         lendHue(overrides?: CallOverrides): Promise<string>;
         minPositionSize(overrides?: CallOverrides): Promise<BigNumber>;
         periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-        removeKickback(positionID: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setCollateralizationRequirement(requirement: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setInterestPortionToLenders(percentage: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setMinPositionSize(size: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setTwapDuration(duration: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        removeKickback(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setCollateralizationRequirement(requirement: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setInterestPortionToLenders(percentage: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setMinPositionSize(size: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setTwapDuration(duration: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         stop(overrides?: CallOverrides): Promise<void>;
         stopped(overrides?: CallOverrides): Promise<boolean>;
-        systemGetUpdatedPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<IAccounting.DebtPositionStructOutput>;
+        systemGetUpdatedPosition(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<IAccounting.DebtPositionStructOutput>;
         truEth(overrides?: CallOverrides): Promise<string>;
         twapDuration(overrides?: CallOverrides): Promise<number>;
-        unlend(lendTokenCount: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        updatePositionImpl(_position: IAccounting.DebtPositionStruct, sdi: IAccounting.SystemDebtInfoStruct, timeNow: BigNumberish, overrides?: CallOverrides): Promise<[
+        unlend(lendTokenCount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        updatePositionImpl(_position: IAccounting.DebtPositionStruct, sdi: IAccounting.SystemDebtInfoStruct, timeNow: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             IAccounting.DebtPositionStructOutput,
             BigNumber
         ] & {
             position: IAccounting.DebtPositionStructOutput;
             rewards: BigNumber;
         }>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
-        valueOfLendTokensInHue(lendTokenCount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+        valueOfLendTokensInHue(lendTokenCount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {
         "CollateralizationRequirementUpdated(uint256)"(requirement?: null): CollateralizationRequirementUpdatedEventFilter;
         CollateralizationRequirementUpdated(requirement?: null): CollateralizationRequirementUpdatedEventFilter;
-        "InterestAccrued(uint64,uint64,uint256,uint256,uint256,uint256)"(period?: BigNumberish | null, periods?: null, newDebt?: null, rewardCount?: null, cumulativeDebt?: null, debtExchangeRate?: null): InterestAccruedEventFilter;
-        InterestAccrued(period?: BigNumberish | null, periods?: null, newDebt?: null, rewardCount?: null, cumulativeDebt?: null, debtExchangeRate?: null): InterestAccruedEventFilter;
+        "InterestAccrued(uint64,uint64,uint256,uint256,uint256,uint256)"(period?: PromiseOrValue<BigNumberish> | null, periods?: null, newDebt?: null, rewardCount?: null, cumulativeDebt?: null, debtExchangeRate?: null): InterestAccruedEventFilter;
+        InterestAccrued(period?: PromiseOrValue<BigNumberish> | null, periods?: null, newDebt?: null, rewardCount?: null, cumulativeDebt?: null, debtExchangeRate?: null): InterestAccruedEventFilter;
         "InterestPortionToLendersUpdated(uint256)"(percentage?: null): InterestPortionToLendersUpdatedEventFilter;
         InterestPortionToLendersUpdated(percentage?: null): InterestPortionToLendersUpdatedEventFilter;
-        "Lend(address,uint256,uint256)"(account?: string | null, hueCount?: null, lendTokenCount?: null): LendEventFilter;
-        Lend(account?: string | null, hueCount?: null, lendTokenCount?: null): LendEventFilter;
+        "Lend(address,uint256,uint256)"(account?: PromiseOrValue<string> | null, hueCount?: null, lendTokenCount?: null): LendEventFilter;
+        Lend(account?: PromiseOrValue<string> | null, hueCount?: null, lendTokenCount?: null): LendEventFilter;
         "MinPositionSizeUpdated(uint256)"(size?: null): MinPositionSizeUpdatedEventFilter;
         MinPositionSizeUpdated(size?: null): MinPositionSizeUpdatedEventFilter;
-        "PositionAdjusted(uint64,uint256,uint256,uint256,uint256,uint256,uint256)"(positionID?: BigNumberish | null, debtIncrease?: null, debtDecrease?: null, collateralIncrease?: null, collateralDecrease?: null, newDebt?: null, newCollateral?: null): PositionAdjustedEventFilter;
-        PositionAdjusted(positionID?: BigNumberish | null, debtIncrease?: null, debtDecrease?: null, collateralIncrease?: null, collateralDecrease?: null, newDebt?: null, newCollateral?: null): PositionAdjustedEventFilter;
-        "PositionCreated(address,uint64,uint256)"(creator?: string | null, positionID?: BigNumberish | null, initialDebt?: null): PositionCreatedEventFilter;
-        PositionCreated(creator?: string | null, positionID?: BigNumberish | null, initialDebt?: null): PositionCreatedEventFilter;
-        "PositionUpdated(uint256,uint64,uint256,uint256)"(positionID?: BigNumberish | null, period?: BigNumberish | null, debtAfter?: null, tcpRewards?: null): PositionUpdatedEventFilter;
-        PositionUpdated(positionID?: BigNumberish | null, period?: BigNumberish | null, debtAfter?: null, tcpRewards?: null): PositionUpdatedEventFilter;
-        "RewardsDistributed(address,bool,uint256)"(account?: string | null, isKickback?: boolean | null, tcpRewards?: null): RewardsDistributedEventFilter;
-        RewardsDistributed(account?: string | null, isKickback?: boolean | null, tcpRewards?: null): RewardsDistributedEventFilter;
+        "PositionAdjusted(uint64,uint256,uint256,uint256,uint256,uint256,uint256)"(positionID?: PromiseOrValue<BigNumberish> | null, debtIncrease?: null, debtDecrease?: null, collateralIncrease?: null, collateralDecrease?: null, newDebt?: null, newCollateral?: null): PositionAdjustedEventFilter;
+        PositionAdjusted(positionID?: PromiseOrValue<BigNumberish> | null, debtIncrease?: null, debtDecrease?: null, collateralIncrease?: null, collateralDecrease?: null, newDebt?: null, newCollateral?: null): PositionAdjustedEventFilter;
+        "PositionCreated(address,uint64,uint256)"(creator?: PromiseOrValue<string> | null, positionID?: PromiseOrValue<BigNumberish> | null, initialDebt?: null): PositionCreatedEventFilter;
+        PositionCreated(creator?: PromiseOrValue<string> | null, positionID?: PromiseOrValue<BigNumberish> | null, initialDebt?: null): PositionCreatedEventFilter;
+        "PositionUpdated(uint256,uint64,uint256,uint256)"(positionID?: PromiseOrValue<BigNumberish> | null, period?: PromiseOrValue<BigNumberish> | null, debtAfter?: null, tcpRewards?: null): PositionUpdatedEventFilter;
+        PositionUpdated(positionID?: PromiseOrValue<BigNumberish> | null, period?: PromiseOrValue<BigNumberish> | null, debtAfter?: null, tcpRewards?: null): PositionUpdatedEventFilter;
+        "RewardsDistributed(address,bool,uint256)"(account?: PromiseOrValue<string> | null, isKickback?: PromiseOrValue<boolean> | null, tcpRewards?: null): RewardsDistributedEventFilter;
+        RewardsDistributed(account?: PromiseOrValue<string> | null, isKickback?: PromiseOrValue<boolean> | null, tcpRewards?: null): RewardsDistributedEventFilter;
         "Stopped()"(): StoppedEventFilter;
         Stopped(): StoppedEventFilter;
         "TwapDurationUpdated(uint32)"(duration?: null): TwapDurationUpdatedEventFilter;
         TwapDurationUpdated(duration?: null): TwapDurationUpdatedEventFilter;
-        "Unlend(address,uint256,uint256)"(account?: string | null, hueCount?: null, lendTokenCount?: null): UnlendEventFilter;
-        Unlend(account?: string | null, hueCount?: null, lendTokenCount?: null): UnlendEventFilter;
+        "Unlend(address,uint256,uint256)"(account?: PromiseOrValue<string> | null, hueCount?: null, lendTokenCount?: null): UnlendEventFilter;
+        Unlend(account?: PromiseOrValue<string> | null, hueCount?: null, lendTokenCount?: null): UnlendEventFilter;
     };
     estimateGas: {
         accounting(overrides?: CallOverrides): Promise<BigNumber>;
         accrueInterest(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        adjustPosition(positionID: BigNumberish, debtChange: BigNumberish, collateralIncrease: BigNumberish, collateralDecrease: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        adjustPosition(positionID: PromiseOrValue<BigNumberish>, debtChange: PromiseOrValue<BigNumberish>, collateralIncrease: PromiseOrValue<BigNumberish>, collateralDecrease: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        calculateInterest(sdi: IAccounting.SystemDebtInfoStruct, periods: BigNumberish, annualInterestRate: BigNumberish, positiveInterestRate: boolean, reserves: BigNumberish, _interestPortionToLenders: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        claimAllRewards(positionIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        calculateInterest(sdi: IAccounting.SystemDebtInfoStruct, periods: PromiseOrValue<BigNumberish>, annualInterestRate: PromiseOrValue<BigNumberish>, positiveInterestRate: PromiseOrValue<boolean>, reserves: PromiseOrValue<BigNumberish>, _interestPortionToLenders: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        claimAllRewards(positionIDs: PromiseOrValue<BigNumberish>[], ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         collateralizationRequirement(overrides?: CallOverrides): Promise<BigNumber>;
-        createPosition(initialCollateral: BigNumberish, initialDebt: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        createPosition(initialCollateral: PromiseOrValue<BigNumberish>, initialDebt: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
         deployer(overrides?: CallOverrides): Promise<BigNumber>;
@@ -637,62 +641,62 @@ export interface MarketTestable extends BaseContract {
         hue(overrides?: CallOverrides): Promise<BigNumber>;
         huePositionNFT(overrides?: CallOverrides): Promise<BigNumber>;
         init(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         interestPortionToLenders(overrides?: CallOverrides): Promise<BigNumber>;
         lastPeriodGlobalInterestAccrued(overrides?: CallOverrides): Promise<BigNumber>;
-        lend(hueCount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        lend(hueCount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         lendHue(overrides?: CallOverrides): Promise<BigNumber>;
         minPositionSize(overrides?: CallOverrides): Promise<BigNumber>;
         periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-        removeKickback(positionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        removeKickback(positionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setCollateralizationRequirement(requirement: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setCollateralizationRequirement(requirement: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setInterestPortionToLenders(percentage: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setInterestPortionToLenders(percentage: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setMinPositionSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMinPositionSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setTwapDuration(duration: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setTwapDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         stopped(overrides?: CallOverrides): Promise<BigNumber>;
-        systemGetUpdatedPosition(positionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        systemGetUpdatedPosition(positionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         truEth(overrides?: CallOverrides): Promise<BigNumber>;
         twapDuration(overrides?: CallOverrides): Promise<BigNumber>;
-        unlend(lendTokenCount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        unlend(lendTokenCount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        updatePositionImpl(_position: IAccounting.DebtPositionStruct, sdi: IAccounting.SystemDebtInfoStruct, timeNow: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-        valueOfLendTokensInHue(lendTokenCount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        updatePositionImpl(_position: IAccounting.DebtPositionStruct, sdi: IAccounting.SystemDebtInfoStruct, timeNow: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+        valueOfLendTokensInHue(lendTokenCount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         accounting(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         accrueInterest(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        adjustPosition(positionID: BigNumberish, debtChange: BigNumberish, collateralIncrease: BigNumberish, collateralDecrease: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        adjustPosition(positionID: PromiseOrValue<BigNumberish>, debtChange: PromiseOrValue<BigNumberish>, collateralIncrease: PromiseOrValue<BigNumberish>, collateralDecrease: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        calculateInterest(sdi: IAccounting.SystemDebtInfoStruct, periods: BigNumberish, annualInterestRate: BigNumberish, positiveInterestRate: boolean, reserves: BigNumberish, _interestPortionToLenders: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        claimAllRewards(positionIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        calculateInterest(sdi: IAccounting.SystemDebtInfoStruct, periods: PromiseOrValue<BigNumberish>, annualInterestRate: PromiseOrValue<BigNumberish>, positiveInterestRate: PromiseOrValue<boolean>, reserves: PromiseOrValue<BigNumberish>, _interestPortionToLenders: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        claimAllRewards(positionIDs: PromiseOrValue<BigNumberish>[], ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         collateralizationRequirement(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        createPosition(initialCollateral: BigNumberish, initialDebt: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        createPosition(initialCollateral: PromiseOrValue<BigNumberish>, initialDebt: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         currentPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         deployer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -701,45 +705,45 @@ export interface MarketTestable extends BaseContract {
         hue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         huePositionNFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         init(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         interestPortionToLenders(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         lastPeriodGlobalInterestAccrued(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        lend(hueCount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        lend(hueCount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         lendHue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         minPositionSize(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         periodLength(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        removeKickback(positionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        removeKickback(positionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setCollateralizationRequirement(requirement: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setCollateralizationRequirement(requirement: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setInterestPortionToLenders(percentage: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setInterestPortionToLenders(percentage: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setMinPositionSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMinPositionSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setTwapDuration(duration: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setTwapDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        systemGetUpdatedPosition(positionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        systemGetUpdatedPosition(positionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         truEth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         twapDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        unlend(lendTokenCount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        unlend(lendTokenCount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        updatePositionImpl(_position: IAccounting.DebtPositionStruct, sdi: IAccounting.SystemDebtInfoStruct, timeNow: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        valueOfLendTokensInHue(lendTokenCount: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        updatePositionImpl(_position: IAccounting.DebtPositionStruct, sdi: IAccounting.SystemDebtInfoStruct, timeNow: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        valueOfLendTokensInHue(lendTokenCount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

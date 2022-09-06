@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface ITokenLockDaoInterface extends utils.Interface {
@@ -31,7 +32,12 @@ export interface ITokenLockDaoInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "lockTokens",
-    values: [BigNumberish, BigNumberish, BigNumberish, string]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "lockTokens", data: BytesLike): Result;
@@ -67,28 +73,28 @@ export interface ITokenLockDao extends BaseContract {
 
   functions: {
     lockTokens(
-      tokenID: BigNumberish,
-      count: BigNumberish,
-      lockDurationMonths: BigNumberish,
-      to: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      tokenID: PromiseOrValue<BigNumberish>,
+      count: PromiseOrValue<BigNumberish>,
+      lockDurationMonths: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   lockTokens(
-    tokenID: BigNumberish,
-    count: BigNumberish,
-    lockDurationMonths: BigNumberish,
-    to: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    tokenID: PromiseOrValue<BigNumberish>,
+    count: PromiseOrValue<BigNumberish>,
+    lockDurationMonths: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     lockTokens(
-      tokenID: BigNumberish,
-      count: BigNumberish,
-      lockDurationMonths: BigNumberish,
-      to: string,
+      tokenID: PromiseOrValue<BigNumberish>,
+      count: PromiseOrValue<BigNumberish>,
+      lockDurationMonths: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -97,21 +103,21 @@ export interface ITokenLockDao extends BaseContract {
 
   estimateGas: {
     lockTokens(
-      tokenID: BigNumberish,
-      count: BigNumberish,
-      lockDurationMonths: BigNumberish,
-      to: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      tokenID: PromiseOrValue<BigNumberish>,
+      count: PromiseOrValue<BigNumberish>,
+      lockDurationMonths: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     lockTokens(
-      tokenID: BigNumberish,
-      count: BigNumberish,
-      lockDurationMonths: BigNumberish,
-      to: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      tokenID: PromiseOrValue<BigNumberish>,
+      count: PromiseOrValue<BigNumberish>,
+      lockDurationMonths: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TestUniswapV3RouterInterface extends utils.Interface {
     functions: {
         "swapForExact0Multi(address,address,address,uint256)": FunctionFragment;
@@ -9,9 +9,23 @@ export interface TestUniswapV3RouterInterface extends utils.Interface {
         "uniswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "swapForExact0Multi" | "swapForExact1Multi" | "uniswapV3SwapCallback"): FunctionFragment;
-    encodeFunctionData(functionFragment: "swapForExact0Multi", values: [string, string, string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "swapForExact1Multi", values: [string, string, string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "uniswapV3SwapCallback", values: [BigNumberish, BigNumberish, BytesLike]): string;
+    encodeFunctionData(functionFragment: "swapForExact0Multi", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "swapForExact1Multi", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "uniswapV3SwapCallback", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
     decodeFunctionResult(functionFragment: "swapForExact0Multi", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapForExact1Multi", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "uniswapV3SwapCallback", data: BytesLike): Result;
@@ -44,54 +58,54 @@ export interface TestUniswapV3Router extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        swapForExact0Multi(recipient: string, poolInput: string, poolOutput: string, amount0Out: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapForExact0Multi(recipient: PromiseOrValue<string>, poolInput: PromiseOrValue<string>, poolOutput: PromiseOrValue<string>, amount0Out: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapForExact1Multi(recipient: string, poolInput: string, poolOutput: string, amount1Out: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapForExact1Multi(recipient: PromiseOrValue<string>, poolInput: PromiseOrValue<string>, poolOutput: PromiseOrValue<string>, amount1Out: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    swapForExact0Multi(recipient: string, poolInput: string, poolOutput: string, amount0Out: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    swapForExact0Multi(recipient: PromiseOrValue<string>, poolInput: PromiseOrValue<string>, poolOutput: PromiseOrValue<string>, amount0Out: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapForExact1Multi(recipient: string, poolInput: string, poolOutput: string, amount1Out: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    swapForExact1Multi(recipient: PromiseOrValue<string>, poolInput: PromiseOrValue<string>, poolOutput: PromiseOrValue<string>, amount1Out: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        swapForExact0Multi(recipient: string, poolInput: string, poolOutput: string, amount0Out: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        swapForExact1Multi(recipient: string, poolInput: string, poolOutput: string, amount1Out: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<void>;
+        swapForExact0Multi(recipient: PromiseOrValue<string>, poolInput: PromiseOrValue<string>, poolOutput: PromiseOrValue<string>, amount0Out: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        swapForExact1Multi(recipient: PromiseOrValue<string>, poolInput: PromiseOrValue<string>, poolOutput: PromiseOrValue<string>, amount1Out: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "SwapCallback(int256,int256)"(amount0Delta?: null, amount1Delta?: null): SwapCallbackEventFilter;
         SwapCallback(amount0Delta?: null, amount1Delta?: null): SwapCallbackEventFilter;
     };
     estimateGas: {
-        swapForExact0Multi(recipient: string, poolInput: string, poolOutput: string, amount0Out: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapForExact0Multi(recipient: PromiseOrValue<string>, poolInput: PromiseOrValue<string>, poolOutput: PromiseOrValue<string>, amount0Out: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapForExact1Multi(recipient: string, poolInput: string, poolOutput: string, amount1Out: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapForExact1Multi(recipient: PromiseOrValue<string>, poolInput: PromiseOrValue<string>, poolOutput: PromiseOrValue<string>, amount1Out: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        swapForExact0Multi(recipient: string, poolInput: string, poolOutput: string, amount0Out: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapForExact0Multi(recipient: PromiseOrValue<string>, poolInput: PromiseOrValue<string>, poolOutput: PromiseOrValue<string>, amount0Out: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapForExact1Multi(recipient: string, poolInput: string, poolOutput: string, amount1Out: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapForExact1Multi(recipient: PromiseOrValue<string>, poolInput: PromiseOrValue<string>, poolOutput: PromiseOrValue<string>, amount1Out: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

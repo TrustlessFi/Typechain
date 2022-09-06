@@ -21,6 +21,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface LocksProtocolInterface extends utils.Interface {
@@ -38,7 +39,7 @@ export interface LocksProtocolInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "validUpdate",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
 
   decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
@@ -91,21 +92,30 @@ export interface LocksProtocol extends BaseContract {
 
     stopped(overrides?: CallOverrides): Promise<[boolean]>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
   };
 
   governor(overrides?: CallOverrides): Promise<string>;
 
   stopped(overrides?: CallOverrides): Promise<boolean>;
 
-  validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  validUpdate(
+    arg0: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
     governor(overrides?: CallOverrides): Promise<string>;
 
     stopped(overrides?: CallOverrides): Promise<boolean>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
@@ -118,7 +128,10 @@ export interface LocksProtocol extends BaseContract {
 
     stopped(overrides?: CallOverrides): Promise<BigNumber>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -127,7 +140,7 @@ export interface LocksProtocol extends BaseContract {
     stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     validUpdate(
-      arg0: BytesLike,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

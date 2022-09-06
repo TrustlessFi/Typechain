@@ -24,13 +24,14 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export declare namespace IRates {
   export type ConstructorParamsStruct = {
-    Governor: string;
-    ProtocolLock: string;
-    CollateralPool: string;
+    Governor: PromiseOrValue<string>;
+    ProtocolLock: PromiseOrValue<string>;
+    CollateralPool: PromiseOrValue<string>;
   };
 
   export type ConstructorParamsStructOutput = [string, string, string] & {
@@ -42,12 +43,12 @@ export declare namespace IRates {
 
 export declare namespace Rates {
   export type InterestRateParametersStruct = {
-    acceptableError: BigNumberish;
-    errorInterval: BigNumberish;
-    interestRateStep: BigNumberish;
-    maxSteps: BigNumberish;
-    minRate: BigNumberish;
-    maxRate: BigNumberish;
+    acceptableError: PromiseOrValue<BigNumberish>;
+    errorInterval: PromiseOrValue<BigNumberish>;
+    interestRateStep: PromiseOrValue<BigNumberish>;
+    maxSteps: PromiseOrValue<BigNumberish>;
+    minRate: PromiseOrValue<BigNumberish>;
+    maxRate: PromiseOrValue<BigNumberish>;
   };
 
   export type InterestRateParametersStructOutput = [
@@ -67,9 +68,9 @@ export declare namespace Rates {
   };
 
   export type RateDataStruct = {
-    rate: BigNumberish;
-    nextUpdateTime: BigNumberish;
-    rewardCount: BigNumberish;
+    rate: PromiseOrValue<BigNumberish>;
+    nextUpdateTime: PromiseOrValue<BigNumberish>;
+    rewardCount: PromiseOrValue<BigNumberish>;
   };
 
   export type RateDataStructOutput = [BigNumber, BigNumber, BigNumber] & {
@@ -159,19 +160,23 @@ export interface RatesTestableInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "addReferencePool",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "calculatePrice",
-    values: [BigNumberish[], BigNumberish]
+    values: [PromiseOrValue<BigNumberish>[], PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "calculateRate",
-    values: [BigNumberish, Rates.InterestRateParametersStruct, BigNumberish]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      Rates.InterestRateParametersStruct,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "calculateRewardCount",
-    values: [Rates.RateDataStruct, BigNumberish]
+    values: [Rates.RateDataStruct, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "collateralPool",
@@ -179,7 +184,7 @@ export interface RatesTestableInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "contains",
-    values: [string[], string]
+    values: [PromiseOrValue<string>[], PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "currentRateData",
@@ -188,7 +193,7 @@ export interface RatesTestableInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "deployer", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "executeRatesUpdateContractUpdate",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getReferencePools",
@@ -210,7 +215,7 @@ export interface RatesTestableInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "median",
-    values: [BigNumberish[]]
+    values: [PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "minTimeBetweenUpdates",
@@ -230,54 +235,54 @@ export interface RatesTestableInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "referencePools",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "removePoolFromPools",
-    values: [string[], string]
+    values: [PromiseOrValue<string>[], PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "removeReferencePool",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setAcceptableError",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setErrorInterval",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setInterestRateStep",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMaxRate",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMaxSteps",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMinRate",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMinTimeBetweenUpdates",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setRatesUpdateContract",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "stop", values?: undefined): string;
   encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
   encodeFunctionData(functionFragment: "update", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "validUpdate",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
 
   decodeFunctionResult(
@@ -575,34 +580,34 @@ export interface RatesTestable extends BaseContract {
 
   functions: {
     addReferencePool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     calculatePrice(
-      referencePrices: BigNumberish[],
-      collateralPrice: BigNumberish,
+      referencePrices: PromiseOrValue<BigNumberish>[],
+      collateralPrice: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     calculateRate(
-      rate: BigNumberish,
+      rate: PromiseOrValue<BigNumberish>,
       rp: Rates.InterestRateParametersStruct,
-      price: BigNumberish,
+      price: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     calculateRewardCount(
       rd: Rates.RateDataStruct,
-      currentTime: BigNumberish,
+      currentTime: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     collateralPool(overrides?: CallOverrides): Promise<[string]>;
 
     contains(
-      pools: string[],
-      pool: string,
+      pools: PromiseOrValue<string>[],
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
@@ -619,8 +624,8 @@ export interface RatesTestable extends BaseContract {
     deployer(overrides?: CallOverrides): Promise<[string]>;
 
     executeRatesUpdateContractUpdate(
-      newRate: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newRate: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getReferencePools(overrides?: CallOverrides): Promise<[string[]]>;
@@ -630,7 +635,7 @@ export interface RatesTestable extends BaseContract {
     governor(overrides?: CallOverrides): Promise<[string]>;
 
     init(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     interestRateAbsoluteValue(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -649,7 +654,7 @@ export interface RatesTestable extends BaseContract {
     >;
 
     median(
-      values: BigNumberish[],
+      values: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -664,103 +669,106 @@ export interface RatesTestable extends BaseContract {
     ratesUpdateContract(overrides?: CallOverrides): Promise<[string]>;
 
     referencePools(
-      arg0: BigNumberish,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     removePoolFromPools(
-      pools: string[],
-      pool: string,
+      pools: PromiseOrValue<string>[],
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string[]]>;
 
     removeReferencePool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setAcceptableError(
-      error: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      error: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setErrorInterval(
-      interval: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      interval: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setInterestRateStep(
-      step: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      step: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setMaxRate(
-      max: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      max: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setMaxSteps(
-      steps: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      steps: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setMinRate(
-      min: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      min: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setMinTimeBetweenUpdates(
-      time: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      time: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setRatesUpdateContract(
-      _ratesUpdateContract: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _ratesUpdateContract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     stopped(overrides?: CallOverrides): Promise<[boolean]>;
 
     update(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
   };
 
   addReferencePool(
-    pool: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   calculatePrice(
-    referencePrices: BigNumberish[],
-    collateralPrice: BigNumberish,
+    referencePrices: PromiseOrValue<BigNumberish>[],
+    collateralPrice: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   calculateRate(
-    rate: BigNumberish,
+    rate: PromiseOrValue<BigNumberish>,
     rp: Rates.InterestRateParametersStruct,
-    price: BigNumberish,
+    price: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   calculateRewardCount(
     rd: Rates.RateDataStruct,
-    currentTime: BigNumberish,
+    currentTime: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   collateralPool(overrides?: CallOverrides): Promise<string>;
 
   contains(
-    pools: string[],
-    pool: string,
+    pools: PromiseOrValue<string>[],
+    pool: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
@@ -777,8 +785,8 @@ export interface RatesTestable extends BaseContract {
   deployer(overrides?: CallOverrides): Promise<string>;
 
   executeRatesUpdateContractUpdate(
-    newRate: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    newRate: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getReferencePools(overrides?: CallOverrides): Promise<string[]>;
@@ -788,7 +796,7 @@ export interface RatesTestable extends BaseContract {
   governor(overrides?: CallOverrides): Promise<string>;
 
   init(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   interestRateAbsoluteValue(overrides?: CallOverrides): Promise<BigNumber>;
@@ -806,7 +814,10 @@ export interface RatesTestable extends BaseContract {
     }
   >;
 
-  median(values: BigNumberish[], overrides?: CallOverrides): Promise<BigNumber>;
+  median(
+    values: PromiseOrValue<BigNumberish>[],
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   minTimeBetweenUpdates(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -819,100 +830,106 @@ export interface RatesTestable extends BaseContract {
   ratesUpdateContract(overrides?: CallOverrides): Promise<string>;
 
   referencePools(
-    arg0: BigNumberish,
+    arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   removePoolFromPools(
-    pools: string[],
-    pool: string,
+    pools: PromiseOrValue<string>[],
+    pool: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string[]>;
 
   removeReferencePool(
-    pool: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setAcceptableError(
-    error: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    error: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setErrorInterval(
-    interval: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    interval: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setInterestRateStep(
-    step: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    step: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setMaxRate(
-    max: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    max: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setMaxSteps(
-    steps: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    steps: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setMinRate(
-    min: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    min: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setMinTimeBetweenUpdates(
-    time: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    time: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setRatesUpdateContract(
-    _ratesUpdateContract: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _ratesUpdateContract: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   stop(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   stopped(overrides?: CallOverrides): Promise<boolean>;
 
   update(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  validUpdate(
+    arg0: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
-    addReferencePool(pool: string, overrides?: CallOverrides): Promise<void>;
+    addReferencePool(
+      pool: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     calculatePrice(
-      referencePrices: BigNumberish[],
-      collateralPrice: BigNumberish,
+      referencePrices: PromiseOrValue<BigNumberish>[],
+      collateralPrice: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateRate(
-      rate: BigNumberish,
+      rate: PromiseOrValue<BigNumberish>,
       rp: Rates.InterestRateParametersStruct,
-      price: BigNumberish,
+      price: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateRewardCount(
       rd: Rates.RateDataStruct,
-      currentTime: BigNumberish,
+      currentTime: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     collateralPool(overrides?: CallOverrides): Promise<string>;
 
     contains(
-      pools: string[],
-      pool: string,
+      pools: PromiseOrValue<string>[],
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -929,7 +946,7 @@ export interface RatesTestable extends BaseContract {
     deployer(overrides?: CallOverrides): Promise<string>;
 
     executeRatesUpdateContractUpdate(
-      newRate: BigNumberish,
+      newRate: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -957,7 +974,7 @@ export interface RatesTestable extends BaseContract {
     >;
 
     median(
-      values: BigNumberish[],
+      values: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -972,46 +989,58 @@ export interface RatesTestable extends BaseContract {
     ratesUpdateContract(overrides?: CallOverrides): Promise<string>;
 
     referencePools(
-      arg0: BigNumberish,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     removePoolFromPools(
-      pools: string[],
-      pool: string,
+      pools: PromiseOrValue<string>[],
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string[]>;
 
-    removeReferencePool(pool: string, overrides?: CallOverrides): Promise<void>;
+    removeReferencePool(
+      pool: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setAcceptableError(
-      error: BigNumberish,
+      error: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setErrorInterval(
-      interval: BigNumberish,
+      interval: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setInterestRateStep(
-      step: BigNumberish,
+      step: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setMaxRate(max: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    setMaxRate(
+      max: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setMaxSteps(steps: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    setMaxSteps(
+      steps: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setMinRate(min: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    setMinRate(
+      min: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setMinTimeBetweenUpdates(
-      time: BigNumberish,
+      time: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setRatesUpdateContract(
-      _ratesUpdateContract: string,
+      _ratesUpdateContract: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1021,7 +1050,10 @@ export interface RatesTestable extends BaseContract {
 
     update(overrides?: CallOverrides): Promise<void>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
@@ -1070,10 +1102,10 @@ export interface RatesTestable extends BaseContract {
     ): RateUpdatedEventFilter;
 
     "RatesContractUpdated(address)"(
-      ratesUpdateContract?: string | null
+      ratesUpdateContract?: PromiseOrValue<string> | null
     ): RatesContractUpdatedEventFilter;
     RatesContractUpdated(
-      ratesUpdateContract?: string | null
+      ratesUpdateContract?: PromiseOrValue<string> | null
     ): RatesContractUpdatedEventFilter;
 
     "ReferencePoolAdded(address)"(pool?: null): ReferencePoolAddedEventFilter;
@@ -1090,34 +1122,34 @@ export interface RatesTestable extends BaseContract {
 
   estimateGas: {
     addReferencePool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     calculatePrice(
-      referencePrices: BigNumberish[],
-      collateralPrice: BigNumberish,
+      referencePrices: PromiseOrValue<BigNumberish>[],
+      collateralPrice: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateRate(
-      rate: BigNumberish,
+      rate: PromiseOrValue<BigNumberish>,
       rp: Rates.InterestRateParametersStruct,
-      price: BigNumberish,
+      price: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateRewardCount(
       rd: Rates.RateDataStruct,
-      currentTime: BigNumberish,
+      currentTime: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     collateralPool(overrides?: CallOverrides): Promise<BigNumber>;
 
     contains(
-      pools: string[],
-      pool: string,
+      pools: PromiseOrValue<string>[],
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1126,8 +1158,8 @@ export interface RatesTestable extends BaseContract {
     deployer(overrides?: CallOverrides): Promise<BigNumber>;
 
     executeRatesUpdateContractUpdate(
-      newRate: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newRate: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getReferencePools(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1137,7 +1169,7 @@ export interface RatesTestable extends BaseContract {
     governor(overrides?: CallOverrides): Promise<BigNumber>;
 
     init(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     interestRateAbsoluteValue(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1145,7 +1177,7 @@ export interface RatesTestable extends BaseContract {
     interestRateParameters(overrides?: CallOverrides): Promise<BigNumber>;
 
     median(
-      values: BigNumberish[],
+      values: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1158,104 +1190,107 @@ export interface RatesTestable extends BaseContract {
     ratesUpdateContract(overrides?: CallOverrides): Promise<BigNumber>;
 
     referencePools(
-      arg0: BigNumberish,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     removePoolFromPools(
-      pools: string[],
-      pool: string,
+      pools: PromiseOrValue<string>[],
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     removeReferencePool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setAcceptableError(
-      error: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      error: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setErrorInterval(
-      interval: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      interval: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setInterestRateStep(
-      step: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      step: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setMaxRate(
-      max: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      max: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setMaxSteps(
-      steps: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      steps: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setMinRate(
-      min: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      min: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setMinTimeBetweenUpdates(
-      time: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      time: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setRatesUpdateContract(
-      _ratesUpdateContract: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _ratesUpdateContract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     stopped(overrides?: CallOverrides): Promise<BigNumber>;
 
     update(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     addReferencePool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     calculatePrice(
-      referencePrices: BigNumberish[],
-      collateralPrice: BigNumberish,
+      referencePrices: PromiseOrValue<BigNumberish>[],
+      collateralPrice: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     calculateRate(
-      rate: BigNumberish,
+      rate: PromiseOrValue<BigNumberish>,
       rp: Rates.InterestRateParametersStruct,
-      price: BigNumberish,
+      price: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     calculateRewardCount(
       rd: Rates.RateDataStruct,
-      currentTime: BigNumberish,
+      currentTime: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     collateralPool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     contains(
-      pools: string[],
-      pool: string,
+      pools: PromiseOrValue<string>[],
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1264,8 +1299,8 @@ export interface RatesTestable extends BaseContract {
     deployer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     executeRatesUpdateContractUpdate(
-      newRate: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newRate: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getReferencePools(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1275,7 +1310,7 @@ export interface RatesTestable extends BaseContract {
     governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     init(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     interestRateAbsoluteValue(
@@ -1287,7 +1322,7 @@ export interface RatesTestable extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     median(
-      values: BigNumberish[],
+      values: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1308,73 +1343,73 @@ export interface RatesTestable extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     referencePools(
-      arg0: BigNumberish,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     removePoolFromPools(
-      pools: string[],
-      pool: string,
+      pools: PromiseOrValue<string>[],
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     removeReferencePool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setAcceptableError(
-      error: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      error: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setErrorInterval(
-      interval: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      interval: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setInterestRateStep(
-      step: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      step: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setMaxRate(
-      max: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      max: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setMaxSteps(
-      steps: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      steps: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setMinRate(
-      min: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      min: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setMinTimeBetweenUpdates(
-      time: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      time: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setRatesUpdateContract(
-      _ratesUpdateContract: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _ratesUpdateContract: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     update(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     validUpdate(
-      arg0: BytesLike,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

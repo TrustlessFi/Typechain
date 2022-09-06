@@ -1,13 +1,13 @@
 import type { BaseContract, BigNumber, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export interface UpdateableContractInterface extends utils.Interface {
     functions: {
         "validUpdate(bytes4)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "validUpdate"): FunctionFragment;
-    encodeFunctionData(functionFragment: "validUpdate", values: [BytesLike]): string;
+    encodeFunctionData(functionFragment: "validUpdate", values: [PromiseOrValue<BytesLike>]): string;
     decodeFunctionResult(functionFragment: "validUpdate", data: BytesLike): Result;
     events: {};
 }
@@ -26,17 +26,17 @@ export interface UpdateableContract extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        validUpdate(action: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
+        validUpdate(action: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
     };
-    validUpdate(action: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    validUpdate(action: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     callStatic: {
-        validUpdate(action: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+        validUpdate(action: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     };
     filters: {};
     estimateGas: {
-        validUpdate(action: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+        validUpdate(action: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        validUpdate(action: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        validUpdate(action: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TDaoVotingRewardsSafeInterface extends utils.Interface {
     functions: {
         "auth()": FunctionFragment;
@@ -9,7 +9,11 @@ export interface TDaoVotingRewardsSafeInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "auth" | "safeTransfer"): FunctionFragment;
     encodeFunctionData(functionFragment: "auth", values?: undefined): string;
-    encodeFunctionData(functionFragment: "safeTransfer", values: [string, string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "safeTransfer", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     decodeFunctionResult(functionFragment: "auth", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "safeTransfer", data: BytesLike): Result;
     events: {};
@@ -30,29 +34,29 @@ export interface TDaoVotingRewardsSafe extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         auth(overrides?: CallOverrides): Promise<[string]>;
-        safeTransfer(token: string, dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        safeTransfer(token: PromiseOrValue<string>, dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     auth(overrides?: CallOverrides): Promise<string>;
-    safeTransfer(token: string, dest: string, count: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    safeTransfer(token: PromiseOrValue<string>, dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         auth(overrides?: CallOverrides): Promise<string>;
-        safeTransfer(token: string, dest: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        safeTransfer(token: PromiseOrValue<string>, dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
         auth(overrides?: CallOverrides): Promise<BigNumber>;
-        safeTransfer(token: string, dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        safeTransfer(token: PromiseOrValue<string>, dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         auth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        safeTransfer(token: string, dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        safeTransfer(token: PromiseOrValue<string>, dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

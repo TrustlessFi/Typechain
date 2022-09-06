@@ -1,13 +1,13 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export interface ITDaoWithIncentiveContractMintInterface extends utils.Interface {
     functions: {
         "incentiveContractMint(address,uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "incentiveContractMint"): FunctionFragment;
-    encodeFunctionData(functionFragment: "incentiveContractMint", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "incentiveContractMint", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "incentiveContractMint", data: BytesLike): Result;
     events: {};
 }
@@ -26,25 +26,25 @@ export interface ITDaoWithIncentiveContractMint extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        incentiveContractMint(dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        incentiveContractMint(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    incentiveContractMint(dest: string, count: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    incentiveContractMint(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        incentiveContractMint(dest: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        incentiveContractMint(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        incentiveContractMint(dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        incentiveContractMint(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        incentiveContractMint(dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        incentiveContractMint(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

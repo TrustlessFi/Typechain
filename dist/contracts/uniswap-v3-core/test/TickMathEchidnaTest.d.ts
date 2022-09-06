@@ -1,15 +1,15 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TickMathEchidnaTestInterface extends utils.Interface {
     functions: {
         "checkGetSqrtRatioAtTickInvariants(int24)": FunctionFragment;
         "checkGetTickAtSqrtRatioInvariants(uint160)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "checkGetSqrtRatioAtTickInvariants" | "checkGetTickAtSqrtRatioInvariants"): FunctionFragment;
-    encodeFunctionData(functionFragment: "checkGetSqrtRatioAtTickInvariants", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "checkGetTickAtSqrtRatioInvariants", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "checkGetSqrtRatioAtTickInvariants", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "checkGetTickAtSqrtRatioInvariants", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "checkGetSqrtRatioAtTickInvariants", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "checkGetTickAtSqrtRatioInvariants", data: BytesLike): Result;
     events: {};
@@ -29,22 +29,22 @@ export interface TickMathEchidnaTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        checkGetSqrtRatioAtTickInvariants(tick: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        checkGetTickAtSqrtRatioInvariants(ratio: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
+        checkGetSqrtRatioAtTickInvariants(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        checkGetTickAtSqrtRatioInvariants(ratio: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
     };
-    checkGetSqrtRatioAtTickInvariants(tick: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    checkGetTickAtSqrtRatioInvariants(ratio: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    checkGetSqrtRatioAtTickInvariants(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    checkGetTickAtSqrtRatioInvariants(ratio: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     callStatic: {
-        checkGetSqrtRatioAtTickInvariants(tick: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        checkGetTickAtSqrtRatioInvariants(ratio: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        checkGetSqrtRatioAtTickInvariants(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        checkGetTickAtSqrtRatioInvariants(ratio: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        checkGetSqrtRatioAtTickInvariants(tick: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        checkGetTickAtSqrtRatioInvariants(ratio: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        checkGetSqrtRatioAtTickInvariants(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        checkGetTickAtSqrtRatioInvariants(ratio: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        checkGetSqrtRatioAtTickInvariants(tick: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        checkGetTickAtSqrtRatioInvariants(ratio: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkGetSqrtRatioAtTickInvariants(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkGetTickAtSqrtRatioInvariants(ratio: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

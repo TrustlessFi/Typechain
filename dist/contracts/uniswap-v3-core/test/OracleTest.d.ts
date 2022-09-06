@@ -1,12 +1,12 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export declare namespace OracleTest {
     type UpdateParamsStruct = {
-        advanceTimeBy: BigNumberish;
-        tick: BigNumberish;
-        liquidity: BigNumberish;
+        advanceTimeBy: PromiseOrValue<BigNumberish>;
+        tick: PromiseOrValue<BigNumberish>;
+        liquidity: PromiseOrValue<BigNumberish>;
     };
     type UpdateParamsStructOutput = [number, number, BigNumber] & {
         advanceTimeBy: number;
@@ -14,9 +14,9 @@ export declare namespace OracleTest {
         liquidity: BigNumber;
     };
     type InitializeParamsStruct = {
-        time: BigNumberish;
-        tick: BigNumberish;
-        liquidity: BigNumberish;
+        time: PromiseOrValue<BigNumberish>;
+        tick: PromiseOrValue<BigNumberish>;
+        liquidity: PromiseOrValue<BigNumberish>;
     };
     type InitializeParamsStructOutput = [number, number, BigNumber] & {
         time: number;
@@ -42,17 +42,17 @@ export interface OracleTestInterface extends utils.Interface {
         "update((uint32,int24,uint128))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "advanceTime" | "batchUpdate" | "cardinality" | "cardinalityNext" | "getGasCostOfObserve" | "grow" | "index" | "initialize" | "liquidity" | "observations" | "observe" | "tick" | "time" | "update"): FunctionFragment;
-    encodeFunctionData(functionFragment: "advanceTime", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "advanceTime", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "batchUpdate", values: [OracleTest.UpdateParamsStruct[]]): string;
     encodeFunctionData(functionFragment: "cardinality", values?: undefined): string;
     encodeFunctionData(functionFragment: "cardinalityNext", values?: undefined): string;
-    encodeFunctionData(functionFragment: "getGasCostOfObserve", values: [BigNumberish[]]): string;
-    encodeFunctionData(functionFragment: "grow", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "getGasCostOfObserve", values: [PromiseOrValue<BigNumberish>[]]): string;
+    encodeFunctionData(functionFragment: "grow", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "index", values?: undefined): string;
     encodeFunctionData(functionFragment: "initialize", values: [OracleTest.InitializeParamsStruct]): string;
     encodeFunctionData(functionFragment: "liquidity", values?: undefined): string;
-    encodeFunctionData(functionFragment: "observations", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "observe", values: [BigNumberish[]]): string;
+    encodeFunctionData(functionFragment: "observations", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "observe", values: [PromiseOrValue<BigNumberish>[]]): string;
     encodeFunctionData(functionFragment: "tick", values?: undefined): string;
     encodeFunctionData(functionFragment: "time", values?: undefined): string;
     encodeFunctionData(functionFragment: "update", values: [OracleTest.UpdateParamsStruct]): string;
@@ -87,24 +87,24 @@ export interface OracleTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        advanceTime(by: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        advanceTime(by: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         batchUpdate(params: OracleTest.UpdateParamsStruct[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         cardinality(overrides?: CallOverrides): Promise<[number]>;
         cardinalityNext(overrides?: CallOverrides): Promise<[number]>;
-        getGasCostOfObserve(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<[BigNumber]>;
-        grow(_cardinalityNext: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        getGasCostOfObserve(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<[BigNumber]>;
+        grow(_cardinalityNext: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         index(overrides?: CallOverrides): Promise<[number]>;
         initialize(params: OracleTest.InitializeParamsStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         liquidity(overrides?: CallOverrides): Promise<[BigNumber]>;
-        observations(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        observations(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             number,
             BigNumber,
             BigNumber,
@@ -115,7 +115,7 @@ export interface OracleTest extends BaseContract {
             secondsPerLiquidityCumulativeX128: BigNumber;
             initialized: boolean;
         }>;
-        observe(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<[
+        observe(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<[
             BigNumber[],
             BigNumber[]
         ] & {
@@ -125,27 +125,27 @@ export interface OracleTest extends BaseContract {
         tick(overrides?: CallOverrides): Promise<[number]>;
         time(overrides?: CallOverrides): Promise<[number]>;
         update(params: OracleTest.UpdateParamsStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    advanceTime(by: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    advanceTime(by: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     batchUpdate(params: OracleTest.UpdateParamsStruct[], overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     cardinality(overrides?: CallOverrides): Promise<number>;
     cardinalityNext(overrides?: CallOverrides): Promise<number>;
-    getGasCostOfObserve(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<BigNumber>;
-    grow(_cardinalityNext: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    getGasCostOfObserve(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<BigNumber>;
+    grow(_cardinalityNext: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     index(overrides?: CallOverrides): Promise<number>;
     initialize(params: OracleTest.InitializeParamsStruct, overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     liquidity(overrides?: CallOverrides): Promise<BigNumber>;
-    observations(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+    observations(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         number,
         BigNumber,
         BigNumber,
@@ -156,7 +156,7 @@ export interface OracleTest extends BaseContract {
         secondsPerLiquidityCumulativeX128: BigNumber;
         initialized: boolean;
     }>;
-    observe(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<[
+    observe(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<[
         BigNumber[],
         BigNumber[]
     ] & {
@@ -166,19 +166,19 @@ export interface OracleTest extends BaseContract {
     tick(overrides?: CallOverrides): Promise<number>;
     time(overrides?: CallOverrides): Promise<number>;
     update(params: OracleTest.UpdateParamsStruct, overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        advanceTime(by: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        advanceTime(by: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         batchUpdate(params: OracleTest.UpdateParamsStruct[], overrides?: CallOverrides): Promise<void>;
         cardinality(overrides?: CallOverrides): Promise<number>;
         cardinalityNext(overrides?: CallOverrides): Promise<number>;
-        getGasCostOfObserve(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<BigNumber>;
-        grow(_cardinalityNext: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        getGasCostOfObserve(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<BigNumber>;
+        grow(_cardinalityNext: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         index(overrides?: CallOverrides): Promise<number>;
         initialize(params: OracleTest.InitializeParamsStruct, overrides?: CallOverrides): Promise<void>;
         liquidity(overrides?: CallOverrides): Promise<BigNumber>;
-        observations(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        observations(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             number,
             BigNumber,
             BigNumber,
@@ -189,7 +189,7 @@ export interface OracleTest extends BaseContract {
             secondsPerLiquidityCumulativeX128: BigNumber;
             initialized: boolean;
         }>;
-        observe(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<[
+        observe(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<[
             BigNumber[],
             BigNumber[]
         ] & {
@@ -202,55 +202,55 @@ export interface OracleTest extends BaseContract {
     };
     filters: {};
     estimateGas: {
-        advanceTime(by: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        advanceTime(by: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         batchUpdate(params: OracleTest.UpdateParamsStruct[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         cardinality(overrides?: CallOverrides): Promise<BigNumber>;
         cardinalityNext(overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfObserve(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<BigNumber>;
-        grow(_cardinalityNext: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        getGasCostOfObserve(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<BigNumber>;
+        grow(_cardinalityNext: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         index(overrides?: CallOverrides): Promise<BigNumber>;
         initialize(params: OracleTest.InitializeParamsStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         liquidity(overrides?: CallOverrides): Promise<BigNumber>;
-        observations(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        observe(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<BigNumber>;
+        observations(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        observe(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<BigNumber>;
         tick(overrides?: CallOverrides): Promise<BigNumber>;
         time(overrides?: CallOverrides): Promise<BigNumber>;
         update(params: OracleTest.UpdateParamsStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        advanceTime(by: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        advanceTime(by: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         batchUpdate(params: OracleTest.UpdateParamsStruct[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         cardinality(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         cardinalityNext(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getGasCostOfObserve(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        grow(_cardinalityNext: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        getGasCostOfObserve(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        grow(_cardinalityNext: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         index(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         initialize(params: OracleTest.InitializeParamsStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         liquidity(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        observations(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        observe(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        observations(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        observe(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
         tick(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         time(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         update(params: OracleTest.UpdateParamsStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

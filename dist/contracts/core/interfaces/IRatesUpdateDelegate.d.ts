@@ -1,13 +1,13 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface IRatesUpdateDelegateInterface extends utils.Interface {
     functions: {
         "executeRatesUpdateContractUpdate(int256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "executeRatesUpdateContractUpdate"): FunctionFragment;
-    encodeFunctionData(functionFragment: "executeRatesUpdateContractUpdate", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "executeRatesUpdateContractUpdate", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "executeRatesUpdateContractUpdate", data: BytesLike): Result;
     events: {};
 }
@@ -26,25 +26,25 @@ export interface IRatesUpdateDelegate extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        executeRatesUpdateContractUpdate(newRate: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        executeRatesUpdateContractUpdate(newRate: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    executeRatesUpdateContractUpdate(newRate: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    executeRatesUpdateContractUpdate(newRate: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        executeRatesUpdateContractUpdate(newRate: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        executeRatesUpdateContractUpdate(newRate: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        executeRatesUpdateContractUpdate(newRate: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        executeRatesUpdateContractUpdate(newRate: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        executeRatesUpdateContractUpdate(newRate: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        executeRatesUpdateContractUpdate(newRate: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

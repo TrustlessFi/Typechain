@@ -1,13 +1,13 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export interface IGovernorAlphaInterface extends utils.Interface {
     functions: {
         "castVote(uint256,bool)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "castVote"): FunctionFragment;
-    encodeFunctionData(functionFragment: "castVote", values: [BigNumberish, boolean]): string;
+    encodeFunctionData(functionFragment: "castVote", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]): string;
     decodeFunctionResult(functionFragment: "castVote", data: BytesLike): Result;
     events: {};
 }
@@ -26,25 +26,25 @@ export interface IGovernorAlpha extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        castVote(proposalId: BigNumberish, support: boolean, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        castVote(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    castVote(proposalId: BigNumberish, support: boolean, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    castVote(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        castVote(proposalId: BigNumberish, support: boolean, overrides?: CallOverrides): Promise<void>;
+        castVote(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        castVote(proposalId: BigNumberish, support: boolean, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        castVote(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        castVote(proposalId: BigNumberish, support: boolean, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        castVote(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface ITokenIncentiveMinterInterface extends utils.Interface {
@@ -31,7 +32,7 @@ export interface ITokenIncentiveMinterInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "mintIncentive",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -70,22 +71,22 @@ export interface ITokenIncentiveMinter extends BaseContract {
 
   functions: {
     mintIncentive(
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   mintIncentive(
-    dest: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    dest: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     mintIncentive(
-      dest: string,
-      count: BigNumberish,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -94,17 +95,17 @@ export interface ITokenIncentiveMinter extends BaseContract {
 
   estimateGas: {
     mintIncentive(
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     mintIncentive(
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

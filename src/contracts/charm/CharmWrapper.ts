@@ -25,6 +25,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export interface CharmWrapperInterface extends utils.Interface {
@@ -89,30 +90,42 @@ export interface CharmWrapperInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "allowance",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
-  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
-  encodeFunctionData(functionFragment: "burn", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "balanceOf",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "burn",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "burnFrom",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "decreaseAllowance",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "deposit",
-    values: [BigNumberish, BigNumberish, BigNumberish, BigNumberish, string]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "increaseAllowance",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "pool", values?: undefined): string;
@@ -125,20 +138,33 @@ export interface CharmWrapperInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transfer",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "transferFrom",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "uniswapV3MintCallback",
-    values: [BigNumberish, BigNumberish, BytesLike]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(functionFragment: "weth", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "withdraw",
-    values: [BigNumberish, BigNumberish, BigNumberish, string]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "TICK_LOWER", data: BytesLike): Result;
@@ -276,51 +302,54 @@ export interface CharmWrapper extends BaseContract {
     TICK_UPPER(overrides?: CallOverrides): Promise<[number]>;
 
     allowance(
-      owner: string,
-      spender: string,
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     approve(
-      spender: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    balanceOf(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+    balanceOf(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     burn(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     burnFrom(
-      account: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      account: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
     decreaseAllowance(
-      spender: string,
-      subtractedValue: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      spender: PromiseOrValue<string>,
+      subtractedValue: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     deposit(
-      amount0Desired: BigNumberish,
-      amount1Desired: BigNumberish,
-      amount0Min: BigNumberish,
-      amount1Min: BigNumberish,
-      to: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      amount0Desired: PromiseOrValue<BigNumberish>,
+      amount1Desired: PromiseOrValue<BigNumberish>,
+      amount0Min: PromiseOrValue<BigNumberish>,
+      amount1Min: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     increaseAllowance(
-      spender: string,
-      addedValue: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      spender: PromiseOrValue<string>,
+      addedValue: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
@@ -336,33 +365,33 @@ export interface CharmWrapper extends BaseContract {
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transfer(
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferFrom(
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     uniswapV3MintCallback(
-      amount0Owed: BigNumberish,
-      amount1Owed: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      amount0Owed: PromiseOrValue<BigNumberish>,
+      amount1Owed: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     weth(overrides?: CallOverrides): Promise<[string]>;
 
     withdraw(
-      shares: BigNumberish,
-      amount0Min: BigNumberish,
-      amount1Min: BigNumberish,
-      to: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      shares: PromiseOrValue<BigNumberish>,
+      amount0Min: PromiseOrValue<BigNumberish>,
+      amount1Min: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
@@ -371,51 +400,54 @@ export interface CharmWrapper extends BaseContract {
   TICK_UPPER(overrides?: CallOverrides): Promise<number>;
 
   allowance(
-    owner: string,
-    spender: string,
+    owner: PromiseOrValue<string>,
+    spender: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   approve(
-    spender: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    spender: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+  balanceOf(
+    account: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   burn(
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   burnFrom(
-    account: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    account: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   decimals(overrides?: CallOverrides): Promise<number>;
 
   decreaseAllowance(
-    spender: string,
-    subtractedValue: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    spender: PromiseOrValue<string>,
+    subtractedValue: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   deposit(
-    amount0Desired: BigNumberish,
-    amount1Desired: BigNumberish,
-    amount0Min: BigNumberish,
-    amount1Min: BigNumberish,
-    to: string,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    amount0Desired: PromiseOrValue<BigNumberish>,
+    amount1Desired: PromiseOrValue<BigNumberish>,
+    amount0Min: PromiseOrValue<BigNumberish>,
+    amount1Min: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   increaseAllowance(
-    spender: string,
-    addedValue: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    spender: PromiseOrValue<string>,
+    addedValue: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   name(overrides?: CallOverrides): Promise<string>;
@@ -431,33 +463,33 @@ export interface CharmWrapper extends BaseContract {
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   transfer(
-    to: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferFrom(
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   uniswapV3MintCallback(
-    amount0Owed: BigNumberish,
-    amount1Owed: BigNumberish,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    amount0Owed: PromiseOrValue<BigNumberish>,
+    amount1Owed: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   weth(overrides?: CallOverrides): Promise<string>;
 
   withdraw(
-    shares: BigNumberish,
-    amount0Min: BigNumberish,
-    amount1Min: BigNumberish,
-    to: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    shares: PromiseOrValue<BigNumberish>,
+    amount0Min: PromiseOrValue<BigNumberish>,
+    amount1Min: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -466,41 +498,47 @@ export interface CharmWrapper extends BaseContract {
     TICK_UPPER(overrides?: CallOverrides): Promise<number>;
 
     allowance(
-      owner: string,
-      spender: string,
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     approve(
-      spender: string,
-      amount: BigNumberish,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    burn(amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    burn(
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     burnFrom(
-      account: string,
-      amount: BigNumberish,
+      account: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     decimals(overrides?: CallOverrides): Promise<number>;
 
     decreaseAllowance(
-      spender: string,
-      subtractedValue: BigNumberish,
+      spender: PromiseOrValue<string>,
+      subtractedValue: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     deposit(
-      amount0Desired: BigNumberish,
-      amount1Desired: BigNumberish,
-      amount0Min: BigNumberish,
-      amount1Min: BigNumberish,
-      to: string,
+      amount0Desired: PromiseOrValue<BigNumberish>,
+      amount1Desired: PromiseOrValue<BigNumberish>,
+      amount0Min: PromiseOrValue<BigNumberish>,
+      amount1Min: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber] & {
@@ -511,8 +549,8 @@ export interface CharmWrapper extends BaseContract {
     >;
 
     increaseAllowance(
-      spender: string,
-      addedValue: BigNumberish,
+      spender: PromiseOrValue<string>,
+      addedValue: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -529,32 +567,32 @@ export interface CharmWrapper extends BaseContract {
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
-      to: string,
-      amount: BigNumberish,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     transferFrom(
-      from: string,
-      to: string,
-      amount: BigNumberish,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     uniswapV3MintCallback(
-      amount0Owed: BigNumberish,
-      amount1Owed: BigNumberish,
-      data: BytesLike,
+      amount0Owed: PromiseOrValue<BigNumberish>,
+      amount1Owed: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     weth(overrides?: CallOverrides): Promise<string>;
 
     withdraw(
-      shares: BigNumberish,
-      amount0Min: BigNumberish,
-      amount1Min: BigNumberish,
-      to: string,
+      shares: PromiseOrValue<BigNumberish>,
+      amount0Min: PromiseOrValue<BigNumberish>,
+      amount1Min: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
@@ -563,52 +601,52 @@ export interface CharmWrapper extends BaseContract {
 
   filters: {
     "Approval(address,address,uint256)"(
-      owner?: string | null,
-      spender?: string | null,
+      owner?: PromiseOrValue<string> | null,
+      spender?: PromiseOrValue<string> | null,
       value?: null
     ): ApprovalEventFilter;
     Approval(
-      owner?: string | null,
-      spender?: string | null,
+      owner?: PromiseOrValue<string> | null,
+      spender?: PromiseOrValue<string> | null,
       value?: null
     ): ApprovalEventFilter;
 
     "Deposit(address,address,uint256,uint256,uint256)"(
-      sender?: string | null,
-      to?: string | null,
+      sender?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
       shares?: null,
       amount0?: null,
       amount1?: null
     ): DepositEventFilter;
     Deposit(
-      sender?: string | null,
-      to?: string | null,
+      sender?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
       shares?: null,
       amount0?: null,
       amount1?: null
     ): DepositEventFilter;
 
     "Transfer(address,address,uint256)"(
-      from?: string | null,
-      to?: string | null,
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
       value?: null
     ): TransferEventFilter;
     Transfer(
-      from?: string | null,
-      to?: string | null,
+      from?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
       value?: null
     ): TransferEventFilter;
 
     "Withdraw(address,address,uint256,uint256,uint256)"(
-      sender?: string | null,
-      to?: string | null,
+      sender?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
       shares?: null,
       amount0?: null,
       amount1?: null
     ): WithdrawEventFilter;
     Withdraw(
-      sender?: string | null,
-      to?: string | null,
+      sender?: PromiseOrValue<string> | null,
+      to?: PromiseOrValue<string> | null,
       shares?: null,
       amount0?: null,
       amount1?: null
@@ -621,51 +659,54 @@ export interface CharmWrapper extends BaseContract {
     TICK_UPPER(overrides?: CallOverrides): Promise<BigNumber>;
 
     allowance(
-      owner: string,
-      spender: string,
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     approve(
-      spender: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     burn(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     burnFrom(
-      account: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      account: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
     decreaseAllowance(
-      spender: string,
-      subtractedValue: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      spender: PromiseOrValue<string>,
+      subtractedValue: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     deposit(
-      amount0Desired: BigNumberish,
-      amount1Desired: BigNumberish,
-      amount0Min: BigNumberish,
-      amount1Min: BigNumberish,
-      to: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      amount0Desired: PromiseOrValue<BigNumberish>,
+      amount1Desired: PromiseOrValue<BigNumberish>,
+      amount0Min: PromiseOrValue<BigNumberish>,
+      amount1Min: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     increaseAllowance(
-      spender: string,
-      addedValue: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      spender: PromiseOrValue<string>,
+      addedValue: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
@@ -681,33 +722,33 @@ export interface CharmWrapper extends BaseContract {
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferFrom(
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     uniswapV3MintCallback(
-      amount0Owed: BigNumberish,
-      amount1Owed: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      amount0Owed: PromiseOrValue<BigNumberish>,
+      amount1Owed: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     weth(overrides?: CallOverrides): Promise<BigNumber>;
 
     withdraw(
-      shares: BigNumberish,
-      amount0Min: BigNumberish,
-      amount1Min: BigNumberish,
-      to: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      shares: PromiseOrValue<BigNumberish>,
+      amount0Min: PromiseOrValue<BigNumberish>,
+      amount1Min: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -717,54 +758,54 @@ export interface CharmWrapper extends BaseContract {
     TICK_UPPER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     allowance(
-      owner: string,
-      spender: string,
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     approve(
-      spender: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     balanceOf(
-      account: string,
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     burn(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     burnFrom(
-      account: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      account: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     decreaseAllowance(
-      spender: string,
-      subtractedValue: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      spender: PromiseOrValue<string>,
+      subtractedValue: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     deposit(
-      amount0Desired: BigNumberish,
-      amount1Desired: BigNumberish,
-      amount0Min: BigNumberish,
-      amount1Min: BigNumberish,
-      to: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      amount0Desired: PromiseOrValue<BigNumberish>,
+      amount1Desired: PromiseOrValue<BigNumberish>,
+      amount0Min: PromiseOrValue<BigNumberish>,
+      amount1Min: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     increaseAllowance(
-      spender: string,
-      addedValue: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      spender: PromiseOrValue<string>,
+      addedValue: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -780,33 +821,33 @@ export interface CharmWrapper extends BaseContract {
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transfer(
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferFrom(
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     uniswapV3MintCallback(
-      amount0Owed: BigNumberish,
-      amount1Owed: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      amount0Owed: PromiseOrValue<BigNumberish>,
+      amount1Owed: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     weth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     withdraw(
-      shares: BigNumberish,
-      amount0Min: BigNumberish,
-      amount1Min: BigNumberish,
-      to: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      shares: PromiseOrValue<BigNumberish>,
+      amount0Min: PromiseOrValue<BigNumberish>,
+      amount1Min: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

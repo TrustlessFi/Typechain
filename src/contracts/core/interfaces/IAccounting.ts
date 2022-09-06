@@ -24,19 +24,20 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export declare namespace IAccounting {
   export type PoolPositionStruct = {
-    owner: string;
-    cumulativeLiquidity: BigNumberish;
-    totalRewards: BigNumberish;
-    lastBlockPositionIncreased: BigNumberish;
-    liquidity: BigNumberish;
-    lastTimeRewarded: BigNumberish;
-    ui: BigNumberish;
-    kickbackDestination: string;
-    kickbackPortion: BigNumberish;
+    owner: PromiseOrValue<string>;
+    cumulativeLiquidity: PromiseOrValue<BigNumberish>;
+    totalRewards: PromiseOrValue<BigNumberish>;
+    lastBlockPositionIncreased: PromiseOrValue<BigNumberish>;
+    liquidity: PromiseOrValue<BigNumberish>;
+    lastTimeRewarded: PromiseOrValue<BigNumberish>;
+    ui: PromiseOrValue<BigNumberish>;
+    kickbackDestination: PromiseOrValue<string>;
+    kickbackPortion: PromiseOrValue<BigNumberish>;
   };
 
   export type PoolPositionStructOutput = [
@@ -62,19 +63,19 @@ export declare namespace IAccounting {
   };
 
   export type DebtPositionStruct = {
-    startCumulativeDebt: BigNumberish;
-    collateral: BigNumberish;
-    debt: BigNumberish;
-    startDebtExchangeRate: BigNumberish;
-    startTCPRewards: BigNumberish;
-    lastTimeUpdated: BigNumberish;
-    lastBlockPositionIncreased: BigNumberish;
-    tick: BigNumberish;
-    tickSet: boolean;
-    tickIndex: BigNumberish;
-    ui: BigNumberish;
-    kickbackDestination: string;
-    kickbackPortion: BigNumberish;
+    startCumulativeDebt: PromiseOrValue<BigNumberish>;
+    collateral: PromiseOrValue<BigNumberish>;
+    debt: PromiseOrValue<BigNumberish>;
+    startDebtExchangeRate: PromiseOrValue<BigNumberish>;
+    startTCPRewards: PromiseOrValue<BigNumberish>;
+    lastTimeUpdated: PromiseOrValue<BigNumberish>;
+    lastBlockPositionIncreased: PromiseOrValue<BigNumberish>;
+    tick: PromiseOrValue<BigNumberish>;
+    tickSet: PromiseOrValue<boolean>;
+    tickIndex: PromiseOrValue<BigNumberish>;
+    ui: PromiseOrValue<BigNumberish>;
+    kickbackDestination: PromiseOrValue<string>;
+    kickbackPortion: PromiseOrValue<BigNumberish>;
   };
 
   export type DebtPositionStructOutput = [
@@ -108,8 +109,8 @@ export declare namespace IAccounting {
   };
 
   export type RewardStatusStruct = {
-    totalRewards: BigNumberish;
-    cumulativeLiquidity: BigNumberish;
+    totalRewards: PromiseOrValue<BigNumberish>;
+    cumulativeLiquidity: PromiseOrValue<BigNumberish>;
   };
 
   export type RewardStatusStructOutput = [BigNumber, BigNumber] & {
@@ -118,10 +119,10 @@ export declare namespace IAccounting {
   };
 
   export type SystemDebtInfoStruct = {
-    debt: BigNumberish;
-    totalTCPRewards: BigNumberish;
-    cumulativeDebt: BigNumberish;
-    debtExchangeRate: BigNumberish;
+    debt: PromiseOrValue<BigNumberish>;
+    totalTCPRewards: PromiseOrValue<BigNumberish>;
+    cumulativeDebt: PromiseOrValue<BigNumberish>;
+    debtExchangeRate: PromiseOrValue<BigNumberish>;
   };
 
   export type SystemDebtInfoStructOutput = [
@@ -189,36 +190,36 @@ export interface IAccountingInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "approveUIs",
-    values: [BigNumberish[]]
+    values: [PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(functionFragment: "debt", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "decreaseDebt",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "decreasePoolLiquidity",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "disapproveUIs",
-    values: [BigNumberish[]]
+    values: [PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "getBasicPositionInfo",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getPoolPosition",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getPosition",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getRewardStatus",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getSystemDebtInfo",
@@ -226,40 +227,44 @@ export interface IAccountingInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "increaseDebt",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "increaseLentHue",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "increasePoolLiquidity",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "lentHue", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "poolLiquidity",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "sendCollateral",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "sendLentHue",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setPoolPosition",
-    values: [string, string, IAccounting.PoolPositionStruct]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      IAccounting.PoolPositionStruct
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "setPosition",
-    values: [BigNumberish, IAccounting.DebtPositionStruct]
+    values: [PromiseOrValue<BigNumberish>, IAccounting.DebtPositionStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "setRewardStatus",
-    values: [string, IAccounting.RewardStatusStruct]
+    values: [PromiseOrValue<string>, IAccounting.RewardStatusStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "setSystemDebtInfo",
@@ -451,30 +456,30 @@ export interface IAccounting extends BaseContract {
 
   functions: {
     approveUIs(
-      ids: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      ids: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     debt(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     decreaseDebt(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     decreasePoolLiquidity(
-      pool: string,
-      liquidity: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      liquidity: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     disapproveUIs(
-      ids: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      ids: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getBasicPositionInfo(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & {
@@ -484,8 +489,8 @@ export interface IAccounting extends BaseContract {
     >;
 
     getPoolPosition(
-      owner: string,
-      pool: string,
+      owner: PromiseOrValue<string>,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [IAccounting.PoolPositionStructOutput] & {
@@ -494,7 +499,7 @@ export interface IAccounting extends BaseContract {
     >;
 
     getPosition(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [IAccounting.DebtPositionStructOutput] & {
@@ -503,7 +508,7 @@ export interface IAccounting extends BaseContract {
     >;
 
     getRewardStatus(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [IAccounting.RewardStatusStructOutput] & {
@@ -516,90 +521,90 @@ export interface IAccounting extends BaseContract {
     ): Promise<[IAccounting.SystemDebtInfoStructOutput]>;
 
     increaseDebt(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     increaseLentHue(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     increasePoolLiquidity(
-      pool: string,
-      liquidity: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      liquidity: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     lentHue(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     poolLiquidity(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { liquidity: BigNumber }>;
 
     sendCollateral(
-      account: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      account: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     sendLentHue(
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setPoolPosition(
-      owner: string,
-      pool: string,
+      owner: PromiseOrValue<string>,
+      pool: PromiseOrValue<string>,
       pt: IAccounting.PoolPositionStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setPosition(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       dp: IAccounting.DebtPositionStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setRewardStatus(
-      pool: string,
+      pool: PromiseOrValue<string>,
       rs: IAccounting.RewardStatusStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setSystemDebtInfo(
       _systemDebtInfo: IAccounting.SystemDebtInfoStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   approveUIs(
-    ids: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    ids: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   debt(overrides?: CallOverrides): Promise<BigNumber>;
 
   decreaseDebt(
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   decreasePoolLiquidity(
-    pool: string,
-    liquidity: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    liquidity: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   disapproveUIs(
-    ids: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    ids: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getBasicPositionInfo(
-    positionID: BigNumberish,
+    positionID: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<
     [BigNumber, BigNumber] & {
@@ -609,18 +614,18 @@ export interface IAccounting extends BaseContract {
   >;
 
   getPoolPosition(
-    owner: string,
-    pool: string,
+    owner: PromiseOrValue<string>,
+    pool: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<IAccounting.PoolPositionStructOutput>;
 
   getPosition(
-    positionID: BigNumberish,
+    positionID: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<IAccounting.DebtPositionStructOutput>;
 
   getRewardStatus(
-    pool: string,
+    pool: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<IAccounting.RewardStatusStructOutput>;
 
@@ -629,81 +634,90 @@ export interface IAccounting extends BaseContract {
   ): Promise<IAccounting.SystemDebtInfoStructOutput>;
 
   increaseDebt(
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   increaseLentHue(
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   increasePoolLiquidity(
-    pool: string,
-    liquidity: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    liquidity: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   lentHue(overrides?: CallOverrides): Promise<BigNumber>;
 
-  poolLiquidity(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
+  poolLiquidity(
+    pool: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   sendCollateral(
-    account: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    account: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   sendLentHue(
-    dest: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    dest: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setPoolPosition(
-    owner: string,
-    pool: string,
+    owner: PromiseOrValue<string>,
+    pool: PromiseOrValue<string>,
     pt: IAccounting.PoolPositionStruct,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setPosition(
-    positionID: BigNumberish,
+    positionID: PromiseOrValue<BigNumberish>,
     dp: IAccounting.DebtPositionStruct,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setRewardStatus(
-    pool: string,
+    pool: PromiseOrValue<string>,
     rs: IAccounting.RewardStatusStruct,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setSystemDebtInfo(
     _systemDebtInfo: IAccounting.SystemDebtInfoStruct,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    approveUIs(ids: BigNumberish[], overrides?: CallOverrides): Promise<void>;
+    approveUIs(
+      ids: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     debt(overrides?: CallOverrides): Promise<BigNumber>;
 
-    decreaseDebt(count: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    decreaseDebt(
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     decreasePoolLiquidity(
-      pool: string,
-      liquidity: BigNumberish,
+      pool: PromiseOrValue<string>,
+      liquidity: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     disapproveUIs(
-      ids: BigNumberish[],
+      ids: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     getBasicPositionInfo(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & {
@@ -713,18 +727,18 @@ export interface IAccounting extends BaseContract {
     >;
 
     getPoolPosition(
-      owner: string,
-      pool: string,
+      owner: PromiseOrValue<string>,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<IAccounting.PoolPositionStructOutput>;
 
     getPosition(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<IAccounting.DebtPositionStructOutput>;
 
     getRewardStatus(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<IAccounting.RewardStatusStructOutput>;
 
@@ -732,50 +746,56 @@ export interface IAccounting extends BaseContract {
       overrides?: CallOverrides
     ): Promise<IAccounting.SystemDebtInfoStructOutput>;
 
-    increaseDebt(count: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    increaseDebt(
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     increaseLentHue(
-      count: BigNumberish,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     increasePoolLiquidity(
-      pool: string,
-      liquidity: BigNumberish,
+      pool: PromiseOrValue<string>,
+      liquidity: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     lentHue(overrides?: CallOverrides): Promise<BigNumber>;
 
-    poolLiquidity(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
+    poolLiquidity(
+      pool: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     sendCollateral(
-      account: string,
-      count: BigNumberish,
+      account: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     sendLentHue(
-      dest: string,
-      count: BigNumberish,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setPoolPosition(
-      owner: string,
-      pool: string,
+      owner: PromiseOrValue<string>,
+      pool: PromiseOrValue<string>,
       pt: IAccounting.PoolPositionStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setPosition(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       dp: IAccounting.DebtPositionStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setRewardStatus(
-      pool: string,
+      pool: PromiseOrValue<string>,
       rs: IAccounting.RewardStatusStruct,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -794,26 +814,26 @@ export interface IAccounting extends BaseContract {
     PoolPositionIndexingDisabled(): PoolPositionIndexingDisabledEventFilter;
 
     "UIInitialized(uint32,address,string)"(
-      interfaceID?: BigNumberish | null,
-      kickbackDestination?: string | null,
+      interfaceID?: PromiseOrValue<BigNumberish> | null,
+      kickbackDestination?: PromiseOrValue<string> | null,
       ipfsHash?: null
     ): UIInitializedEventFilter;
     UIInitialized(
-      interfaceID?: BigNumberish | null,
-      kickbackDestination?: string | null,
+      interfaceID?: PromiseOrValue<BigNumberish> | null,
+      kickbackDestination?: PromiseOrValue<string> | null,
       ipfsHash?: null
     ): UIInitializedEventFilter;
 
     "UIRegistered(uint32,address,uint24,uint256)"(
-      interfaceID?: BigNumberish | null,
-      kickbackDestination?: string | null,
-      tags?: BigNumberish | null,
+      interfaceID?: PromiseOrValue<BigNumberish> | null,
+      kickbackDestination?: PromiseOrValue<string> | null,
+      tags?: PromiseOrValue<BigNumberish> | null,
       kickbackPortion?: null
     ): UIRegisteredEventFilter;
     UIRegistered(
-      interfaceID?: BigNumberish | null,
-      kickbackDestination?: string | null,
-      tags?: BigNumberish | null,
+      interfaceID?: PromiseOrValue<BigNumberish> | null,
+      kickbackDestination?: PromiseOrValue<string> | null,
+      tags?: PromiseOrValue<BigNumberish> | null,
       kickbackPortion?: null
     ): UIRegisteredEventFilter;
 
@@ -826,212 +846,215 @@ export interface IAccounting extends BaseContract {
 
   estimateGas: {
     approveUIs(
-      ids: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      ids: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     debt(overrides?: CallOverrides): Promise<BigNumber>;
 
     decreaseDebt(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     decreasePoolLiquidity(
-      pool: string,
-      liquidity: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      liquidity: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     disapproveUIs(
-      ids: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      ids: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getBasicPositionInfo(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getPoolPosition(
-      owner: string,
-      pool: string,
+      owner: PromiseOrValue<string>,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getPosition(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getRewardStatus(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getSystemDebtInfo(overrides?: CallOverrides): Promise<BigNumber>;
 
     increaseDebt(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     increaseLentHue(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     increasePoolLiquidity(
-      pool: string,
-      liquidity: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      liquidity: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     lentHue(overrides?: CallOverrides): Promise<BigNumber>;
 
-    poolLiquidity(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
+    poolLiquidity(
+      pool: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     sendCollateral(
-      account: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      account: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     sendLentHue(
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setPoolPosition(
-      owner: string,
-      pool: string,
+      owner: PromiseOrValue<string>,
+      pool: PromiseOrValue<string>,
       pt: IAccounting.PoolPositionStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setPosition(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       dp: IAccounting.DebtPositionStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setRewardStatus(
-      pool: string,
+      pool: PromiseOrValue<string>,
       rs: IAccounting.RewardStatusStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setSystemDebtInfo(
       _systemDebtInfo: IAccounting.SystemDebtInfoStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     approveUIs(
-      ids: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      ids: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     debt(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     decreaseDebt(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     decreasePoolLiquidity(
-      pool: string,
-      liquidity: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      liquidity: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     disapproveUIs(
-      ids: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      ids: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getBasicPositionInfo(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getPoolPosition(
-      owner: string,
-      pool: string,
+      owner: PromiseOrValue<string>,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getPosition(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getRewardStatus(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getSystemDebtInfo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     increaseDebt(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     increaseLentHue(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     increasePoolLiquidity(
-      pool: string,
-      liquidity: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      liquidity: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     lentHue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     poolLiquidity(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     sendCollateral(
-      account: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      account: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     sendLentHue(
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setPoolPosition(
-      owner: string,
-      pool: string,
+      owner: PromiseOrValue<string>,
+      pool: PromiseOrValue<string>,
       pt: IAccounting.PoolPositionStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setPosition(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       dp: IAccounting.DebtPositionStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setRewardStatus(
-      pool: string,
+      pool: PromiseOrValue<string>,
       rs: IAccounting.RewardStatusStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setSystemDebtInfo(
       _systemDebtInfo: IAccounting.SystemDebtInfoStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

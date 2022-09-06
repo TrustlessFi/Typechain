@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface TestUniswapV3SwapPayInterface extends utils.Interface {
@@ -35,18 +36,22 @@ export interface TestUniswapV3SwapPayInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "swap",
     values: [
-      string,
-      string,
-      boolean,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<boolean>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "uniswapV3SwapCallback",
-    values: [BigNumberish, BigNumberish, BytesLike]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
@@ -86,58 +91,58 @@ export interface TestUniswapV3SwapPay extends BaseContract {
 
   functions: {
     swap(
-      pool: string,
-      recipient: string,
-      zeroForOne: boolean,
-      sqrtPriceX96: BigNumberish,
-      amountSpecified: BigNumberish,
-      pay0: BigNumberish,
-      pay1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
+      zeroForOne: PromiseOrValue<boolean>,
+      sqrtPriceX96: PromiseOrValue<BigNumberish>,
+      amountSpecified: PromiseOrValue<BigNumberish>,
+      pay0: PromiseOrValue<BigNumberish>,
+      pay1: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     uniswapV3SwapCallback(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   swap(
-    pool: string,
-    recipient: string,
-    zeroForOne: boolean,
-    sqrtPriceX96: BigNumberish,
-    amountSpecified: BigNumberish,
-    pay0: BigNumberish,
-    pay1: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    recipient: PromiseOrValue<string>,
+    zeroForOne: PromiseOrValue<boolean>,
+    sqrtPriceX96: PromiseOrValue<BigNumberish>,
+    amountSpecified: PromiseOrValue<BigNumberish>,
+    pay0: PromiseOrValue<BigNumberish>,
+    pay1: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   uniswapV3SwapCallback(
-    arg0: BigNumberish,
-    arg1: BigNumberish,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    arg0: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     swap(
-      pool: string,
-      recipient: string,
-      zeroForOne: boolean,
-      sqrtPriceX96: BigNumberish,
-      amountSpecified: BigNumberish,
-      pay0: BigNumberish,
-      pay1: BigNumberish,
+      pool: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
+      zeroForOne: PromiseOrValue<boolean>,
+      sqrtPriceX96: PromiseOrValue<BigNumberish>,
+      amountSpecified: PromiseOrValue<BigNumberish>,
+      pay0: PromiseOrValue<BigNumberish>,
+      pay1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     uniswapV3SwapCallback(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
-      data: BytesLike,
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -146,41 +151,41 @@ export interface TestUniswapV3SwapPay extends BaseContract {
 
   estimateGas: {
     swap(
-      pool: string,
-      recipient: string,
-      zeroForOne: boolean,
-      sqrtPriceX96: BigNumberish,
-      amountSpecified: BigNumberish,
-      pay0: BigNumberish,
-      pay1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
+      zeroForOne: PromiseOrValue<boolean>,
+      sqrtPriceX96: PromiseOrValue<BigNumberish>,
+      amountSpecified: PromiseOrValue<BigNumberish>,
+      pay0: PromiseOrValue<BigNumberish>,
+      pay1: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     uniswapV3SwapCallback(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     swap(
-      pool: string,
-      recipient: string,
-      zeroForOne: boolean,
-      sqrtPriceX96: BigNumberish,
-      amountSpecified: BigNumberish,
-      pay0: BigNumberish,
-      pay1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
+      zeroForOne: PromiseOrValue<boolean>,
+      sqrtPriceX96: PromiseOrValue<BigNumberish>,
+      amountSpecified: PromiseOrValue<BigNumberish>,
+      pay0: PromiseOrValue<BigNumberish>,
+      pay1: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     uniswapV3SwapCallback(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

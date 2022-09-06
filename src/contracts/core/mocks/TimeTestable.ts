@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface TimeTestableInterface extends utils.Interface {
@@ -58,7 +59,7 @@ export interface TimeTestableInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "futureTime",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getPeriodLength",
@@ -70,11 +71,11 @@ export interface TimeTestableInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "periodToTime",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "timeToPeriod",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -148,7 +149,7 @@ export interface TimeTestable extends BaseContract {
     firstPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     futureTime(
-      addition: BigNumberish,
+      addition: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { time: BigNumber }>;
 
@@ -159,12 +160,12 @@ export interface TimeTestable extends BaseContract {
     periodLength(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     periodToTime(
-      period: BigNumberish,
+      period: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { time: BigNumber }>;
 
     timeToPeriod(
-      time: BigNumberish,
+      time: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { period: BigNumber }>;
   };
@@ -176,7 +177,7 @@ export interface TimeTestable extends BaseContract {
   firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
   futureTime(
-    addition: BigNumberish,
+    addition: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -185,12 +186,12 @@ export interface TimeTestable extends BaseContract {
   periodLength(overrides?: CallOverrides): Promise<BigNumber>;
 
   periodToTime(
-    period: BigNumberish,
+    period: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   timeToPeriod(
-    time: BigNumberish,
+    time: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -202,7 +203,7 @@ export interface TimeTestable extends BaseContract {
     firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
     futureTime(
-      addition: BigNumberish,
+      addition: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -211,12 +212,12 @@ export interface TimeTestable extends BaseContract {
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
 
     periodToTime(
-      period: BigNumberish,
+      period: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     timeToPeriod(
-      time: BigNumberish,
+      time: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -231,7 +232,7 @@ export interface TimeTestable extends BaseContract {
     firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
     futureTime(
-      addition: BigNumberish,
+      addition: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -240,12 +241,12 @@ export interface TimeTestable extends BaseContract {
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
 
     periodToTime(
-      period: BigNumberish,
+      period: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     timeToPeriod(
-      time: BigNumberish,
+      time: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -258,7 +259,7 @@ export interface TimeTestable extends BaseContract {
     firstPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     futureTime(
-      addition: BigNumberish,
+      addition: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -267,12 +268,12 @@ export interface TimeTestable extends BaseContract {
     periodLength(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     periodToTime(
-      period: BigNumberish,
+      period: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     timeToPeriod(
-      time: BigNumberish,
+      time: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

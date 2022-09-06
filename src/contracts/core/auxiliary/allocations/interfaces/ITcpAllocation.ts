@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../../common";
 
 export interface ITcpAllocationInterface extends utils.Interface {
@@ -40,7 +41,7 @@ export interface ITcpAllocationInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "getTokens",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "incentiveAllocation",
@@ -48,11 +49,15 @@ export interface ITcpAllocationInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "increaseAllocation",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "lockTokensIntoDao",
-    values: [string, BigNumberish, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "getTokens", data: BytesLike): Result;
@@ -100,67 +105,67 @@ export interface ITcpAllocation extends BaseContract {
 
   functions: {
     getTokens(
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     incentiveAllocation(overrides?: CallOverrides): Promise<[string]>;
 
     increaseAllocation(
-      allocatee: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      allocatee: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     lockTokensIntoDao(
-      dest: string,
-      count: BigNumberish,
-      lockDurationMonths: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      lockDurationMonths: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   getTokens(
-    dest: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    dest: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   incentiveAllocation(overrides?: CallOverrides): Promise<string>;
 
   increaseAllocation(
-    allocatee: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    allocatee: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   lockTokensIntoDao(
-    dest: string,
-    count: BigNumberish,
-    lockDurationMonths: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    dest: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    lockDurationMonths: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     getTokens(
-      dest: string,
-      count: BigNumberish,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     incentiveAllocation(overrides?: CallOverrides): Promise<string>;
 
     increaseAllocation(
-      allocatee: string,
-      count: BigNumberish,
+      allocatee: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     lockTokensIntoDao(
-      dest: string,
-      count: BigNumberish,
-      lockDurationMonths: BigNumberish,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      lockDurationMonths: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -169,32 +174,32 @@ export interface ITcpAllocation extends BaseContract {
 
   estimateGas: {
     getTokens(
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     incentiveAllocation(overrides?: CallOverrides): Promise<BigNumber>;
 
     increaseAllocation(
-      allocatee: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      allocatee: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     lockTokensIntoDao(
-      dest: string,
-      count: BigNumberish,
-      lockDurationMonths: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      lockDurationMonths: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     getTokens(
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     incentiveAllocation(
@@ -202,16 +207,16 @@ export interface ITcpAllocation extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     increaseAllocation(
-      allocatee: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      allocatee: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     lockTokensIntoDao(
-      dest: string,
-      count: BigNumberish,
-      lockDurationMonths: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      lockDurationMonths: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

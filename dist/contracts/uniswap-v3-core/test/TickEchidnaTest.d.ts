@@ -1,13 +1,13 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TickEchidnaTestInterface extends utils.Interface {
     functions: {
         "checkTickSpacingToParametersInvariants(int24)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "checkTickSpacingToParametersInvariants"): FunctionFragment;
-    encodeFunctionData(functionFragment: "checkTickSpacingToParametersInvariants", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "checkTickSpacingToParametersInvariants", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "checkTickSpacingToParametersInvariants", data: BytesLike): Result;
     events: {};
 }
@@ -26,17 +26,17 @@ export interface TickEchidnaTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        checkTickSpacingToParametersInvariants(tickSpacing: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
+        checkTickSpacingToParametersInvariants(tickSpacing: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
     };
-    checkTickSpacingToParametersInvariants(tickSpacing: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    checkTickSpacingToParametersInvariants(tickSpacing: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     callStatic: {
-        checkTickSpacingToParametersInvariants(tickSpacing: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        checkTickSpacingToParametersInvariants(tickSpacing: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        checkTickSpacingToParametersInvariants(tickSpacing: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        checkTickSpacingToParametersInvariants(tickSpacing: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        checkTickSpacingToParametersInvariants(tickSpacing: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkTickSpacingToParametersInvariants(tickSpacing: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

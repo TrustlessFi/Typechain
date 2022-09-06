@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface EnumerableUint128SetTestableInterface extends utils.Interface {
@@ -42,17 +43,23 @@ export interface EnumerableUint128SetTestableInterface extends utils.Interface {
       | "remove"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "add", values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: "at", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "add",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "at",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "contains",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "getAll", values?: undefined): string;
   encodeFunctionData(functionFragment: "length", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "remove",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(functionFragment: "add", data: BytesLike): Result;
@@ -93,14 +100,17 @@ export interface EnumerableUint128SetTestable extends BaseContract {
 
   functions: {
     add(
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    at(index: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+    at(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     contains(
-      value: BigNumberish,
+      value: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
@@ -109,55 +119,76 @@ export interface EnumerableUint128SetTestable extends BaseContract {
     length(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     remove(
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   add(
-    value: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    value: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  at(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  at(
+    index: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  contains(value: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+  contains(
+    value: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   getAll(overrides?: CallOverrides): Promise<BigNumber[]>;
 
   length(overrides?: CallOverrides): Promise<BigNumber>;
 
   remove(
-    value: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    value: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    add(value: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    add(
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    at(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    at(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    contains(value: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    contains(
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     getAll(overrides?: CallOverrides): Promise<BigNumber[]>;
 
     length(overrides?: CallOverrides): Promise<BigNumber>;
 
-    remove(value: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    remove(
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {};
 
   estimateGas: {
     add(
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    at(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    at(
+      index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     contains(
-      value: BigNumberish,
+      value: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -166,24 +197,24 @@ export interface EnumerableUint128SetTestable extends BaseContract {
     length(overrides?: CallOverrides): Promise<BigNumber>;
 
     remove(
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     add(
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     at(
-      index: BigNumberish,
+      index: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     contains(
-      value: BigNumberish,
+      value: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -192,8 +223,8 @@ export interface EnumerableUint128SetTestable extends BaseContract {
     length(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     remove(
-      value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      value: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

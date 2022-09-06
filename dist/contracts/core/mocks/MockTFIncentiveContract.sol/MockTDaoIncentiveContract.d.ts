@@ -1,13 +1,13 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export interface MockTDaoIncentiveContractInterface extends utils.Interface {
     functions: {
         "mint(address,uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "mint"): FunctionFragment;
-    encodeFunctionData(functionFragment: "mint", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "mint", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
     events: {};
 }
@@ -26,25 +26,25 @@ export interface MockTDaoIncentiveContract extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        mint(dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    mint(dest: string, count: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    mint(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        mint(dest: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        mint(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        mint(dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        mint(dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

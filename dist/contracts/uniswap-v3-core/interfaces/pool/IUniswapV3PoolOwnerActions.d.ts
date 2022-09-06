@@ -1,15 +1,19 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export interface IUniswapV3PoolOwnerActionsInterface extends utils.Interface {
     functions: {
         "collectProtocol(address,uint128,uint128)": FunctionFragment;
         "setFeeProtocol(uint8,uint8)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "collectProtocol" | "setFeeProtocol"): FunctionFragment;
-    encodeFunctionData(functionFragment: "collectProtocol", values: [string, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setFeeProtocol", values: [BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "collectProtocol", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "setFeeProtocol", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "collectProtocol", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setFeeProtocol", data: BytesLike): Result;
     events: {};
@@ -29,44 +33,44 @@ export interface IUniswapV3PoolOwnerActions extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        collectProtocol(recipient: string, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collectProtocol(recipient: PromiseOrValue<string>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setFeeProtocol(feeProtocol0: BigNumberish, feeProtocol1: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setFeeProtocol(feeProtocol0: PromiseOrValue<BigNumberish>, feeProtocol1: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    collectProtocol(recipient: string, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    collectProtocol(recipient: PromiseOrValue<string>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setFeeProtocol(feeProtocol0: BigNumberish, feeProtocol1: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setFeeProtocol(feeProtocol0: PromiseOrValue<BigNumberish>, feeProtocol1: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        collectProtocol(recipient: string, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: CallOverrides): Promise<[
+        collectProtocol(recipient: PromiseOrValue<string>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
             amount0: BigNumber;
             amount1: BigNumber;
         }>;
-        setFeeProtocol(feeProtocol0: BigNumberish, feeProtocol1: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        setFeeProtocol(feeProtocol0: PromiseOrValue<BigNumberish>, feeProtocol1: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        collectProtocol(recipient: string, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collectProtocol(recipient: PromiseOrValue<string>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setFeeProtocol(feeProtocol0: BigNumberish, feeProtocol1: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setFeeProtocol(feeProtocol0: PromiseOrValue<BigNumberish>, feeProtocol1: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        collectProtocol(recipient: string, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collectProtocol(recipient: PromiseOrValue<string>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setFeeProtocol(feeProtocol0: BigNumberish, feeProtocol1: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setFeeProtocol(feeProtocol0: PromiseOrValue<BigNumberish>, feeProtocol1: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

@@ -24,13 +24,14 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export declare namespace IEnforcedDecentralization {
   export type ConstructorParamsStruct = {
-    Governor: string;
-    ProtocolLock: string;
-    Tcp: string;
+    Governor: PromiseOrValue<string>;
+    ProtocolLock: PromiseOrValue<string>;
+    Tcp: PromiseOrValue<string>;
   };
 
   export type ConstructorParamsStructOutput = [string, string, string] & {
@@ -76,7 +77,7 @@ export interface EnforcedDecentralizationInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "blacklistAction",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "currentPhase",
@@ -84,41 +85,41 @@ export interface EnforcedDecentralizationInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "delayPhaseStartTime",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "governor", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "isBlacklistedAction",
-    values: [string, BytesLike]
+    values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "isPermanentAction",
-    values: [string, BytesLike]
+    values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "isProtocolAction",
-    values: [string, BytesLike]
+    values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "isUpgradeAction",
-    values: [string, BytesLike]
+    values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "phaseInfo",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "requireValidAction",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setPhaseOneStartTime",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "validUpdate",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
 
   decodeFunctionResult(
@@ -261,46 +262,46 @@ export interface EnforcedDecentralization extends BaseContract {
 
   functions: {
     blacklistAction(
-      target: string,
-      signature: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     currentPhase(overrides?: CallOverrides): Promise<[number]>;
 
     delayPhaseStartTime(
-      phaseNumber: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      phaseNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     governor(overrides?: CallOverrides): Promise<[string]>;
 
     isBlacklistedAction(
-      arg0: string,
-      arg1: BytesLike,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     isPermanentAction(
-      target: string,
-      selector: BytesLike,
+      target: PromiseOrValue<string>,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     isProtocolAction(
-      target: string,
-      selector: BytesLike,
+      target: PromiseOrValue<string>,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     isUpgradeAction(
-      target: string,
-      selector: BytesLike,
+      target: PromiseOrValue<string>,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     phaseInfo(
-      arg0: BigNumberish,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, number] & {
@@ -310,62 +311,65 @@ export interface EnforcedDecentralization extends BaseContract {
     >;
 
     requireValidAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     setPhaseOneStartTime(
-      phaseOneStartTime: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      phaseOneStartTime: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     stopped(overrides?: CallOverrides): Promise<[boolean]>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
   };
 
   blacklistAction(
-    target: string,
-    signature: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    target: PromiseOrValue<string>,
+    signature: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   currentPhase(overrides?: CallOverrides): Promise<number>;
 
   delayPhaseStartTime(
-    phaseNumber: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    phaseNumber: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   governor(overrides?: CallOverrides): Promise<string>;
 
   isBlacklistedAction(
-    arg0: string,
-    arg1: BytesLike,
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   isPermanentAction(
-    target: string,
-    selector: BytesLike,
+    target: PromiseOrValue<string>,
+    selector: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   isProtocolAction(
-    target: string,
-    selector: BytesLike,
+    target: PromiseOrValue<string>,
+    selector: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   isUpgradeAction(
-    target: string,
-    selector: BytesLike,
+    target: PromiseOrValue<string>,
+    selector: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   phaseInfo(
-    arg0: BigNumberish,
+    arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<
     [BigNumber, number] & {
@@ -375,62 +379,65 @@ export interface EnforcedDecentralization extends BaseContract {
   >;
 
   requireValidAction(
-    target: string,
-    signature: string,
+    target: PromiseOrValue<string>,
+    signature: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   setPhaseOneStartTime(
-    phaseOneStartTime: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    phaseOneStartTime: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   stopped(overrides?: CallOverrides): Promise<boolean>;
 
-  validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  validUpdate(
+    arg0: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
     blacklistAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     currentPhase(overrides?: CallOverrides): Promise<number>;
 
     delayPhaseStartTime(
-      phaseNumber: BigNumberish,
+      phaseNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     governor(overrides?: CallOverrides): Promise<string>;
 
     isBlacklistedAction(
-      arg0: string,
-      arg1: BytesLike,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     isPermanentAction(
-      target: string,
-      selector: BytesLike,
+      target: PromiseOrValue<string>,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     isProtocolAction(
-      target: string,
-      selector: BytesLike,
+      target: PromiseOrValue<string>,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     isUpgradeAction(
-      target: string,
-      selector: BytesLike,
+      target: PromiseOrValue<string>,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     phaseInfo(
-      arg0: BigNumberish,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, number] & {
@@ -440,29 +447,32 @@ export interface EnforcedDecentralization extends BaseContract {
     >;
 
     requireValidAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setPhaseOneStartTime(
-      phaseOneStartTime: BigNumberish,
+      phaseOneStartTime: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     stopped(overrides?: CallOverrides): Promise<boolean>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
     "ActionBlacklisted(address,string)"(
-      target?: string | null,
-      signature?: string | null
+      target?: PromiseOrValue<string> | null,
+      signature?: PromiseOrValue<string> | null
     ): ActionBlacklistedEventFilter;
     ActionBlacklisted(
-      target?: string | null,
-      signature?: string | null
+      target?: PromiseOrValue<string> | null,
+      signature?: PromiseOrValue<string> | null
     ): ActionBlacklistedEventFilter;
 
     "PhaseOneStartTimeSet(uint64)"(
@@ -471,12 +481,12 @@ export interface EnforcedDecentralization extends BaseContract {
     PhaseOneStartTimeSet(startTime?: null): PhaseOneStartTimeSetEventFilter;
 
     "PhaseStartDelayed(uint8,uint64,uint8)"(
-      phase?: BigNumberish | null,
+      phase?: PromiseOrValue<BigNumberish> | null,
       startTime?: null,
       delaysRemaining?: null
     ): PhaseStartDelayedEventFilter;
     PhaseStartDelayed(
-      phase?: BigNumberish | null,
+      phase?: PromiseOrValue<BigNumberish> | null,
       startTime?: null,
       delaysRemaining?: null
     ): PhaseStartDelayedEventFilter;
@@ -496,125 +506,128 @@ export interface EnforcedDecentralization extends BaseContract {
 
   estimateGas: {
     blacklistAction(
-      target: string,
-      signature: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     currentPhase(overrides?: CallOverrides): Promise<BigNumber>;
 
     delayPhaseStartTime(
-      phaseNumber: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      phaseNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     governor(overrides?: CallOverrides): Promise<BigNumber>;
 
     isBlacklistedAction(
-      arg0: string,
-      arg1: BytesLike,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     isPermanentAction(
-      target: string,
-      selector: BytesLike,
+      target: PromiseOrValue<string>,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     isProtocolAction(
-      target: string,
-      selector: BytesLike,
+      target: PromiseOrValue<string>,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     isUpgradeAction(
-      target: string,
-      selector: BytesLike,
+      target: PromiseOrValue<string>,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     phaseInfo(
-      arg0: BigNumberish,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     requireValidAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     setPhaseOneStartTime(
-      phaseOneStartTime: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      phaseOneStartTime: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     stopped(overrides?: CallOverrides): Promise<BigNumber>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     blacklistAction(
-      target: string,
-      signature: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     currentPhase(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     delayPhaseStartTime(
-      phaseNumber: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      phaseNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     isBlacklistedAction(
-      arg0: string,
-      arg1: BytesLike,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     isPermanentAction(
-      target: string,
-      selector: BytesLike,
+      target: PromiseOrValue<string>,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     isProtocolAction(
-      target: string,
-      selector: BytesLike,
+      target: PromiseOrValue<string>,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     isUpgradeAction(
-      target: string,
-      selector: BytesLike,
+      target: PromiseOrValue<string>,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     phaseInfo(
-      arg0: BigNumberish,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     requireValidAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     setPhaseOneStartTime(
-      phaseOneStartTime: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      phaseOneStartTime: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     validUpdate(
-      arg0: BytesLike,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

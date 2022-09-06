@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface IProtocolLockInterface extends utils.Interface {
     functions: {
         "authorizeCaller(address)": FunctionFragment;
@@ -10,10 +10,10 @@ export interface IProtocolLockInterface extends utils.Interface {
         "unauthorizeCaller(address)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "authorizeCaller" | "enter" | "exit" | "unauthorizeCaller"): FunctionFragment;
-    encodeFunctionData(functionFragment: "authorizeCaller", values: [string]): string;
+    encodeFunctionData(functionFragment: "authorizeCaller", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "enter", values?: undefined): string;
     encodeFunctionData(functionFragment: "exit", values?: undefined): string;
-    encodeFunctionData(functionFragment: "unauthorizeCaller", values: [string]): string;
+    encodeFunctionData(functionFragment: "unauthorizeCaller", values: [PromiseOrValue<string>]): string;
     decodeFunctionResult(functionFragment: "authorizeCaller", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "enter", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "exit", data: BytesLike): Result;
@@ -54,69 +54,69 @@ export interface IProtocolLock extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        authorizeCaller(caller: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        authorizeCaller(caller: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         enter(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         exit(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        unauthorizeCaller(caller: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        unauthorizeCaller(caller: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    authorizeCaller(caller: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    authorizeCaller(caller: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     enter(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     exit(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    unauthorizeCaller(caller: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    unauthorizeCaller(caller: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        authorizeCaller(caller: string, overrides?: CallOverrides): Promise<void>;
+        authorizeCaller(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         enter(overrides?: CallOverrides): Promise<void>;
         exit(overrides?: CallOverrides): Promise<void>;
-        unauthorizeCaller(caller: string, overrides?: CallOverrides): Promise<void>;
+        unauthorizeCaller(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "CallerAuthorized(address)"(caller?: string | null): CallerAuthorizedEventFilter;
-        CallerAuthorized(caller?: string | null): CallerAuthorizedEventFilter;
-        "CallerUnauthorized(address)"(caller?: string | null): CallerUnauthorizedEventFilter;
-        CallerUnauthorized(caller?: string | null): CallerUnauthorizedEventFilter;
+        "CallerAuthorized(address)"(caller?: PromiseOrValue<string> | null): CallerAuthorizedEventFilter;
+        CallerAuthorized(caller?: PromiseOrValue<string> | null): CallerAuthorizedEventFilter;
+        "CallerUnauthorized(address)"(caller?: PromiseOrValue<string> | null): CallerUnauthorizedEventFilter;
+        CallerUnauthorized(caller?: PromiseOrValue<string> | null): CallerUnauthorizedEventFilter;
     };
     estimateGas: {
-        authorizeCaller(caller: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        authorizeCaller(caller: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         enter(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         exit(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        unauthorizeCaller(caller: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        unauthorizeCaller(caller: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        authorizeCaller(caller: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        authorizeCaller(caller: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         enter(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         exit(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        unauthorizeCaller(caller: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        unauthorizeCaller(caller: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

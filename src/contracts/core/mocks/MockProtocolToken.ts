@@ -19,6 +19,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface MockProtocolTokenInterface extends utils.Interface {
@@ -28,7 +29,10 @@ export interface MockProtocolTokenInterface extends utils.Interface {
 
   getFunction(nameOrSignatureOrTopic: "delegate"): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "delegate", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "delegate",
+    values: [PromiseOrValue<string>]
+  ): string;
 
   decodeFunctionResult(functionFragment: "delegate", data: BytesLike): Result;
 
@@ -63,33 +67,36 @@ export interface MockProtocolToken extends BaseContract {
 
   functions: {
     delegate(
-      delegatee: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      delegatee: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   delegate(
-    delegatee: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    delegatee: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    delegate(delegatee: string, overrides?: CallOverrides): Promise<void>;
+    delegate(
+      delegatee: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
     delegate(
-      delegatee: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      delegatee: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     delegate(
-      delegatee: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      delegatee: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

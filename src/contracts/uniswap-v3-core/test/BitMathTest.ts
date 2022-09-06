@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface BitMathTestInterface extends utils.Interface {
@@ -38,19 +39,19 @@ export interface BitMathTestInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "getGasCostOfLeastSignificantBit",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getGasCostOfMostSignificantBit",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "leastSignificantBit",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "mostSignificantBit",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -101,64 +102,64 @@ export interface BitMathTest extends BaseContract {
 
   functions: {
     getGasCostOfLeastSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     getGasCostOfMostSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     leastSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[number] & { r: number }>;
 
     mostSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[number] & { r: number }>;
   };
 
   getGasCostOfLeastSignificantBit(
-    x: BigNumberish,
+    x: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   getGasCostOfMostSignificantBit(
-    x: BigNumberish,
+    x: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   leastSignificantBit(
-    x: BigNumberish,
+    x: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<number>;
 
   mostSignificantBit(
-    x: BigNumberish,
+    x: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<number>;
 
   callStatic: {
     getGasCostOfLeastSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getGasCostOfMostSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     leastSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<number>;
 
     mostSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<number>;
   };
@@ -167,44 +168,44 @@ export interface BitMathTest extends BaseContract {
 
   estimateGas: {
     getGasCostOfLeastSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getGasCostOfMostSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     leastSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     mostSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     getGasCostOfLeastSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getGasCostOfMostSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     leastSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     mostSignificantBit(
-      x: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface UnsafeMathEchidnaTestInterface extends utils.Interface {
@@ -29,7 +30,7 @@ export interface UnsafeMathEchidnaTestInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "checkDivRoundingUp",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -68,22 +69,22 @@ export interface UnsafeMathEchidnaTest extends BaseContract {
 
   functions: {
     checkDivRoundingUp(
-      x: BigNumberish,
-      d: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      d: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[void]>;
   };
 
   checkDivRoundingUp(
-    x: BigNumberish,
-    d: BigNumberish,
+    x: PromiseOrValue<BigNumberish>,
+    d: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   callStatic: {
     checkDivRoundingUp(
-      x: BigNumberish,
-      d: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      d: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -92,16 +93,16 @@ export interface UnsafeMathEchidnaTest extends BaseContract {
 
   estimateGas: {
     checkDivRoundingUp(
-      x: BigNumberish,
-      d: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      d: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     checkDivRoundingUp(
-      x: BigNumberish,
-      d: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      d: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TimeTestableInterface extends utils.Interface {
     functions: {
         "currentPeriod()": FunctionFragment;
@@ -17,11 +17,11 @@ export interface TimeTestableInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "currentPeriod", values?: undefined): string;
     encodeFunctionData(functionFragment: "currentTime", values?: undefined): string;
     encodeFunctionData(functionFragment: "firstPeriod", values?: undefined): string;
-    encodeFunctionData(functionFragment: "futureTime", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "futureTime", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "getPeriodLength", values?: undefined): string;
     encodeFunctionData(functionFragment: "periodLength", values?: undefined): string;
-    encodeFunctionData(functionFragment: "periodToTime", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "timeToPeriod", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "periodToTime", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "timeToPeriod", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "currentPeriod", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "currentTime", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "firstPeriod", data: BytesLike): Result;
@@ -54,57 +54,57 @@ export interface TimeTestable extends BaseContract {
             time: BigNumber;
         }>;
         firstPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
-        futureTime(addition: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber] & {
+        futureTime(addition: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber] & {
             time: BigNumber;
         }>;
         getPeriodLength(overrides?: CallOverrides): Promise<[BigNumber] & {
             length: BigNumber;
         }>;
         periodLength(overrides?: CallOverrides): Promise<[BigNumber]>;
-        periodToTime(period: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber] & {
+        periodToTime(period: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber] & {
             time: BigNumber;
         }>;
-        timeToPeriod(time: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber] & {
+        timeToPeriod(time: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber] & {
             period: BigNumber;
         }>;
     };
     currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
     currentTime(overrides?: CallOverrides): Promise<BigNumber>;
     firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
-    futureTime(addition: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    futureTime(addition: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     getPeriodLength(overrides?: CallOverrides): Promise<BigNumber>;
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-    periodToTime(period: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    timeToPeriod(time: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    periodToTime(period: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    timeToPeriod(time: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     callStatic: {
         currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
         currentTime(overrides?: CallOverrides): Promise<BigNumber>;
         firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
-        futureTime(addition: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        futureTime(addition: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         getPeriodLength(overrides?: CallOverrides): Promise<BigNumber>;
         periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-        periodToTime(period: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        timeToPeriod(time: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        periodToTime(period: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        timeToPeriod(time: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {};
     estimateGas: {
         currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
         currentTime(overrides?: CallOverrides): Promise<BigNumber>;
         firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
-        futureTime(addition: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        futureTime(addition: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         getPeriodLength(overrides?: CallOverrides): Promise<BigNumber>;
         periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-        periodToTime(period: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        timeToPeriod(time: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        periodToTime(period: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        timeToPeriod(time: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         currentPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         currentTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         firstPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        futureTime(addition: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        futureTime(addition: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getPeriodLength(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         periodLength(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        periodToTime(period: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        timeToPeriod(time: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        periodToTime(period: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        timeToPeriod(time: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

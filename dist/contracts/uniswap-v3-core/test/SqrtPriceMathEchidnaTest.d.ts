@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface SqrtPriceMathEchidnaTestInterface extends utils.Interface {
     functions: {
         "getAmount0DeltaEquivalency(uint160,uint160,uint128,bool)": FunctionFragment;
@@ -18,18 +18,72 @@ export interface SqrtPriceMathEchidnaTestInterface extends utils.Interface {
         "mulDivRoundingUpInvariants(uint256,uint256,uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "getAmount0DeltaEquivalency" | "getAmount0DeltaInvariants" | "getAmount0DeltaSignedInvariants" | "getAmount1DeltaInvariants" | "getAmount1DeltaSignedInvariants" | "getInRangeMintInvariants" | "getNextSqrtPriceFromAmount0RoundingUpInvariants" | "getNextSqrtPriceFromAmount1RoundingDownInvariants" | "getNextSqrtPriceFromInputInvariants" | "getNextSqrtPriceFromOutputInvariants" | "getOutOfRangeMintInvariants" | "mulDivRoundingUpInvariants"): FunctionFragment;
-    encodeFunctionData(functionFragment: "getAmount0DeltaEquivalency", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "getAmount0DeltaInvariants", values: [BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getAmount0DeltaSignedInvariants", values: [BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getAmount1DeltaInvariants", values: [BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getAmount1DeltaSignedInvariants", values: [BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getInRangeMintInvariants", values: [BigNumberish, BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getNextSqrtPriceFromAmount0RoundingUpInvariants", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "getNextSqrtPriceFromAmount1RoundingDownInvariants", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "getNextSqrtPriceFromInputInvariants", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "getNextSqrtPriceFromOutputInvariants", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "getOutOfRangeMintInvariants", values: [BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "mulDivRoundingUpInvariants", values: [BigNumberish, BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "getAmount0DeltaEquivalency", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
+    encodeFunctionData(functionFragment: "getAmount0DeltaInvariants", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "getAmount0DeltaSignedInvariants", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "getAmount1DeltaInvariants", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "getAmount1DeltaSignedInvariants", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "getInRangeMintInvariants", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "getNextSqrtPriceFromAmount0RoundingUpInvariants", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
+    encodeFunctionData(functionFragment: "getNextSqrtPriceFromAmount1RoundingDownInvariants", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
+    encodeFunctionData(functionFragment: "getNextSqrtPriceFromInputInvariants", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
+    encodeFunctionData(functionFragment: "getNextSqrtPriceFromOutputInvariants", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
+    encodeFunctionData(functionFragment: "getOutOfRangeMintInvariants", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "mulDivRoundingUpInvariants", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     decodeFunctionResult(functionFragment: "getAmount0DeltaEquivalency", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getAmount0DeltaInvariants", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getAmount0DeltaSignedInvariants", data: BytesLike): Result;
@@ -59,72 +113,72 @@ export interface SqrtPriceMathEchidnaTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        getAmount0DeltaEquivalency(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<[void]>;
-        getAmount0DeltaInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        getAmount0DeltaSignedInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        getAmount1DeltaInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        getAmount1DeltaSignedInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        getInRangeMintInvariants(sqrtLower: BigNumberish, sqrtCurrent: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        getNextSqrtPriceFromAmount0RoundingUpInvariants(sqrtPX96: BigNumberish, liquidity: BigNumberish, amount: BigNumberish, add: boolean, overrides?: CallOverrides): Promise<[void]>;
-        getNextSqrtPriceFromAmount1RoundingDownInvariants(sqrtPX96: BigNumberish, liquidity: BigNumberish, amount: BigNumberish, add: boolean, overrides?: CallOverrides): Promise<[void]>;
-        getNextSqrtPriceFromInputInvariants(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<[void]>;
-        getNextSqrtPriceFromOutputInvariants(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<[void]>;
-        getOutOfRangeMintInvariants(sqrtA: BigNumberish, sqrtB: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        mulDivRoundingUpInvariants(x: BigNumberish, y: BigNumberish, z: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
+        getAmount0DeltaEquivalency(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[void]>;
+        getAmount0DeltaInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        getAmount0DeltaSignedInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        getAmount1DeltaInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        getAmount1DeltaSignedInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        getInRangeMintInvariants(sqrtLower: PromiseOrValue<BigNumberish>, sqrtCurrent: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        getNextSqrtPriceFromAmount0RoundingUpInvariants(sqrtPX96: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, add: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[void]>;
+        getNextSqrtPriceFromAmount1RoundingDownInvariants(sqrtPX96: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, add: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[void]>;
+        getNextSqrtPriceFromInputInvariants(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[void]>;
+        getNextSqrtPriceFromOutputInvariants(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[void]>;
+        getOutOfRangeMintInvariants(sqrtA: PromiseOrValue<BigNumberish>, sqrtB: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        mulDivRoundingUpInvariants(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, z: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
     };
-    getAmount0DeltaEquivalency(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<void>;
-    getAmount0DeltaInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    getAmount0DeltaSignedInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    getAmount1DeltaInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    getAmount1DeltaSignedInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    getInRangeMintInvariants(sqrtLower: BigNumberish, sqrtCurrent: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    getNextSqrtPriceFromAmount0RoundingUpInvariants(sqrtPX96: BigNumberish, liquidity: BigNumberish, amount: BigNumberish, add: boolean, overrides?: CallOverrides): Promise<void>;
-    getNextSqrtPriceFromAmount1RoundingDownInvariants(sqrtPX96: BigNumberish, liquidity: BigNumberish, amount: BigNumberish, add: boolean, overrides?: CallOverrides): Promise<void>;
-    getNextSqrtPriceFromInputInvariants(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<void>;
-    getNextSqrtPriceFromOutputInvariants(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<void>;
-    getOutOfRangeMintInvariants(sqrtA: BigNumberish, sqrtB: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    mulDivRoundingUpInvariants(x: BigNumberish, y: BigNumberish, z: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    getAmount0DeltaEquivalency(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+    getAmount0DeltaInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    getAmount0DeltaSignedInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    getAmount1DeltaInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    getAmount1DeltaSignedInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    getInRangeMintInvariants(sqrtLower: PromiseOrValue<BigNumberish>, sqrtCurrent: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    getNextSqrtPriceFromAmount0RoundingUpInvariants(sqrtPX96: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, add: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+    getNextSqrtPriceFromAmount1RoundingDownInvariants(sqrtPX96: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, add: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+    getNextSqrtPriceFromInputInvariants(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+    getNextSqrtPriceFromOutputInvariants(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+    getOutOfRangeMintInvariants(sqrtA: PromiseOrValue<BigNumberish>, sqrtB: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    mulDivRoundingUpInvariants(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, z: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     callStatic: {
-        getAmount0DeltaEquivalency(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<void>;
-        getAmount0DeltaInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        getAmount0DeltaSignedInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        getAmount1DeltaInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        getAmount1DeltaSignedInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        getInRangeMintInvariants(sqrtLower: BigNumberish, sqrtCurrent: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        getNextSqrtPriceFromAmount0RoundingUpInvariants(sqrtPX96: BigNumberish, liquidity: BigNumberish, amount: BigNumberish, add: boolean, overrides?: CallOverrides): Promise<void>;
-        getNextSqrtPriceFromAmount1RoundingDownInvariants(sqrtPX96: BigNumberish, liquidity: BigNumberish, amount: BigNumberish, add: boolean, overrides?: CallOverrides): Promise<void>;
-        getNextSqrtPriceFromInputInvariants(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<void>;
-        getNextSqrtPriceFromOutputInvariants(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<void>;
-        getOutOfRangeMintInvariants(sqrtA: BigNumberish, sqrtB: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        mulDivRoundingUpInvariants(x: BigNumberish, y: BigNumberish, z: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        getAmount0DeltaEquivalency(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        getAmount0DeltaInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        getAmount0DeltaSignedInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        getAmount1DeltaInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        getAmount1DeltaSignedInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        getInRangeMintInvariants(sqrtLower: PromiseOrValue<BigNumberish>, sqrtCurrent: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        getNextSqrtPriceFromAmount0RoundingUpInvariants(sqrtPX96: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, add: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        getNextSqrtPriceFromAmount1RoundingDownInvariants(sqrtPX96: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, add: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        getNextSqrtPriceFromInputInvariants(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        getNextSqrtPriceFromOutputInvariants(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        getOutOfRangeMintInvariants(sqrtA: PromiseOrValue<BigNumberish>, sqrtB: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        mulDivRoundingUpInvariants(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, z: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        getAmount0DeltaEquivalency(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getAmount0DeltaInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getAmount0DeltaSignedInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getAmount1DeltaInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getAmount1DeltaSignedInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getInRangeMintInvariants(sqrtLower: BigNumberish, sqrtCurrent: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getNextSqrtPriceFromAmount0RoundingUpInvariants(sqrtPX96: BigNumberish, liquidity: BigNumberish, amount: BigNumberish, add: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getNextSqrtPriceFromAmount1RoundingDownInvariants(sqrtPX96: BigNumberish, liquidity: BigNumberish, amount: BigNumberish, add: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getNextSqrtPriceFromInputInvariants(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getNextSqrtPriceFromOutputInvariants(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getOutOfRangeMintInvariants(sqrtA: BigNumberish, sqrtB: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        mulDivRoundingUpInvariants(x: BigNumberish, y: BigNumberish, z: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getAmount0DeltaEquivalency(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getAmount0DeltaInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getAmount0DeltaSignedInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getAmount1DeltaInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getAmount1DeltaSignedInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getInRangeMintInvariants(sqrtLower: PromiseOrValue<BigNumberish>, sqrtCurrent: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getNextSqrtPriceFromAmount0RoundingUpInvariants(sqrtPX96: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, add: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getNextSqrtPriceFromAmount1RoundingDownInvariants(sqrtPX96: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, add: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getNextSqrtPriceFromInputInvariants(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getNextSqrtPriceFromOutputInvariants(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getOutOfRangeMintInvariants(sqrtA: PromiseOrValue<BigNumberish>, sqrtB: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        mulDivRoundingUpInvariants(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, z: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        getAmount0DeltaEquivalency(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getAmount0DeltaInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getAmount0DeltaSignedInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getAmount1DeltaInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getAmount1DeltaSignedInvariants(sqrtP: BigNumberish, sqrtQ: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getInRangeMintInvariants(sqrtLower: BigNumberish, sqrtCurrent: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getNextSqrtPriceFromAmount0RoundingUpInvariants(sqrtPX96: BigNumberish, liquidity: BigNumberish, amount: BigNumberish, add: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getNextSqrtPriceFromAmount1RoundingDownInvariants(sqrtPX96: BigNumberish, liquidity: BigNumberish, amount: BigNumberish, add: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getNextSqrtPriceFromInputInvariants(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getNextSqrtPriceFromOutputInvariants(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getOutOfRangeMintInvariants(sqrtA: BigNumberish, sqrtB: BigNumberish, liquidity: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        mulDivRoundingUpInvariants(x: BigNumberish, y: BigNumberish, z: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getAmount0DeltaEquivalency(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getAmount0DeltaInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getAmount0DeltaSignedInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getAmount1DeltaInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getAmount1DeltaSignedInvariants(sqrtP: PromiseOrValue<BigNumberish>, sqrtQ: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getInRangeMintInvariants(sqrtLower: PromiseOrValue<BigNumberish>, sqrtCurrent: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getNextSqrtPriceFromAmount0RoundingUpInvariants(sqrtPX96: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, add: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getNextSqrtPriceFromAmount1RoundingDownInvariants(sqrtPX96: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, add: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getNextSqrtPriceFromInputInvariants(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getNextSqrtPriceFromOutputInvariants(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getOutOfRangeMintInvariants(sqrtA: PromiseOrValue<BigNumberish>, sqrtB: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        mulDivRoundingUpInvariants(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, z: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

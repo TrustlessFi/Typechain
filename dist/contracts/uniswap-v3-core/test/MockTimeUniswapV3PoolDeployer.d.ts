@@ -1,14 +1,20 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface MockTimeUniswapV3PoolDeployerInterface extends utils.Interface {
     functions: {
         "deploy(address,address,address,uint24,int24)": FunctionFragment;
         "parameters()": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "deploy" | "parameters"): FunctionFragment;
-    encodeFunctionData(functionFragment: "deploy", values: [string, string, string, BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "deploy", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     encodeFunctionData(functionFragment: "parameters", values?: undefined): string;
     decodeFunctionResult(functionFragment: "deploy", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "parameters", data: BytesLike): Result;
@@ -37,8 +43,8 @@ export interface MockTimeUniswapV3PoolDeployer extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        deploy(factory: string, token0: string, token1: string, fee: BigNumberish, tickSpacing: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        deploy(factory: PromiseOrValue<string>, token0: PromiseOrValue<string>, token1: PromiseOrValue<string>, fee: PromiseOrValue<BigNumberish>, tickSpacing: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         parameters(overrides?: CallOverrides): Promise<[
             string,
@@ -54,8 +60,8 @@ export interface MockTimeUniswapV3PoolDeployer extends BaseContract {
             tickSpacing: number;
         }>;
     };
-    deploy(factory: string, token0: string, token1: string, fee: BigNumberish, tickSpacing: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    deploy(factory: PromiseOrValue<string>, token0: PromiseOrValue<string>, token1: PromiseOrValue<string>, fee: PromiseOrValue<BigNumberish>, tickSpacing: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     parameters(overrides?: CallOverrides): Promise<[
         string,
@@ -71,7 +77,7 @@ export interface MockTimeUniswapV3PoolDeployer extends BaseContract {
         tickSpacing: number;
     }>;
     callStatic: {
-        deploy(factory: string, token0: string, token1: string, fee: BigNumberish, tickSpacing: BigNumberish, overrides?: CallOverrides): Promise<string>;
+        deploy(factory: PromiseOrValue<string>, token0: PromiseOrValue<string>, token1: PromiseOrValue<string>, fee: PromiseOrValue<BigNumberish>, tickSpacing: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
         parameters(overrides?: CallOverrides): Promise<[
             string,
             string,
@@ -91,14 +97,14 @@ export interface MockTimeUniswapV3PoolDeployer extends BaseContract {
         PoolDeployed(pool?: null): PoolDeployedEventFilter;
     };
     estimateGas: {
-        deploy(factory: string, token0: string, token1: string, fee: BigNumberish, tickSpacing: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        deploy(factory: PromiseOrValue<string>, token0: PromiseOrValue<string>, token1: PromiseOrValue<string>, fee: PromiseOrValue<BigNumberish>, tickSpacing: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         parameters(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        deploy(factory: string, token0: string, token1: string, fee: BigNumberish, tickSpacing: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        deploy(factory: PromiseOrValue<string>, token0: PromiseOrValue<string>, token1: PromiseOrValue<string>, fee: PromiseOrValue<BigNumberish>, tickSpacing: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         parameters(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };

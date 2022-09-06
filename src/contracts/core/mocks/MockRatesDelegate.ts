@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface MockRatesDelegateInterface extends utils.Interface {
@@ -37,7 +38,7 @@ export interface MockRatesDelegateInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "guardian", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "update",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
@@ -79,8 +80,8 @@ export interface MockRatesDelegate extends BaseContract {
     guardian(overrides?: CallOverrides): Promise<[string]>;
 
     update(
-      newRate: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newRate: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
@@ -89,8 +90,8 @@ export interface MockRatesDelegate extends BaseContract {
   guardian(overrides?: CallOverrides): Promise<string>;
 
   update(
-    newRate: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    newRate: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -98,7 +99,10 @@ export interface MockRatesDelegate extends BaseContract {
 
     guardian(overrides?: CallOverrides): Promise<string>;
 
-    update(newRate: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    update(
+      newRate: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {};
@@ -109,8 +113,8 @@ export interface MockRatesDelegate extends BaseContract {
     guardian(overrides?: CallOverrides): Promise<BigNumber>;
 
     update(
-      newRate: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newRate: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -120,8 +124,8 @@ export interface MockRatesDelegate extends BaseContract {
     guardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     update(
-      newRate: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newRate: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

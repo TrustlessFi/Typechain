@@ -20,17 +20,24 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export declare namespace Multicall2 {
-  export type CallStruct = { target: string; callData: BytesLike };
+  export type CallStruct = {
+    target: PromiseOrValue<string>;
+    callData: PromiseOrValue<BytesLike>;
+  };
 
   export type CallStructOutput = [string, string] & {
     target: string;
     callData: string;
   };
 
-  export type ResultStruct = { success: boolean; returnData: BytesLike };
+  export type ResultStruct = {
+    success: PromiseOrValue<boolean>;
+    returnData: PromiseOrValue<BytesLike>;
+  };
 
   export type ResultStructOutput = [boolean, string] & {
     success: boolean;
@@ -80,7 +87,7 @@ export interface Multicall2Interface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getBlockHash",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getBlockNumber",
@@ -104,7 +111,7 @@ export interface Multicall2Interface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getEthBalance",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getLastBlockHash",
@@ -112,11 +119,11 @@ export interface Multicall2Interface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "tryAggregate",
-    values: [boolean, Multicall2.CallStruct[]]
+    values: [PromiseOrValue<boolean>, Multicall2.CallStruct[]]
   ): string;
   encodeFunctionData(
     functionFragment: "tryBlockAndAggregate",
-    values: [boolean, Multicall2.CallStruct[]]
+    values: [PromiseOrValue<boolean>, Multicall2.CallStruct[]]
   ): string;
 
   decodeFunctionResult(functionFragment: "aggregate", data: BytesLike): Result;
@@ -197,16 +204,16 @@ export interface Multicall2 extends BaseContract {
   functions: {
     aggregate(
       calls: Multicall2.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     blockAndAggregate(
       calls: Multicall2.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getBlockHash(
-      blockNumber: BigNumberish,
+      blockNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string] & { blockHash: string }>;
 
@@ -231,7 +238,7 @@ export interface Multicall2 extends BaseContract {
     ): Promise<[BigNumber] & { timestamp: BigNumber }>;
 
     getEthBalance(
-      addr: string,
+      addr: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { balance: BigNumber }>;
 
@@ -240,30 +247,30 @@ export interface Multicall2 extends BaseContract {
     ): Promise<[string] & { blockHash: string }>;
 
     tryAggregate(
-      requireSuccess: boolean,
+      requireSuccess: PromiseOrValue<boolean>,
       calls: Multicall2.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     tryBlockAndAggregate(
-      requireSuccess: boolean,
+      requireSuccess: PromiseOrValue<boolean>,
       calls: Multicall2.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   aggregate(
     calls: Multicall2.CallStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   blockAndAggregate(
     calls: Multicall2.CallStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getBlockHash(
-    blockNumber: BigNumberish,
+    blockNumber: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -277,20 +284,23 @@ export interface Multicall2 extends BaseContract {
 
   getCurrentBlockTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-  getEthBalance(addr: string, overrides?: CallOverrides): Promise<BigNumber>;
+  getEthBalance(
+    addr: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   getLastBlockHash(overrides?: CallOverrides): Promise<string>;
 
   tryAggregate(
-    requireSuccess: boolean,
+    requireSuccess: PromiseOrValue<boolean>,
     calls: Multicall2.CallStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   tryBlockAndAggregate(
-    requireSuccess: boolean,
+    requireSuccess: PromiseOrValue<boolean>,
     calls: Multicall2.CallStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -313,7 +323,7 @@ export interface Multicall2 extends BaseContract {
     >;
 
     getBlockHash(
-      blockNumber: BigNumberish,
+      blockNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -327,18 +337,21 @@ export interface Multicall2 extends BaseContract {
 
     getCurrentBlockTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getEthBalance(addr: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getEthBalance(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     getLastBlockHash(overrides?: CallOverrides): Promise<string>;
 
     tryAggregate(
-      requireSuccess: boolean,
+      requireSuccess: PromiseOrValue<boolean>,
       calls: Multicall2.CallStruct[],
       overrides?: CallOverrides
     ): Promise<Multicall2.ResultStructOutput[]>;
 
     tryBlockAndAggregate(
-      requireSuccess: boolean,
+      requireSuccess: PromiseOrValue<boolean>,
       calls: Multicall2.CallStruct[],
       overrides?: CallOverrides
     ): Promise<
@@ -355,16 +368,16 @@ export interface Multicall2 extends BaseContract {
   estimateGas: {
     aggregate(
       calls: Multicall2.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     blockAndAggregate(
       calls: Multicall2.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getBlockHash(
-      blockNumber: BigNumberish,
+      blockNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -378,36 +391,39 @@ export interface Multicall2 extends BaseContract {
 
     getCurrentBlockTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getEthBalance(addr: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getEthBalance(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     getLastBlockHash(overrides?: CallOverrides): Promise<BigNumber>;
 
     tryAggregate(
-      requireSuccess: boolean,
+      requireSuccess: PromiseOrValue<boolean>,
       calls: Multicall2.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     tryBlockAndAggregate(
-      requireSuccess: boolean,
+      requireSuccess: PromiseOrValue<boolean>,
       calls: Multicall2.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     aggregate(
       calls: Multicall2.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     blockAndAggregate(
       calls: Multicall2.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getBlockHash(
-      blockNumber: BigNumberish,
+      blockNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -430,22 +446,22 @@ export interface Multicall2 extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     getEthBalance(
-      addr: string,
+      addr: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getLastBlockHash(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     tryAggregate(
-      requireSuccess: boolean,
+      requireSuccess: PromiseOrValue<boolean>,
       calls: Multicall2.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     tryBlockAndAggregate(
-      requireSuccess: boolean,
+      requireSuccess: PromiseOrValue<boolean>,
       calls: Multicall2.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

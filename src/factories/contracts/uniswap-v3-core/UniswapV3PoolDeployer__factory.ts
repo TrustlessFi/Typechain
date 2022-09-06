@@ -3,6 +3,7 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../../../common";
 import type {
   UniswapV3PoolDeployer,
   UniswapV3PoolDeployerInterface,
@@ -45,7 +46,7 @@ const _abi = [
 ];
 
 const _bytecode =
-  "0x60806040523480156100115760006000fd5b50610017565b610188806100266000396000f3fe60806040523480156100115760006000fd5b50600436106100305760003560e01c8063890357301461003657610030565b60006000fd5b61003e610058565b60405161004f9594939291906100ff565b60405180910390f35b60006000508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060020160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060020160149054906101000a900462ffffff16908060020160179054906101000a900460020b90508556610151565b600060a08201905073ffffffffffffffffffffffffffffffffffffffff8088168352808716602084015280861660408401525062ffffff841660608301528260020b60808301525b9695505050505050565bfea26469706673582212207bccd6fdfbb5cebac01a012c510b36f76c2db4198abf8fda244eedd2e1c6d18164736f6c634300080c0033";
+  "0x60806040523480156100115760006000fd5b50610017565b610188806100266000396000f3fe60806040523480156100115760006000fd5b50600436106100305760003560e01c8063890357301461003657610030565b60006000fd5b61003e610058565b60405161004f9594939291906100ff565b60405180910390f35b60006000508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060020160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060020160149054906101000a900462ffffff16908060020160179054906101000a900460020b90508556610151565b600060a08201905073ffffffffffffffffffffffffffffffffffffffff8088168352808716602084015280861660408401525062ffffff841660608301528260020b60808301525b9695505050505050565bfea264697066735822122053b74d2a23f0181295507fd904efff84beb0f68a75d6d398f1c2d79f358c5df264736f6c63430008100033";
 
 type UniswapV3PoolDeployerConstructorParams =
   | [signer?: Signer]
@@ -65,12 +66,12 @@ export class UniswapV3PoolDeployer__factory extends ContractFactory {
   }
 
   override deploy(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<UniswapV3PoolDeployer> {
     return super.deploy(overrides || {}) as Promise<UniswapV3PoolDeployer>;
   }
   override getDeployTransaction(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }

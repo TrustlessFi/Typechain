@@ -1,13 +1,13 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface UnsafeMathEchidnaTestInterface extends utils.Interface {
     functions: {
         "checkDivRoundingUp(uint256,uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "checkDivRoundingUp"): FunctionFragment;
-    encodeFunctionData(functionFragment: "checkDivRoundingUp", values: [BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "checkDivRoundingUp", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "checkDivRoundingUp", data: BytesLike): Result;
     events: {};
 }
@@ -26,17 +26,17 @@ export interface UnsafeMathEchidnaTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        checkDivRoundingUp(x: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
+        checkDivRoundingUp(x: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
     };
-    checkDivRoundingUp(x: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    checkDivRoundingUp(x: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     callStatic: {
-        checkDivRoundingUp(x: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        checkDivRoundingUp(x: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        checkDivRoundingUp(x: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        checkDivRoundingUp(x: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        checkDivRoundingUp(x: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkDivRoundingUp(x: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

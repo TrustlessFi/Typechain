@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface FullMathEchidnaTestInterface extends utils.Interface {
     functions: {
         "checkMulDiv(uint256,uint256,uint256)": FunctionFragment;
@@ -9,9 +9,21 @@ export interface FullMathEchidnaTestInterface extends utils.Interface {
         "checkMulDivRoundingUp(uint256,uint256,uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "checkMulDiv" | "checkMulDivRounding" | "checkMulDivRoundingUp"): FunctionFragment;
-    encodeFunctionData(functionFragment: "checkMulDiv", values: [BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "checkMulDivRounding", values: [BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "checkMulDivRoundingUp", values: [BigNumberish, BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "checkMulDiv", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "checkMulDivRounding", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "checkMulDivRoundingUp", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     decodeFunctionResult(functionFragment: "checkMulDiv", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "checkMulDivRounding", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "checkMulDivRoundingUp", data: BytesLike): Result;
@@ -32,27 +44,27 @@ export interface FullMathEchidnaTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        checkMulDiv(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        checkMulDivRounding(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        checkMulDivRoundingUp(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
+        checkMulDiv(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        checkMulDivRounding(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        checkMulDivRoundingUp(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
     };
-    checkMulDiv(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    checkMulDivRounding(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    checkMulDivRoundingUp(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    checkMulDiv(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    checkMulDivRounding(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    checkMulDivRoundingUp(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     callStatic: {
-        checkMulDiv(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        checkMulDivRounding(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        checkMulDivRoundingUp(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        checkMulDiv(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        checkMulDivRounding(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        checkMulDivRoundingUp(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        checkMulDiv(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        checkMulDivRounding(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        checkMulDivRoundingUp(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        checkMulDiv(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        checkMulDivRounding(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        checkMulDivRoundingUp(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        checkMulDiv(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        checkMulDivRounding(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        checkMulDivRoundingUp(x: BigNumberish, y: BigNumberish, d: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkMulDiv(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkMulDivRounding(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkMulDivRoundingUp(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, d: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

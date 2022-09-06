@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TickOverflowSafetyEchidnaTestInterface extends utils.Interface {
     functions: {
         "increaseFeeGrowthGlobal0X128(uint256)": FunctionFragment;
@@ -10,10 +10,14 @@ export interface TickOverflowSafetyEchidnaTestInterface extends utils.Interface 
         "setPosition(int24,int24,int128)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "increaseFeeGrowthGlobal0X128" | "increaseFeeGrowthGlobal1X128" | "moveToTick" | "setPosition"): FunctionFragment;
-    encodeFunctionData(functionFragment: "increaseFeeGrowthGlobal0X128", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "increaseFeeGrowthGlobal1X128", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "moveToTick", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setPosition", values: [BigNumberish, BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "increaseFeeGrowthGlobal0X128", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "increaseFeeGrowthGlobal1X128", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "moveToTick", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setPosition", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     decodeFunctionResult(functionFragment: "increaseFeeGrowthGlobal0X128", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "increaseFeeGrowthGlobal1X128", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "moveToTick", data: BytesLike): Result;
@@ -35,64 +39,64 @@ export interface TickOverflowSafetyEchidnaTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        increaseFeeGrowthGlobal0X128(amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseFeeGrowthGlobal0X128(amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        increaseFeeGrowthGlobal1X128(amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseFeeGrowthGlobal1X128(amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        moveToTick(target: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        moveToTick(target: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setPosition(tickLower: BigNumberish, tickUpper: BigNumberish, liquidityDelta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setPosition(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, liquidityDelta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    increaseFeeGrowthGlobal0X128(amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    increaseFeeGrowthGlobal0X128(amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    increaseFeeGrowthGlobal1X128(amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    increaseFeeGrowthGlobal1X128(amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    moveToTick(target: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    moveToTick(target: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setPosition(tickLower: BigNumberish, tickUpper: BigNumberish, liquidityDelta: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setPosition(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, liquidityDelta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        increaseFeeGrowthGlobal0X128(amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        increaseFeeGrowthGlobal1X128(amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        moveToTick(target: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setPosition(tickLower: BigNumberish, tickUpper: BigNumberish, liquidityDelta: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        increaseFeeGrowthGlobal0X128(amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        increaseFeeGrowthGlobal1X128(amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        moveToTick(target: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setPosition(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, liquidityDelta: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        increaseFeeGrowthGlobal0X128(amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseFeeGrowthGlobal0X128(amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        increaseFeeGrowthGlobal1X128(amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseFeeGrowthGlobal1X128(amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        moveToTick(target: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        moveToTick(target: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setPosition(tickLower: BigNumberish, tickUpper: BigNumberish, liquidityDelta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setPosition(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, liquidityDelta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        increaseFeeGrowthGlobal0X128(amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseFeeGrowthGlobal0X128(amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        increaseFeeGrowthGlobal1X128(amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseFeeGrowthGlobal1X128(amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        moveToTick(target: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        moveToTick(target: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setPosition(tickLower: BigNumberish, tickUpper: BigNumberish, liquidityDelta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setPosition(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, liquidityDelta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

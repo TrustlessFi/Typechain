@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface MockGovernorInterface extends utils.Interface {
@@ -44,15 +45,23 @@ export interface MockGovernorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "execute",
-    values: [string, string, BytesLike]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "mintTo",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "requireValidAction",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
 
   decodeFunctionResult(
@@ -99,22 +108,22 @@ export interface MockGovernor extends BaseContract {
     currentPhase(overrides?: CallOverrides): Promise<[number]>;
 
     execute(
-      arg0: string,
-      arg1: string,
-      arg2: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     mintTo(
-      token: string,
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     requireValidAction(
-      arg0: string,
-      arg1: string,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[void]>;
   };
@@ -122,22 +131,22 @@ export interface MockGovernor extends BaseContract {
   currentPhase(overrides?: CallOverrides): Promise<number>;
 
   execute(
-    arg0: string,
-    arg1: string,
-    arg2: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
+    arg2: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   mintTo(
-    token: string,
-    dest: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    dest: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   requireValidAction(
-    arg0: string,
-    arg1: string,
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<void>;
 
@@ -145,22 +154,22 @@ export interface MockGovernor extends BaseContract {
     currentPhase(overrides?: CallOverrides): Promise<number>;
 
     execute(
-      arg0: string,
-      arg1: string,
-      arg2: BytesLike,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, string] & { success: boolean; returnData: string }>;
 
     mintTo(
-      token: string,
-      dest: string,
-      count: BigNumberish,
+      token: PromiseOrValue<string>,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     requireValidAction(
-      arg0: string,
-      arg1: string,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -171,22 +180,22 @@ export interface MockGovernor extends BaseContract {
     currentPhase(overrides?: CallOverrides): Promise<BigNumber>;
 
     execute(
-      arg0: string,
-      arg1: string,
-      arg2: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     mintTo(
-      token: string,
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     requireValidAction(
-      arg0: string,
-      arg1: string,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -195,22 +204,22 @@ export interface MockGovernor extends BaseContract {
     currentPhase(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     execute(
-      arg0: string,
-      arg1: string,
-      arg2: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
+      arg2: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     mintTo(
-      token: string,
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     requireValidAction(
-      arg0: string,
-      arg1: string,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

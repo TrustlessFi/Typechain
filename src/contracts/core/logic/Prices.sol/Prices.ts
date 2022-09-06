@@ -24,16 +24,17 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export declare namespace IPrices {
   export type ConstructorParamsStruct = {
-    Governor: string;
-    Tcp: string;
-    Hue: string;
-    CollateralPool: string;
-    ProtocolPool: string;
-    TruEth: string;
+    Governor: PromiseOrValue<string>;
+    Tcp: PromiseOrValue<string>;
+    Hue: PromiseOrValue<string>;
+    CollateralPool: PromiseOrValue<string>;
+    ProtocolPool: PromiseOrValue<string>;
+    TruEth: PromiseOrValue<string>;
   };
 
   export type ConstructorParamsStructOutput = [
@@ -105,19 +106,19 @@ export interface PricesInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "calculateInstantCollateralPrice",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "calculateInstantTwappedPrice",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "calculateInstantTwappedTick",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "calculateTwappedPrice",
-    values: [string, boolean]
+    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "collateralPool",
@@ -128,22 +129,25 @@ export interface PricesInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "hue", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "hueTcpPrice",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "init", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "initializePool",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "initializeWethPool",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "isPoolInitialized",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "priceInfo", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "priceInfo",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "protocolPool",
     values?: undefined
@@ -152,13 +156,13 @@ export interface PricesInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "systemObtainReferencePrice",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "tcp", values?: undefined): string;
   encodeFunctionData(functionFragment: "truEth", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "validUpdate",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
 
   decodeFunctionResult(
@@ -273,25 +277,25 @@ export interface Prices extends BaseContract {
 
   functions: {
     calculateInstantCollateralPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     calculateInstantTwappedPrice(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     calculateInstantTwappedTick(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[number] & { tick: number }>;
 
     calculateTwappedPrice(
-      pool: string,
-      normalizeDecimals: boolean,
+      pool: PromiseOrValue<string>,
+      normalizeDecimals: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { price: BigNumber }>;
 
@@ -304,31 +308,31 @@ export interface Prices extends BaseContract {
     hue(overrides?: CallOverrides): Promise<[string]>;
 
     hueTcpPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     init(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     initializePool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     initializeWethPool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     isPoolInitialized(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     priceInfo(
-      arg0: string,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, number, number, boolean, boolean] & {
@@ -344,43 +348,46 @@ export interface Prices extends BaseContract {
     protocolPool(overrides?: CallOverrides): Promise<[string]>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     stopped(overrides?: CallOverrides): Promise<[boolean]>;
 
     systemObtainReferencePrice(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     tcp(overrides?: CallOverrides): Promise<[string]>;
 
     truEth(overrides?: CallOverrides): Promise<[string]>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
   };
 
   calculateInstantCollateralPrice(
-    twapDuration: BigNumberish,
+    twapDuration: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   calculateInstantTwappedPrice(
-    pool: string,
-    twapDuration: BigNumberish,
+    pool: PromiseOrValue<string>,
+    twapDuration: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   calculateInstantTwappedTick(
-    pool: string,
-    twapDuration: BigNumberish,
+    pool: PromiseOrValue<string>,
+    twapDuration: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<number>;
 
   calculateTwappedPrice(
-    pool: string,
-    normalizeDecimals: boolean,
+    pool: PromiseOrValue<string>,
+    normalizeDecimals: PromiseOrValue<boolean>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -393,28 +400,31 @@ export interface Prices extends BaseContract {
   hue(overrides?: CallOverrides): Promise<string>;
 
   hueTcpPrice(
-    twapDuration: BigNumberish,
+    twapDuration: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   init(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   initializePool(
-    pool: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   initializeWethPool(
-    pool: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  isPoolInitialized(pool: string, overrides?: CallOverrides): Promise<boolean>;
+  isPoolInitialized(
+    pool: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   priceInfo(
-    arg0: string,
+    arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<
     [BigNumber, BigNumber, number, number, boolean, boolean] & {
@@ -430,43 +440,46 @@ export interface Prices extends BaseContract {
   protocolPool(overrides?: CallOverrides): Promise<string>;
 
   stop(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   stopped(overrides?: CallOverrides): Promise<boolean>;
 
   systemObtainReferencePrice(
-    pool: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   tcp(overrides?: CallOverrides): Promise<string>;
 
   truEth(overrides?: CallOverrides): Promise<string>;
 
-  validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  validUpdate(
+    arg0: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
     calculateInstantCollateralPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateInstantTwappedPrice(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateInstantTwappedTick(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<number>;
 
     calculateTwappedPrice(
-      pool: string,
-      normalizeDecimals: boolean,
+      pool: PromiseOrValue<string>,
+      normalizeDecimals: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -479,23 +492,29 @@ export interface Prices extends BaseContract {
     hue(overrides?: CallOverrides): Promise<string>;
 
     hueTcpPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     init(overrides?: CallOverrides): Promise<void>;
 
-    initializePool(pool: string, overrides?: CallOverrides): Promise<void>;
+    initializePool(
+      pool: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    initializeWethPool(pool: string, overrides?: CallOverrides): Promise<void>;
+    initializeWethPool(
+      pool: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     isPoolInitialized(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     priceInfo(
-      arg0: string,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, number, number, boolean, boolean] & {
@@ -515,7 +534,7 @@ export interface Prices extends BaseContract {
     stopped(overrides?: CallOverrides): Promise<boolean>;
 
     systemObtainReferencePrice(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -523,17 +542,20 @@ export interface Prices extends BaseContract {
 
     truEth(overrides?: CallOverrides): Promise<string>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
     "PriceUpdated(address,uint256,int24)"(
-      pool?: string | null,
+      pool?: PromiseOrValue<string> | null,
       price?: null,
       tick?: null
     ): PriceUpdatedEventFilter;
     PriceUpdated(
-      pool?: string | null,
+      pool?: PromiseOrValue<string> | null,
       price?: null,
       tick?: null
     ): PriceUpdatedEventFilter;
@@ -544,25 +566,25 @@ export interface Prices extends BaseContract {
 
   estimateGas: {
     calculateInstantCollateralPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateInstantTwappedPrice(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateInstantTwappedTick(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateTwappedPrice(
-      pool: string,
-      normalizeDecimals: boolean,
+      pool: PromiseOrValue<string>,
+      normalizeDecimals: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -575,72 +597,78 @@ export interface Prices extends BaseContract {
     hue(overrides?: CallOverrides): Promise<BigNumber>;
 
     hueTcpPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     init(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     initializePool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     initializeWethPool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     isPoolInitialized(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    priceInfo(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    priceInfo(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     protocolPool(overrides?: CallOverrides): Promise<BigNumber>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     stopped(overrides?: CallOverrides): Promise<BigNumber>;
 
     systemObtainReferencePrice(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     tcp(overrides?: CallOverrides): Promise<BigNumber>;
 
     truEth(overrides?: CallOverrides): Promise<BigNumber>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     calculateInstantCollateralPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     calculateInstantTwappedPrice(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     calculateInstantTwappedTick(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     calculateTwappedPrice(
-      pool: string,
-      normalizeDecimals: boolean,
+      pool: PromiseOrValue<string>,
+      normalizeDecimals: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -653,45 +681,45 @@ export interface Prices extends BaseContract {
     hue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     hueTcpPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     init(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     initializePool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     initializeWethPool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     isPoolInitialized(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     priceInfo(
-      arg0: string,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     protocolPool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     systemObtainReferencePrice(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     tcp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -699,7 +727,7 @@ export interface Prices extends BaseContract {
     truEth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     validUpdate(
-      arg0: BytesLike,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

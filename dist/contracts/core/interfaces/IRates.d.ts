@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface IRatesInterface extends utils.Interface {
     functions: {
         "addReferencePool(address)": FunctionFragment;
@@ -14,13 +14,13 @@ export interface IRatesInterface extends utils.Interface {
         "stop()": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "addReferencePool" | "executeRatesUpdateContractUpdate" | "interestRateAbsoluteValue" | "positiveInterestRate" | "removeReferencePool" | "setInterestRateStep" | "setRatesUpdateContract" | "stop"): FunctionFragment;
-    encodeFunctionData(functionFragment: "addReferencePool", values: [string]): string;
-    encodeFunctionData(functionFragment: "executeRatesUpdateContractUpdate", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "addReferencePool", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "executeRatesUpdateContractUpdate", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "interestRateAbsoluteValue", values?: undefined): string;
     encodeFunctionData(functionFragment: "positiveInterestRate", values?: undefined): string;
-    encodeFunctionData(functionFragment: "removeReferencePool", values: [string]): string;
-    encodeFunctionData(functionFragment: "setInterestRateStep", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setRatesUpdateContract", values: [string]): string;
+    encodeFunctionData(functionFragment: "removeReferencePool", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "setInterestRateStep", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setRatesUpdateContract", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "stop", values?: undefined): string;
     decodeFunctionResult(functionFragment: "addReferencePool", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "executeRatesUpdateContractUpdate", data: BytesLike): Result;
@@ -153,55 +153,55 @@ export interface IRates extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        addReferencePool(pool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        addReferencePool(pool: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        executeRatesUpdateContractUpdate(newRate: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        executeRatesUpdateContractUpdate(newRate: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         interestRateAbsoluteValue(overrides?: CallOverrides): Promise<[BigNumber]>;
         positiveInterestRate(overrides?: CallOverrides): Promise<[boolean]>;
-        removeReferencePool(pool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        removeReferencePool(pool: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setInterestRateStep(step: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setInterestRateStep(step: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setRatesUpdateContract(ratesUpdateContract: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setRatesUpdateContract(ratesUpdateContract: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    addReferencePool(pool: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    addReferencePool(pool: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    executeRatesUpdateContractUpdate(newRate: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    executeRatesUpdateContractUpdate(newRate: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     interestRateAbsoluteValue(overrides?: CallOverrides): Promise<BigNumber>;
     positiveInterestRate(overrides?: CallOverrides): Promise<boolean>;
-    removeReferencePool(pool: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    removeReferencePool(pool: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setInterestRateStep(step: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setInterestRateStep(step: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setRatesUpdateContract(ratesUpdateContract: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setRatesUpdateContract(ratesUpdateContract: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     stop(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        addReferencePool(pool: string, overrides?: CallOverrides): Promise<void>;
-        executeRatesUpdateContractUpdate(newRate: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        addReferencePool(pool: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        executeRatesUpdateContractUpdate(newRate: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         interestRateAbsoluteValue(overrides?: CallOverrides): Promise<BigNumber>;
         positiveInterestRate(overrides?: CallOverrides): Promise<boolean>;
-        removeReferencePool(pool: string, overrides?: CallOverrides): Promise<void>;
-        setInterestRateStep(step: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setRatesUpdateContract(ratesUpdateContract: string, overrides?: CallOverrides): Promise<void>;
+        removeReferencePool(pool: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        setInterestRateStep(step: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setRatesUpdateContract(ratesUpdateContract: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         stop(overrides?: CallOverrides): Promise<void>;
     };
     filters: {
@@ -221,55 +221,55 @@ export interface IRates extends BaseContract {
         MinTimeBetweenUpdatesUpdated(time?: null): MinTimeBetweenUpdatesUpdatedEventFilter;
         "RateUpdated(int256,uint256,uint256,uint64)"(interestRate?: null, price?: null, rewardCount?: null, nextUpdateTime?: null): RateUpdatedEventFilter;
         RateUpdated(interestRate?: null, price?: null, rewardCount?: null, nextUpdateTime?: null): RateUpdatedEventFilter;
-        "RatesContractUpdated(address)"(ratesUpdateContract?: string | null): RatesContractUpdatedEventFilter;
-        RatesContractUpdated(ratesUpdateContract?: string | null): RatesContractUpdatedEventFilter;
+        "RatesContractUpdated(address)"(ratesUpdateContract?: PromiseOrValue<string> | null): RatesContractUpdatedEventFilter;
+        RatesContractUpdated(ratesUpdateContract?: PromiseOrValue<string> | null): RatesContractUpdatedEventFilter;
         "ReferencePoolAdded(address)"(pool?: null): ReferencePoolAddedEventFilter;
         ReferencePoolAdded(pool?: null): ReferencePoolAddedEventFilter;
         "ReferencePoolRemoved(address)"(pool?: null): ReferencePoolRemovedEventFilter;
         ReferencePoolRemoved(pool?: null): ReferencePoolRemovedEventFilter;
     };
     estimateGas: {
-        addReferencePool(pool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        addReferencePool(pool: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        executeRatesUpdateContractUpdate(newRate: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        executeRatesUpdateContractUpdate(newRate: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         interestRateAbsoluteValue(overrides?: CallOverrides): Promise<BigNumber>;
         positiveInterestRate(overrides?: CallOverrides): Promise<BigNumber>;
-        removeReferencePool(pool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        removeReferencePool(pool: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setInterestRateStep(step: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setInterestRateStep(step: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setRatesUpdateContract(ratesUpdateContract: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setRatesUpdateContract(ratesUpdateContract: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        addReferencePool(pool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        addReferencePool(pool: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        executeRatesUpdateContractUpdate(newRate: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        executeRatesUpdateContractUpdate(newRate: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         interestRateAbsoluteValue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         positiveInterestRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        removeReferencePool(pool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        removeReferencePool(pool: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setInterestRateStep(step: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setInterestRateStep(step: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setRatesUpdateContract(ratesUpdateContract: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setRatesUpdateContract(ratesUpdateContract: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

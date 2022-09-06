@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface TestUniswapV3ReentrantCalleeInterface extends utils.Interface {
@@ -34,11 +35,15 @@ export interface TestUniswapV3ReentrantCalleeInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "swapToReenter",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "uniswapV3SwapCallback",
-    values: [BigNumberish, BigNumberish, BytesLike]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
 
   decodeFunctionResult(
@@ -81,37 +86,40 @@ export interface TestUniswapV3ReentrantCallee extends BaseContract {
 
   functions: {
     swapToReenter(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     uniswapV3SwapCallback(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
-      arg2: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   swapToReenter(
-    pool: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   uniswapV3SwapCallback(
-    arg0: BigNumberish,
-    arg1: BigNumberish,
-    arg2: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    arg0: PromiseOrValue<BigNumberish>,
+    arg1: PromiseOrValue<BigNumberish>,
+    arg2: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    swapToReenter(pool: string, overrides?: CallOverrides): Promise<void>;
+    swapToReenter(
+      pool: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     uniswapV3SwapCallback(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
-      arg2: BytesLike,
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -120,29 +128,29 @@ export interface TestUniswapV3ReentrantCallee extends BaseContract {
 
   estimateGas: {
     swapToReenter(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     uniswapV3SwapCallback(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
-      arg2: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     swapToReenter(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     uniswapV3SwapCallback(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
-      arg2: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<BigNumberish>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface MockTokenIncentiveMinterInterface extends utils.Interface {
@@ -34,7 +35,7 @@ export interface MockTokenIncentiveMinterInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "mintIncentive",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "token", values?: undefined): string;
 
@@ -75,26 +76,26 @@ export interface MockTokenIncentiveMinter extends BaseContract {
 
   functions: {
     mintIncentive(
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     token(overrides?: CallOverrides): Promise<[string]>;
   };
 
   mintIncentive(
-    dest: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    dest: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   token(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     mintIncentive(
-      dest: string,
-      count: BigNumberish,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -105,9 +106,9 @@ export interface MockTokenIncentiveMinter extends BaseContract {
 
   estimateGas: {
     mintIncentive(
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     token(overrides?: CallOverrides): Promise<BigNumber>;
@@ -115,9 +116,9 @@ export interface MockTokenIncentiveMinter extends BaseContract {
 
   populateTransaction: {
     mintIncentive(
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     token(overrides?: CallOverrides): Promise<PopulatedTransaction>;

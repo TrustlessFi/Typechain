@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface MockRatesDelegateInterface extends utils.Interface {
     functions: {
         "governor()": FunctionFragment;
@@ -11,7 +11,7 @@ export interface MockRatesDelegateInterface extends utils.Interface {
     getFunction(nameOrSignatureOrTopic: "governor" | "guardian" | "update"): FunctionFragment;
     encodeFunctionData(functionFragment: "governor", values?: undefined): string;
     encodeFunctionData(functionFragment: "guardian", values?: undefined): string;
-    encodeFunctionData(functionFragment: "update", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "update", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "guardian", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "update", data: BytesLike): Result;
@@ -34,33 +34,33 @@ export interface MockRatesDelegate extends BaseContract {
     functions: {
         governor(overrides?: CallOverrides): Promise<[string]>;
         guardian(overrides?: CallOverrides): Promise<[string]>;
-        update(newRate: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        update(newRate: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     governor(overrides?: CallOverrides): Promise<string>;
     guardian(overrides?: CallOverrides): Promise<string>;
-    update(newRate: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    update(newRate: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         governor(overrides?: CallOverrides): Promise<string>;
         guardian(overrides?: CallOverrides): Promise<string>;
-        update(newRate: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        update(newRate: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
         governor(overrides?: CallOverrides): Promise<BigNumber>;
         guardian(overrides?: CallOverrides): Promise<BigNumber>;
-        update(newRate: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        update(newRate: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         guardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        update(newRate: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        update(newRate: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

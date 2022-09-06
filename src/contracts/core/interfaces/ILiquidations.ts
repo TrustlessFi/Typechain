@@ -24,6 +24,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface ILiquidationsInterface extends utils.Interface {
@@ -184,12 +185,12 @@ export interface ILiquidations extends BaseContract {
 
   functions: {
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   stop(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -242,13 +243,13 @@ export interface ILiquidations extends BaseContract {
     ): MinLiquidationIncentiveUpdatedEventFilter;
 
     "UndercollatPositionDiscovered(uint64,uint256,uint256,uint256)"(
-      positionID?: BigNumberish | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
       debtCount?: null,
       collateralCount?: null,
       price?: null
     ): UndercollatPositionDiscoveredEventFilter;
     UndercollatPositionDiscovered(
-      positionID?: BigNumberish | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
       debtCount?: null,
       collateralCount?: null,
       price?: null
@@ -262,13 +263,13 @@ export interface ILiquidations extends BaseContract {
 
   estimateGas: {
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

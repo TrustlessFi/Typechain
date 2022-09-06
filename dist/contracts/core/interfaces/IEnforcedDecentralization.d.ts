@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface IEnforcedDecentralizationInterface extends utils.Interface {
     functions: {
         "currentPhase()": FunctionFragment;
@@ -10,8 +10,8 @@ export interface IEnforcedDecentralizationInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "currentPhase" | "requireValidAction" | "setPhaseOneStartTime"): FunctionFragment;
     encodeFunctionData(functionFragment: "currentPhase", values?: undefined): string;
-    encodeFunctionData(functionFragment: "requireValidAction", values: [string, string]): string;
-    encodeFunctionData(functionFragment: "setPhaseOneStartTime", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "requireValidAction", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "setPhaseOneStartTime", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "currentPhase", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "requireValidAction", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setPhaseOneStartTime", data: BytesLike): Result;
@@ -78,43 +78,43 @@ export interface IEnforcedDecentralization extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         currentPhase(overrides?: CallOverrides): Promise<[number]>;
-        requireValidAction(target: string, signature: string, overrides?: CallOverrides): Promise<[void]>;
-        setPhaseOneStartTime(phaseOneStartTime: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        requireValidAction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[void]>;
+        setPhaseOneStartTime(phaseOneStartTime: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     currentPhase(overrides?: CallOverrides): Promise<number>;
-    requireValidAction(target: string, signature: string, overrides?: CallOverrides): Promise<void>;
-    setPhaseOneStartTime(phaseOneStartTime: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    requireValidAction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    setPhaseOneStartTime(phaseOneStartTime: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         currentPhase(overrides?: CallOverrides): Promise<number>;
-        requireValidAction(target: string, signature: string, overrides?: CallOverrides): Promise<void>;
-        setPhaseOneStartTime(phaseOneStartTime: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        requireValidAction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        setPhaseOneStartTime(phaseOneStartTime: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "ActionBlacklisted(address,string)"(target?: string | null, signature?: string | null): ActionBlacklistedEventFilter;
-        ActionBlacklisted(target?: string | null, signature?: string | null): ActionBlacklistedEventFilter;
+        "ActionBlacklisted(address,string)"(target?: PromiseOrValue<string> | null, signature?: PromiseOrValue<string> | null): ActionBlacklistedEventFilter;
+        ActionBlacklisted(target?: PromiseOrValue<string> | null, signature?: PromiseOrValue<string> | null): ActionBlacklistedEventFilter;
         "PhaseOneStartTimeSet(uint64)"(startTime?: null): PhaseOneStartTimeSetEventFilter;
         PhaseOneStartTimeSet(startTime?: null): PhaseOneStartTimeSetEventFilter;
-        "PhaseStartDelayed(uint8,uint64,uint8)"(phase?: BigNumberish | null, startTime?: null, delaysRemaining?: null): PhaseStartDelayedEventFilter;
-        PhaseStartDelayed(phase?: BigNumberish | null, startTime?: null, delaysRemaining?: null): PhaseStartDelayedEventFilter;
+        "PhaseStartDelayed(uint8,uint64,uint8)"(phase?: PromiseOrValue<BigNumberish> | null, startTime?: null, delaysRemaining?: null): PhaseStartDelayedEventFilter;
+        PhaseStartDelayed(phase?: PromiseOrValue<BigNumberish> | null, startTime?: null, delaysRemaining?: null): PhaseStartDelayedEventFilter;
         "UpdateLockDelayed(uint64,uint8)"(locktime?: null, delaysRemaining?: null): UpdateLockDelayedEventFilter;
         UpdateLockDelayed(locktime?: null, delaysRemaining?: null): UpdateLockDelayedEventFilter;
     };
     estimateGas: {
         currentPhase(overrides?: CallOverrides): Promise<BigNumber>;
-        requireValidAction(target: string, signature: string, overrides?: CallOverrides): Promise<BigNumber>;
-        setPhaseOneStartTime(phaseOneStartTime: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        requireValidAction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        setPhaseOneStartTime(phaseOneStartTime: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         currentPhase(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        requireValidAction(target: string, signature: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setPhaseOneStartTime(phaseOneStartTime: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        requireValidAction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        setPhaseOneStartTime(phaseOneStartTime: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

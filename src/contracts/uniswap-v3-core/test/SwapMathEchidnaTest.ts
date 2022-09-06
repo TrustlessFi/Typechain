@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface SwapMathEchidnaTestInterface extends utils.Interface {
@@ -32,11 +33,11 @@ export interface SwapMathEchidnaTestInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "checkComputeSwapStepInvariants",
     values: [
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
 
@@ -76,31 +77,31 @@ export interface SwapMathEchidnaTest extends BaseContract {
 
   functions: {
     checkComputeSwapStepInvariants(
-      sqrtPriceRaw: BigNumberish,
-      sqrtPriceTargetRaw: BigNumberish,
-      liquidity: BigNumberish,
-      amountRemaining: BigNumberish,
-      feePips: BigNumberish,
+      sqrtPriceRaw: PromiseOrValue<BigNumberish>,
+      sqrtPriceTargetRaw: PromiseOrValue<BigNumberish>,
+      liquidity: PromiseOrValue<BigNumberish>,
+      amountRemaining: PromiseOrValue<BigNumberish>,
+      feePips: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[void]>;
   };
 
   checkComputeSwapStepInvariants(
-    sqrtPriceRaw: BigNumberish,
-    sqrtPriceTargetRaw: BigNumberish,
-    liquidity: BigNumberish,
-    amountRemaining: BigNumberish,
-    feePips: BigNumberish,
+    sqrtPriceRaw: PromiseOrValue<BigNumberish>,
+    sqrtPriceTargetRaw: PromiseOrValue<BigNumberish>,
+    liquidity: PromiseOrValue<BigNumberish>,
+    amountRemaining: PromiseOrValue<BigNumberish>,
+    feePips: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   callStatic: {
     checkComputeSwapStepInvariants(
-      sqrtPriceRaw: BigNumberish,
-      sqrtPriceTargetRaw: BigNumberish,
-      liquidity: BigNumberish,
-      amountRemaining: BigNumberish,
-      feePips: BigNumberish,
+      sqrtPriceRaw: PromiseOrValue<BigNumberish>,
+      sqrtPriceTargetRaw: PromiseOrValue<BigNumberish>,
+      liquidity: PromiseOrValue<BigNumberish>,
+      amountRemaining: PromiseOrValue<BigNumberish>,
+      feePips: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -109,22 +110,22 @@ export interface SwapMathEchidnaTest extends BaseContract {
 
   estimateGas: {
     checkComputeSwapStepInvariants(
-      sqrtPriceRaw: BigNumberish,
-      sqrtPriceTargetRaw: BigNumberish,
-      liquidity: BigNumberish,
-      amountRemaining: BigNumberish,
-      feePips: BigNumberish,
+      sqrtPriceRaw: PromiseOrValue<BigNumberish>,
+      sqrtPriceTargetRaw: PromiseOrValue<BigNumberish>,
+      liquidity: PromiseOrValue<BigNumberish>,
+      amountRemaining: PromiseOrValue<BigNumberish>,
+      feePips: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     checkComputeSwapStepInvariants(
-      sqrtPriceRaw: BigNumberish,
-      sqrtPriceTargetRaw: BigNumberish,
-      liquidity: BigNumberish,
-      amountRemaining: BigNumberish,
-      feePips: BigNumberish,
+      sqrtPriceRaw: PromiseOrValue<BigNumberish>,
+      sqrtPriceTargetRaw: PromiseOrValue<BigNumberish>,
+      liquidity: PromiseOrValue<BigNumberish>,
+      amountRemaining: PromiseOrValue<BigNumberish>,
+      feePips: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

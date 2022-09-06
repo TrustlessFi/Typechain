@@ -1,12 +1,12 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export declare namespace DaoPositionCreator {
     type DaoPositionCreatorConstructorParamsStruct = {
-        Governor: string;
-        Tcp: string;
-        Guardian: string;
+        Governor: PromiseOrValue<string>;
+        Tcp: PromiseOrValue<string>;
+        Guardian: PromiseOrValue<string>;
     };
     type DaoPositionCreatorConstructorParamsStructOutput = [
         string,
@@ -20,10 +20,10 @@ export declare namespace DaoPositionCreator {
 }
 export declare namespace MinAverageLockDuration {
     type UserAllocationStruct = {
-        totalAllocation: BigNumberish;
-        minimumAverageTokensAllocatedxLockYears: BigNumberish;
-        tokensAllocated: BigNumberish;
-        cumulativeTokensAllocatedxLockYears: BigNumberish;
+        totalAllocation: PromiseOrValue<BigNumberish>;
+        minimumAverageTokensAllocatedxLockYears: PromiseOrValue<BigNumberish>;
+        tokensAllocated: PromiseOrValue<BigNumberish>;
+        cumulativeTokensAllocatedxLockYears: PromiseOrValue<BigNumberish>;
     };
     type UserAllocationStructOutput = [
         BigNumber,
@@ -39,14 +39,14 @@ export declare namespace MinAverageLockDuration {
 }
 export declare namespace TcpAllocation {
     type InitParamsStruct = {
-        governor: string;
-        governorAllocationCount: BigNumberish;
-        genesisAllocation: string;
-        genesisAllocationCount: BigNumberish;
-        incentiveAllocation: string;
-        incentiveAllocationCount: BigNumberish;
-        allocationReceivers: string[];
-        allocationAmounts: BigNumberish[];
+        governor: PromiseOrValue<string>;
+        governorAllocationCount: PromiseOrValue<BigNumberish>;
+        genesisAllocation: PromiseOrValue<string>;
+        genesisAllocationCount: PromiseOrValue<BigNumberish>;
+        incentiveAllocation: PromiseOrValue<string>;
+        incentiveAllocationCount: PromiseOrValue<BigNumberish>;
+        allocationReceivers: PromiseOrValue<string>[];
+        allocationAmounts: PromiseOrValue<BigNumberish>[];
     };
     type InitParamsStructOutput = [
         string,
@@ -90,19 +90,23 @@ export interface TcpAllocationInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "abdicate" | "allocationCaps" | "dao" | "deployer" | "getTokens" | "getUserAllocation" | "guardian" | "incentiveAllocation" | "increaseAllocation" | "init" | "lockTokensIntoDao" | "restrictedToUnlockDuration" | "restrictedUnlockTime" | "setDao" | "startTime" | "tcp" | "tokenMinter"): FunctionFragment;
     encodeFunctionData(functionFragment: "abdicate", values?: undefined): string;
-    encodeFunctionData(functionFragment: "allocationCaps", values: [string]): string;
+    encodeFunctionData(functionFragment: "allocationCaps", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "dao", values?: undefined): string;
     encodeFunctionData(functionFragment: "deployer", values?: undefined): string;
-    encodeFunctionData(functionFragment: "getTokens", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getUserAllocation", values: [string]): string;
+    encodeFunctionData(functionFragment: "getTokens", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "getUserAllocation", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "guardian", values?: undefined): string;
     encodeFunctionData(functionFragment: "incentiveAllocation", values?: undefined): string;
-    encodeFunctionData(functionFragment: "increaseAllocation", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "increaseAllocation", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "init", values: [TcpAllocation.InitParamsStruct]): string;
-    encodeFunctionData(functionFragment: "lockTokensIntoDao", values: [string, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "restrictedToUnlockDuration", values: [string]): string;
+    encodeFunctionData(functionFragment: "lockTokensIntoDao", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "restrictedToUnlockDuration", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "restrictedUnlockTime", values?: undefined): string;
-    encodeFunctionData(functionFragment: "setDao", values: [string]): string;
+    encodeFunctionData(functionFragment: "setDao", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "startTime", values?: undefined): string;
     encodeFunctionData(functionFragment: "tcp", values?: undefined): string;
     encodeFunctionData(functionFragment: "tokenMinter", values?: undefined): string;
@@ -177,121 +181,121 @@ export interface TcpAllocation extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         abdicate(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        allocationCaps(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+        allocationCaps(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
         dao(overrides?: CallOverrides): Promise<[string]>;
         deployer(overrides?: CallOverrides): Promise<[string]>;
-        getTokens(dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        getTokens(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        getUserAllocation(user: string, overrides?: CallOverrides): Promise<[
+        getUserAllocation(user: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[
             MinAverageLockDuration.UserAllocationStructOutput
         ] & {
             _userAllocation: MinAverageLockDuration.UserAllocationStructOutput;
         }>;
         guardian(overrides?: CallOverrides): Promise<[string]>;
         incentiveAllocation(overrides?: CallOverrides): Promise<[string]>;
-        increaseAllocation(allocatee: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseAllocation(allocatee: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         init(params: TcpAllocation.InitParamsStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        lockTokensIntoDao(dest: string, count: BigNumberish, lockDurationMonths: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        lockTokensIntoDao(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, lockDurationMonths: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        restrictedToUnlockDuration(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
+        restrictedToUnlockDuration(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean]>;
         restrictedUnlockTime(overrides?: CallOverrides): Promise<[BigNumber]>;
-        setDao(_dao: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setDao(_dao: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         startTime(overrides?: CallOverrides): Promise<[BigNumber]>;
         tcp(overrides?: CallOverrides): Promise<[string]>;
         tokenMinter(overrides?: CallOverrides): Promise<[string]>;
     };
     abdicate(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    allocationCaps(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allocationCaps(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     dao(overrides?: CallOverrides): Promise<string>;
     deployer(overrides?: CallOverrides): Promise<string>;
-    getTokens(dest: string, count: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    getTokens(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    getUserAllocation(user: string, overrides?: CallOverrides): Promise<MinAverageLockDuration.UserAllocationStructOutput>;
+    getUserAllocation(user: PromiseOrValue<string>, overrides?: CallOverrides): Promise<MinAverageLockDuration.UserAllocationStructOutput>;
     guardian(overrides?: CallOverrides): Promise<string>;
     incentiveAllocation(overrides?: CallOverrides): Promise<string>;
-    increaseAllocation(allocatee: string, count: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    increaseAllocation(allocatee: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     init(params: TcpAllocation.InitParamsStruct, overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    lockTokensIntoDao(dest: string, count: BigNumberish, lockDurationMonths: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    lockTokensIntoDao(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, lockDurationMonths: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    restrictedToUnlockDuration(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+    restrictedToUnlockDuration(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
     restrictedUnlockTime(overrides?: CallOverrides): Promise<BigNumber>;
-    setDao(_dao: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setDao(_dao: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     startTime(overrides?: CallOverrides): Promise<BigNumber>;
     tcp(overrides?: CallOverrides): Promise<string>;
     tokenMinter(overrides?: CallOverrides): Promise<string>;
     callStatic: {
         abdicate(overrides?: CallOverrides): Promise<void>;
-        allocationCaps(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+        allocationCaps(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         dao(overrides?: CallOverrides): Promise<string>;
         deployer(overrides?: CallOverrides): Promise<string>;
-        getTokens(dest: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        getUserAllocation(user: string, overrides?: CallOverrides): Promise<MinAverageLockDuration.UserAllocationStructOutput>;
+        getTokens(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        getUserAllocation(user: PromiseOrValue<string>, overrides?: CallOverrides): Promise<MinAverageLockDuration.UserAllocationStructOutput>;
         guardian(overrides?: CallOverrides): Promise<string>;
         incentiveAllocation(overrides?: CallOverrides): Promise<string>;
-        increaseAllocation(allocatee: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        increaseAllocation(allocatee: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         init(params: TcpAllocation.InitParamsStruct, overrides?: CallOverrides): Promise<void>;
-        lockTokensIntoDao(dest: string, count: BigNumberish, lockDurationMonths: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        restrictedToUnlockDuration(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+        lockTokensIntoDao(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, lockDurationMonths: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        restrictedToUnlockDuration(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
         restrictedUnlockTime(overrides?: CallOverrides): Promise<BigNumber>;
-        setDao(_dao: string, overrides?: CallOverrides): Promise<void>;
+        setDao(_dao: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         startTime(overrides?: CallOverrides): Promise<BigNumber>;
         tcp(overrides?: CallOverrides): Promise<string>;
         tokenMinter(overrides?: CallOverrides): Promise<string>;
     };
     filters: {
-        "IncentiveDistributed(address,uint256)"(dest?: string | null, count?: null): IncentiveDistributedEventFilter;
-        IncentiveDistributed(dest?: string | null, count?: null): IncentiveDistributedEventFilter;
-        "LockPositionIncreased(address,uint128)"(receiver?: string | null, count?: null): LockPositionIncreasedEventFilter;
-        LockPositionIncreased(receiver?: string | null, count?: null): LockPositionIncreasedEventFilter;
-        "TokensLocked(address,uint8,uint256)"(receiver?: string | null, lockDurationMonths?: BigNumberish | null, count?: null): TokensLockedEventFilter;
-        TokensLocked(receiver?: string | null, lockDurationMonths?: BigNumberish | null, count?: null): TokensLockedEventFilter;
+        "IncentiveDistributed(address,uint256)"(dest?: PromiseOrValue<string> | null, count?: null): IncentiveDistributedEventFilter;
+        IncentiveDistributed(dest?: PromiseOrValue<string> | null, count?: null): IncentiveDistributedEventFilter;
+        "LockPositionIncreased(address,uint128)"(receiver?: PromiseOrValue<string> | null, count?: null): LockPositionIncreasedEventFilter;
+        LockPositionIncreased(receiver?: PromiseOrValue<string> | null, count?: null): LockPositionIncreasedEventFilter;
+        "TokensLocked(address,uint8,uint256)"(receiver?: PromiseOrValue<string> | null, lockDurationMonths?: PromiseOrValue<BigNumberish> | null, count?: null): TokensLockedEventFilter;
+        TokensLocked(receiver?: PromiseOrValue<string> | null, lockDurationMonths?: PromiseOrValue<BigNumberish> | null, count?: null): TokensLockedEventFilter;
     };
     estimateGas: {
         abdicate(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        allocationCaps(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+        allocationCaps(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         dao(overrides?: CallOverrides): Promise<BigNumber>;
         deployer(overrides?: CallOverrides): Promise<BigNumber>;
-        getTokens(dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        getTokens(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        getUserAllocation(user: string, overrides?: CallOverrides): Promise<BigNumber>;
+        getUserAllocation(user: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         guardian(overrides?: CallOverrides): Promise<BigNumber>;
         incentiveAllocation(overrides?: CallOverrides): Promise<BigNumber>;
-        increaseAllocation(allocatee: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseAllocation(allocatee: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         init(params: TcpAllocation.InitParamsStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        lockTokensIntoDao(dest: string, count: BigNumberish, lockDurationMonths: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        lockTokensIntoDao(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, lockDurationMonths: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        restrictedToUnlockDuration(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+        restrictedToUnlockDuration(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         restrictedUnlockTime(overrides?: CallOverrides): Promise<BigNumber>;
-        setDao(_dao: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setDao(_dao: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         startTime(overrides?: CallOverrides): Promise<BigNumber>;
         tcp(overrides?: CallOverrides): Promise<BigNumber>;
@@ -299,30 +303,30 @@ export interface TcpAllocation extends BaseContract {
     };
     populateTransaction: {
         abdicate(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        allocationCaps(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        allocationCaps(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         dao(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         deployer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getTokens(dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        getTokens(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        getUserAllocation(user: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getUserAllocation(user: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         guardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         incentiveAllocation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        increaseAllocation(allocatee: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseAllocation(allocatee: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         init(params: TcpAllocation.InitParamsStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        lockTokensIntoDao(dest: string, count: BigNumberish, lockDurationMonths: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        lockTokensIntoDao(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, lockDurationMonths: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        restrictedToUnlockDuration(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        restrictedToUnlockDuration(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         restrictedUnlockTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setDao(_dao: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setDao(_dao: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         startTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         tcp(overrides?: CallOverrides): Promise<PopulatedTransaction>;

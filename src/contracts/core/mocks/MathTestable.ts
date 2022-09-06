@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface MathTestableInterface extends utils.Interface {
@@ -27,7 +28,10 @@ export interface MathTestableInterface extends utils.Interface {
 
   getFunction(nameOrSignatureOrTopic: "_sqrt"): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "_sqrt", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "_sqrt",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
 
   decodeFunctionResult(functionFragment: "_sqrt", data: BytesLike): Result;
 
@@ -62,26 +66,35 @@ export interface MathTestable extends BaseContract {
 
   functions: {
     _sqrt(
-      y: BigNumberish,
+      y: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { r: BigNumber }>;
   };
 
-  _sqrt(y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  _sqrt(
+    y: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   callStatic: {
-    _sqrt(y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    _sqrt(
+      y: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   filters: {};
 
   estimateGas: {
-    _sqrt(y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    _sqrt(
+      y: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     _sqrt(
-      y: BigNumberish,
+      y: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

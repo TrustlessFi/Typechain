@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface SafeMath128TestableInterface extends utils.Interface {
@@ -31,15 +32,15 @@ export interface SafeMath128TestableInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "add",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "mul",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "sub",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(functionFragment: "add", data: BytesLike): Result;
@@ -77,58 +78,58 @@ export interface SafeMath128Testable extends BaseContract {
 
   functions: {
     add(
-      a: BigNumberish,
-      b: BigNumberish,
+      a: PromiseOrValue<BigNumberish>,
+      b: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { r: BigNumber }>;
 
     mul(
-      a: BigNumberish,
-      b: BigNumberish,
+      a: PromiseOrValue<BigNumberish>,
+      b: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { r: BigNumber }>;
 
     sub(
-      a: BigNumberish,
-      b: BigNumberish,
+      a: PromiseOrValue<BigNumberish>,
+      b: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { r: BigNumber }>;
   };
 
   add(
-    a: BigNumberish,
-    b: BigNumberish,
+    a: PromiseOrValue<BigNumberish>,
+    b: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   mul(
-    a: BigNumberish,
-    b: BigNumberish,
+    a: PromiseOrValue<BigNumberish>,
+    b: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   sub(
-    a: BigNumberish,
-    b: BigNumberish,
+    a: PromiseOrValue<BigNumberish>,
+    b: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   callStatic: {
     add(
-      a: BigNumberish,
-      b: BigNumberish,
+      a: PromiseOrValue<BigNumberish>,
+      b: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     mul(
-      a: BigNumberish,
-      b: BigNumberish,
+      a: PromiseOrValue<BigNumberish>,
+      b: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     sub(
-      a: BigNumberish,
-      b: BigNumberish,
+      a: PromiseOrValue<BigNumberish>,
+      b: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -137,40 +138,40 @@ export interface SafeMath128Testable extends BaseContract {
 
   estimateGas: {
     add(
-      a: BigNumberish,
-      b: BigNumberish,
+      a: PromiseOrValue<BigNumberish>,
+      b: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     mul(
-      a: BigNumberish,
-      b: BigNumberish,
+      a: PromiseOrValue<BigNumberish>,
+      b: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     sub(
-      a: BigNumberish,
-      b: BigNumberish,
+      a: PromiseOrValue<BigNumberish>,
+      b: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     add(
-      a: BigNumberish,
-      b: BigNumberish,
+      a: PromiseOrValue<BigNumberish>,
+      b: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     mul(
-      a: BigNumberish,
-      b: BigNumberish,
+      a: PromiseOrValue<BigNumberish>,
+      b: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     sub(
-      a: BigNumberish,
-      b: BigNumberish,
+      a: PromiseOrValue<BigNumberish>,
+      b: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface LocksProtocolInterface extends utils.Interface {
     functions: {
         "governor()": FunctionFragment;
@@ -11,7 +11,7 @@ export interface LocksProtocolInterface extends utils.Interface {
     getFunction(nameOrSignatureOrTopic: "governor" | "stopped" | "validUpdate"): FunctionFragment;
     encodeFunctionData(functionFragment: "governor", values?: undefined): string;
     encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
-    encodeFunctionData(functionFragment: "validUpdate", values: [BytesLike]): string;
+    encodeFunctionData(functionFragment: "validUpdate", values: [PromiseOrValue<BytesLike>]): string;
     decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "stopped", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "validUpdate", data: BytesLike): Result;
@@ -41,15 +41,15 @@ export interface LocksProtocol extends BaseContract {
     functions: {
         governor(overrides?: CallOverrides): Promise<[string]>;
         stopped(overrides?: CallOverrides): Promise<[boolean]>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
     };
     governor(overrides?: CallOverrides): Promise<string>;
     stopped(overrides?: CallOverrides): Promise<boolean>;
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     callStatic: {
         governor(overrides?: CallOverrides): Promise<string>;
         stopped(overrides?: CallOverrides): Promise<boolean>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     };
     filters: {
         "Stopped()"(): StoppedEventFilter;
@@ -58,11 +58,11 @@ export interface LocksProtocol extends BaseContract {
     estimateGas: {
         governor(overrides?: CallOverrides): Promise<BigNumber>;
         stopped(overrides?: CallOverrides): Promise<BigNumber>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

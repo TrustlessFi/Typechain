@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export interface UniswapV3PoolInterface extends utils.Interface {
     functions: {
         "burn(int24,int24,uint128)": FunctionFragment;
@@ -32,30 +32,61 @@ export interface UniswapV3PoolInterface extends utils.Interface {
         "token1()": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "burn" | "collect" | "collectProtocol" | "factory" | "fee" | "feeGrowthGlobal0X128" | "feeGrowthGlobal1X128" | "flash" | "increaseObservationCardinalityNext" | "initialize" | "liquidity" | "maxLiquidityPerTick" | "mint" | "observations" | "observe" | "positions" | "protocolFees" | "setFeeProtocol" | "slot0" | "snapshotCumulativesInside" | "swap" | "tickBitmap" | "tickSpacing" | "ticks" | "token0" | "token1"): FunctionFragment;
-    encodeFunctionData(functionFragment: "burn", values: [BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "collect", values: [string, BigNumberish, BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "collectProtocol", values: [string, BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "burn", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "collect", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "collectProtocol", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     encodeFunctionData(functionFragment: "factory", values?: undefined): string;
     encodeFunctionData(functionFragment: "fee", values?: undefined): string;
     encodeFunctionData(functionFragment: "feeGrowthGlobal0X128", values?: undefined): string;
     encodeFunctionData(functionFragment: "feeGrowthGlobal1X128", values?: undefined): string;
-    encodeFunctionData(functionFragment: "flash", values: [string, BigNumberish, BigNumberish, BytesLike]): string;
-    encodeFunctionData(functionFragment: "increaseObservationCardinalityNext", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "initialize", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "flash", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "increaseObservationCardinalityNext", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "initialize", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "liquidity", values?: undefined): string;
     encodeFunctionData(functionFragment: "maxLiquidityPerTick", values?: undefined): string;
-    encodeFunctionData(functionFragment: "mint", values: [string, BigNumberish, BigNumberish, BigNumberish, BytesLike]): string;
-    encodeFunctionData(functionFragment: "observations", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "observe", values: [BigNumberish[]]): string;
-    encodeFunctionData(functionFragment: "positions", values: [BytesLike]): string;
+    encodeFunctionData(functionFragment: "mint", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "observations", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "observe", values: [PromiseOrValue<BigNumberish>[]]): string;
+    encodeFunctionData(functionFragment: "positions", values: [PromiseOrValue<BytesLike>]): string;
     encodeFunctionData(functionFragment: "protocolFees", values?: undefined): string;
-    encodeFunctionData(functionFragment: "setFeeProtocol", values: [BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "setFeeProtocol", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "slot0", values?: undefined): string;
-    encodeFunctionData(functionFragment: "snapshotCumulativesInside", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "swap", values: [string, boolean, BigNumberish, BigNumberish, BytesLike]): string;
-    encodeFunctionData(functionFragment: "tickBitmap", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "snapshotCumulativesInside", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "swap", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<boolean>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "tickBitmap", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "tickSpacing", values?: undefined): string;
-    encodeFunctionData(functionFragment: "ticks", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "ticks", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "token0", values?: undefined): string;
     encodeFunctionData(functionFragment: "token1", values?: undefined): string;
     decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
@@ -253,34 +284,34 @@ export interface UniswapV3Pool extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        burn(tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        burn(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        collect(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collect(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        collectProtocol(recipient: string, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collectProtocol(recipient: PromiseOrValue<string>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         factory(overrides?: CallOverrides): Promise<[string]>;
         fee(overrides?: CallOverrides): Promise<[number]>;
         feeGrowthGlobal0X128(overrides?: CallOverrides): Promise<[BigNumber]>;
         feeGrowthGlobal1X128(overrides?: CallOverrides): Promise<[BigNumber]>;
-        flash(recipient: string, amount0: BigNumberish, amount1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        flash(recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        increaseObservationCardinalityNext(observationCardinalityNext: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseObservationCardinalityNext(observationCardinalityNext: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        initialize(sqrtPriceX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        initialize(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         liquidity(overrides?: CallOverrides): Promise<[BigNumber]>;
         maxLiquidityPerTick(overrides?: CallOverrides): Promise<[BigNumber]>;
-        mint(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        observations(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        observations(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             number,
             BigNumber,
             BigNumber,
@@ -291,14 +322,14 @@ export interface UniswapV3Pool extends BaseContract {
             secondsPerLiquidityCumulativeX128: BigNumber;
             initialized: boolean;
         }>;
-        observe(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<[
+        observe(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<[
             BigNumber[],
             BigNumber[]
         ] & {
             tickCumulatives: BigNumber[];
             secondsPerLiquidityCumulativeX128s: BigNumber[];
         }>;
-        positions(arg0: BytesLike, overrides?: CallOverrides): Promise<[
+        positions(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber,
@@ -318,8 +349,8 @@ export interface UniswapV3Pool extends BaseContract {
             token0: BigNumber;
             token1: BigNumber;
         }>;
-        setFeeProtocol(feeProtocol0: BigNumberish, feeProtocol1: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setFeeProtocol(feeProtocol0: PromiseOrValue<BigNumberish>, feeProtocol1: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         slot0(overrides?: CallOverrides): Promise<[
             BigNumber,
@@ -338,7 +369,7 @@ export interface UniswapV3Pool extends BaseContract {
             feeProtocol: number;
             unlocked: boolean;
         }>;
-        snapshotCumulativesInside(tickLower: BigNumberish, tickUpper: BigNumberish, overrides?: CallOverrides): Promise<[
+        snapshotCumulativesInside(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             number
@@ -347,12 +378,12 @@ export interface UniswapV3Pool extends BaseContract {
             secondsPerLiquidityInsideX128: BigNumber;
             secondsInside: number;
         }>;
-        swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        tickBitmap(arg0: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        tickBitmap(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
         tickSpacing(overrides?: CallOverrides): Promise<[number]>;
-        ticks(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        ticks(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber,
@@ -374,34 +405,34 @@ export interface UniswapV3Pool extends BaseContract {
         token0(overrides?: CallOverrides): Promise<[string]>;
         token1(overrides?: CallOverrides): Promise<[string]>;
     };
-    burn(tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    burn(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    collect(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    collect(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    collectProtocol(recipient: string, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    collectProtocol(recipient: PromiseOrValue<string>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     factory(overrides?: CallOverrides): Promise<string>;
     fee(overrides?: CallOverrides): Promise<number>;
     feeGrowthGlobal0X128(overrides?: CallOverrides): Promise<BigNumber>;
     feeGrowthGlobal1X128(overrides?: CallOverrides): Promise<BigNumber>;
-    flash(recipient: string, amount0: BigNumberish, amount1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    flash(recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    increaseObservationCardinalityNext(observationCardinalityNext: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    increaseObservationCardinalityNext(observationCardinalityNext: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    initialize(sqrtPriceX96: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    initialize(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     liquidity(overrides?: CallOverrides): Promise<BigNumber>;
     maxLiquidityPerTick(overrides?: CallOverrides): Promise<BigNumber>;
-    mint(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    mint(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    observations(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+    observations(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         number,
         BigNumber,
         BigNumber,
@@ -412,14 +443,14 @@ export interface UniswapV3Pool extends BaseContract {
         secondsPerLiquidityCumulativeX128: BigNumber;
         initialized: boolean;
     }>;
-    observe(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<[
+    observe(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<[
         BigNumber[],
         BigNumber[]
     ] & {
         tickCumulatives: BigNumber[];
         secondsPerLiquidityCumulativeX128s: BigNumber[];
     }>;
-    positions(arg0: BytesLike, overrides?: CallOverrides): Promise<[
+    positions(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
         BigNumber,
         BigNumber,
         BigNumber,
@@ -436,8 +467,8 @@ export interface UniswapV3Pool extends BaseContract {
         token0: BigNumber;
         token1: BigNumber;
     }>;
-    setFeeProtocol(feeProtocol0: BigNumberish, feeProtocol1: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setFeeProtocol(feeProtocol0: PromiseOrValue<BigNumberish>, feeProtocol1: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     slot0(overrides?: CallOverrides): Promise<[
         BigNumber,
@@ -456,7 +487,7 @@ export interface UniswapV3Pool extends BaseContract {
         feeProtocol: number;
         unlocked: boolean;
     }>;
-    snapshotCumulativesInside(tickLower: BigNumberish, tickUpper: BigNumberish, overrides?: CallOverrides): Promise<[
+    snapshotCumulativesInside(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         BigNumber,
         BigNumber,
         number
@@ -465,12 +496,12 @@ export interface UniswapV3Pool extends BaseContract {
         secondsPerLiquidityInsideX128: BigNumber;
         secondsInside: number;
     }>;
-    swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    tickBitmap(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    tickBitmap(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     tickSpacing(overrides?: CallOverrides): Promise<number>;
-    ticks(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+    ticks(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         BigNumber,
         BigNumber,
         BigNumber,
@@ -492,21 +523,21 @@ export interface UniswapV3Pool extends BaseContract {
     token0(overrides?: CallOverrides): Promise<string>;
     token1(overrides?: CallOverrides): Promise<string>;
     callStatic: {
-        burn(tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: CallOverrides): Promise<[
+        burn(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
             amount0: BigNumber;
             amount1: BigNumber;
         }>;
-        collect(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: CallOverrides): Promise<[
+        collect(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
             amount0: BigNumber;
             amount1: BigNumber;
         }>;
-        collectProtocol(recipient: string, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: CallOverrides): Promise<[
+        collectProtocol(recipient: PromiseOrValue<string>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
@@ -517,19 +548,19 @@ export interface UniswapV3Pool extends BaseContract {
         fee(overrides?: CallOverrides): Promise<number>;
         feeGrowthGlobal0X128(overrides?: CallOverrides): Promise<BigNumber>;
         feeGrowthGlobal1X128(overrides?: CallOverrides): Promise<BigNumber>;
-        flash(recipient: string, amount0: BigNumberish, amount1: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<void>;
-        increaseObservationCardinalityNext(observationCardinalityNext: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        initialize(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        flash(recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+        increaseObservationCardinalityNext(observationCardinalityNext: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        initialize(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         liquidity(overrides?: CallOverrides): Promise<BigNumber>;
         maxLiquidityPerTick(overrides?: CallOverrides): Promise<BigNumber>;
-        mint(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<[
+        mint(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
             amount0: BigNumber;
             amount1: BigNumber;
         }>;
-        observations(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        observations(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             number,
             BigNumber,
             BigNumber,
@@ -540,14 +571,14 @@ export interface UniswapV3Pool extends BaseContract {
             secondsPerLiquidityCumulativeX128: BigNumber;
             initialized: boolean;
         }>;
-        observe(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<[
+        observe(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<[
             BigNumber[],
             BigNumber[]
         ] & {
             tickCumulatives: BigNumber[];
             secondsPerLiquidityCumulativeX128s: BigNumber[];
         }>;
-        positions(arg0: BytesLike, overrides?: CallOverrides): Promise<[
+        positions(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber,
@@ -567,7 +598,7 @@ export interface UniswapV3Pool extends BaseContract {
             token0: BigNumber;
             token1: BigNumber;
         }>;
-        setFeeProtocol(feeProtocol0: BigNumberish, feeProtocol1: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        setFeeProtocol(feeProtocol0: PromiseOrValue<BigNumberish>, feeProtocol1: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         slot0(overrides?: CallOverrides): Promise<[
             BigNumber,
             number,
@@ -585,7 +616,7 @@ export interface UniswapV3Pool extends BaseContract {
             feeProtocol: number;
             unlocked: boolean;
         }>;
-        snapshotCumulativesInside(tickLower: BigNumberish, tickUpper: BigNumberish, overrides?: CallOverrides): Promise<[
+        snapshotCumulativesInside(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             number
@@ -594,16 +625,16 @@ export interface UniswapV3Pool extends BaseContract {
             secondsPerLiquidityInsideX128: BigNumber;
             secondsInside: number;
         }>;
-        swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<[
+        swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
             amount0: BigNumber;
             amount1: BigNumber;
         }>;
-        tickBitmap(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        tickBitmap(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         tickSpacing(overrides?: CallOverrides): Promise<number>;
-        ticks(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        ticks(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber,
@@ -626,114 +657,114 @@ export interface UniswapV3Pool extends BaseContract {
         token1(overrides?: CallOverrides): Promise<string>;
     };
     filters: {
-        "Burn(address,int24,int24,uint128,uint256,uint256)"(owner?: string | null, tickLower?: BigNumberish | null, tickUpper?: BigNumberish | null, amount?: null, amount0?: null, amount1?: null): BurnEventFilter;
-        Burn(owner?: string | null, tickLower?: BigNumberish | null, tickUpper?: BigNumberish | null, amount?: null, amount0?: null, amount1?: null): BurnEventFilter;
-        "Collect(address,address,int24,int24,uint128,uint128)"(owner?: string | null, recipient?: null, tickLower?: BigNumberish | null, tickUpper?: BigNumberish | null, amount0?: null, amount1?: null): CollectEventFilter;
-        Collect(owner?: string | null, recipient?: null, tickLower?: BigNumberish | null, tickUpper?: BigNumberish | null, amount0?: null, amount1?: null): CollectEventFilter;
-        "CollectProtocol(address,address,uint128,uint128)"(sender?: string | null, recipient?: string | null, amount0?: null, amount1?: null): CollectProtocolEventFilter;
-        CollectProtocol(sender?: string | null, recipient?: string | null, amount0?: null, amount1?: null): CollectProtocolEventFilter;
-        "Flash(address,address,uint256,uint256,uint256,uint256)"(sender?: string | null, recipient?: string | null, amount0?: null, amount1?: null, paid0?: null, paid1?: null): FlashEventFilter;
-        Flash(sender?: string | null, recipient?: string | null, amount0?: null, amount1?: null, paid0?: null, paid1?: null): FlashEventFilter;
+        "Burn(address,int24,int24,uint128,uint256,uint256)"(owner?: PromiseOrValue<string> | null, tickLower?: PromiseOrValue<BigNumberish> | null, tickUpper?: PromiseOrValue<BigNumberish> | null, amount?: null, amount0?: null, amount1?: null): BurnEventFilter;
+        Burn(owner?: PromiseOrValue<string> | null, tickLower?: PromiseOrValue<BigNumberish> | null, tickUpper?: PromiseOrValue<BigNumberish> | null, amount?: null, amount0?: null, amount1?: null): BurnEventFilter;
+        "Collect(address,address,int24,int24,uint128,uint128)"(owner?: PromiseOrValue<string> | null, recipient?: null, tickLower?: PromiseOrValue<BigNumberish> | null, tickUpper?: PromiseOrValue<BigNumberish> | null, amount0?: null, amount1?: null): CollectEventFilter;
+        Collect(owner?: PromiseOrValue<string> | null, recipient?: null, tickLower?: PromiseOrValue<BigNumberish> | null, tickUpper?: PromiseOrValue<BigNumberish> | null, amount0?: null, amount1?: null): CollectEventFilter;
+        "CollectProtocol(address,address,uint128,uint128)"(sender?: PromiseOrValue<string> | null, recipient?: PromiseOrValue<string> | null, amount0?: null, amount1?: null): CollectProtocolEventFilter;
+        CollectProtocol(sender?: PromiseOrValue<string> | null, recipient?: PromiseOrValue<string> | null, amount0?: null, amount1?: null): CollectProtocolEventFilter;
+        "Flash(address,address,uint256,uint256,uint256,uint256)"(sender?: PromiseOrValue<string> | null, recipient?: PromiseOrValue<string> | null, amount0?: null, amount1?: null, paid0?: null, paid1?: null): FlashEventFilter;
+        Flash(sender?: PromiseOrValue<string> | null, recipient?: PromiseOrValue<string> | null, amount0?: null, amount1?: null, paid0?: null, paid1?: null): FlashEventFilter;
         "IncreaseObservationCardinalityNext(uint16,uint16)"(observationCardinalityNextOld?: null, observationCardinalityNextNew?: null): IncreaseObservationCardinalityNextEventFilter;
         IncreaseObservationCardinalityNext(observationCardinalityNextOld?: null, observationCardinalityNextNew?: null): IncreaseObservationCardinalityNextEventFilter;
         "Initialize(uint160,int24)"(sqrtPriceX96?: null, tick?: null): InitializeEventFilter;
         Initialize(sqrtPriceX96?: null, tick?: null): InitializeEventFilter;
-        "Mint(address,address,int24,int24,uint128,uint256,uint256)"(sender?: null, owner?: string | null, tickLower?: BigNumberish | null, tickUpper?: BigNumberish | null, amount?: null, amount0?: null, amount1?: null): MintEventFilter;
-        Mint(sender?: null, owner?: string | null, tickLower?: BigNumberish | null, tickUpper?: BigNumberish | null, amount?: null, amount0?: null, amount1?: null): MintEventFilter;
+        "Mint(address,address,int24,int24,uint128,uint256,uint256)"(sender?: null, owner?: PromiseOrValue<string> | null, tickLower?: PromiseOrValue<BigNumberish> | null, tickUpper?: PromiseOrValue<BigNumberish> | null, amount?: null, amount0?: null, amount1?: null): MintEventFilter;
+        Mint(sender?: null, owner?: PromiseOrValue<string> | null, tickLower?: PromiseOrValue<BigNumberish> | null, tickUpper?: PromiseOrValue<BigNumberish> | null, amount?: null, amount0?: null, amount1?: null): MintEventFilter;
         "SetFeeProtocol(uint8,uint8,uint8,uint8)"(feeProtocol0Old?: null, feeProtocol1Old?: null, feeProtocol0New?: null, feeProtocol1New?: null): SetFeeProtocolEventFilter;
         SetFeeProtocol(feeProtocol0Old?: null, feeProtocol1Old?: null, feeProtocol0New?: null, feeProtocol1New?: null): SetFeeProtocolEventFilter;
-        "Swap(address,address,int256,int256,uint160,uint128,int24)"(sender?: string | null, recipient?: string | null, amount0?: null, amount1?: null, sqrtPriceX96?: null, liquidity?: null, tick?: null): SwapEventFilter;
-        Swap(sender?: string | null, recipient?: string | null, amount0?: null, amount1?: null, sqrtPriceX96?: null, liquidity?: null, tick?: null): SwapEventFilter;
+        "Swap(address,address,int256,int256,uint160,uint128,int24)"(sender?: PromiseOrValue<string> | null, recipient?: PromiseOrValue<string> | null, amount0?: null, amount1?: null, sqrtPriceX96?: null, liquidity?: null, tick?: null): SwapEventFilter;
+        Swap(sender?: PromiseOrValue<string> | null, recipient?: PromiseOrValue<string> | null, amount0?: null, amount1?: null, sqrtPriceX96?: null, liquidity?: null, tick?: null): SwapEventFilter;
     };
     estimateGas: {
-        burn(tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        burn(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        collect(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collect(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        collectProtocol(recipient: string, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collectProtocol(recipient: PromiseOrValue<string>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         factory(overrides?: CallOverrides): Promise<BigNumber>;
         fee(overrides?: CallOverrides): Promise<BigNumber>;
         feeGrowthGlobal0X128(overrides?: CallOverrides): Promise<BigNumber>;
         feeGrowthGlobal1X128(overrides?: CallOverrides): Promise<BigNumber>;
-        flash(recipient: string, amount0: BigNumberish, amount1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        flash(recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        increaseObservationCardinalityNext(observationCardinalityNext: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseObservationCardinalityNext(observationCardinalityNext: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        initialize(sqrtPriceX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        initialize(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         liquidity(overrides?: CallOverrides): Promise<BigNumber>;
         maxLiquidityPerTick(overrides?: CallOverrides): Promise<BigNumber>;
-        mint(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        observations(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        observe(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<BigNumber>;
-        positions(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+        observations(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        observe(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<BigNumber>;
+        positions(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
         protocolFees(overrides?: CallOverrides): Promise<BigNumber>;
-        setFeeProtocol(feeProtocol0: BigNumberish, feeProtocol1: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setFeeProtocol(feeProtocol0: PromiseOrValue<BigNumberish>, feeProtocol1: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         slot0(overrides?: CallOverrides): Promise<BigNumber>;
-        snapshotCumulativesInside(tickLower: BigNumberish, tickUpper: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        snapshotCumulativesInside(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        tickBitmap(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        tickBitmap(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         tickSpacing(overrides?: CallOverrides): Promise<BigNumber>;
-        ticks(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        ticks(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         token0(overrides?: CallOverrides): Promise<BigNumber>;
         token1(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        burn(tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        burn(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        collect(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collect(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        collectProtocol(recipient: string, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collectProtocol(recipient: PromiseOrValue<string>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         fee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         feeGrowthGlobal0X128(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         feeGrowthGlobal1X128(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        flash(recipient: string, amount0: BigNumberish, amount1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        flash(recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        increaseObservationCardinalityNext(observationCardinalityNext: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseObservationCardinalityNext(observationCardinalityNext: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        initialize(sqrtPriceX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        initialize(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         liquidity(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         maxLiquidityPerTick(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        mint(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        observations(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        observe(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        positions(arg0: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        observations(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        observe(secondsAgos: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        positions(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         protocolFees(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setFeeProtocol(feeProtocol0: BigNumberish, feeProtocol1: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setFeeProtocol(feeProtocol0: PromiseOrValue<BigNumberish>, feeProtocol1: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         slot0(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        snapshotCumulativesInside(tickLower: BigNumberish, tickUpper: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        snapshotCumulativesInside(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        tickBitmap(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        tickBitmap(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         tickSpacing(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        ticks(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        ticks(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         token0(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         token1(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };

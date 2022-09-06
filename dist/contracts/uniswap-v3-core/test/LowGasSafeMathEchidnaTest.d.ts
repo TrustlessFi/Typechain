@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface LowGasSafeMathEchidnaTestInterface extends utils.Interface {
     functions: {
         "checkAdd(uint256,uint256)": FunctionFragment;
@@ -11,11 +11,11 @@ export interface LowGasSafeMathEchidnaTestInterface extends utils.Interface {
         "checkSubi(int256,int256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "checkAdd" | "checkAddi" | "checkMul" | "checkSub" | "checkSubi"): FunctionFragment;
-    encodeFunctionData(functionFragment: "checkAdd", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "checkAddi", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "checkMul", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "checkSub", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "checkSubi", values: [BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "checkAdd", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "checkAddi", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "checkMul", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "checkSub", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "checkSubi", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "checkAdd", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "checkAddi", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "checkMul", data: BytesLike): Result;
@@ -38,37 +38,37 @@ export interface LowGasSafeMathEchidnaTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        checkAdd(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        checkAddi(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        checkMul(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        checkSub(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        checkSubi(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
+        checkAdd(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        checkAddi(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        checkMul(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        checkSub(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        checkSubi(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
     };
-    checkAdd(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    checkAddi(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    checkMul(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    checkSub(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    checkSubi(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    checkAdd(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    checkAddi(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    checkMul(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    checkSub(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    checkSubi(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     callStatic: {
-        checkAdd(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        checkAddi(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        checkMul(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        checkSub(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        checkSubi(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        checkAdd(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        checkAddi(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        checkMul(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        checkSub(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        checkSubi(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        checkAdd(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        checkAddi(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        checkMul(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        checkSub(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        checkSubi(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        checkAdd(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        checkAddi(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        checkMul(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        checkSub(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        checkSubi(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        checkAdd(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        checkAddi(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        checkMul(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        checkSub(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        checkSubi(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkAdd(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkAddi(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkMul(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkSub(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkSubi(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

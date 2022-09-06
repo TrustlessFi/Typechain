@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface LiquidityMathTestInterface extends utils.Interface {
@@ -32,11 +33,11 @@ export interface LiquidityMathTestInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "addDelta",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getGasCostOfAddDelta",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(functionFragment: "addDelta", data: BytesLike): Result;
@@ -76,40 +77,40 @@ export interface LiquidityMathTest extends BaseContract {
 
   functions: {
     addDelta(
-      x: BigNumberish,
-      y: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { z: BigNumber }>;
 
     getGasCostOfAddDelta(
-      x: BigNumberish,
-      y: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
   };
 
   addDelta(
-    x: BigNumberish,
-    y: BigNumberish,
+    x: PromiseOrValue<BigNumberish>,
+    y: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   getGasCostOfAddDelta(
-    x: BigNumberish,
-    y: BigNumberish,
+    x: PromiseOrValue<BigNumberish>,
+    y: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   callStatic: {
     addDelta(
-      x: BigNumberish,
-      y: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getGasCostOfAddDelta(
-      x: BigNumberish,
-      y: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -118,28 +119,28 @@ export interface LiquidityMathTest extends BaseContract {
 
   estimateGas: {
     addDelta(
-      x: BigNumberish,
-      y: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getGasCostOfAddDelta(
-      x: BigNumberish,
-      y: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     addDelta(
-      x: BigNumberish,
-      y: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getGasCostOfAddDelta(
-      x: BigNumberish,
-      y: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

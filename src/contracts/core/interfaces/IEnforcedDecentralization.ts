@@ -24,6 +24,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface IEnforcedDecentralizationInterface extends utils.Interface {
@@ -46,11 +47,11 @@ export interface IEnforcedDecentralizationInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "requireValidAction",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setPhaseOneStartTime",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -157,53 +158,53 @@ export interface IEnforcedDecentralization extends BaseContract {
     currentPhase(overrides?: CallOverrides): Promise<[number]>;
 
     requireValidAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     setPhaseOneStartTime(
-      phaseOneStartTime: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      phaseOneStartTime: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   currentPhase(overrides?: CallOverrides): Promise<number>;
 
   requireValidAction(
-    target: string,
-    signature: string,
+    target: PromiseOrValue<string>,
+    signature: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   setPhaseOneStartTime(
-    phaseOneStartTime: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    phaseOneStartTime: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     currentPhase(overrides?: CallOverrides): Promise<number>;
 
     requireValidAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setPhaseOneStartTime(
-      phaseOneStartTime: BigNumberish,
+      phaseOneStartTime: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
     "ActionBlacklisted(address,string)"(
-      target?: string | null,
-      signature?: string | null
+      target?: PromiseOrValue<string> | null,
+      signature?: PromiseOrValue<string> | null
     ): ActionBlacklistedEventFilter;
     ActionBlacklisted(
-      target?: string | null,
-      signature?: string | null
+      target?: PromiseOrValue<string> | null,
+      signature?: PromiseOrValue<string> | null
     ): ActionBlacklistedEventFilter;
 
     "PhaseOneStartTimeSet(uint64)"(
@@ -212,12 +213,12 @@ export interface IEnforcedDecentralization extends BaseContract {
     PhaseOneStartTimeSet(startTime?: null): PhaseOneStartTimeSetEventFilter;
 
     "PhaseStartDelayed(uint8,uint64,uint8)"(
-      phase?: BigNumberish | null,
+      phase?: PromiseOrValue<BigNumberish> | null,
       startTime?: null,
       delaysRemaining?: null
     ): PhaseStartDelayedEventFilter;
     PhaseStartDelayed(
-      phase?: BigNumberish | null,
+      phase?: PromiseOrValue<BigNumberish> | null,
       startTime?: null,
       delaysRemaining?: null
     ): PhaseStartDelayedEventFilter;
@@ -236,14 +237,14 @@ export interface IEnforcedDecentralization extends BaseContract {
     currentPhase(overrides?: CallOverrides): Promise<BigNumber>;
 
     requireValidAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     setPhaseOneStartTime(
-      phaseOneStartTime: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      phaseOneStartTime: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -251,14 +252,14 @@ export interface IEnforcedDecentralization extends BaseContract {
     currentPhase(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     requireValidAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     setPhaseOneStartTime(
-      phaseOneStartTime: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      phaseOneStartTime: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

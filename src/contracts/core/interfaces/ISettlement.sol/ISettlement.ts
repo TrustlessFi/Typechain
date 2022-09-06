@@ -24,6 +24,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface ISettlementInterface extends utils.Interface {
@@ -44,11 +45,11 @@ export interface ISettlementInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "setEthPriceProvider",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "stakeTokensForNoPriceConfidence",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "stop", values?: undefined): string;
   encodeFunctionData(
@@ -203,50 +204,50 @@ export interface ISettlement extends BaseContract {
 
   functions: {
     setEthPriceProvider(
-      aggregator: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      aggregator: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     stakeTokensForNoPriceConfidence(
-      countTCPToStake: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      countTCPToStake: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     unstakeTokensForNoPriceConfidence(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   setEthPriceProvider(
-    aggregator: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    aggregator: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   stakeTokensForNoPriceConfidence(
-    countTCPToStake: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    countTCPToStake: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   stop(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   unstakeTokensForNoPriceConfidence(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     setEthPriceProvider(
-      aggregator: string,
+      aggregator: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     stakeTokensForNoPriceConfidence(
-      countTCPToStake: BigNumberish,
+      countTCPToStake: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -264,21 +265,21 @@ export interface ISettlement extends BaseContract {
     ): EthPriceProviderUpdatedEventFilter;
 
     "NoConfidenceConfirmed(address)"(
-      account?: string | null
+      account?: PromiseOrValue<string> | null
     ): NoConfidenceConfirmedEventFilter;
     NoConfidenceConfirmed(
-      account?: string | null
+      account?: PromiseOrValue<string> | null
     ): NoConfidenceConfirmedEventFilter;
 
     "SettlementCollateralForHue(uint64,address,uint256,uint256)"(
-      positionID?: BigNumberish | null,
-      caller?: string | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
+      caller?: PromiseOrValue<string> | null,
       hueCount?: null,
       collateralCount?: null
     ): SettlementCollateralForHueEventFilter;
     SettlementCollateralForHue(
-      positionID?: BigNumberish | null,
-      caller?: string | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
+      caller?: PromiseOrValue<string> | null,
       hueCount?: null,
       collateralCount?: null
     ): SettlementCollateralForHueEventFilter;
@@ -291,72 +292,72 @@ export interface ISettlement extends BaseContract {
     ): SettlementInitializedEventFilter;
 
     "SettlementWithdrawCollateral(uint64,address,uint256)"(
-      positionID?: BigNumberish | null,
-      owner?: string | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
+      owner?: PromiseOrValue<string> | null,
       collateralToWithdraw?: null
     ): SettlementWithdrawCollateralEventFilter;
     SettlementWithdrawCollateral(
-      positionID?: BigNumberish | null,
-      owner?: string | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
+      owner?: PromiseOrValue<string> | null,
       collateralToWithdraw?: null
     ): SettlementWithdrawCollateralEventFilter;
 
     "StakedNoConfidenceTokens(address,uint256)"(
-      account?: string | null,
+      account?: PromiseOrValue<string> | null,
       count?: null
     ): StakedNoConfidenceTokensEventFilter;
     StakedNoConfidenceTokens(
-      account?: string | null,
+      account?: PromiseOrValue<string> | null,
       count?: null
     ): StakedNoConfidenceTokensEventFilter;
 
     "UnstakedNoConfidenceTokens(address,uint256)"(
-      account?: string | null,
+      account?: PromiseOrValue<string> | null,
       count?: null
     ): UnstakedNoConfidenceTokensEventFilter;
     UnstakedNoConfidenceTokens(
-      account?: string | null,
+      account?: PromiseOrValue<string> | null,
       count?: null
     ): UnstakedNoConfidenceTokensEventFilter;
   };
 
   estimateGas: {
     setEthPriceProvider(
-      aggregator: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      aggregator: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     stakeTokensForNoPriceConfidence(
-      countTCPToStake: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      countTCPToStake: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     unstakeTokensForNoPriceConfidence(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     setEthPriceProvider(
-      aggregator: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      aggregator: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     stakeTokensForNoPriceConfidence(
-      countTCPToStake: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      countTCPToStake: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     unstakeTokensForNoPriceConfidence(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

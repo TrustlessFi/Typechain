@@ -1,12 +1,12 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export declare namespace IAuctions {
     type ConstructorParamsStruct = {
-        Governor: string;
-        ProtocolLock: string;
-        Hue: string;
+        Governor: PromiseOrValue<string>;
+        ProtocolLock: PromiseOrValue<string>;
+        Hue: PromiseOrValue<string>;
     };
     type ConstructorParamsStructOutput = [string, string, string] & {
         Governor: string;
@@ -14,11 +14,11 @@ export declare namespace IAuctions {
         Hue: string;
     };
     type AuctionStruct = {
-        count: BigNumberish;
-        bid: BigNumberish;
-        bidder: string;
-        endTime: BigNumberish;
-        maxEndTime: BigNumberish;
+        count: PromiseOrValue<BigNumberish>;
+        bid: PromiseOrValue<BigNumberish>;
+        bidder: PromiseOrValue<string>;
+        endTime: PromiseOrValue<BigNumberish>;
+        maxEndTime: PromiseOrValue<BigNumberish>;
     };
     type AuctionStructOutput = [
         BigNumber,
@@ -88,17 +88,17 @@ export interface AuctionsTestableInterface extends utils.Interface {
         "validUpdate(bytes4)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "aggregateAuctionSize" | "bidDeficitAuction" | "bidSurplusAuction" | "checkReservesAndStartAuctions" | "deficitAuction" | "deficitAuctionComplete" | "deficitAuctionCount" | "deficitAuctionExists" | "deficitAuctionLive" | "extensionPerBid" | "getAllAuctions" | "governor" | "hue" | "hueToBeBought" | "hueToBeSold" | "latestAuctionCompletionTime" | "maxAuctionDuration" | "maxBatchSize" | "maxDeficitLotSize" | "maxSurplusLotSize" | "minAuctionDuration" | "minBidDelta" | "minLotSize" | "reservesBufferLowerBound" | "reservesBufferUpperBound" | "setExtensionPerBid" | "setMaxAuctionDuration" | "setMaxBatchSize" | "setMaxDeficitLotSize" | "setMaxSurplusLotSize" | "setMinAuctionDuration" | "setMinBidDelta" | "setMinLotSize" | "setReservesBufferLowerBound" | "setReservesBufferUpperBound" | "setTwapDuration" | "settleDeficitAuction" | "settleSurplusAuction" | "shouldStartAuctions" | "startAuction" | "startAuctions" | "stop" | "stopped" | "surplusAuction" | "surplusAuctionComplete" | "surplusAuctionCount" | "surplusAuctionExists" | "surplusAuctionLive" | "twapDuration" | "validUpdate"): FunctionFragment;
-    encodeFunctionData(functionFragment: "aggregateAuctionSize", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "bidDeficitAuction", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "bidSurplusAuction", values: [BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "aggregateAuctionSize", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "bidDeficitAuction", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "bidSurplusAuction", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "checkReservesAndStartAuctions", values?: undefined): string;
-    encodeFunctionData(functionFragment: "deficitAuction", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "deficitAuctionComplete", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "deficitAuction", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "deficitAuctionComplete", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "deficitAuctionCount", values?: undefined): string;
-    encodeFunctionData(functionFragment: "deficitAuctionExists", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "deficitAuctionLive", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "deficitAuctionExists", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "deficitAuctionLive", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "extensionPerBid", values?: undefined): string;
-    encodeFunctionData(functionFragment: "getAllAuctions", values: [BigNumberish, boolean]): string;
+    encodeFunctionData(functionFragment: "getAllAuctions", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]): string;
     encodeFunctionData(functionFragment: "governor", values?: undefined): string;
     encodeFunctionData(functionFragment: "hue", values?: undefined): string;
     encodeFunctionData(functionFragment: "hueToBeBought", values?: undefined): string;
@@ -113,31 +113,31 @@ export interface AuctionsTestableInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "minLotSize", values?: undefined): string;
     encodeFunctionData(functionFragment: "reservesBufferLowerBound", values?: undefined): string;
     encodeFunctionData(functionFragment: "reservesBufferUpperBound", values?: undefined): string;
-    encodeFunctionData(functionFragment: "setExtensionPerBid", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setMaxAuctionDuration", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setMaxBatchSize", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setMaxDeficitLotSize", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setMaxSurplusLotSize", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setMinAuctionDuration", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setMinBidDelta", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setMinLotSize", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setReservesBufferLowerBound", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setReservesBufferUpperBound", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setTwapDuration", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "settleDeficitAuction", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "settleSurplusAuction", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "setExtensionPerBid", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setMaxAuctionDuration", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setMaxBatchSize", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setMaxDeficitLotSize", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setMaxSurplusLotSize", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setMinAuctionDuration", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setMinBidDelta", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setMinLotSize", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setReservesBufferLowerBound", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setReservesBufferUpperBound", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setTwapDuration", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "settleDeficitAuction", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "settleSurplusAuction", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "shouldStartAuctions", values?: undefined): string;
-    encodeFunctionData(functionFragment: "startAuction", values: [BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "startAuctions", values: [BigNumberish, boolean]): string;
+    encodeFunctionData(functionFragment: "startAuction", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]): string;
+    encodeFunctionData(functionFragment: "startAuctions", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]): string;
     encodeFunctionData(functionFragment: "stop", values?: undefined): string;
     encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
-    encodeFunctionData(functionFragment: "surplusAuction", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "surplusAuctionComplete", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "surplusAuction", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "surplusAuctionComplete", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "surplusAuctionCount", values?: undefined): string;
-    encodeFunctionData(functionFragment: "surplusAuctionExists", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "surplusAuctionLive", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "surplusAuctionExists", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "surplusAuctionLive", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "twapDuration", values?: undefined): string;
-    encodeFunctionData(functionFragment: "validUpdate", values: [BytesLike]): string;
+    encodeFunctionData(functionFragment: "validUpdate", values: [PromiseOrValue<BytesLike>]): string;
     decodeFunctionResult(functionFragment: "aggregateAuctionSize", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "bidDeficitAuction", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "bidSurplusAuction", data: BytesLike): Result;
@@ -385,19 +385,19 @@ export interface AuctionsTestable extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        aggregateAuctionSize(amtIn: BigNumberish, lotSize: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber] & {
+        aggregateAuctionSize(amtIn: PromiseOrValue<BigNumberish>, lotSize: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber] & {
             size: BigNumber;
         }>;
-        bidDeficitAuction(auctionID: BigNumberish, bid: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        bidDeficitAuction(auctionID: PromiseOrValue<BigNumberish>, bid: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        bidSurplusAuction(auctionID: BigNumberish, bid: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        bidSurplusAuction(auctionID: PromiseOrValue<BigNumberish>, bid: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         checkReservesAndStartAuctions(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        deficitAuction(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        deficitAuction(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             string,
@@ -410,12 +410,12 @@ export interface AuctionsTestable extends BaseContract {
             endTime: number;
             maxEndTime: number;
         }>;
-        deficitAuctionComplete(auctionID: BigNumberish, overrides?: CallOverrides): Promise<[boolean]>;
+        deficitAuctionComplete(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[boolean]>;
         deficitAuctionCount(overrides?: CallOverrides): Promise<[BigNumber]>;
-        deficitAuctionExists(id: BigNumberish, overrides?: CallOverrides): Promise<[boolean]>;
-        deficitAuctionLive(auctionID: BigNumberish, overrides?: CallOverrides): Promise<[boolean]>;
+        deficitAuctionExists(id: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[boolean]>;
+        deficitAuctionLive(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[boolean]>;
         extensionPerBid(overrides?: CallOverrides): Promise<[BigNumber]>;
-        getAllAuctions(start: BigNumberish, surplus: boolean, overrides?: CallOverrides): Promise<[
+        getAllAuctions(start: PromiseOrValue<BigNumberish>, surplus: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[
             IAuctions.AuctionStructOutput[],
             BigNumber[],
             boolean[]
@@ -438,44 +438,44 @@ export interface AuctionsTestable extends BaseContract {
         minLotSize(overrides?: CallOverrides): Promise<[BigNumber]>;
         reservesBufferLowerBound(overrides?: CallOverrides): Promise<[BigNumber]>;
         reservesBufferUpperBound(overrides?: CallOverrides): Promise<[BigNumber]>;
-        setExtensionPerBid(extension: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setExtensionPerBid(extension: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setMaxAuctionDuration(duration: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMaxAuctionDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setMaxBatchSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMaxBatchSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setMaxDeficitLotSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMaxDeficitLotSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setMaxSurplusLotSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMaxSurplusLotSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setMinAuctionDuration(duration: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMinAuctionDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setMinBidDelta(delta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMinBidDelta(delta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setMinLotSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMinLotSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setReservesBufferLowerBound(bound: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setReservesBufferLowerBound(bound: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setReservesBufferUpperBound(bound: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setReservesBufferUpperBound(bound: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setTwapDuration(duration: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setTwapDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        settleDeficitAuction(auctionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        settleDeficitAuction(auctionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        settleSurplusAuction(auctionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        settleSurplusAuction(auctionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         shouldStartAuctions(overrides?: CallOverrides): Promise<[
             BigNumber,
@@ -484,17 +484,17 @@ export interface AuctionsTestable extends BaseContract {
             surplusAmount: BigNumber;
             deficitAmount: BigNumber;
         }>;
-        startAuction(count: BigNumberish, isSurplus: boolean, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        startAuction(count: PromiseOrValue<BigNumberish>, isSurplus: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        startAuctions(amt: BigNumberish, isSurplus: boolean, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        startAuctions(amt: PromiseOrValue<BigNumberish>, isSurplus: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         stopped(overrides?: CallOverrides): Promise<[boolean]>;
-        surplusAuction(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        surplusAuction(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             string,
@@ -507,24 +507,24 @@ export interface AuctionsTestable extends BaseContract {
             endTime: number;
             maxEndTime: number;
         }>;
-        surplusAuctionComplete(auctionID: BigNumberish, overrides?: CallOverrides): Promise<[boolean]>;
+        surplusAuctionComplete(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[boolean]>;
         surplusAuctionCount(overrides?: CallOverrides): Promise<[BigNumber]>;
-        surplusAuctionExists(id: BigNumberish, overrides?: CallOverrides): Promise<[boolean]>;
-        surplusAuctionLive(auctionID: BigNumberish, overrides?: CallOverrides): Promise<[boolean]>;
+        surplusAuctionExists(id: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[boolean]>;
+        surplusAuctionLive(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[boolean]>;
         twapDuration(overrides?: CallOverrides): Promise<[number]>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
     };
-    aggregateAuctionSize(amtIn: BigNumberish, lotSize: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    bidDeficitAuction(auctionID: BigNumberish, bid: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    aggregateAuctionSize(amtIn: PromiseOrValue<BigNumberish>, lotSize: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    bidDeficitAuction(auctionID: PromiseOrValue<BigNumberish>, bid: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    bidSurplusAuction(auctionID: BigNumberish, bid: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    bidSurplusAuction(auctionID: PromiseOrValue<BigNumberish>, bid: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     checkReservesAndStartAuctions(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    deficitAuction(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+    deficitAuction(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         BigNumber,
         BigNumber,
         string,
@@ -537,12 +537,12 @@ export interface AuctionsTestable extends BaseContract {
         endTime: number;
         maxEndTime: number;
     }>;
-    deficitAuctionComplete(auctionID: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    deficitAuctionComplete(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
     deficitAuctionCount(overrides?: CallOverrides): Promise<BigNumber>;
-    deficitAuctionExists(id: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-    deficitAuctionLive(auctionID: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    deficitAuctionExists(id: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+    deficitAuctionLive(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
     extensionPerBid(overrides?: CallOverrides): Promise<BigNumber>;
-    getAllAuctions(start: BigNumberish, surplus: boolean, overrides?: CallOverrides): Promise<[
+    getAllAuctions(start: PromiseOrValue<BigNumberish>, surplus: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[
         IAuctions.AuctionStructOutput[],
         BigNumber[],
         boolean[]
@@ -565,44 +565,44 @@ export interface AuctionsTestable extends BaseContract {
     minLotSize(overrides?: CallOverrides): Promise<BigNumber>;
     reservesBufferLowerBound(overrides?: CallOverrides): Promise<BigNumber>;
     reservesBufferUpperBound(overrides?: CallOverrides): Promise<BigNumber>;
-    setExtensionPerBid(extension: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setExtensionPerBid(extension: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setMaxAuctionDuration(duration: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setMaxAuctionDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setMaxBatchSize(size: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setMaxBatchSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setMaxDeficitLotSize(size: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setMaxDeficitLotSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setMaxSurplusLotSize(size: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setMaxSurplusLotSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setMinAuctionDuration(duration: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setMinAuctionDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setMinBidDelta(delta: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setMinBidDelta(delta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setMinLotSize(size: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setMinLotSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setReservesBufferLowerBound(bound: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setReservesBufferLowerBound(bound: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setReservesBufferUpperBound(bound: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setReservesBufferUpperBound(bound: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setTwapDuration(duration: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setTwapDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    settleDeficitAuction(auctionID: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    settleDeficitAuction(auctionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    settleSurplusAuction(auctionID: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    settleSurplusAuction(auctionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     shouldStartAuctions(overrides?: CallOverrides): Promise<[
         BigNumber,
@@ -611,17 +611,17 @@ export interface AuctionsTestable extends BaseContract {
         surplusAmount: BigNumber;
         deficitAmount: BigNumber;
     }>;
-    startAuction(count: BigNumberish, isSurplus: boolean, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    startAuction(count: PromiseOrValue<BigNumberish>, isSurplus: PromiseOrValue<boolean>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    startAuctions(amt: BigNumberish, isSurplus: boolean, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    startAuctions(amt: PromiseOrValue<BigNumberish>, isSurplus: PromiseOrValue<boolean>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     stop(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     stopped(overrides?: CallOverrides): Promise<boolean>;
-    surplusAuction(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+    surplusAuction(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         BigNumber,
         BigNumber,
         string,
@@ -634,18 +634,18 @@ export interface AuctionsTestable extends BaseContract {
         endTime: number;
         maxEndTime: number;
     }>;
-    surplusAuctionComplete(auctionID: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    surplusAuctionComplete(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
     surplusAuctionCount(overrides?: CallOverrides): Promise<BigNumber>;
-    surplusAuctionExists(id: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-    surplusAuctionLive(auctionID: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    surplusAuctionExists(id: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+    surplusAuctionLive(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
     twapDuration(overrides?: CallOverrides): Promise<number>;
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     callStatic: {
-        aggregateAuctionSize(amtIn: BigNumberish, lotSize: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        bidDeficitAuction(auctionID: BigNumberish, bid: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        bidSurplusAuction(auctionID: BigNumberish, bid: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        aggregateAuctionSize(amtIn: PromiseOrValue<BigNumberish>, lotSize: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        bidDeficitAuction(auctionID: PromiseOrValue<BigNumberish>, bid: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        bidSurplusAuction(auctionID: PromiseOrValue<BigNumberish>, bid: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         checkReservesAndStartAuctions(overrides?: CallOverrides): Promise<void>;
-        deficitAuction(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        deficitAuction(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             string,
@@ -658,12 +658,12 @@ export interface AuctionsTestable extends BaseContract {
             endTime: number;
             maxEndTime: number;
         }>;
-        deficitAuctionComplete(auctionID: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        deficitAuctionComplete(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
         deficitAuctionCount(overrides?: CallOverrides): Promise<BigNumber>;
-        deficitAuctionExists(id: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        deficitAuctionLive(auctionID: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        deficitAuctionExists(id: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        deficitAuctionLive(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
         extensionPerBid(overrides?: CallOverrides): Promise<BigNumber>;
-        getAllAuctions(start: BigNumberish, surplus: boolean, overrides?: CallOverrides): Promise<[
+        getAllAuctions(start: PromiseOrValue<BigNumberish>, surplus: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[
             IAuctions.AuctionStructOutput[],
             BigNumber[],
             boolean[]
@@ -686,19 +686,19 @@ export interface AuctionsTestable extends BaseContract {
         minLotSize(overrides?: CallOverrides): Promise<BigNumber>;
         reservesBufferLowerBound(overrides?: CallOverrides): Promise<BigNumber>;
         reservesBufferUpperBound(overrides?: CallOverrides): Promise<BigNumber>;
-        setExtensionPerBid(extension: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setMaxAuctionDuration(duration: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setMaxBatchSize(size: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setMaxDeficitLotSize(size: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setMaxSurplusLotSize(size: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setMinAuctionDuration(duration: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setMinBidDelta(delta: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setMinLotSize(size: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setReservesBufferLowerBound(bound: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setReservesBufferUpperBound(bound: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setTwapDuration(duration: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        settleDeficitAuction(auctionID: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        settleSurplusAuction(auctionID: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        setExtensionPerBid(extension: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setMaxAuctionDuration(duration: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setMaxBatchSize(size: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setMaxDeficitLotSize(size: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setMaxSurplusLotSize(size: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setMinAuctionDuration(duration: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setMinBidDelta(delta: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setMinLotSize(size: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setReservesBufferLowerBound(bound: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setReservesBufferUpperBound(bound: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setTwapDuration(duration: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        settleDeficitAuction(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        settleSurplusAuction(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         shouldStartAuctions(overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
@@ -706,11 +706,11 @@ export interface AuctionsTestable extends BaseContract {
             surplusAmount: BigNumber;
             deficitAmount: BigNumber;
         }>;
-        startAuction(count: BigNumberish, isSurplus: boolean, overrides?: CallOverrides): Promise<void>;
-        startAuctions(amt: BigNumberish, isSurplus: boolean, overrides?: CallOverrides): Promise<void>;
+        startAuction(count: PromiseOrValue<BigNumberish>, isSurplus: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        startAuctions(amt: PromiseOrValue<BigNumberish>, isSurplus: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
         stop(overrides?: CallOverrides): Promise<void>;
         stopped(overrides?: CallOverrides): Promise<boolean>;
-        surplusAuction(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        surplusAuction(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             string,
@@ -723,20 +723,20 @@ export interface AuctionsTestable extends BaseContract {
             endTime: number;
             maxEndTime: number;
         }>;
-        surplusAuctionComplete(auctionID: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        surplusAuctionComplete(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
         surplusAuctionCount(overrides?: CallOverrides): Promise<BigNumber>;
-        surplusAuctionExists(id: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        surplusAuctionLive(auctionID: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        surplusAuctionExists(id: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        surplusAuctionLive(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
         twapDuration(overrides?: CallOverrides): Promise<number>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     };
     filters: {
-        "DeficitAuctionBid(uint64,address,uint256)"(auctionID?: BigNumberish | null, bidder?: string | null, bid?: null): DeficitAuctionBidEventFilter;
-        DeficitAuctionBid(auctionID?: BigNumberish | null, bidder?: string | null, bid?: null): DeficitAuctionBidEventFilter;
-        "DeficitAuctionSettled(uint64,address)"(auctionID?: BigNumberish | null, winner?: string | null): DeficitAuctionSettledEventFilter;
-        DeficitAuctionSettled(auctionID?: BigNumberish | null, winner?: string | null): DeficitAuctionSettledEventFilter;
-        "DeficitAuctionStarted(uint64,uint256,uint64)"(auctionID?: BigNumberish | null, count?: BigNumberish | null, maxEndTime?: null): DeficitAuctionStartedEventFilter;
-        DeficitAuctionStarted(auctionID?: BigNumberish | null, count?: BigNumberish | null, maxEndTime?: null): DeficitAuctionStartedEventFilter;
+        "DeficitAuctionBid(uint64,address,uint256)"(auctionID?: PromiseOrValue<BigNumberish> | null, bidder?: PromiseOrValue<string> | null, bid?: null): DeficitAuctionBidEventFilter;
+        DeficitAuctionBid(auctionID?: PromiseOrValue<BigNumberish> | null, bidder?: PromiseOrValue<string> | null, bid?: null): DeficitAuctionBidEventFilter;
+        "DeficitAuctionSettled(uint64,address)"(auctionID?: PromiseOrValue<BigNumberish> | null, winner?: PromiseOrValue<string> | null): DeficitAuctionSettledEventFilter;
+        DeficitAuctionSettled(auctionID?: PromiseOrValue<BigNumberish> | null, winner?: PromiseOrValue<string> | null): DeficitAuctionSettledEventFilter;
+        "DeficitAuctionStarted(uint64,uint256,uint64)"(auctionID?: PromiseOrValue<BigNumberish> | null, count?: PromiseOrValue<BigNumberish> | null, maxEndTime?: null): DeficitAuctionStartedEventFilter;
+        DeficitAuctionStarted(auctionID?: PromiseOrValue<BigNumberish> | null, count?: PromiseOrValue<BigNumberish> | null, maxEndTime?: null): DeficitAuctionStartedEventFilter;
         "ExtensionPerBidUpdated(uint64)"(extension?: null): ExtensionPerBidUpdatedEventFilter;
         ExtensionPerBidUpdated(extension?: null): ExtensionPerBidUpdatedEventFilter;
         "MaxAuctionDurationUpdated(uint64)"(duration?: null): MaxAuctionDurationUpdatedEventFilter;
@@ -757,35 +757,35 @@ export interface AuctionsTestable extends BaseContract {
         ReservesBufferUpperBoundUpdated(bound?: null): ReservesBufferUpperBoundUpdatedEventFilter;
         "Stopped()"(): StoppedEventFilter;
         Stopped(): StoppedEventFilter;
-        "SurplusAuctionBid(uint64,address,uint256)"(auctionID?: BigNumberish | null, bidder?: string | null, bid?: null): SurplusAuctionBidEventFilter;
-        SurplusAuctionBid(auctionID?: BigNumberish | null, bidder?: string | null, bid?: null): SurplusAuctionBidEventFilter;
-        "SurplusAuctionSettled(uint64,address)"(auctionID?: BigNumberish | null, winner?: string | null): SurplusAuctionSettledEventFilter;
-        SurplusAuctionSettled(auctionID?: BigNumberish | null, winner?: string | null): SurplusAuctionSettledEventFilter;
-        "SurplusAuctionStarted(uint64,uint256,uint64)"(auctionID?: BigNumberish | null, count?: BigNumberish | null, maxEndTime?: null): SurplusAuctionStartedEventFilter;
-        SurplusAuctionStarted(auctionID?: BigNumberish | null, count?: BigNumberish | null, maxEndTime?: null): SurplusAuctionStartedEventFilter;
+        "SurplusAuctionBid(uint64,address,uint256)"(auctionID?: PromiseOrValue<BigNumberish> | null, bidder?: PromiseOrValue<string> | null, bid?: null): SurplusAuctionBidEventFilter;
+        SurplusAuctionBid(auctionID?: PromiseOrValue<BigNumberish> | null, bidder?: PromiseOrValue<string> | null, bid?: null): SurplusAuctionBidEventFilter;
+        "SurplusAuctionSettled(uint64,address)"(auctionID?: PromiseOrValue<BigNumberish> | null, winner?: PromiseOrValue<string> | null): SurplusAuctionSettledEventFilter;
+        SurplusAuctionSettled(auctionID?: PromiseOrValue<BigNumberish> | null, winner?: PromiseOrValue<string> | null): SurplusAuctionSettledEventFilter;
+        "SurplusAuctionStarted(uint64,uint256,uint64)"(auctionID?: PromiseOrValue<BigNumberish> | null, count?: PromiseOrValue<BigNumberish> | null, maxEndTime?: null): SurplusAuctionStartedEventFilter;
+        SurplusAuctionStarted(auctionID?: PromiseOrValue<BigNumberish> | null, count?: PromiseOrValue<BigNumberish> | null, maxEndTime?: null): SurplusAuctionStartedEventFilter;
         "TwapDurationUpdated(uint32)"(duration?: null): TwapDurationUpdatedEventFilter;
         TwapDurationUpdated(duration?: null): TwapDurationUpdatedEventFilter;
         "maxDeficitLotSizeUpdated(uint256)"(size?: null): maxDeficitLotSizeUpdatedEventFilter;
         maxDeficitLotSizeUpdated(size?: null): maxDeficitLotSizeUpdatedEventFilter;
     };
     estimateGas: {
-        aggregateAuctionSize(amtIn: BigNumberish, lotSize: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        bidDeficitAuction(auctionID: BigNumberish, bid: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        aggregateAuctionSize(amtIn: PromiseOrValue<BigNumberish>, lotSize: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        bidDeficitAuction(auctionID: PromiseOrValue<BigNumberish>, bid: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        bidSurplusAuction(auctionID: BigNumberish, bid: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        bidSurplusAuction(auctionID: PromiseOrValue<BigNumberish>, bid: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         checkReservesAndStartAuctions(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        deficitAuction(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        deficitAuctionComplete(auctionID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        deficitAuction(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        deficitAuctionComplete(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         deficitAuctionCount(overrides?: CallOverrides): Promise<BigNumber>;
-        deficitAuctionExists(id: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        deficitAuctionLive(auctionID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        deficitAuctionExists(id: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        deficitAuctionLive(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         extensionPerBid(overrides?: CallOverrides): Promise<BigNumber>;
-        getAllAuctions(start: BigNumberish, surplus: boolean, overrides?: CallOverrides): Promise<BigNumber>;
+        getAllAuctions(start: PromiseOrValue<BigNumberish>, surplus: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
         governor(overrides?: CallOverrides): Promise<BigNumber>;
         hue(overrides?: CallOverrides): Promise<BigNumber>;
         hueToBeBought(overrides?: CallOverrides): Promise<BigNumber>;
@@ -800,82 +800,82 @@ export interface AuctionsTestable extends BaseContract {
         minLotSize(overrides?: CallOverrides): Promise<BigNumber>;
         reservesBufferLowerBound(overrides?: CallOverrides): Promise<BigNumber>;
         reservesBufferUpperBound(overrides?: CallOverrides): Promise<BigNumber>;
-        setExtensionPerBid(extension: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setExtensionPerBid(extension: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setMaxAuctionDuration(duration: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMaxAuctionDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setMaxBatchSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMaxBatchSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setMaxDeficitLotSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMaxDeficitLotSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setMaxSurplusLotSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMaxSurplusLotSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setMinAuctionDuration(duration: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMinAuctionDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setMinBidDelta(delta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMinBidDelta(delta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setMinLotSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMinLotSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setReservesBufferLowerBound(bound: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setReservesBufferLowerBound(bound: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setReservesBufferUpperBound(bound: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setReservesBufferUpperBound(bound: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setTwapDuration(duration: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setTwapDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        settleDeficitAuction(auctionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        settleDeficitAuction(auctionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        settleSurplusAuction(auctionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        settleSurplusAuction(auctionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         shouldStartAuctions(overrides?: CallOverrides): Promise<BigNumber>;
-        startAuction(count: BigNumberish, isSurplus: boolean, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        startAuction(count: PromiseOrValue<BigNumberish>, isSurplus: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        startAuctions(amt: BigNumberish, isSurplus: boolean, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        startAuctions(amt: PromiseOrValue<BigNumberish>, isSurplus: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         stopped(overrides?: CallOverrides): Promise<BigNumber>;
-        surplusAuction(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        surplusAuctionComplete(auctionID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        surplusAuction(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        surplusAuctionComplete(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         surplusAuctionCount(overrides?: CallOverrides): Promise<BigNumber>;
-        surplusAuctionExists(id: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        surplusAuctionLive(auctionID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        surplusAuctionExists(id: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        surplusAuctionLive(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         twapDuration(overrides?: CallOverrides): Promise<BigNumber>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        aggregateAuctionSize(amtIn: BigNumberish, lotSize: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        bidDeficitAuction(auctionID: BigNumberish, bid: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        aggregateAuctionSize(amtIn: PromiseOrValue<BigNumberish>, lotSize: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        bidDeficitAuction(auctionID: PromiseOrValue<BigNumberish>, bid: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        bidSurplusAuction(auctionID: BigNumberish, bid: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        bidSurplusAuction(auctionID: PromiseOrValue<BigNumberish>, bid: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         checkReservesAndStartAuctions(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        deficitAuction(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        deficitAuctionComplete(auctionID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        deficitAuction(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        deficitAuctionComplete(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         deficitAuctionCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        deficitAuctionExists(id: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        deficitAuctionLive(auctionID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        deficitAuctionExists(id: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        deficitAuctionLive(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         extensionPerBid(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getAllAuctions(start: BigNumberish, surplus: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getAllAuctions(start: PromiseOrValue<BigNumberish>, surplus: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         hue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         hueToBeBought(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -890,62 +890,62 @@ export interface AuctionsTestable extends BaseContract {
         minLotSize(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         reservesBufferLowerBound(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         reservesBufferUpperBound(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setExtensionPerBid(extension: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setExtensionPerBid(extension: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setMaxAuctionDuration(duration: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMaxAuctionDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setMaxBatchSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMaxBatchSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setMaxDeficitLotSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMaxDeficitLotSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setMaxSurplusLotSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMaxSurplusLotSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setMinAuctionDuration(duration: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMinAuctionDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setMinBidDelta(delta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMinBidDelta(delta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setMinLotSize(size: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setMinLotSize(size: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setReservesBufferLowerBound(bound: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setReservesBufferLowerBound(bound: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setReservesBufferUpperBound(bound: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setReservesBufferUpperBound(bound: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setTwapDuration(duration: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setTwapDuration(duration: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        settleDeficitAuction(auctionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        settleDeficitAuction(auctionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        settleSurplusAuction(auctionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        settleSurplusAuction(auctionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         shouldStartAuctions(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        startAuction(count: BigNumberish, isSurplus: boolean, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        startAuction(count: PromiseOrValue<BigNumberish>, isSurplus: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        startAuctions(amt: BigNumberish, isSurplus: boolean, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        startAuctions(amt: PromiseOrValue<BigNumberish>, isSurplus: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        surplusAuction(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        surplusAuctionComplete(auctionID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        surplusAuction(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        surplusAuctionComplete(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         surplusAuctionCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        surplusAuctionExists(id: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        surplusAuctionLive(auctionID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        surplusAuctionExists(id: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        surplusAuctionLive(auctionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         twapDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

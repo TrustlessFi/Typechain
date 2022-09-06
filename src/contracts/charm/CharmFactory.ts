@@ -19,10 +19,11 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export declare namespace CharmFactory {
-  export type ConstructorParamsStruct = { Weth: string };
+  export type ConstructorParamsStruct = { Weth: PromiseOrValue<string> };
 
   export type ConstructorParamsStructOutput = [string] & { Weth: string };
 }
@@ -40,15 +41,15 @@ export interface CharmFactoryInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "createWrapper",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "poolToWrapper",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "wrapperToPool",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
 
   decodeFunctionResult(
@@ -95,58 +96,85 @@ export interface CharmFactory extends BaseContract {
 
   functions: {
     createWrapper(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    poolToWrapper(arg0: string, overrides?: CallOverrides): Promise<[string]>;
+    poolToWrapper(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
-    wrapperToPool(arg0: string, overrides?: CallOverrides): Promise<[string]>;
+    wrapperToPool(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
   };
 
   createWrapper(
-    pool: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  poolToWrapper(arg0: string, overrides?: CallOverrides): Promise<string>;
+  poolToWrapper(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
-  wrapperToPool(arg0: string, overrides?: CallOverrides): Promise<string>;
+  wrapperToPool(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   callStatic: {
-    createWrapper(pool: string, overrides?: CallOverrides): Promise<string>;
+    createWrapper(
+      pool: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    poolToWrapper(arg0: string, overrides?: CallOverrides): Promise<string>;
+    poolToWrapper(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    wrapperToPool(arg0: string, overrides?: CallOverrides): Promise<string>;
+    wrapperToPool(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {};
 
   estimateGas: {
     createWrapper(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    poolToWrapper(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    poolToWrapper(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    wrapperToPool(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    wrapperToPool(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     createWrapper(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     poolToWrapper(
-      arg0: string,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     wrapperToPool(
-      arg0: string,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

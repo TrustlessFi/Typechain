@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export interface MockGovernorInterface extends utils.Interface {
     functions: {
         "currentPhase()": FunctionFragment;
@@ -11,9 +11,17 @@ export interface MockGovernorInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "currentPhase" | "execute" | "mintTo" | "requireValidAction"): FunctionFragment;
     encodeFunctionData(functionFragment: "currentPhase", values?: undefined): string;
-    encodeFunctionData(functionFragment: "execute", values: [string, string, BytesLike]): string;
-    encodeFunctionData(functionFragment: "mintTo", values: [string, string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "requireValidAction", values: [string, string]): string;
+    encodeFunctionData(functionFragment: "execute", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "mintTo", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "requireValidAction", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
     decodeFunctionResult(functionFragment: "currentPhase", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "execute", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "mintTo", data: BytesLike): Result;
@@ -36,50 +44,50 @@ export interface MockGovernor extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         currentPhase(overrides?: CallOverrides): Promise<[number]>;
-        execute(arg0: string, arg1: string, arg2: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        execute(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, arg2: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        mintTo(token: string, dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mintTo(token: PromiseOrValue<string>, dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        requireValidAction(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[void]>;
+        requireValidAction(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[void]>;
     };
     currentPhase(overrides?: CallOverrides): Promise<number>;
-    execute(arg0: string, arg1: string, arg2: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    execute(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, arg2: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    mintTo(token: string, dest: string, count: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    mintTo(token: PromiseOrValue<string>, dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    requireValidAction(arg0: string, arg1: string, overrides?: CallOverrides): Promise<void>;
+    requireValidAction(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
     callStatic: {
         currentPhase(overrides?: CallOverrides): Promise<number>;
-        execute(arg0: string, arg1: string, arg2: BytesLike, overrides?: CallOverrides): Promise<[boolean, string] & {
+        execute(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, arg2: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean, string] & {
             success: boolean;
             returnData: string;
         }>;
-        mintTo(token: string, dest: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        requireValidAction(arg0: string, arg1: string, overrides?: CallOverrides): Promise<void>;
+        mintTo(token: PromiseOrValue<string>, dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        requireValidAction(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
         currentPhase(overrides?: CallOverrides): Promise<BigNumber>;
-        execute(arg0: string, arg1: string, arg2: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        execute(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, arg2: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        mintTo(token: string, dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mintTo(token: PromiseOrValue<string>, dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        requireValidAction(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
+        requireValidAction(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         currentPhase(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        execute(arg0: string, arg1: string, arg2: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        execute(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, arg2: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        mintTo(token: string, dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mintTo(token: PromiseOrValue<string>, dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        requireValidAction(arg0: string, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        requireValidAction(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

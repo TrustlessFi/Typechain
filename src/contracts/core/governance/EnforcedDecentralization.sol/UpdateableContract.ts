@@ -17,6 +17,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface UpdateableContractInterface extends utils.Interface {
@@ -28,7 +29,7 @@ export interface UpdateableContractInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "validUpdate",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
 
   decodeFunctionResult(
@@ -67,29 +68,35 @@ export interface UpdateableContract extends BaseContract {
 
   functions: {
     validUpdate(
-      action: BytesLike,
+      action: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
   };
 
-  validUpdate(action: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  validUpdate(
+    action: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
-    validUpdate(action: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    validUpdate(
+      action: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {};
 
   estimateGas: {
     validUpdate(
-      action: BytesLike,
+      action: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     validUpdate(
-      action: BytesLike,
+      action: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

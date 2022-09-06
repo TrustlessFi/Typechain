@@ -1,17 +1,17 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export declare namespace Tick {
     type InfoStruct = {
-        liquidityGross: BigNumberish;
-        liquidityNet: BigNumberish;
-        feeGrowthOutside0X128: BigNumberish;
-        feeGrowthOutside1X128: BigNumberish;
-        tickCumulativeOutside: BigNumberish;
-        secondsPerLiquidityOutsideX128: BigNumberish;
-        secondsOutside: BigNumberish;
-        initialized: boolean;
+        liquidityGross: PromiseOrValue<BigNumberish>;
+        liquidityNet: PromiseOrValue<BigNumberish>;
+        feeGrowthOutside0X128: PromiseOrValue<BigNumberish>;
+        feeGrowthOutside1X128: PromiseOrValue<BigNumberish>;
+        tickCumulativeOutside: PromiseOrValue<BigNumberish>;
+        secondsPerLiquidityOutsideX128: PromiseOrValue<BigNumberish>;
+        secondsOutside: PromiseOrValue<BigNumberish>;
+        initialized: PromiseOrValue<boolean>;
     };
     type InfoStructOutput = [
         BigNumber,
@@ -44,36 +44,36 @@ export interface TickTestInterface extends utils.Interface {
         "update(int24,int24,int128,uint256,uint256,uint160,int56,uint32,bool,uint128)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "clear" | "cross" | "getFeeGrowthInside" | "setTick" | "tickSpacingToMaxLiquidityPerTick" | "ticks" | "update"): FunctionFragment;
-    encodeFunctionData(functionFragment: "clear", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "clear", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "cross", values: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
     ]): string;
     encodeFunctionData(functionFragment: "getFeeGrowthInside", values: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
     ]): string;
-    encodeFunctionData(functionFragment: "setTick", values: [BigNumberish, Tick.InfoStruct]): string;
-    encodeFunctionData(functionFragment: "tickSpacingToMaxLiquidityPerTick", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "ticks", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "setTick", values: [PromiseOrValue<BigNumberish>, Tick.InfoStruct]): string;
+    encodeFunctionData(functionFragment: "tickSpacingToMaxLiquidityPerTick", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "ticks", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "update", values: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        boolean,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>,
+        PromiseOrValue<BigNumberish>
     ]): string;
     decodeFunctionResult(functionFragment: "clear", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "cross", data: BytesLike): Result;
@@ -99,24 +99,24 @@ export interface TickTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        clear(tick: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        clear(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        cross(tick: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, secondsPerLiquidityCumulativeX128: BigNumberish, tickCumulative: BigNumberish, time: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        cross(tick: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, secondsPerLiquidityCumulativeX128: PromiseOrValue<BigNumberish>, tickCumulative: PromiseOrValue<BigNumberish>, time: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        getFeeGrowthInside(tickLower: BigNumberish, tickUpper: BigNumberish, tickCurrent: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, overrides?: CallOverrides): Promise<[
+        getFeeGrowthInside(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, tickCurrent: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
             feeGrowthInside0X128: BigNumber;
             feeGrowthInside1X128: BigNumber;
         }>;
-        setTick(tick: BigNumberish, info: Tick.InfoStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setTick(tick: PromiseOrValue<BigNumberish>, info: Tick.InfoStruct, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        tickSpacingToMaxLiquidityPerTick(tickSpacing: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
-        ticks(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        tickSpacingToMaxLiquidityPerTick(tickSpacing: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        ticks(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber,
@@ -135,28 +135,28 @@ export interface TickTest extends BaseContract {
             secondsOutside: number;
             initialized: boolean;
         }>;
-        update(tick: BigNumberish, tickCurrent: BigNumberish, liquidityDelta: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, secondsPerLiquidityCumulativeX128: BigNumberish, tickCumulative: BigNumberish, time: BigNumberish, upper: boolean, maxLiquidity: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        update(tick: PromiseOrValue<BigNumberish>, tickCurrent: PromiseOrValue<BigNumberish>, liquidityDelta: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, secondsPerLiquidityCumulativeX128: PromiseOrValue<BigNumberish>, tickCumulative: PromiseOrValue<BigNumberish>, time: PromiseOrValue<BigNumberish>, upper: PromiseOrValue<boolean>, maxLiquidity: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    clear(tick: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    clear(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    cross(tick: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, secondsPerLiquidityCumulativeX128: BigNumberish, tickCumulative: BigNumberish, time: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    cross(tick: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, secondsPerLiquidityCumulativeX128: PromiseOrValue<BigNumberish>, tickCumulative: PromiseOrValue<BigNumberish>, time: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    getFeeGrowthInside(tickLower: BigNumberish, tickUpper: BigNumberish, tickCurrent: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, overrides?: CallOverrides): Promise<[
+    getFeeGrowthInside(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, tickCurrent: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         BigNumber,
         BigNumber
     ] & {
         feeGrowthInside0X128: BigNumber;
         feeGrowthInside1X128: BigNumber;
     }>;
-    setTick(tick: BigNumberish, info: Tick.InfoStruct, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setTick(tick: PromiseOrValue<BigNumberish>, info: Tick.InfoStruct, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    tickSpacingToMaxLiquidityPerTick(tickSpacing: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    ticks(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+    tickSpacingToMaxLiquidityPerTick(tickSpacing: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    ticks(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         BigNumber,
         BigNumber,
         BigNumber,
@@ -175,22 +175,22 @@ export interface TickTest extends BaseContract {
         secondsOutside: number;
         initialized: boolean;
     }>;
-    update(tick: BigNumberish, tickCurrent: BigNumberish, liquidityDelta: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, secondsPerLiquidityCumulativeX128: BigNumberish, tickCumulative: BigNumberish, time: BigNumberish, upper: boolean, maxLiquidity: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    update(tick: PromiseOrValue<BigNumberish>, tickCurrent: PromiseOrValue<BigNumberish>, liquidityDelta: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, secondsPerLiquidityCumulativeX128: PromiseOrValue<BigNumberish>, tickCumulative: PromiseOrValue<BigNumberish>, time: PromiseOrValue<BigNumberish>, upper: PromiseOrValue<boolean>, maxLiquidity: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        clear(tick: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        cross(tick: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, secondsPerLiquidityCumulativeX128: BigNumberish, tickCumulative: BigNumberish, time: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getFeeGrowthInside(tickLower: BigNumberish, tickUpper: BigNumberish, tickCurrent: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, overrides?: CallOverrides): Promise<[
+        clear(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        cross(tick: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, secondsPerLiquidityCumulativeX128: PromiseOrValue<BigNumberish>, tickCumulative: PromiseOrValue<BigNumberish>, time: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getFeeGrowthInside(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, tickCurrent: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
             feeGrowthInside0X128: BigNumber;
             feeGrowthInside1X128: BigNumber;
         }>;
-        setTick(tick: BigNumberish, info: Tick.InfoStruct, overrides?: CallOverrides): Promise<void>;
-        tickSpacingToMaxLiquidityPerTick(tickSpacing: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        ticks(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        setTick(tick: PromiseOrValue<BigNumberish>, info: Tick.InfoStruct, overrides?: CallOverrides): Promise<void>;
+        tickSpacingToMaxLiquidityPerTick(tickSpacing: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        ticks(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber,
@@ -209,41 +209,41 @@ export interface TickTest extends BaseContract {
             secondsOutside: number;
             initialized: boolean;
         }>;
-        update(tick: BigNumberish, tickCurrent: BigNumberish, liquidityDelta: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, secondsPerLiquidityCumulativeX128: BigNumberish, tickCumulative: BigNumberish, time: BigNumberish, upper: boolean, maxLiquidity: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        update(tick: PromiseOrValue<BigNumberish>, tickCurrent: PromiseOrValue<BigNumberish>, liquidityDelta: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, secondsPerLiquidityCumulativeX128: PromiseOrValue<BigNumberish>, tickCumulative: PromiseOrValue<BigNumberish>, time: PromiseOrValue<BigNumberish>, upper: PromiseOrValue<boolean>, maxLiquidity: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
     };
     filters: {};
     estimateGas: {
-        clear(tick: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        clear(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        cross(tick: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, secondsPerLiquidityCumulativeX128: BigNumberish, tickCumulative: BigNumberish, time: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        cross(tick: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, secondsPerLiquidityCumulativeX128: PromiseOrValue<BigNumberish>, tickCumulative: PromiseOrValue<BigNumberish>, time: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        getFeeGrowthInside(tickLower: BigNumberish, tickUpper: BigNumberish, tickCurrent: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        setTick(tick: BigNumberish, info: Tick.InfoStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        getFeeGrowthInside(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, tickCurrent: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        setTick(tick: PromiseOrValue<BigNumberish>, info: Tick.InfoStruct, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        tickSpacingToMaxLiquidityPerTick(tickSpacing: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        ticks(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        update(tick: BigNumberish, tickCurrent: BigNumberish, liquidityDelta: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, secondsPerLiquidityCumulativeX128: BigNumberish, tickCumulative: BigNumberish, time: BigNumberish, upper: boolean, maxLiquidity: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        tickSpacingToMaxLiquidityPerTick(tickSpacing: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        ticks(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        update(tick: PromiseOrValue<BigNumberish>, tickCurrent: PromiseOrValue<BigNumberish>, liquidityDelta: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, secondsPerLiquidityCumulativeX128: PromiseOrValue<BigNumberish>, tickCumulative: PromiseOrValue<BigNumberish>, time: PromiseOrValue<BigNumberish>, upper: PromiseOrValue<boolean>, maxLiquidity: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        clear(tick: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        clear(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        cross(tick: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, secondsPerLiquidityCumulativeX128: BigNumberish, tickCumulative: BigNumberish, time: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        cross(tick: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, secondsPerLiquidityCumulativeX128: PromiseOrValue<BigNumberish>, tickCumulative: PromiseOrValue<BigNumberish>, time: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        getFeeGrowthInside(tickLower: BigNumberish, tickUpper: BigNumberish, tickCurrent: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setTick(tick: BigNumberish, info: Tick.InfoStruct, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        getFeeGrowthInside(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, tickCurrent: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        setTick(tick: PromiseOrValue<BigNumberish>, info: Tick.InfoStruct, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        tickSpacingToMaxLiquidityPerTick(tickSpacing: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        ticks(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        update(tick: BigNumberish, tickCurrent: BigNumberish, liquidityDelta: BigNumberish, feeGrowthGlobal0X128: BigNumberish, feeGrowthGlobal1X128: BigNumberish, secondsPerLiquidityCumulativeX128: BigNumberish, tickCumulative: BigNumberish, time: BigNumberish, upper: boolean, maxLiquidity: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        tickSpacingToMaxLiquidityPerTick(tickSpacing: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        ticks(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        update(tick: PromiseOrValue<BigNumberish>, tickCurrent: PromiseOrValue<BigNumberish>, liquidityDelta: PromiseOrValue<BigNumberish>, feeGrowthGlobal0X128: PromiseOrValue<BigNumberish>, feeGrowthGlobal1X128: PromiseOrValue<BigNumberish>, secondsPerLiquidityCumulativeX128: PromiseOrValue<BigNumberish>, tickCumulative: PromiseOrValue<BigNumberish>, time: PromiseOrValue<BigNumberish>, upper: PromiseOrValue<boolean>, maxLiquidity: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

@@ -1,13 +1,17 @@
 import type { BaseContract, BigNumber, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface IExecutorInterface extends utils.Interface {
     functions: {
         "execute(address,string,bytes)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "execute"): FunctionFragment;
-    encodeFunctionData(functionFragment: "execute", values: [string, string, BytesLike]): string;
+    encodeFunctionData(functionFragment: "execute", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>
+    ]): string;
     decodeFunctionResult(functionFragment: "execute", data: BytesLike): Result;
     events: {};
 }
@@ -26,28 +30,28 @@ export interface IExecutor extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        execute(target: string, signature: string, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        execute(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    execute(target: string, signature: string, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    execute(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        execute(target: string, signature: string, data: BytesLike, overrides?: CallOverrides): Promise<[boolean, string] & {
+        execute(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean, string] & {
             success: boolean;
             returnData: string;
         }>;
     };
     filters: {};
     estimateGas: {
-        execute(target: string, signature: string, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        execute(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        execute(target: string, signature: string, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        execute(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

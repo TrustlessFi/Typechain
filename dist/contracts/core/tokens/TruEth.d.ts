@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TruEthInterface extends utils.Interface {
     functions: {
         "addAdmin(address)": FunctionFragment;
@@ -25,25 +25,29 @@ export interface TruEthInterface extends utils.Interface {
         "transferFrom(address,address,uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "addAdmin" | "addMinter" | "allowance" | "approve" | "balanceOf" | "decimals" | "decreaseAllowance" | "firstAdmin" | "increaseAllowance" | "isAdmin" | "isMinter" | "mint" | "name" | "removeAdmin" | "removeMinter" | "symbol" | "totalSupply" | "transfer" | "transferFrom"): FunctionFragment;
-    encodeFunctionData(functionFragment: "addAdmin", values: [string]): string;
-    encodeFunctionData(functionFragment: "addMinter", values: [string]): string;
-    encodeFunctionData(functionFragment: "allowance", values: [string, string]): string;
-    encodeFunctionData(functionFragment: "approve", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
+    encodeFunctionData(functionFragment: "addAdmin", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "addMinter", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "allowance", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "approve", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "balanceOf", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
-    encodeFunctionData(functionFragment: "decreaseAllowance", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "decreaseAllowance", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "firstAdmin", values?: undefined): string;
-    encodeFunctionData(functionFragment: "increaseAllowance", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "isAdmin", values: [string]): string;
-    encodeFunctionData(functionFragment: "isMinter", values: [string]): string;
-    encodeFunctionData(functionFragment: "mint", values: [BigNumberish, string[]]): string;
+    encodeFunctionData(functionFragment: "increaseAllowance", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "isAdmin", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "isMinter", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "mint", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>[]]): string;
     encodeFunctionData(functionFragment: "name", values?: undefined): string;
-    encodeFunctionData(functionFragment: "removeAdmin", values: [string]): string;
-    encodeFunctionData(functionFragment: "removeMinter", values: [string]): string;
+    encodeFunctionData(functionFragment: "removeAdmin", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "removeMinter", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
     encodeFunctionData(functionFragment: "totalSupply", values?: undefined): string;
-    encodeFunctionData(functionFragment: "transfer", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "transferFrom", values: [string, string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "transfer", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "transferFrom", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     decodeFunctionResult(functionFragment: "addAdmin", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "addMinter", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
@@ -107,192 +111,192 @@ export interface TruEth extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        addAdmin(account: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        addAdmin(account: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        addMinter(account: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        addMinter(account: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        approve(spender: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        allowance(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        approve(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        balanceOf(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+        balanceOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
         decimals(overrides?: CallOverrides): Promise<[number]>;
-        decreaseAllowance(spender: string, subtractedValue: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        decreaseAllowance(spender: PromiseOrValue<string>, subtractedValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         firstAdmin(overrides?: CallOverrides): Promise<[string]>;
-        increaseAllowance(spender: string, addedValue: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseAllowance(spender: PromiseOrValue<string>, addedValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        isAdmin(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
-        isMinter(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
-        mint(amount: BigNumberish, accounts: string[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        isAdmin(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean]>;
+        isMinter(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean]>;
+        mint(amount: PromiseOrValue<BigNumberish>, accounts: PromiseOrValue<string>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         name(overrides?: CallOverrides): Promise<[string]>;
-        removeAdmin(account: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        removeAdmin(account: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        removeMinter(account: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        removeMinter(account: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         symbol(overrides?: CallOverrides): Promise<[string]>;
         totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
-        transfer(to: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transfer(to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        transferFrom(from: string, to: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferFrom(from: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    addAdmin(account: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    addAdmin(account: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    addMinter(account: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    addMinter(account: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
-    approve(spender: string, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    allowance(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    approve(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     decimals(overrides?: CallOverrides): Promise<number>;
-    decreaseAllowance(spender: string, subtractedValue: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    decreaseAllowance(spender: PromiseOrValue<string>, subtractedValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     firstAdmin(overrides?: CallOverrides): Promise<string>;
-    increaseAllowance(spender: string, addedValue: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    increaseAllowance(spender: PromiseOrValue<string>, addedValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    isAdmin(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-    isMinter(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-    mint(amount: BigNumberish, accounts: string[], overrides?: Overrides & {
-        from?: string | Promise<string>;
+    isAdmin(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+    isMinter(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+    mint(amount: PromiseOrValue<BigNumberish>, accounts: PromiseOrValue<string>[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     name(overrides?: CallOverrides): Promise<string>;
-    removeAdmin(account: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    removeAdmin(account: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    removeMinter(account: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    removeMinter(account: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     symbol(overrides?: CallOverrides): Promise<string>;
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-    transfer(to: string, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    transfer(to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    transferFrom(from: string, to: string, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    transferFrom(from: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        addAdmin(account: string, overrides?: CallOverrides): Promise<void>;
-        addMinter(account: string, overrides?: CallOverrides): Promise<void>;
-        allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
-        approve(spender: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+        addAdmin(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        addMinter(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        allowance(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        approve(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        balanceOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         decimals(overrides?: CallOverrides): Promise<number>;
-        decreaseAllowance(spender: string, subtractedValue: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        decreaseAllowance(spender: PromiseOrValue<string>, subtractedValue: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
         firstAdmin(overrides?: CallOverrides): Promise<string>;
-        increaseAllowance(spender: string, addedValue: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        isAdmin(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-        isMinter(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-        mint(amount: BigNumberish, accounts: string[], overrides?: CallOverrides): Promise<void>;
+        increaseAllowance(spender: PromiseOrValue<string>, addedValue: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        isAdmin(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+        isMinter(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+        mint(amount: PromiseOrValue<BigNumberish>, accounts: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<void>;
         name(overrides?: CallOverrides): Promise<string>;
-        removeAdmin(account: string, overrides?: CallOverrides): Promise<void>;
-        removeMinter(account: string, overrides?: CallOverrides): Promise<void>;
+        removeAdmin(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        removeMinter(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         symbol(overrides?: CallOverrides): Promise<string>;
         totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-        transfer(to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        transferFrom(from: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        transfer(to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        transferFrom(from: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
     };
     filters: {
-        "Approval(address,address,uint256)"(owner?: string | null, spender?: string | null, value?: null): ApprovalEventFilter;
-        Approval(owner?: string | null, spender?: string | null, value?: null): ApprovalEventFilter;
-        "Transfer(address,address,uint256)"(from?: string | null, to?: string | null, value?: null): TransferEventFilter;
-        Transfer(from?: string | null, to?: string | null, value?: null): TransferEventFilter;
+        "Approval(address,address,uint256)"(owner?: PromiseOrValue<string> | null, spender?: PromiseOrValue<string> | null, value?: null): ApprovalEventFilter;
+        Approval(owner?: PromiseOrValue<string> | null, spender?: PromiseOrValue<string> | null, value?: null): ApprovalEventFilter;
+        "Transfer(address,address,uint256)"(from?: PromiseOrValue<string> | null, to?: PromiseOrValue<string> | null, value?: null): TransferEventFilter;
+        Transfer(from?: PromiseOrValue<string> | null, to?: PromiseOrValue<string> | null, value?: null): TransferEventFilter;
     };
     estimateGas: {
-        addAdmin(account: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        addAdmin(account: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        addMinter(account: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        addMinter(account: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
-        approve(spender: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        allowance(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        approve(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+        balanceOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         decimals(overrides?: CallOverrides): Promise<BigNumber>;
-        decreaseAllowance(spender: string, subtractedValue: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        decreaseAllowance(spender: PromiseOrValue<string>, subtractedValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         firstAdmin(overrides?: CallOverrides): Promise<BigNumber>;
-        increaseAllowance(spender: string, addedValue: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseAllowance(spender: PromiseOrValue<string>, addedValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        isAdmin(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-        isMinter(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-        mint(amount: BigNumberish, accounts: string[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        isAdmin(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        isMinter(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        mint(amount: PromiseOrValue<BigNumberish>, accounts: PromiseOrValue<string>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         name(overrides?: CallOverrides): Promise<BigNumber>;
-        removeAdmin(account: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        removeAdmin(account: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        removeMinter(account: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        removeMinter(account: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         symbol(overrides?: CallOverrides): Promise<BigNumber>;
         totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-        transfer(to: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transfer(to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        transferFrom(from: string, to: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferFrom(from: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        addAdmin(account: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        addAdmin(account: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        addMinter(account: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        addMinter(account: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        approve(spender: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        allowance(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        approve(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        balanceOf(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        balanceOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        decreaseAllowance(spender: string, subtractedValue: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        decreaseAllowance(spender: PromiseOrValue<string>, subtractedValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         firstAdmin(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        increaseAllowance(spender: string, addedValue: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseAllowance(spender: PromiseOrValue<string>, addedValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        isAdmin(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        isMinter(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        mint(amount: BigNumberish, accounts: string[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        isAdmin(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        isMinter(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        mint(amount: PromiseOrValue<BigNumberish>, accounts: PromiseOrValue<string>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        removeAdmin(account: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        removeAdmin(account: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        removeMinter(account: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        removeMinter(account: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        transfer(to: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transfer(to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        transferFrom(from: string, to: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferFrom(from: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

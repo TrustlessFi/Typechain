@@ -1,22 +1,22 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export declare namespace IAccounting {
     type DebtPositionStruct = {
-        startCumulativeDebt: BigNumberish;
-        collateral: BigNumberish;
-        debt: BigNumberish;
-        startDebtExchangeRate: BigNumberish;
-        startTCPRewards: BigNumberish;
-        lastTimeUpdated: BigNumberish;
-        lastBlockPositionIncreased: BigNumberish;
-        tick: BigNumberish;
-        tickSet: boolean;
-        tickIndex: BigNumberish;
-        ui: BigNumberish;
-        kickbackDestination: string;
-        kickbackPortion: BigNumberish;
+        startCumulativeDebt: PromiseOrValue<BigNumberish>;
+        collateral: PromiseOrValue<BigNumberish>;
+        debt: PromiseOrValue<BigNumberish>;
+        startDebtExchangeRate: PromiseOrValue<BigNumberish>;
+        startTCPRewards: PromiseOrValue<BigNumberish>;
+        lastTimeUpdated: PromiseOrValue<BigNumberish>;
+        lastBlockPositionIncreased: PromiseOrValue<BigNumberish>;
+        tick: PromiseOrValue<BigNumberish>;
+        tickSet: PromiseOrValue<boolean>;
+        tickIndex: PromiseOrValue<BigNumberish>;
+        ui: PromiseOrValue<BigNumberish>;
+        kickbackDestination: PromiseOrValue<string>;
+        kickbackPortion: PromiseOrValue<BigNumberish>;
     };
     type DebtPositionStructOutput = [
         BigNumber,
@@ -61,7 +61,7 @@ export interface IMarketInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "collateralizationRequirement", values?: undefined): string;
     encodeFunctionData(functionFragment: "lastPeriodGlobalInterestAccrued", values?: undefined): string;
     encodeFunctionData(functionFragment: "stop", values?: undefined): string;
-    encodeFunctionData(functionFragment: "systemGetUpdatedPosition", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "systemGetUpdatedPosition", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "accrueInterest", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "collateralizationRequirement", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "lastPeriodGlobalInterestAccrued", data: BytesLike): Result;
@@ -229,7 +229,7 @@ export interface IMarket extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         accrueInterest(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         collateralizationRequirement(overrides?: CallOverrides): Promise<[BigNumber] & {
             ratio: BigNumber;
@@ -238,78 +238,78 @@ export interface IMarket extends BaseContract {
             period: BigNumber;
         }>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        systemGetUpdatedPosition(positionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        systemGetUpdatedPosition(positionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     accrueInterest(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     collateralizationRequirement(overrides?: CallOverrides): Promise<BigNumber>;
     lastPeriodGlobalInterestAccrued(overrides?: CallOverrides): Promise<BigNumber>;
     stop(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    systemGetUpdatedPosition(positionID: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    systemGetUpdatedPosition(positionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         accrueInterest(overrides?: CallOverrides): Promise<void>;
         collateralizationRequirement(overrides?: CallOverrides): Promise<BigNumber>;
         lastPeriodGlobalInterestAccrued(overrides?: CallOverrides): Promise<BigNumber>;
         stop(overrides?: CallOverrides): Promise<void>;
-        systemGetUpdatedPosition(positionID: BigNumberish, overrides?: CallOverrides): Promise<IAccounting.DebtPositionStructOutput>;
+        systemGetUpdatedPosition(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<IAccounting.DebtPositionStructOutput>;
     };
     filters: {
         "CollateralizationRequirementUpdated(uint256)"(requirement?: null): CollateralizationRequirementUpdatedEventFilter;
         CollateralizationRequirementUpdated(requirement?: null): CollateralizationRequirementUpdatedEventFilter;
-        "InterestAccrued(uint64,uint64,uint256,uint256,uint256,uint256)"(period?: BigNumberish | null, periods?: null, newDebt?: null, rewardCount?: null, cumulativeDebt?: null, debtExchangeRate?: null): InterestAccruedEventFilter;
-        InterestAccrued(period?: BigNumberish | null, periods?: null, newDebt?: null, rewardCount?: null, cumulativeDebt?: null, debtExchangeRate?: null): InterestAccruedEventFilter;
+        "InterestAccrued(uint64,uint64,uint256,uint256,uint256,uint256)"(period?: PromiseOrValue<BigNumberish> | null, periods?: null, newDebt?: null, rewardCount?: null, cumulativeDebt?: null, debtExchangeRate?: null): InterestAccruedEventFilter;
+        InterestAccrued(period?: PromiseOrValue<BigNumberish> | null, periods?: null, newDebt?: null, rewardCount?: null, cumulativeDebt?: null, debtExchangeRate?: null): InterestAccruedEventFilter;
         "InterestPortionToLendersUpdated(uint256)"(percentage?: null): InterestPortionToLendersUpdatedEventFilter;
         InterestPortionToLendersUpdated(percentage?: null): InterestPortionToLendersUpdatedEventFilter;
-        "Lend(address,uint256,uint256)"(account?: string | null, hueCount?: null, lendTokenCount?: null): LendEventFilter;
-        Lend(account?: string | null, hueCount?: null, lendTokenCount?: null): LendEventFilter;
+        "Lend(address,uint256,uint256)"(account?: PromiseOrValue<string> | null, hueCount?: null, lendTokenCount?: null): LendEventFilter;
+        Lend(account?: PromiseOrValue<string> | null, hueCount?: null, lendTokenCount?: null): LendEventFilter;
         "MinPositionSizeUpdated(uint256)"(size?: null): MinPositionSizeUpdatedEventFilter;
         MinPositionSizeUpdated(size?: null): MinPositionSizeUpdatedEventFilter;
-        "PositionAdjusted(uint64,uint256,uint256,uint256,uint256,uint256,uint256)"(positionID?: BigNumberish | null, debtIncrease?: null, debtDecrease?: null, collateralIncrease?: null, collateralDecrease?: null, newDebt?: null, newCollateral?: null): PositionAdjustedEventFilter;
-        PositionAdjusted(positionID?: BigNumberish | null, debtIncrease?: null, debtDecrease?: null, collateralIncrease?: null, collateralDecrease?: null, newDebt?: null, newCollateral?: null): PositionAdjustedEventFilter;
-        "PositionCreated(address,uint64,uint256)"(creator?: string | null, positionID?: BigNumberish | null, initialDebt?: null): PositionCreatedEventFilter;
-        PositionCreated(creator?: string | null, positionID?: BigNumberish | null, initialDebt?: null): PositionCreatedEventFilter;
-        "PositionUpdated(uint256,uint64,uint256,uint256)"(positionID?: BigNumberish | null, period?: BigNumberish | null, debtAfter?: null, tcpRewards?: null): PositionUpdatedEventFilter;
-        PositionUpdated(positionID?: BigNumberish | null, period?: BigNumberish | null, debtAfter?: null, tcpRewards?: null): PositionUpdatedEventFilter;
-        "RewardsDistributed(address,bool,uint256)"(account?: string | null, isKickback?: boolean | null, tcpRewards?: null): RewardsDistributedEventFilter;
-        RewardsDistributed(account?: string | null, isKickback?: boolean | null, tcpRewards?: null): RewardsDistributedEventFilter;
+        "PositionAdjusted(uint64,uint256,uint256,uint256,uint256,uint256,uint256)"(positionID?: PromiseOrValue<BigNumberish> | null, debtIncrease?: null, debtDecrease?: null, collateralIncrease?: null, collateralDecrease?: null, newDebt?: null, newCollateral?: null): PositionAdjustedEventFilter;
+        PositionAdjusted(positionID?: PromiseOrValue<BigNumberish> | null, debtIncrease?: null, debtDecrease?: null, collateralIncrease?: null, collateralDecrease?: null, newDebt?: null, newCollateral?: null): PositionAdjustedEventFilter;
+        "PositionCreated(address,uint64,uint256)"(creator?: PromiseOrValue<string> | null, positionID?: PromiseOrValue<BigNumberish> | null, initialDebt?: null): PositionCreatedEventFilter;
+        PositionCreated(creator?: PromiseOrValue<string> | null, positionID?: PromiseOrValue<BigNumberish> | null, initialDebt?: null): PositionCreatedEventFilter;
+        "PositionUpdated(uint256,uint64,uint256,uint256)"(positionID?: PromiseOrValue<BigNumberish> | null, period?: PromiseOrValue<BigNumberish> | null, debtAfter?: null, tcpRewards?: null): PositionUpdatedEventFilter;
+        PositionUpdated(positionID?: PromiseOrValue<BigNumberish> | null, period?: PromiseOrValue<BigNumberish> | null, debtAfter?: null, tcpRewards?: null): PositionUpdatedEventFilter;
+        "RewardsDistributed(address,bool,uint256)"(account?: PromiseOrValue<string> | null, isKickback?: PromiseOrValue<boolean> | null, tcpRewards?: null): RewardsDistributedEventFilter;
+        RewardsDistributed(account?: PromiseOrValue<string> | null, isKickback?: PromiseOrValue<boolean> | null, tcpRewards?: null): RewardsDistributedEventFilter;
         "TwapDurationUpdated(uint32)"(duration?: null): TwapDurationUpdatedEventFilter;
         TwapDurationUpdated(duration?: null): TwapDurationUpdatedEventFilter;
-        "Unlend(address,uint256,uint256)"(account?: string | null, hueCount?: null, lendTokenCount?: null): UnlendEventFilter;
-        Unlend(account?: string | null, hueCount?: null, lendTokenCount?: null): UnlendEventFilter;
+        "Unlend(address,uint256,uint256)"(account?: PromiseOrValue<string> | null, hueCount?: null, lendTokenCount?: null): UnlendEventFilter;
+        Unlend(account?: PromiseOrValue<string> | null, hueCount?: null, lendTokenCount?: null): UnlendEventFilter;
     };
     estimateGas: {
         accrueInterest(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         collateralizationRequirement(overrides?: CallOverrides): Promise<BigNumber>;
         lastPeriodGlobalInterestAccrued(overrides?: CallOverrides): Promise<BigNumber>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        systemGetUpdatedPosition(positionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        systemGetUpdatedPosition(positionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         accrueInterest(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         collateralizationRequirement(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         lastPeriodGlobalInterestAccrued(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        systemGetUpdatedPosition(positionID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        systemGetUpdatedPosition(positionID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

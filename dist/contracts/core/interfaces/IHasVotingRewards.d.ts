@@ -1,14 +1,14 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface IHasVotingRewardsInterface extends utils.Interface {
     functions: {
         "claimVotingRewards(uint256[])": FunctionFragment;
         "implementsVotingRewardsWithToken()": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "claimVotingRewards" | "implementsVotingRewardsWithToken"): FunctionFragment;
-    encodeFunctionData(functionFragment: "claimVotingRewards", values: [BigNumberish[]]): string;
+    encodeFunctionData(functionFragment: "claimVotingRewards", values: [PromiseOrValue<BigNumberish>[]]): string;
     encodeFunctionData(functionFragment: "implementsVotingRewardsWithToken", values?: undefined): string;
     decodeFunctionResult(functionFragment: "claimVotingRewards", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "implementsVotingRewardsWithToken", data: BytesLike): Result;
@@ -41,34 +41,34 @@ export interface IHasVotingRewards extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         implementsVotingRewardsWithToken(overrides?: CallOverrides): Promise<[string] & {
             votingToken: string;
         }>;
     };
-    claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
-        from?: string | Promise<string>;
+    claimVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     implementsVotingRewardsWithToken(overrides?: CallOverrides): Promise<string>;
     callStatic: {
-        claimVotingRewards(proposalIDs: BigNumberish[], overrides?: CallOverrides): Promise<void>;
+        claimVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<void>;
         implementsVotingRewardsWithToken(overrides?: CallOverrides): Promise<string>;
     };
     filters: {
-        "VotingRewardsDistributed(address,uint256)"(voter?: string | null, count?: null): VotingRewardsDistributedEventFilter;
-        VotingRewardsDistributed(voter?: string | null, count?: null): VotingRewardsDistributedEventFilter;
+        "VotingRewardsDistributed(address,uint256)"(voter?: PromiseOrValue<string> | null, count?: null): VotingRewardsDistributedEventFilter;
+        VotingRewardsDistributed(voter?: PromiseOrValue<string> | null, count?: null): VotingRewardsDistributedEventFilter;
     };
     estimateGas: {
-        claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         implementsVotingRewardsWithToken(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         implementsVotingRewardsWithToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };

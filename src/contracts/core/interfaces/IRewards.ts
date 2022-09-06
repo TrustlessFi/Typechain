@@ -24,6 +24,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface IRewardsInterface extends utils.Interface {
@@ -48,12 +49,12 @@ export interface IRewardsInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "addIncentivePool",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "stop", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "updatePoolIncentive",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -267,118 +268,118 @@ export interface IRewards extends BaseContract {
 
   functions: {
     accrueRewards(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     addIncentivePool(
-      pool: string,
-      rewardsPortion: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      rewardsPortion: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     updatePoolIncentive(
-      poolID: BigNumberish,
-      incentive: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      poolID: PromiseOrValue<BigNumberish>,
+      incentive: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   accrueRewards(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   addIncentivePool(
-    pool: string,
-    rewardsPortion: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    rewardsPortion: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   stop(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   updatePoolIncentive(
-    poolID: BigNumberish,
-    incentive: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    poolID: PromiseOrValue<BigNumberish>,
+    incentive: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     accrueRewards(overrides?: CallOverrides): Promise<void>;
 
     addIncentivePool(
-      pool: string,
-      rewardsPortion: BigNumberish,
+      pool: PromiseOrValue<string>,
+      rewardsPortion: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     stop(overrides?: CallOverrides): Promise<void>;
 
     updatePoolIncentive(
-      poolID: BigNumberish,
-      incentive: BigNumberish,
+      poolID: PromiseOrValue<BigNumberish>,
+      incentive: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
     "LiquidityPositionCreated(address,uint16,uint256,int24,int24,uint128)"(
-      owner?: string | null,
-      poolID?: BigNumberish | null,
-      nftID?: BigNumberish | null,
+      owner?: PromiseOrValue<string> | null,
+      poolID?: PromiseOrValue<BigNumberish> | null,
+      nftID?: PromiseOrValue<BigNumberish> | null,
       tickLower?: null,
       tickUpper?: null,
       liquidity?: null
     ): LiquidityPositionCreatedEventFilter;
     LiquidityPositionCreated(
-      owner?: string | null,
-      poolID?: BigNumberish | null,
-      nftID?: BigNumberish | null,
+      owner?: PromiseOrValue<string> | null,
+      poolID?: PromiseOrValue<BigNumberish> | null,
+      nftID?: PromiseOrValue<BigNumberish> | null,
       tickLower?: null,
       tickUpper?: null,
       liquidity?: null
     ): LiquidityPositionCreatedEventFilter;
 
     "LiquidityPositionDecreased(uint256,uint256,uint256)"(
-      nftID?: BigNumberish | null,
+      nftID?: PromiseOrValue<BigNumberish> | null,
       amount0?: null,
       amount1?: null
     ): LiquidityPositionDecreasedEventFilter;
     LiquidityPositionDecreased(
-      nftID?: BigNumberish | null,
+      nftID?: PromiseOrValue<BigNumberish> | null,
       amount0?: null,
       amount1?: null
     ): LiquidityPositionDecreasedEventFilter;
 
     "LiquidityPositionIncreased(uint256,uint128)"(
-      nftID?: BigNumberish | null,
+      nftID?: PromiseOrValue<BigNumberish> | null,
       liquidity?: null
     ): LiquidityPositionIncreasedEventFilter;
     LiquidityPositionIncreased(
-      nftID?: BigNumberish | null,
+      nftID?: PromiseOrValue<BigNumberish> | null,
       liquidity?: null
     ): LiquidityPositionIncreasedEventFilter;
 
     "LiquidityPositionLiquidated(uint256,address)"(
-      nftID?: BigNumberish | null,
-      liquidator?: string | null
+      nftID?: PromiseOrValue<BigNumberish> | null,
+      liquidator?: PromiseOrValue<string> | null
     ): LiquidityPositionLiquidatedEventFilter;
     LiquidityPositionLiquidated(
-      nftID?: BigNumberish | null,
-      liquidator?: string | null
+      nftID?: PromiseOrValue<BigNumberish> | null,
+      liquidator?: PromiseOrValue<string> | null
     ): LiquidityPositionLiquidatedEventFilter;
 
     "LiquidityPositionRemoved(uint256,uint256,uint256)"(
-      nftID?: BigNumberish | null,
+      nftID?: PromiseOrValue<BigNumberish> | null,
       amount0?: null,
       amount1?: null
     ): LiquidityPositionRemovedEventFilter;
     LiquidityPositionRemoved(
-      nftID?: BigNumberish | null,
+      nftID?: PromiseOrValue<BigNumberish> | null,
       amount0?: null,
       amount1?: null
     ): LiquidityPositionRemovedEventFilter;
@@ -391,22 +392,22 @@ export interface IRewards extends BaseContract {
     ): MaxCollateralLiquidityDecreasePerPeriodUpdatedEventFilter;
 
     "PoolAdded(address,uint16,uint64)"(
-      pool?: string | null,
-      poolID?: BigNumberish | null,
+      pool?: PromiseOrValue<string> | null,
+      poolID?: PromiseOrValue<BigNumberish> | null,
       rewardsPortion?: null
     ): PoolAddedEventFilter;
     PoolAdded(
-      pool?: string | null,
-      poolID?: BigNumberish | null,
+      pool?: PromiseOrValue<string> | null,
+      poolID?: PromiseOrValue<BigNumberish> | null,
       rewardsPortion?: null
     ): PoolAddedEventFilter;
 
     "PoolIncentiveUpdated(uint16,uint64)"(
-      poolID?: BigNumberish | null,
+      poolID?: PromiseOrValue<BigNumberish> | null,
       incentive?: null
     ): PoolIncentiveUpdatedEventFilter;
     PoolIncentiveUpdated(
-      poolID?: BigNumberish | null,
+      poolID?: PromiseOrValue<BigNumberish> | null,
       incentive?: null
     ): PoolIncentiveUpdatedEventFilter;
 
@@ -417,71 +418,71 @@ export interface IRewards extends BaseContract {
     RewardsAccrued(count?: null, periods?: null): RewardsAccruedEventFilter;
 
     "RewardsClaimed(address,uint256,uint256,uint256)"(
-      caller?: string | null,
-      nftTokenID?: BigNumberish | null,
+      caller?: PromiseOrValue<string> | null,
+      nftTokenID?: PromiseOrValue<BigNumberish> | null,
       amount0?: null,
       amount1?: null
     ): RewardsClaimedEventFilter;
     RewardsClaimed(
-      caller?: string | null,
-      nftTokenID?: BigNumberish | null,
+      caller?: PromiseOrValue<string> | null,
+      nftTokenID?: PromiseOrValue<BigNumberish> | null,
       amount0?: null,
       amount1?: null
     ): RewardsClaimedEventFilter;
 
     "RewardsDistributed(address,bool,uint256)"(
-      account?: string | null,
-      isKickback?: boolean | null,
+      account?: PromiseOrValue<string> | null,
+      isKickback?: PromiseOrValue<boolean> | null,
       tcpRewards?: null
     ): RewardsDistributedEventFilter;
     RewardsDistributed(
-      account?: string | null,
-      isKickback?: boolean | null,
+      account?: PromiseOrValue<string> | null,
+      isKickback?: PromiseOrValue<boolean> | null,
       tcpRewards?: null
     ): RewardsDistributedEventFilter;
   };
 
   estimateGas: {
     accrueRewards(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     addIncentivePool(
-      pool: string,
-      rewardsPortion: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      rewardsPortion: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     updatePoolIncentive(
-      poolID: BigNumberish,
-      incentive: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      poolID: PromiseOrValue<BigNumberish>,
+      incentive: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     accrueRewards(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     addIncentivePool(
-      pool: string,
-      rewardsPortion: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      rewardsPortion: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     updatePoolIncentive(
-      poolID: BigNumberish,
-      incentive: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      poolID: PromiseOrValue<BigNumberish>,
+      incentive: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

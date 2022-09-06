@@ -1,13 +1,13 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export declare namespace IRewards {
     type ConstructorParamsStruct = {
-        Governor: string;
-        ProtocolLock: string;
-        Accounting: string;
-        Weth: string;
+        Governor: PromiseOrValue<string>;
+        ProtocolLock: PromiseOrValue<string>;
+        Accounting: PromiseOrValue<string>;
+        Weth: PromiseOrValue<string>;
     };
     type ConstructorParamsStructOutput = [
         string,
@@ -21,16 +21,16 @@ export declare namespace IRewards {
         Weth: string;
     };
     type MinLiquidityByPeriodStruct = {
-        period: BigNumberish;
-        minLiquidity: BigNumberish;
+        period: PromiseOrValue<BigNumberish>;
+        minLiquidity: PromiseOrValue<BigNumberish>;
     };
     type MinLiquidityByPeriodStructOutput = [BigNumber, BigNumber] & {
         period: BigNumber;
         minLiquidity: BigNumber;
     };
     type PoolConfigStruct = {
-        pool: string;
-        rewardsPortion: BigNumberish;
+        pool: PromiseOrValue<string>;
+        rewardsPortion: PromiseOrValue<BigNumberish>;
     };
     type PoolConfigStructOutput = [string, BigNumber] & {
         pool: string;
@@ -39,15 +39,15 @@ export declare namespace IRewards {
 }
 export declare namespace IAccounting {
     type PoolPositionStruct = {
-        owner: string;
-        cumulativeLiquidity: BigNumberish;
-        totalRewards: BigNumberish;
-        lastBlockPositionIncreased: BigNumberish;
-        liquidity: BigNumberish;
-        lastTimeRewarded: BigNumberish;
-        ui: BigNumberish;
-        kickbackDestination: string;
-        kickbackPortion: BigNumberish;
+        owner: PromiseOrValue<string>;
+        cumulativeLiquidity: PromiseOrValue<BigNumberish>;
+        totalRewards: PromiseOrValue<BigNumberish>;
+        lastBlockPositionIncreased: PromiseOrValue<BigNumberish>;
+        liquidity: PromiseOrValue<BigNumberish>;
+        lastTimeRewarded: PromiseOrValue<BigNumberish>;
+        ui: PromiseOrValue<BigNumberish>;
+        kickbackDestination: PromiseOrValue<string>;
+        kickbackPortion: PromiseOrValue<BigNumberish>;
     };
     type PoolPositionStructOutput = [
         string,
@@ -71,8 +71,8 @@ export declare namespace IAccounting {
         kickbackPortion: BigNumber;
     };
     type RewardStatusStruct = {
-        totalRewards: BigNumberish;
-        cumulativeLiquidity: BigNumberish;
+        totalRewards: PromiseOrValue<BigNumberish>;
+        cumulativeLiquidity: PromiseOrValue<BigNumberish>;
     };
     type RewardStatusStructOutput = [BigNumber, BigNumber] & {
         totalRewards: BigNumber;
@@ -81,11 +81,11 @@ export declare namespace IAccounting {
 }
 export declare namespace Rewards {
     type RewardsDepositParamsStruct = {
-        poolID: BigNumberish;
-        amount0Desired: BigNumberish;
-        amount1Desired: BigNumberish;
-        amount0Min: BigNumberish;
-        amount1Min: BigNumberish;
+        poolID: PromiseOrValue<BigNumberish>;
+        amount0Desired: PromiseOrValue<BigNumberish>;
+        amount1Desired: PromiseOrValue<BigNumberish>;
+        amount0Min: PromiseOrValue<BigNumberish>;
+        amount1Min: PromiseOrValue<BigNumberish>;
     };
     type RewardsDepositParamsStructOutput = [
         number,
@@ -101,10 +101,10 @@ export declare namespace Rewards {
         amount1Min: BigNumber;
     };
     type RewardsWithdrawParamsStruct = {
-        poolID: BigNumberish;
-        liquidity: BigNumberish;
-        amount0Min: BigNumberish;
-        amount1Min: BigNumberish;
+        poolID: PromiseOrValue<BigNumberish>;
+        liquidity: PromiseOrValue<BigNumberish>;
+        amount0Min: PromiseOrValue<BigNumberish>;
+        amount1Min: PromiseOrValue<BigNumberish>;
     };
     type RewardsWithdrawParamsStructOutput = [
         number,
@@ -153,37 +153,37 @@ export interface RewardsTestableInterface extends utils.Interface {
     getFunction(nameOrSignatureOrTopic: "accounting" | "accrueRewards" | "addIncentivePool" | "calculateUpdatedLiquidityPosition" | "claimAllRewards" | "claimRewards" | "countPools" | "currentPeriod" | "deployer" | "deposit" | "firstPeriod" | "getMinLiquidityByPeriod" | "getPoolConfigForPoolID" | "governor" | "init" | "lastPeriodGlobalRewardsAccrued" | "maxCollateralLiquidityDecreasePerPeriod" | "minLiquidityByPeriod" | "periodLength" | "poolIDForPool" | "removeKickback" | "requireAuthorized" | "setMaxCollateralLiquidityDecreasePerPeriod" | "stop" | "stopped" | "updatePoolIncentive" | "validUpdate" | "weth" | "withdraw"): FunctionFragment;
     encodeFunctionData(functionFragment: "accounting", values?: undefined): string;
     encodeFunctionData(functionFragment: "accrueRewards", values?: undefined): string;
-    encodeFunctionData(functionFragment: "addIncentivePool", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "addIncentivePool", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "calculateUpdatedLiquidityPosition", values: [
         IAccounting.PoolPositionStruct,
         IAccounting.RewardStatusStruct,
-        BigNumberish
+        PromiseOrValue<BigNumberish>
     ]): string;
-    encodeFunctionData(functionFragment: "claimAllRewards", values: [BigNumberish[], BigNumberish]): string;
-    encodeFunctionData(functionFragment: "claimRewards", values: [BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "claimAllRewards", values: [PromiseOrValue<BigNumberish>[], PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "claimRewards", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "countPools", values?: undefined): string;
     encodeFunctionData(functionFragment: "currentPeriod", values?: undefined): string;
     encodeFunctionData(functionFragment: "deployer", values?: undefined): string;
-    encodeFunctionData(functionFragment: "deposit", values: [Rewards.RewardsDepositParamsStruct, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "deposit", values: [Rewards.RewardsDepositParamsStruct, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "firstPeriod", values?: undefined): string;
-    encodeFunctionData(functionFragment: "getMinLiquidityByPeriod", values: [string]): string;
-    encodeFunctionData(functionFragment: "getPoolConfigForPoolID", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "getMinLiquidityByPeriod", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "getPoolConfigForPoolID", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "governor", values?: undefined): string;
-    encodeFunctionData(functionFragment: "init", values: [string]): string;
+    encodeFunctionData(functionFragment: "init", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "lastPeriodGlobalRewardsAccrued", values?: undefined): string;
     encodeFunctionData(functionFragment: "maxCollateralLiquidityDecreasePerPeriod", values?: undefined): string;
-    encodeFunctionData(functionFragment: "minLiquidityByPeriod", values: [string]): string;
+    encodeFunctionData(functionFragment: "minLiquidityByPeriod", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "periodLength", values?: undefined): string;
-    encodeFunctionData(functionFragment: "poolIDForPool", values: [string]): string;
-    encodeFunctionData(functionFragment: "removeKickback", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "requireAuthorized", values: [boolean]): string;
-    encodeFunctionData(functionFragment: "setMaxCollateralLiquidityDecreasePerPeriod", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "poolIDForPool", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "removeKickback", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "requireAuthorized", values: [PromiseOrValue<boolean>]): string;
+    encodeFunctionData(functionFragment: "setMaxCollateralLiquidityDecreasePerPeriod", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "stop", values?: undefined): string;
     encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
-    encodeFunctionData(functionFragment: "updatePoolIncentive", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "validUpdate", values: [BytesLike]): string;
+    encodeFunctionData(functionFragment: "updatePoolIncentive", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "validUpdate", values: [PromiseOrValue<BytesLike>]): string;
     encodeFunctionData(functionFragment: "weth", values?: undefined): string;
-    encodeFunctionData(functionFragment: "withdraw", values: [Rewards.RewardsWithdrawParamsStruct, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "withdraw", values: [Rewards.RewardsWithdrawParamsStruct, PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "accounting", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "accrueRewards", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "addIncentivePool", data: BytesLike): Result;
@@ -378,42 +378,42 @@ export interface RewardsTestable extends BaseContract {
     functions: {
         accounting(overrides?: CallOverrides): Promise<[string]>;
         accrueRewards(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        addIncentivePool(pool: string, rewardsPortion: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        addIncentivePool(pool: PromiseOrValue<string>, rewardsPortion: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        calculateUpdatedLiquidityPosition(_pt: IAccounting.PoolPositionStruct, rs: IAccounting.RewardStatusStruct, timeNow: BigNumberish, overrides?: CallOverrides): Promise<[
+        calculateUpdatedLiquidityPosition(_pt: IAccounting.PoolPositionStruct, rs: IAccounting.RewardStatusStruct, timeNow: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             IAccounting.PoolPositionStructOutput,
             BigNumber
         ] & {
             pt: IAccounting.PoolPositionStructOutput;
             rewards: BigNumber;
         }>;
-        claimAllRewards(poolIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimAllRewards(poolIDs: PromiseOrValue<BigNumberish>[], ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        claimRewards(poolID: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimRewards(poolID: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         countPools(overrides?: CallOverrides): Promise<[number]>;
         currentPeriod(overrides?: CallOverrides): Promise<[BigNumber] & {
             period: BigNumber;
         }>;
         deployer(overrides?: CallOverrides): Promise<[string]>;
-        deposit(params: Rewards.RewardsDepositParamsStruct, ui: BigNumberish, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        deposit(params: Rewards.RewardsDepositParamsStruct, ui: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         firstPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
-        getMinLiquidityByPeriod(pool: string, overrides?: CallOverrides): Promise<[IRewards.MinLiquidityByPeriodStructOutput]>;
-        getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<[IRewards.PoolConfigStructOutput]>;
+        getMinLiquidityByPeriod(pool: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[IRewards.MinLiquidityByPeriodStructOutput]>;
+        getPoolConfigForPoolID(poolID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[IRewards.PoolConfigStructOutput]>;
         governor(overrides?: CallOverrides): Promise<[string]>;
-        init(_collateralPool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        init(_collateralPool: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         lastPeriodGlobalRewardsAccrued(overrides?: CallOverrides): Promise<[BigNumber]>;
         maxCollateralLiquidityDecreasePerPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
-        minLiquidityByPeriod(arg0: string, overrides?: CallOverrides): Promise<[
+        minLiquidityByPeriod(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
@@ -421,63 +421,63 @@ export interface RewardsTestable extends BaseContract {
             minLiquidity: BigNumber;
         }>;
         periodLength(overrides?: CallOverrides): Promise<[BigNumber]>;
-        poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<[number]>;
-        removeKickback(poolID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        poolIDForPool(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[number]>;
+        removeKickback(poolID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        requireAuthorized(authorized: boolean, overrides?: CallOverrides): Promise<[void]>;
-        setMaxCollateralLiquidityDecreasePerPeriod(decreasePortion: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        requireAuthorized(authorized: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[void]>;
+        setMaxCollateralLiquidityDecreasePerPeriod(decreasePortion: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         stopped(overrides?: CallOverrides): Promise<[boolean]>;
-        updatePoolIncentive(poolID: BigNumberish, incentive: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        updatePoolIncentive(poolID: PromiseOrValue<BigNumberish>, incentive: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
         weth(overrides?: CallOverrides): Promise<[string]>;
-        withdraw(params: Rewards.RewardsWithdrawParamsStruct, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        withdraw(params: Rewards.RewardsWithdrawParamsStruct, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     accounting(overrides?: CallOverrides): Promise<string>;
     accrueRewards(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    addIncentivePool(pool: string, rewardsPortion: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    addIncentivePool(pool: PromiseOrValue<string>, rewardsPortion: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    calculateUpdatedLiquidityPosition(_pt: IAccounting.PoolPositionStruct, rs: IAccounting.RewardStatusStruct, timeNow: BigNumberish, overrides?: CallOverrides): Promise<[
+    calculateUpdatedLiquidityPosition(_pt: IAccounting.PoolPositionStruct, rs: IAccounting.RewardStatusStruct, timeNow: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         IAccounting.PoolPositionStructOutput,
         BigNumber
     ] & {
         pt: IAccounting.PoolPositionStructOutput;
         rewards: BigNumber;
     }>;
-    claimAllRewards(poolIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    claimAllRewards(poolIDs: PromiseOrValue<BigNumberish>[], ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    claimRewards(poolID: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    claimRewards(poolID: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     countPools(overrides?: CallOverrides): Promise<number>;
     currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
     deployer(overrides?: CallOverrides): Promise<string>;
-    deposit(params: Rewards.RewardsDepositParamsStruct, ui: BigNumberish, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+    deposit(params: Rewards.RewardsDepositParamsStruct, ui: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
-    getMinLiquidityByPeriod(pool: string, overrides?: CallOverrides): Promise<IRewards.MinLiquidityByPeriodStructOutput>;
-    getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<IRewards.PoolConfigStructOutput>;
+    getMinLiquidityByPeriod(pool: PromiseOrValue<string>, overrides?: CallOverrides): Promise<IRewards.MinLiquidityByPeriodStructOutput>;
+    getPoolConfigForPoolID(poolID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<IRewards.PoolConfigStructOutput>;
     governor(overrides?: CallOverrides): Promise<string>;
-    init(_collateralPool: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    init(_collateralPool: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     lastPeriodGlobalRewardsAccrued(overrides?: CallOverrides): Promise<BigNumber>;
     maxCollateralLiquidityDecreasePerPeriod(overrides?: CallOverrides): Promise<BigNumber>;
-    minLiquidityByPeriod(arg0: string, overrides?: CallOverrides): Promise<[
+    minLiquidityByPeriod(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[
         BigNumber,
         BigNumber
     ] & {
@@ -485,43 +485,43 @@ export interface RewardsTestable extends BaseContract {
         minLiquidity: BigNumber;
     }>;
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-    poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<number>;
-    removeKickback(poolID: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    poolIDForPool(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<number>;
+    removeKickback(poolID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    requireAuthorized(authorized: boolean, overrides?: CallOverrides): Promise<void>;
-    setMaxCollateralLiquidityDecreasePerPeriod(decreasePortion: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    requireAuthorized(authorized: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+    setMaxCollateralLiquidityDecreasePerPeriod(decreasePortion: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     stop(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     stopped(overrides?: CallOverrides): Promise<boolean>;
-    updatePoolIncentive(poolID: BigNumberish, incentive: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    updatePoolIncentive(poolID: PromiseOrValue<BigNumberish>, incentive: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     weth(overrides?: CallOverrides): Promise<string>;
-    withdraw(params: Rewards.RewardsWithdrawParamsStruct, ui: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    withdraw(params: Rewards.RewardsWithdrawParamsStruct, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         accounting(overrides?: CallOverrides): Promise<string>;
         accrueRewards(overrides?: CallOverrides): Promise<void>;
-        addIncentivePool(pool: string, rewardsPortion: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        calculateUpdatedLiquidityPosition(_pt: IAccounting.PoolPositionStruct, rs: IAccounting.RewardStatusStruct, timeNow: BigNumberish, overrides?: CallOverrides): Promise<[
+        addIncentivePool(pool: PromiseOrValue<string>, rewardsPortion: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        calculateUpdatedLiquidityPosition(_pt: IAccounting.PoolPositionStruct, rs: IAccounting.RewardStatusStruct, timeNow: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             IAccounting.PoolPositionStructOutput,
             BigNumber
         ] & {
             pt: IAccounting.PoolPositionStructOutput;
             rewards: BigNumber;
         }>;
-        claimAllRewards(poolIDs: BigNumberish[], ui: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        claimRewards(poolID: BigNumberish, ui: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        claimAllRewards(poolIDs: PromiseOrValue<BigNumberish>[], ui: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        claimRewards(poolID: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         countPools(overrides?: CallOverrides): Promise<number>;
         currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
         deployer(overrides?: CallOverrides): Promise<string>;
-        deposit(params: Rewards.RewardsDepositParamsStruct, ui: BigNumberish, overrides?: CallOverrides): Promise<[
+        deposit(params: Rewards.RewardsDepositParamsStruct, ui: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber
@@ -531,13 +531,13 @@ export interface RewardsTestable extends BaseContract {
             amount1: BigNumber;
         }>;
         firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
-        getMinLiquidityByPeriod(pool: string, overrides?: CallOverrides): Promise<IRewards.MinLiquidityByPeriodStructOutput>;
-        getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<IRewards.PoolConfigStructOutput>;
+        getMinLiquidityByPeriod(pool: PromiseOrValue<string>, overrides?: CallOverrides): Promise<IRewards.MinLiquidityByPeriodStructOutput>;
+        getPoolConfigForPoolID(poolID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<IRewards.PoolConfigStructOutput>;
         governor(overrides?: CallOverrides): Promise<string>;
-        init(_collateralPool: string, overrides?: CallOverrides): Promise<void>;
+        init(_collateralPool: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         lastPeriodGlobalRewardsAccrued(overrides?: CallOverrides): Promise<BigNumber>;
         maxCollateralLiquidityDecreasePerPeriod(overrides?: CallOverrides): Promise<BigNumber>;
-        minLiquidityByPeriod(arg0: string, overrides?: CallOverrides): Promise<[
+        minLiquidityByPeriod(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
@@ -545,16 +545,16 @@ export interface RewardsTestable extends BaseContract {
             minLiquidity: BigNumber;
         }>;
         periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-        poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<number>;
-        removeKickback(poolID: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        requireAuthorized(authorized: boolean, overrides?: CallOverrides): Promise<void>;
-        setMaxCollateralLiquidityDecreasePerPeriod(decreasePortion: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        poolIDForPool(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<number>;
+        removeKickback(poolID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        requireAuthorized(authorized: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        setMaxCollateralLiquidityDecreasePerPeriod(decreasePortion: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         stop(overrides?: CallOverrides): Promise<void>;
         stopped(overrides?: CallOverrides): Promise<boolean>;
-        updatePoolIncentive(poolID: BigNumberish, incentive: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+        updatePoolIncentive(poolID: PromiseOrValue<BigNumberish>, incentive: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
         weth(overrides?: CallOverrides): Promise<string>;
-        withdraw(params: Rewards.RewardsWithdrawParamsStruct, ui: BigNumberish, overrides?: CallOverrides): Promise<[
+        withdraw(params: Rewards.RewardsWithdrawParamsStruct, ui: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
@@ -563,135 +563,135 @@ export interface RewardsTestable extends BaseContract {
         }>;
     };
     filters: {
-        "LiquidityPositionCreated(address,uint16,uint256,int24,int24,uint128)"(owner?: string | null, poolID?: BigNumberish | null, nftID?: BigNumberish | null, tickLower?: null, tickUpper?: null, liquidity?: null): LiquidityPositionCreatedEventFilter;
-        LiquidityPositionCreated(owner?: string | null, poolID?: BigNumberish | null, nftID?: BigNumberish | null, tickLower?: null, tickUpper?: null, liquidity?: null): LiquidityPositionCreatedEventFilter;
-        "LiquidityPositionDecreased(uint256,uint256,uint256)"(nftID?: BigNumberish | null, amount0?: null, amount1?: null): LiquidityPositionDecreasedEventFilter;
-        LiquidityPositionDecreased(nftID?: BigNumberish | null, amount0?: null, amount1?: null): LiquidityPositionDecreasedEventFilter;
-        "LiquidityPositionIncreased(uint256,uint128)"(nftID?: BigNumberish | null, liquidity?: null): LiquidityPositionIncreasedEventFilter;
-        LiquidityPositionIncreased(nftID?: BigNumberish | null, liquidity?: null): LiquidityPositionIncreasedEventFilter;
-        "LiquidityPositionLiquidated(uint256,address)"(nftID?: BigNumberish | null, liquidator?: string | null): LiquidityPositionLiquidatedEventFilter;
-        LiquidityPositionLiquidated(nftID?: BigNumberish | null, liquidator?: string | null): LiquidityPositionLiquidatedEventFilter;
-        "LiquidityPositionRemoved(uint256,uint256,uint256)"(nftID?: BigNumberish | null, amount0?: null, amount1?: null): LiquidityPositionRemovedEventFilter;
-        LiquidityPositionRemoved(nftID?: BigNumberish | null, amount0?: null, amount1?: null): LiquidityPositionRemovedEventFilter;
+        "LiquidityPositionCreated(address,uint16,uint256,int24,int24,uint128)"(owner?: PromiseOrValue<string> | null, poolID?: PromiseOrValue<BigNumberish> | null, nftID?: PromiseOrValue<BigNumberish> | null, tickLower?: null, tickUpper?: null, liquidity?: null): LiquidityPositionCreatedEventFilter;
+        LiquidityPositionCreated(owner?: PromiseOrValue<string> | null, poolID?: PromiseOrValue<BigNumberish> | null, nftID?: PromiseOrValue<BigNumberish> | null, tickLower?: null, tickUpper?: null, liquidity?: null): LiquidityPositionCreatedEventFilter;
+        "LiquidityPositionDecreased(uint256,uint256,uint256)"(nftID?: PromiseOrValue<BigNumberish> | null, amount0?: null, amount1?: null): LiquidityPositionDecreasedEventFilter;
+        LiquidityPositionDecreased(nftID?: PromiseOrValue<BigNumberish> | null, amount0?: null, amount1?: null): LiquidityPositionDecreasedEventFilter;
+        "LiquidityPositionIncreased(uint256,uint128)"(nftID?: PromiseOrValue<BigNumberish> | null, liquidity?: null): LiquidityPositionIncreasedEventFilter;
+        LiquidityPositionIncreased(nftID?: PromiseOrValue<BigNumberish> | null, liquidity?: null): LiquidityPositionIncreasedEventFilter;
+        "LiquidityPositionLiquidated(uint256,address)"(nftID?: PromiseOrValue<BigNumberish> | null, liquidator?: PromiseOrValue<string> | null): LiquidityPositionLiquidatedEventFilter;
+        LiquidityPositionLiquidated(nftID?: PromiseOrValue<BigNumberish> | null, liquidator?: PromiseOrValue<string> | null): LiquidityPositionLiquidatedEventFilter;
+        "LiquidityPositionRemoved(uint256,uint256,uint256)"(nftID?: PromiseOrValue<BigNumberish> | null, amount0?: null, amount1?: null): LiquidityPositionRemovedEventFilter;
+        LiquidityPositionRemoved(nftID?: PromiseOrValue<BigNumberish> | null, amount0?: null, amount1?: null): LiquidityPositionRemovedEventFilter;
         "MaxCollateralLiquidityDecreasePerPeriodUpdated(uint64)"(decreasePortion?: null): MaxCollateralLiquidityDecreasePerPeriodUpdatedEventFilter;
         MaxCollateralLiquidityDecreasePerPeriodUpdated(decreasePortion?: null): MaxCollateralLiquidityDecreasePerPeriodUpdatedEventFilter;
-        "PoolAdded(address,uint16,uint64)"(pool?: string | null, poolID?: BigNumberish | null, rewardsPortion?: null): PoolAddedEventFilter;
-        PoolAdded(pool?: string | null, poolID?: BigNumberish | null, rewardsPortion?: null): PoolAddedEventFilter;
-        "PoolIncentiveUpdated(uint16,uint64)"(poolID?: BigNumberish | null, incentive?: null): PoolIncentiveUpdatedEventFilter;
-        PoolIncentiveUpdated(poolID?: BigNumberish | null, incentive?: null): PoolIncentiveUpdatedEventFilter;
+        "PoolAdded(address,uint16,uint64)"(pool?: PromiseOrValue<string> | null, poolID?: PromiseOrValue<BigNumberish> | null, rewardsPortion?: null): PoolAddedEventFilter;
+        PoolAdded(pool?: PromiseOrValue<string> | null, poolID?: PromiseOrValue<BigNumberish> | null, rewardsPortion?: null): PoolAddedEventFilter;
+        "PoolIncentiveUpdated(uint16,uint64)"(poolID?: PromiseOrValue<BigNumberish> | null, incentive?: null): PoolIncentiveUpdatedEventFilter;
+        PoolIncentiveUpdated(poolID?: PromiseOrValue<BigNumberish> | null, incentive?: null): PoolIncentiveUpdatedEventFilter;
         "RewardsAccrued(uint256,uint64)"(count?: null, periods?: null): RewardsAccruedEventFilter;
         RewardsAccrued(count?: null, periods?: null): RewardsAccruedEventFilter;
-        "RewardsClaimed(address,uint256,uint256,uint256)"(caller?: string | null, nftTokenID?: BigNumberish | null, amount0?: null, amount1?: null): RewardsClaimedEventFilter;
-        RewardsClaimed(caller?: string | null, nftTokenID?: BigNumberish | null, amount0?: null, amount1?: null): RewardsClaimedEventFilter;
-        "RewardsDistributed(address,bool,uint256)"(account?: string | null, isKickback?: boolean | null, tcpRewards?: null): RewardsDistributedEventFilter;
-        RewardsDistributed(account?: string | null, isKickback?: boolean | null, tcpRewards?: null): RewardsDistributedEventFilter;
+        "RewardsClaimed(address,uint256,uint256,uint256)"(caller?: PromiseOrValue<string> | null, nftTokenID?: PromiseOrValue<BigNumberish> | null, amount0?: null, amount1?: null): RewardsClaimedEventFilter;
+        RewardsClaimed(caller?: PromiseOrValue<string> | null, nftTokenID?: PromiseOrValue<BigNumberish> | null, amount0?: null, amount1?: null): RewardsClaimedEventFilter;
+        "RewardsDistributed(address,bool,uint256)"(account?: PromiseOrValue<string> | null, isKickback?: PromiseOrValue<boolean> | null, tcpRewards?: null): RewardsDistributedEventFilter;
+        RewardsDistributed(account?: PromiseOrValue<string> | null, isKickback?: PromiseOrValue<boolean> | null, tcpRewards?: null): RewardsDistributedEventFilter;
         "Stopped()"(): StoppedEventFilter;
         Stopped(): StoppedEventFilter;
     };
     estimateGas: {
         accounting(overrides?: CallOverrides): Promise<BigNumber>;
         accrueRewards(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        addIncentivePool(pool: string, rewardsPortion: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        addIncentivePool(pool: PromiseOrValue<string>, rewardsPortion: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        calculateUpdatedLiquidityPosition(_pt: IAccounting.PoolPositionStruct, rs: IAccounting.RewardStatusStruct, timeNow: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        claimAllRewards(poolIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        calculateUpdatedLiquidityPosition(_pt: IAccounting.PoolPositionStruct, rs: IAccounting.RewardStatusStruct, timeNow: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        claimAllRewards(poolIDs: PromiseOrValue<BigNumberish>[], ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        claimRewards(poolID: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimRewards(poolID: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         countPools(overrides?: CallOverrides): Promise<BigNumber>;
         currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
         deployer(overrides?: CallOverrides): Promise<BigNumber>;
-        deposit(params: Rewards.RewardsDepositParamsStruct, ui: BigNumberish, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        deposit(params: Rewards.RewardsDepositParamsStruct, ui: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
-        getMinLiquidityByPeriod(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
-        getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getMinLiquidityByPeriod(pool: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        getPoolConfigForPoolID(poolID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         governor(overrides?: CallOverrides): Promise<BigNumber>;
-        init(_collateralPool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        init(_collateralPool: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         lastPeriodGlobalRewardsAccrued(overrides?: CallOverrides): Promise<BigNumber>;
         maxCollateralLiquidityDecreasePerPeriod(overrides?: CallOverrides): Promise<BigNumber>;
-        minLiquidityByPeriod(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+        minLiquidityByPeriod(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         periodLength(overrides?: CallOverrides): Promise<BigNumber>;
-        poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-        removeKickback(poolID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        poolIDForPool(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        removeKickback(poolID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        requireAuthorized(authorized: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        setMaxCollateralLiquidityDecreasePerPeriod(decreasePortion: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        requireAuthorized(authorized: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        setMaxCollateralLiquidityDecreasePerPeriod(decreasePortion: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         stopped(overrides?: CallOverrides): Promise<BigNumber>;
-        updatePoolIncentive(poolID: BigNumberish, incentive: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        updatePoolIncentive(poolID: PromiseOrValue<BigNumberish>, incentive: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
         weth(overrides?: CallOverrides): Promise<BigNumber>;
-        withdraw(params: Rewards.RewardsWithdrawParamsStruct, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        withdraw(params: Rewards.RewardsWithdrawParamsStruct, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         accounting(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         accrueRewards(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        addIncentivePool(pool: string, rewardsPortion: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        addIncentivePool(pool: PromiseOrValue<string>, rewardsPortion: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        calculateUpdatedLiquidityPosition(_pt: IAccounting.PoolPositionStruct, rs: IAccounting.RewardStatusStruct, timeNow: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        claimAllRewards(poolIDs: BigNumberish[], ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        calculateUpdatedLiquidityPosition(_pt: IAccounting.PoolPositionStruct, rs: IAccounting.RewardStatusStruct, timeNow: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        claimAllRewards(poolIDs: PromiseOrValue<BigNumberish>[], ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        claimRewards(poolID: BigNumberish, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimRewards(poolID: PromiseOrValue<BigNumberish>, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         countPools(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         currentPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         deployer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        deposit(params: Rewards.RewardsDepositParamsStruct, ui: BigNumberish, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        deposit(params: Rewards.RewardsDepositParamsStruct, ui: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         firstPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getMinLiquidityByPeriod(pool: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getMinLiquidityByPeriod(pool: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getPoolConfigForPoolID(poolID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        init(_collateralPool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        init(_collateralPool: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         lastPeriodGlobalRewardsAccrued(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         maxCollateralLiquidityDecreasePerPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        minLiquidityByPeriod(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        minLiquidityByPeriod(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         periodLength(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        poolIDForPool(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        removeKickback(poolID: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        poolIDForPool(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        removeKickback(poolID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        requireAuthorized(authorized: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setMaxCollateralLiquidityDecreasePerPeriod(decreasePortion: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        requireAuthorized(authorized: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        setMaxCollateralLiquidityDecreasePerPeriod(decreasePortion: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        updatePoolIncentive(poolID: BigNumberish, incentive: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        updatePoolIncentive(poolID: PromiseOrValue<BigNumberish>, incentive: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        validUpdate(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         weth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        withdraw(params: Rewards.RewardsWithdrawParamsStruct, ui: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        withdraw(params: Rewards.RewardsWithdrawParamsStruct, ui: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

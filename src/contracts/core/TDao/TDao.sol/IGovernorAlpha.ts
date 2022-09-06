@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface IGovernorAlphaInterface extends utils.Interface {
@@ -31,7 +32,7 @@ export interface IGovernorAlphaInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "castVote",
-    values: [BigNumberish, boolean]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
   ): string;
 
   decodeFunctionResult(functionFragment: "castVote", data: BytesLike): Result;
@@ -67,22 +68,22 @@ export interface IGovernorAlpha extends BaseContract {
 
   functions: {
     castVote(
-      proposalId: BigNumberish,
-      support: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      proposalId: PromiseOrValue<BigNumberish>,
+      support: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   castVote(
-    proposalId: BigNumberish,
-    support: boolean,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    proposalId: PromiseOrValue<BigNumberish>,
+    support: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     castVote(
-      proposalId: BigNumberish,
-      support: boolean,
+      proposalId: PromiseOrValue<BigNumberish>,
+      support: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -91,17 +92,17 @@ export interface IGovernorAlpha extends BaseContract {
 
   estimateGas: {
     castVote(
-      proposalId: BigNumberish,
-      support: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      proposalId: PromiseOrValue<BigNumberish>,
+      support: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     castVote(
-      proposalId: BigNumberish,
-      support: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      proposalId: PromiseOrValue<BigNumberish>,
+      support: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

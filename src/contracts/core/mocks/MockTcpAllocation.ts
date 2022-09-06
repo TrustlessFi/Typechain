@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface MockTcpAllocationInterface extends utils.Interface {
@@ -40,10 +41,13 @@ export interface MockTcpAllocationInterface extends utils.Interface {
       | "lockTokensIntoDao"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "allocations", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "allocations",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "getTokens",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "incentiveAllocation",
@@ -51,11 +55,15 @@ export interface MockTcpAllocationInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "increaseAllocation",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "lockTokensIntoDao",
-    values: [string, BigNumberish, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
 
   decodeFunctionResult(
@@ -106,74 +114,83 @@ export interface MockTcpAllocation extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    allocations(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+    allocations(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     getTokens(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     incentiveAllocation(overrides?: CallOverrides): Promise<[string]>;
 
     increaseAllocation(
-      allocatee: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      allocatee: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     lockTokensIntoDao(
-      arg0: string,
-      arg1: BigNumberish,
-      arg2: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  allocations(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+  allocations(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   getTokens(
-    arg0: string,
-    arg1: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   incentiveAllocation(overrides?: CallOverrides): Promise<string>;
 
   increaseAllocation(
-    allocatee: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    allocatee: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   lockTokensIntoDao(
-    arg0: string,
-    arg1: BigNumberish,
-    arg2: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
+    arg2: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    allocations(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allocations(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     getTokens(
-      arg0: string,
-      arg1: BigNumberish,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     incentiveAllocation(overrides?: CallOverrides): Promise<string>;
 
     increaseAllocation(
-      allocatee: string,
-      count: BigNumberish,
+      allocatee: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     lockTokensIntoDao(
-      arg0: string,
-      arg1: BigNumberish,
-      arg2: BigNumberish,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -181,40 +198,43 @@ export interface MockTcpAllocation extends BaseContract {
   filters: {};
 
   estimateGas: {
-    allocations(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allocations(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     getTokens(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     incentiveAllocation(overrides?: CallOverrides): Promise<BigNumber>;
 
     increaseAllocation(
-      allocatee: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      allocatee: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     lockTokensIntoDao(
-      arg0: string,
-      arg1: BigNumberish,
-      arg2: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     allocations(
-      arg0: string,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getTokens(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     incentiveAllocation(
@@ -222,16 +242,16 @@ export interface MockTcpAllocation extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     increaseAllocation(
-      allocatee: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      allocatee: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     lockTokensIntoDao(
-      arg0: string,
-      arg1: BigNumberish,
-      arg2: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      arg2: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

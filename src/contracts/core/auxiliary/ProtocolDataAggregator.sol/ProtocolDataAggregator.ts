@@ -20,16 +20,20 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export declare namespace ProtocolDataAggregator {
-  export type ConstructorParamsStruct = { Governor: string };
+  export type ConstructorParamsStruct = { Governor: PromiseOrValue<string> };
 
   export type ConstructorParamsStructOutput = [string] & { Governor: string };
 }
 
 export declare namespace IRewards {
-  export type PoolConfigStruct = { pool: string; rewardsPortion: BigNumberish };
+  export type PoolConfigStruct = {
+    pool: PromiseOrValue<string>;
+    rewardsPortion: PromiseOrValue<BigNumberish>;
+  };
 
   export type PoolConfigStructOutput = [string, BigNumber] & {
     pool: string;
@@ -67,7 +71,7 @@ export interface ProtocolDataAggregatorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "positionsCollateralization",
-    values: [BigNumberish[]]
+    values: [PromiseOrValue<BigNumberish>[]]
   ): string;
 
   decodeFunctionResult(functionFragment: "counter", data: BytesLike): Result;
@@ -128,11 +132,11 @@ export interface ProtocolDataAggregator extends BaseContract {
     governor(overrides?: CallOverrides): Promise<[string]>;
 
     incrementCounter(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     positionsCollateralization(
-      positionIDs: BigNumberish[],
+      positionIDs: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<[BigNumber[]] & { collateralizations: BigNumber[] }>;
   };
@@ -146,11 +150,11 @@ export interface ProtocolDataAggregator extends BaseContract {
   governor(overrides?: CallOverrides): Promise<string>;
 
   incrementCounter(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   positionsCollateralization(
-    positionIDs: BigNumberish[],
+    positionIDs: PromiseOrValue<BigNumberish>[],
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
@@ -166,7 +170,7 @@ export interface ProtocolDataAggregator extends BaseContract {
     incrementCounter(overrides?: CallOverrides): Promise<void>;
 
     positionsCollateralization(
-      positionIDs: BigNumberish[],
+      positionIDs: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
   };
@@ -181,11 +185,11 @@ export interface ProtocolDataAggregator extends BaseContract {
     governor(overrides?: CallOverrides): Promise<BigNumber>;
 
     incrementCounter(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     positionsCollateralization(
-      positionIDs: BigNumberish[],
+      positionIDs: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -200,11 +204,11 @@ export interface ProtocolDataAggregator extends BaseContract {
     governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     incrementCounter(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     positionsCollateralization(
-      positionIDs: BigNumberish[],
+      positionIDs: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

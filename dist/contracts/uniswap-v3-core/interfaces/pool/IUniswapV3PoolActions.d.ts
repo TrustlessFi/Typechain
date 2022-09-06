@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export interface IUniswapV3PoolActionsInterface extends utils.Interface {
     functions: {
         "burn(int24,int24,uint128)": FunctionFragment;
@@ -13,13 +13,40 @@ export interface IUniswapV3PoolActionsInterface extends utils.Interface {
         "swap(address,bool,int256,uint160,bytes)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "burn" | "collect" | "flash" | "increaseObservationCardinalityNext" | "initialize" | "mint" | "swap"): FunctionFragment;
-    encodeFunctionData(functionFragment: "burn", values: [BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "collect", values: [string, BigNumberish, BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "flash", values: [string, BigNumberish, BigNumberish, BytesLike]): string;
-    encodeFunctionData(functionFragment: "increaseObservationCardinalityNext", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "initialize", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "mint", values: [string, BigNumberish, BigNumberish, BigNumberish, BytesLike]): string;
-    encodeFunctionData(functionFragment: "swap", values: [string, boolean, BigNumberish, BigNumberish, BytesLike]): string;
+    encodeFunctionData(functionFragment: "burn", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "collect", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "flash", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "increaseObservationCardinalityNext", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "initialize", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "mint", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "swap", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<boolean>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
     decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "collect", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "flash", data: BytesLike): Result;
@@ -44,75 +71,75 @@ export interface IUniswapV3PoolActions extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        burn(tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        burn(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        collect(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collect(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        flash(recipient: string, amount0: BigNumberish, amount1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        flash(recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        increaseObservationCardinalityNext(observationCardinalityNext: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseObservationCardinalityNext(observationCardinalityNext: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        initialize(sqrtPriceX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        initialize(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        mint(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    burn(tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    burn(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    collect(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    collect(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    flash(recipient: string, amount0: BigNumberish, amount1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    flash(recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    increaseObservationCardinalityNext(observationCardinalityNext: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    increaseObservationCardinalityNext(observationCardinalityNext: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    initialize(sqrtPriceX96: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    initialize(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    mint(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    mint(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        burn(tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: CallOverrides): Promise<[
+        burn(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
             amount0: BigNumber;
             amount1: BigNumber;
         }>;
-        collect(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: CallOverrides): Promise<[
+        collect(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
             amount0: BigNumber;
             amount1: BigNumber;
         }>;
-        flash(recipient: string, amount0: BigNumberish, amount1: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<void>;
-        increaseObservationCardinalityNext(observationCardinalityNext: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        initialize(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        mint(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<[
+        flash(recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+        increaseObservationCardinalityNext(observationCardinalityNext: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        initialize(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        mint(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
             amount0: BigNumber;
             amount1: BigNumber;
         }>;
-        swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<[
+        swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
@@ -122,49 +149,49 @@ export interface IUniswapV3PoolActions extends BaseContract {
     };
     filters: {};
     estimateGas: {
-        burn(tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        burn(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        collect(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collect(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        flash(recipient: string, amount0: BigNumberish, amount1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        flash(recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        increaseObservationCardinalityNext(observationCardinalityNext: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseObservationCardinalityNext(observationCardinalityNext: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        initialize(sqrtPriceX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        initialize(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        mint(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        burn(tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        burn(tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        collect(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount0Requested: BigNumberish, amount1Requested: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collect(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount0Requested: PromiseOrValue<BigNumberish>, amount1Requested: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        flash(recipient: string, amount0: BigNumberish, amount1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        flash(recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        increaseObservationCardinalityNext(observationCardinalityNext: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseObservationCardinalityNext(observationCardinalityNext: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        initialize(sqrtPriceX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        initialize(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        mint(recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

@@ -1,10 +1,10 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export declare namespace ProtocolDataAggregator {
     type ConstructorParamsStruct = {
-        Governor: string;
+        Governor: PromiseOrValue<string>;
     };
     type ConstructorParamsStructOutput = [string] & {
         Governor: string;
@@ -12,8 +12,8 @@ export declare namespace ProtocolDataAggregator {
 }
 export declare namespace IRewards {
     type PoolConfigStruct = {
-        pool: string;
-        rewardsPortion: BigNumberish;
+        pool: PromiseOrValue<string>;
+        rewardsPortion: PromiseOrValue<BigNumberish>;
     };
     type PoolConfigStructOutput = [string, BigNumber] & {
         pool: string;
@@ -33,7 +33,7 @@ export interface ProtocolDataAggregatorInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "getIncentivizedPools", values?: undefined): string;
     encodeFunctionData(functionFragment: "governor", values?: undefined): string;
     encodeFunctionData(functionFragment: "incrementCounter", values?: undefined): string;
-    encodeFunctionData(functionFragment: "positionsCollateralization", values: [BigNumberish[]]): string;
+    encodeFunctionData(functionFragment: "positionsCollateralization", values: [PromiseOrValue<BigNumberish>[]]): string;
     decodeFunctionResult(functionFragment: "counter", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getIncentivizedPools", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "governor", data: BytesLike): Result;
@@ -64,9 +64,9 @@ export interface ProtocolDataAggregator extends BaseContract {
         }>;
         governor(overrides?: CallOverrides): Promise<[string]>;
         incrementCounter(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        positionsCollateralization(positionIDs: BigNumberish[], overrides?: CallOverrides): Promise<[BigNumber[]] & {
+        positionsCollateralization(positionIDs: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<[BigNumber[]] & {
             collateralizations: BigNumber[];
         }>;
     };
@@ -74,15 +74,15 @@ export interface ProtocolDataAggregator extends BaseContract {
     getIncentivizedPools(overrides?: CallOverrides): Promise<IRewards.PoolConfigStructOutput[]>;
     governor(overrides?: CallOverrides): Promise<string>;
     incrementCounter(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    positionsCollateralization(positionIDs: BigNumberish[], overrides?: CallOverrides): Promise<BigNumber[]>;
+    positionsCollateralization(positionIDs: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<BigNumber[]>;
     callStatic: {
         counter(overrides?: CallOverrides): Promise<BigNumber>;
         getIncentivizedPools(overrides?: CallOverrides): Promise<IRewards.PoolConfigStructOutput[]>;
         governor(overrides?: CallOverrides): Promise<string>;
         incrementCounter(overrides?: CallOverrides): Promise<void>;
-        positionsCollateralization(positionIDs: BigNumberish[], overrides?: CallOverrides): Promise<BigNumber[]>;
+        positionsCollateralization(positionIDs: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<BigNumber[]>;
     };
     filters: {};
     estimateGas: {
@@ -90,17 +90,17 @@ export interface ProtocolDataAggregator extends BaseContract {
         getIncentivizedPools(overrides?: CallOverrides): Promise<BigNumber>;
         governor(overrides?: CallOverrides): Promise<BigNumber>;
         incrementCounter(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        positionsCollateralization(positionIDs: BigNumberish[], overrides?: CallOverrides): Promise<BigNumber>;
+        positionsCollateralization(positionIDs: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         counter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getIncentivizedPools(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         governor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         incrementCounter(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        positionsCollateralization(positionIDs: BigNumberish[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        positionsCollateralization(positionIDs: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

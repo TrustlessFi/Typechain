@@ -24,6 +24,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface IPricesInterface extends utils.Interface {
@@ -56,40 +57,40 @@ export interface IPricesInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "calculateInstantCollateralPrice",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "calculateInstantTwappedPrice",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "calculateInstantTwappedTick",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "calculateTwappedPrice",
-    values: [string, boolean]
+    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "hueTcpPrice",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "initializePool",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "initializeWethPool",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "isPoolInitialized",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "stop", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "systemObtainReferencePrice",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
 
   decodeFunctionResult(
@@ -177,161 +178,170 @@ export interface IPrices extends BaseContract {
 
   functions: {
     calculateInstantCollateralPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { price: BigNumber }>;
 
     calculateInstantTwappedPrice(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     calculateInstantTwappedTick(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[number] & { tick: number }>;
 
     calculateTwappedPrice(
-      pool: string,
-      normalizeDecimals: boolean,
+      pool: PromiseOrValue<string>,
+      normalizeDecimals: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { price: BigNumber }>;
 
     hueTcpPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     initializePool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     initializeWethPool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     isPoolInitialized(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     systemObtainReferencePrice(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   calculateInstantCollateralPrice(
-    twapDuration: BigNumberish,
+    twapDuration: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   calculateInstantTwappedPrice(
-    pool: string,
-    twapDuration: BigNumberish,
+    pool: PromiseOrValue<string>,
+    twapDuration: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   calculateInstantTwappedTick(
-    pool: string,
-    twapDuration: BigNumberish,
+    pool: PromiseOrValue<string>,
+    twapDuration: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<number>;
 
   calculateTwappedPrice(
-    pool: string,
-    normalizeDecimals: boolean,
+    pool: PromiseOrValue<string>,
+    normalizeDecimals: PromiseOrValue<boolean>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   hueTcpPrice(
-    twapDuration: BigNumberish,
+    twapDuration: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   initializePool(
-    pool: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   initializeWethPool(
-    pool: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  isPoolInitialized(pool: string, overrides?: CallOverrides): Promise<boolean>;
+  isPoolInitialized(
+    pool: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   stop(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   systemObtainReferencePrice(
-    pool: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pool: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     calculateInstantCollateralPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateInstantTwappedPrice(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateInstantTwappedTick(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<number>;
 
     calculateTwappedPrice(
-      pool: string,
-      normalizeDecimals: boolean,
+      pool: PromiseOrValue<string>,
+      normalizeDecimals: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     hueTcpPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    initializePool(pool: string, overrides?: CallOverrides): Promise<void>;
+    initializePool(
+      pool: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    initializeWethPool(pool: string, overrides?: CallOverrides): Promise<void>;
+    initializeWethPool(
+      pool: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     isPoolInitialized(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     stop(overrides?: CallOverrides): Promise<void>;
 
     systemObtainReferencePrice(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   filters: {
     "PriceUpdated(address,uint256,int24)"(
-      pool?: string | null,
+      pool?: PromiseOrValue<string> | null,
       price?: null,
       tick?: null
     ): PriceUpdatedEventFilter;
     PriceUpdated(
-      pool?: string | null,
+      pool?: PromiseOrValue<string> | null,
       price?: null,
       tick?: null
     ): PriceUpdatedEventFilter;
@@ -339,109 +349,109 @@ export interface IPrices extends BaseContract {
 
   estimateGas: {
     calculateInstantCollateralPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateInstantTwappedPrice(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateInstantTwappedTick(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     calculateTwappedPrice(
-      pool: string,
-      normalizeDecimals: boolean,
+      pool: PromiseOrValue<string>,
+      normalizeDecimals: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     hueTcpPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     initializePool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     initializeWethPool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     isPoolInitialized(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     systemObtainReferencePrice(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     calculateInstantCollateralPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     calculateInstantTwappedPrice(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     calculateInstantTwappedTick(
-      pool: string,
-      twapDuration: BigNumberish,
+      pool: PromiseOrValue<string>,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     calculateTwappedPrice(
-      pool: string,
-      normalizeDecimals: boolean,
+      pool: PromiseOrValue<string>,
+      normalizeDecimals: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     hueTcpPrice(
-      twapDuration: BigNumberish,
+      twapDuration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     initializePool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     initializeWethPool(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     isPoolInitialized(
-      pool: string,
+      pool: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     systemObtainReferencePrice(
-      pool: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pool: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

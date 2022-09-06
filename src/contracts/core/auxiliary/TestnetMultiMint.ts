@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface TestnetMultiMintInterface extends utils.Interface {
@@ -32,7 +33,7 @@ export interface TestnetMultiMintInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "multiMint",
-    values: [BigNumberish, string[]]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>[]]
   ): string;
   encodeFunctionData(functionFragment: "truEth", values?: undefined): string;
 
@@ -70,26 +71,26 @@ export interface TestnetMultiMint extends BaseContract {
 
   functions: {
     multiMint(
-      truEthMintCount: BigNumberish,
-      targetAddresses: string[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      truEthMintCount: PromiseOrValue<BigNumberish>,
+      targetAddresses: PromiseOrValue<string>[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     truEth(overrides?: CallOverrides): Promise<[string]>;
   };
 
   multiMint(
-    truEthMintCount: BigNumberish,
-    targetAddresses: string[],
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    truEthMintCount: PromiseOrValue<BigNumberish>,
+    targetAddresses: PromiseOrValue<string>[],
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   truEth(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     multiMint(
-      truEthMintCount: BigNumberish,
-      targetAddresses: string[],
+      truEthMintCount: PromiseOrValue<BigNumberish>,
+      targetAddresses: PromiseOrValue<string>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -100,9 +101,9 @@ export interface TestnetMultiMint extends BaseContract {
 
   estimateGas: {
     multiMint(
-      truEthMintCount: BigNumberish,
-      targetAddresses: string[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      truEthMintCount: PromiseOrValue<BigNumberish>,
+      targetAddresses: PromiseOrValue<string>[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     truEth(overrides?: CallOverrides): Promise<BigNumber>;
@@ -110,9 +111,9 @@ export interface TestnetMultiMint extends BaseContract {
 
   populateTransaction: {
     multiMint(
-      truEthMintCount: BigNumberish,
-      targetAddresses: string[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      truEthMintCount: PromiseOrValue<BigNumberish>,
+      targetAddresses: PromiseOrValue<string>[],
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     truEth(overrides?: CallOverrides): Promise<PopulatedTransaction>;

@@ -1,13 +1,13 @@
 import type { BaseContract, BigNumber, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface MockProtocolTokenInterface extends utils.Interface {
     functions: {
         "delegate(address)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "delegate"): FunctionFragment;
-    encodeFunctionData(functionFragment: "delegate", values: [string]): string;
+    encodeFunctionData(functionFragment: "delegate", values: [PromiseOrValue<string>]): string;
     decodeFunctionResult(functionFragment: "delegate", data: BytesLike): Result;
     events: {};
 }
@@ -26,25 +26,25 @@ export interface MockProtocolToken extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        delegate(delegatee: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        delegate(delegatee: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    delegate(delegatee: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    delegate(delegatee: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        delegate(delegatee: string, overrides?: CallOverrides): Promise<void>;
+        delegate(delegatee: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        delegate(delegatee: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        delegate(delegatee: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        delegate(delegatee: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        delegate(delegatee: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

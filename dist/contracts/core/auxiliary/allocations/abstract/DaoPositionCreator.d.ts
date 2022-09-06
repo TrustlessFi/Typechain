@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../../common";
 export interface DaoPositionCreatorInterface extends utils.Interface {
     functions: {
         "abdicate()": FunctionFragment;
@@ -15,7 +15,7 @@ export interface DaoPositionCreatorInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "abdicate", values?: undefined): string;
     encodeFunctionData(functionFragment: "dao", values?: undefined): string;
     encodeFunctionData(functionFragment: "guardian", values?: undefined): string;
-    encodeFunctionData(functionFragment: "setDao", values: [string]): string;
+    encodeFunctionData(functionFragment: "setDao", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "tcp", values?: undefined): string;
     encodeFunctionData(functionFragment: "tokenMinter", values?: undefined): string;
     decodeFunctionResult(functionFragment: "abdicate", data: BytesLike): Result;
@@ -67,23 +67,23 @@ export interface DaoPositionCreator extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         abdicate(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         dao(overrides?: CallOverrides): Promise<[string]>;
         guardian(overrides?: CallOverrides): Promise<[string]>;
-        setDao(_dao: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setDao(_dao: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         tcp(overrides?: CallOverrides): Promise<[string]>;
         tokenMinter(overrides?: CallOverrides): Promise<[string]>;
     };
     abdicate(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     dao(overrides?: CallOverrides): Promise<string>;
     guardian(overrides?: CallOverrides): Promise<string>;
-    setDao(_dao: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setDao(_dao: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     tcp(overrides?: CallOverrides): Promise<string>;
     tokenMinter(overrides?: CallOverrides): Promise<string>;
@@ -91,36 +91,36 @@ export interface DaoPositionCreator extends BaseContract {
         abdicate(overrides?: CallOverrides): Promise<void>;
         dao(overrides?: CallOverrides): Promise<string>;
         guardian(overrides?: CallOverrides): Promise<string>;
-        setDao(_dao: string, overrides?: CallOverrides): Promise<void>;
+        setDao(_dao: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         tcp(overrides?: CallOverrides): Promise<string>;
         tokenMinter(overrides?: CallOverrides): Promise<string>;
     };
     filters: {
-        "IncentiveDistributed(address,uint256)"(dest?: string | null, count?: null): IncentiveDistributedEventFilter;
-        IncentiveDistributed(dest?: string | null, count?: null): IncentiveDistributedEventFilter;
-        "TokensLocked(address,uint8,uint256)"(receiver?: string | null, lockDurationMonths?: BigNumberish | null, count?: null): TokensLockedEventFilter;
-        TokensLocked(receiver?: string | null, lockDurationMonths?: BigNumberish | null, count?: null): TokensLockedEventFilter;
+        "IncentiveDistributed(address,uint256)"(dest?: PromiseOrValue<string> | null, count?: null): IncentiveDistributedEventFilter;
+        IncentiveDistributed(dest?: PromiseOrValue<string> | null, count?: null): IncentiveDistributedEventFilter;
+        "TokensLocked(address,uint8,uint256)"(receiver?: PromiseOrValue<string> | null, lockDurationMonths?: PromiseOrValue<BigNumberish> | null, count?: null): TokensLockedEventFilter;
+        TokensLocked(receiver?: PromiseOrValue<string> | null, lockDurationMonths?: PromiseOrValue<BigNumberish> | null, count?: null): TokensLockedEventFilter;
     };
     estimateGas: {
         abdicate(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         dao(overrides?: CallOverrides): Promise<BigNumber>;
         guardian(overrides?: CallOverrides): Promise<BigNumber>;
-        setDao(_dao: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setDao(_dao: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         tcp(overrides?: CallOverrides): Promise<BigNumber>;
         tokenMinter(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         abdicate(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         dao(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         guardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setDao(_dao: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setDao(_dao: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         tcp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         tokenMinter(overrides?: CallOverrides): Promise<PopulatedTransaction>;

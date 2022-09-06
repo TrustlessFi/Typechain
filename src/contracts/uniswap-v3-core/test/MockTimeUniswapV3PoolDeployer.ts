@@ -24,6 +24,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface MockTimeUniswapV3PoolDeployerInterface
@@ -39,7 +40,13 @@ export interface MockTimeUniswapV3PoolDeployerInterface
 
   encodeFunctionData(
     functionFragment: "deploy",
-    values: [string, string, string, BigNumberish, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "parameters",
@@ -91,12 +98,12 @@ export interface MockTimeUniswapV3PoolDeployer extends BaseContract {
 
   functions: {
     deploy(
-      factory: string,
-      token0: string,
-      token1: string,
-      fee: BigNumberish,
-      tickSpacing: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      factory: PromiseOrValue<string>,
+      token0: PromiseOrValue<string>,
+      token1: PromiseOrValue<string>,
+      fee: PromiseOrValue<BigNumberish>,
+      tickSpacing: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     parameters(
@@ -113,12 +120,12 @@ export interface MockTimeUniswapV3PoolDeployer extends BaseContract {
   };
 
   deploy(
-    factory: string,
-    token0: string,
-    token1: string,
-    fee: BigNumberish,
-    tickSpacing: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    factory: PromiseOrValue<string>,
+    token0: PromiseOrValue<string>,
+    token1: PromiseOrValue<string>,
+    fee: PromiseOrValue<BigNumberish>,
+    tickSpacing: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   parameters(
@@ -135,11 +142,11 @@ export interface MockTimeUniswapV3PoolDeployer extends BaseContract {
 
   callStatic: {
     deploy(
-      factory: string,
-      token0: string,
-      token1: string,
-      fee: BigNumberish,
-      tickSpacing: BigNumberish,
+      factory: PromiseOrValue<string>,
+      token0: PromiseOrValue<string>,
+      token1: PromiseOrValue<string>,
+      fee: PromiseOrValue<BigNumberish>,
+      tickSpacing: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -163,12 +170,12 @@ export interface MockTimeUniswapV3PoolDeployer extends BaseContract {
 
   estimateGas: {
     deploy(
-      factory: string,
-      token0: string,
-      token1: string,
-      fee: BigNumberish,
-      tickSpacing: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      factory: PromiseOrValue<string>,
+      token0: PromiseOrValue<string>,
+      token1: PromiseOrValue<string>,
+      fee: PromiseOrValue<BigNumberish>,
+      tickSpacing: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     parameters(overrides?: CallOverrides): Promise<BigNumber>;
@@ -176,12 +183,12 @@ export interface MockTimeUniswapV3PoolDeployer extends BaseContract {
 
   populateTransaction: {
     deploy(
-      factory: string,
-      token0: string,
-      token1: string,
-      fee: BigNumberish,
-      tickSpacing: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      factory: PromiseOrValue<string>,
+      token0: PromiseOrValue<string>,
+      token1: PromiseOrValue<string>,
+      fee: PromiseOrValue<BigNumberish>,
+      tickSpacing: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     parameters(overrides?: CallOverrides): Promise<PopulatedTransaction>;

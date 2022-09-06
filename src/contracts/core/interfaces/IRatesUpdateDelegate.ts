@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface IRatesUpdateDelegateInterface extends utils.Interface {
@@ -33,7 +34,7 @@ export interface IRatesUpdateDelegateInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "executeRatesUpdateContractUpdate",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -72,19 +73,19 @@ export interface IRatesUpdateDelegate extends BaseContract {
 
   functions: {
     executeRatesUpdateContractUpdate(
-      newRate: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newRate: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   executeRatesUpdateContractUpdate(
-    newRate: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    newRate: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     executeRatesUpdateContractUpdate(
-      newRate: BigNumberish,
+      newRate: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -93,15 +94,15 @@ export interface IRatesUpdateDelegate extends BaseContract {
 
   estimateGas: {
     executeRatesUpdateContractUpdate(
-      newRate: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newRate: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     executeRatesUpdateContractUpdate(
-      newRate: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newRate: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

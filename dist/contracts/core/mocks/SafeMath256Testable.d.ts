@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface SafeMath256TestableInterface extends utils.Interface {
     functions: {
         "add(uint256,uint256)": FunctionFragment;
@@ -9,9 +9,9 @@ export interface SafeMath256TestableInterface extends utils.Interface {
         "sub(uint256,uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "add" | "mul" | "sub"): FunctionFragment;
-    encodeFunctionData(functionFragment: "add", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "mul", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "sub", values: [BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "add", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "mul", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "sub", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "add", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "mul", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "sub", data: BytesLike): Result;
@@ -32,33 +32,33 @@ export interface SafeMath256Testable extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        add(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber] & {
+        add(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber] & {
             r: BigNumber;
         }>;
-        mul(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber] & {
+        mul(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber] & {
             r: BigNumber;
         }>;
-        sub(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber] & {
+        sub(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber] & {
             r: BigNumber;
         }>;
     };
-    add(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    mul(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    sub(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    add(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    mul(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    sub(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     callStatic: {
-        add(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        mul(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        sub(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        add(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        mul(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        sub(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {};
     estimateGas: {
-        add(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        mul(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        sub(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        add(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        mul(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        sub(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        add(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        mul(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        sub(a: BigNumberish, b: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        add(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        mul(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        sub(a: PromiseOrValue<BigNumberish>, b: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

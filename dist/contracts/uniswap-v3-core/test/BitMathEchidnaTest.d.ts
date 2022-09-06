@@ -1,15 +1,15 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface BitMathEchidnaTestInterface extends utils.Interface {
     functions: {
         "leastSignificantBitInvariant(uint256)": FunctionFragment;
         "mostSignificantBitInvariant(uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "leastSignificantBitInvariant" | "mostSignificantBitInvariant"): FunctionFragment;
-    encodeFunctionData(functionFragment: "leastSignificantBitInvariant", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "mostSignificantBitInvariant", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "leastSignificantBitInvariant", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "mostSignificantBitInvariant", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "leastSignificantBitInvariant", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "mostSignificantBitInvariant", data: BytesLike): Result;
     events: {};
@@ -29,22 +29,22 @@ export interface BitMathEchidnaTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        leastSignificantBitInvariant(input: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
-        mostSignificantBitInvariant(input: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
+        leastSignificantBitInvariant(input: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
+        mostSignificantBitInvariant(input: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
     };
-    leastSignificantBitInvariant(input: BigNumberish, overrides?: CallOverrides): Promise<void>;
-    mostSignificantBitInvariant(input: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    leastSignificantBitInvariant(input: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    mostSignificantBitInvariant(input: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     callStatic: {
-        leastSignificantBitInvariant(input: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        mostSignificantBitInvariant(input: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        leastSignificantBitInvariant(input: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        mostSignificantBitInvariant(input: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        leastSignificantBitInvariant(input: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        mostSignificantBitInvariant(input: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        leastSignificantBitInvariant(input: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        mostSignificantBitInvariant(input: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        leastSignificantBitInvariant(input: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        mostSignificantBitInvariant(input: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        leastSignificantBitInvariant(input: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        mostSignificantBitInvariant(input: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

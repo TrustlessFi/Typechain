@@ -19,6 +19,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface IExecutorInterface extends utils.Interface {
@@ -30,7 +31,11 @@ export interface IExecutorInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "execute",
-    values: [string, string, BytesLike]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "execute", data: BytesLike): Result;
@@ -66,25 +71,25 @@ export interface IExecutor extends BaseContract {
 
   functions: {
     execute(
-      target: string,
-      signature: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   execute(
-    target: string,
-    signature: string,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    target: PromiseOrValue<string>,
+    signature: PromiseOrValue<string>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     execute(
-      target: string,
-      signature: string,
-      data: BytesLike,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, string] & { success: boolean; returnData: string }>;
   };
@@ -93,19 +98,19 @@ export interface IExecutor extends BaseContract {
 
   estimateGas: {
     execute(
-      target: string,
-      signature: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     execute(
-      target: string,
-      signature: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

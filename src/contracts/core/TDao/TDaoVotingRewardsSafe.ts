@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface TDaoVotingRewardsSafeInterface extends utils.Interface {
@@ -35,7 +36,11 @@ export interface TDaoVotingRewardsSafeInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "auth", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "safeTransfer",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "auth", data: BytesLike): Result;
@@ -77,29 +82,29 @@ export interface TDaoVotingRewardsSafe extends BaseContract {
     auth(overrides?: CallOverrides): Promise<[string]>;
 
     safeTransfer(
-      token: string,
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   auth(overrides?: CallOverrides): Promise<string>;
 
   safeTransfer(
-    token: string,
-    dest: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    dest: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     auth(overrides?: CallOverrides): Promise<string>;
 
     safeTransfer(
-      token: string,
-      dest: string,
-      count: BigNumberish,
+      token: PromiseOrValue<string>,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -110,10 +115,10 @@ export interface TDaoVotingRewardsSafe extends BaseContract {
     auth(overrides?: CallOverrides): Promise<BigNumber>;
 
     safeTransfer(
-      token: string,
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -121,10 +126,10 @@ export interface TDaoVotingRewardsSafe extends BaseContract {
     auth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     safeTransfer(
-      token: string,
-      dest: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      dest: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

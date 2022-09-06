@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface SwapMathTestInterface extends utils.Interface {
     functions: {
         "computeSwapStep(uint160,uint160,uint128,int256,uint24)": FunctionFragment;
@@ -9,18 +9,18 @@ export interface SwapMathTestInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "computeSwapStep" | "getGasCostOfComputeSwapStep"): FunctionFragment;
     encodeFunctionData(functionFragment: "computeSwapStep", values: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
     ]): string;
     encodeFunctionData(functionFragment: "getGasCostOfComputeSwapStep", values: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
     ]): string;
     decodeFunctionResult(functionFragment: "computeSwapStep", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getGasCostOfComputeSwapStep", data: BytesLike): Result;
@@ -41,7 +41,7 @@ export interface SwapMathTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        computeSwapStep(sqrtP: BigNumberish, sqrtPTarget: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<[
+        computeSwapStep(sqrtP: PromiseOrValue<BigNumberish>, sqrtPTarget: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber,
@@ -52,9 +52,9 @@ export interface SwapMathTest extends BaseContract {
             amountOut: BigNumber;
             feeAmount: BigNumber;
         }>;
-        getGasCostOfComputeSwapStep(sqrtP: BigNumberish, sqrtPTarget: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getGasCostOfComputeSwapStep(sqrtP: PromiseOrValue<BigNumberish>, sqrtPTarget: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
     };
-    computeSwapStep(sqrtP: BigNumberish, sqrtPTarget: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<[
+    computeSwapStep(sqrtP: PromiseOrValue<BigNumberish>, sqrtPTarget: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         BigNumber,
         BigNumber,
         BigNumber,
@@ -65,9 +65,9 @@ export interface SwapMathTest extends BaseContract {
         amountOut: BigNumber;
         feeAmount: BigNumber;
     }>;
-    getGasCostOfComputeSwapStep(sqrtP: BigNumberish, sqrtPTarget: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getGasCostOfComputeSwapStep(sqrtP: PromiseOrValue<BigNumberish>, sqrtPTarget: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     callStatic: {
-        computeSwapStep(sqrtP: BigNumberish, sqrtPTarget: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<[
+        computeSwapStep(sqrtP: PromiseOrValue<BigNumberish>, sqrtPTarget: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber,
@@ -78,15 +78,15 @@ export interface SwapMathTest extends BaseContract {
             amountOut: BigNumber;
             feeAmount: BigNumber;
         }>;
-        getGasCostOfComputeSwapStep(sqrtP: BigNumberish, sqrtPTarget: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfComputeSwapStep(sqrtP: PromiseOrValue<BigNumberish>, sqrtPTarget: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {};
     estimateGas: {
-        computeSwapStep(sqrtP: BigNumberish, sqrtPTarget: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfComputeSwapStep(sqrtP: BigNumberish, sqrtPTarget: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        computeSwapStep(sqrtP: PromiseOrValue<BigNumberish>, sqrtPTarget: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfComputeSwapStep(sqrtP: PromiseOrValue<BigNumberish>, sqrtPTarget: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        computeSwapStep(sqrtP: BigNumberish, sqrtPTarget: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getGasCostOfComputeSwapStep(sqrtP: BigNumberish, sqrtPTarget: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        computeSwapStep(sqrtP: PromiseOrValue<BigNumberish>, sqrtPTarget: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getGasCostOfComputeSwapStep(sqrtP: PromiseOrValue<BigNumberish>, sqrtPTarget: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

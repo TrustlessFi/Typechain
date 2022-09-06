@@ -24,14 +24,15 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../../common";
 
 export declare namespace MinAverageLockDuration {
   export type UserAllocationStruct = {
-    totalAllocation: BigNumberish;
-    minimumAverageTokensAllocatedxLockYears: BigNumberish;
-    tokensAllocated: BigNumberish;
-    cumulativeTokensAllocatedxLockYears: BigNumberish;
+    totalAllocation: PromiseOrValue<BigNumberish>;
+    minimumAverageTokensAllocatedxLockYears: PromiseOrValue<BigNumberish>;
+    tokensAllocated: PromiseOrValue<BigNumberish>;
+    cumulativeTokensAllocatedxLockYears: PromiseOrValue<BigNumberish>;
   };
 
   export type UserAllocationStructOutput = [
@@ -75,10 +76,13 @@ export interface MinAverageLockDurationInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "dao", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "getUserAllocation",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "guardian", values?: undefined): string;
-  encodeFunctionData(functionFragment: "setDao", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "setDao",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(functionFragment: "startTime", values?: undefined): string;
   encodeFunctionData(functionFragment: "tcp", values?: undefined): string;
   encodeFunctionData(
@@ -176,13 +180,13 @@ export interface MinAverageLockDuration extends BaseContract {
 
   functions: {
     abdicate(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     dao(overrides?: CallOverrides): Promise<[string]>;
 
     getUserAllocation(
-      user: string,
+      user: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [MinAverageLockDuration.UserAllocationStructOutput] & {
@@ -193,8 +197,8 @@ export interface MinAverageLockDuration extends BaseContract {
     guardian(overrides?: CallOverrides): Promise<[string]>;
 
     setDao(
-      _dao: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _dao: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     startTime(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -205,21 +209,21 @@ export interface MinAverageLockDuration extends BaseContract {
   };
 
   abdicate(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   dao(overrides?: CallOverrides): Promise<string>;
 
   getUserAllocation(
-    user: string,
+    user: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<MinAverageLockDuration.UserAllocationStructOutput>;
 
   guardian(overrides?: CallOverrides): Promise<string>;
 
   setDao(
-    _dao: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _dao: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   startTime(overrides?: CallOverrides): Promise<BigNumber>;
@@ -234,13 +238,16 @@ export interface MinAverageLockDuration extends BaseContract {
     dao(overrides?: CallOverrides): Promise<string>;
 
     getUserAllocation(
-      user: string,
+      user: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<MinAverageLockDuration.UserAllocationStructOutput>;
 
     guardian(overrides?: CallOverrides): Promise<string>;
 
-    setDao(_dao: string, overrides?: CallOverrides): Promise<void>;
+    setDao(
+      _dao: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     startTime(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -251,52 +258,52 @@ export interface MinAverageLockDuration extends BaseContract {
 
   filters: {
     "IncentiveDistributed(address,uint256)"(
-      dest?: string | null,
+      dest?: PromiseOrValue<string> | null,
       count?: null
     ): IncentiveDistributedEventFilter;
     IncentiveDistributed(
-      dest?: string | null,
+      dest?: PromiseOrValue<string> | null,
       count?: null
     ): IncentiveDistributedEventFilter;
 
     "LockPositionIncreased(address,uint128)"(
-      receiver?: string | null,
+      receiver?: PromiseOrValue<string> | null,
       count?: null
     ): LockPositionIncreasedEventFilter;
     LockPositionIncreased(
-      receiver?: string | null,
+      receiver?: PromiseOrValue<string> | null,
       count?: null
     ): LockPositionIncreasedEventFilter;
 
     "TokensLocked(address,uint8,uint256)"(
-      receiver?: string | null,
-      lockDurationMonths?: BigNumberish | null,
+      receiver?: PromiseOrValue<string> | null,
+      lockDurationMonths?: PromiseOrValue<BigNumberish> | null,
       count?: null
     ): TokensLockedEventFilter;
     TokensLocked(
-      receiver?: string | null,
-      lockDurationMonths?: BigNumberish | null,
+      receiver?: PromiseOrValue<string> | null,
+      lockDurationMonths?: PromiseOrValue<BigNumberish> | null,
       count?: null
     ): TokensLockedEventFilter;
   };
 
   estimateGas: {
     abdicate(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     dao(overrides?: CallOverrides): Promise<BigNumber>;
 
     getUserAllocation(
-      user: string,
+      user: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     guardian(overrides?: CallOverrides): Promise<BigNumber>;
 
     setDao(
-      _dao: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _dao: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     startTime(overrides?: CallOverrides): Promise<BigNumber>;
@@ -308,21 +315,21 @@ export interface MinAverageLockDuration extends BaseContract {
 
   populateTransaction: {
     abdicate(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     dao(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getUserAllocation(
-      user: string,
+      user: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     guardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setDao(
-      _dao: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _dao: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     startTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;

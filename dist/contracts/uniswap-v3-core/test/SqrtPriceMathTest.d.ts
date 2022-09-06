@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface SqrtPriceMathTestInterface extends utils.Interface {
     functions: {
         "getAmount0Delta(uint160,uint160,uint128,bool)": FunctionFragment;
@@ -14,14 +14,54 @@ export interface SqrtPriceMathTestInterface extends utils.Interface {
         "getNextSqrtPriceFromOutput(uint160,uint128,uint256,bool)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "getAmount0Delta" | "getAmount1Delta" | "getGasCostOfGetAmount0Delta" | "getGasCostOfGetAmount1Delta" | "getGasCostOfGetNextSqrtPriceFromInput" | "getGasCostOfGetNextSqrtPriceFromOutput" | "getNextSqrtPriceFromInput" | "getNextSqrtPriceFromOutput"): FunctionFragment;
-    encodeFunctionData(functionFragment: "getAmount0Delta", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "getAmount1Delta", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "getGasCostOfGetAmount0Delta", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "getGasCostOfGetAmount1Delta", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "getGasCostOfGetNextSqrtPriceFromInput", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "getGasCostOfGetNextSqrtPriceFromOutput", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "getNextSqrtPriceFromInput", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "getNextSqrtPriceFromOutput", values: [BigNumberish, BigNumberish, BigNumberish, boolean]): string;
+    encodeFunctionData(functionFragment: "getAmount0Delta", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
+    encodeFunctionData(functionFragment: "getAmount1Delta", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
+    encodeFunctionData(functionFragment: "getGasCostOfGetAmount0Delta", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
+    encodeFunctionData(functionFragment: "getGasCostOfGetAmount1Delta", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
+    encodeFunctionData(functionFragment: "getGasCostOfGetNextSqrtPriceFromInput", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
+    encodeFunctionData(functionFragment: "getGasCostOfGetNextSqrtPriceFromOutput", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
+    encodeFunctionData(functionFragment: "getNextSqrtPriceFromInput", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
+    encodeFunctionData(functionFragment: "getNextSqrtPriceFromOutput", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>
+    ]): string;
     decodeFunctionResult(functionFragment: "getAmount0Delta", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getAmount1Delta", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getGasCostOfGetAmount0Delta", data: BytesLike): Result;
@@ -47,60 +87,60 @@ export interface SqrtPriceMathTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        getAmount0Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<[BigNumber] & {
+        getAmount0Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[BigNumber] & {
             amount0: BigNumber;
         }>;
-        getAmount1Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<[BigNumber] & {
+        getAmount1Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[BigNumber] & {
             amount1: BigNumber;
         }>;
-        getGasCostOfGetAmount0Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<[BigNumber]>;
-        getGasCostOfGetAmount1Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<[BigNumber]>;
-        getGasCostOfGetNextSqrtPriceFromInput(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<[BigNumber]>;
-        getGasCostOfGetNextSqrtPriceFromOutput(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<[BigNumber]>;
-        getNextSqrtPriceFromInput(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<[BigNumber] & {
+        getGasCostOfGetAmount0Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getGasCostOfGetAmount1Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getGasCostOfGetNextSqrtPriceFromInput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getGasCostOfGetNextSqrtPriceFromOutput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getNextSqrtPriceFromInput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[BigNumber] & {
             sqrtQ: BigNumber;
         }>;
-        getNextSqrtPriceFromOutput(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<[BigNumber] & {
+        getNextSqrtPriceFromOutput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[BigNumber] & {
             sqrtQ: BigNumber;
         }>;
     };
-    getAmount0Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-    getAmount1Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-    getGasCostOfGetAmount0Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-    getGasCostOfGetAmount1Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-    getGasCostOfGetNextSqrtPriceFromInput(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-    getGasCostOfGetNextSqrtPriceFromOutput(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-    getNextSqrtPriceFromInput(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-    getNextSqrtPriceFromOutput(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
+    getAmount0Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+    getAmount1Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+    getGasCostOfGetAmount0Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+    getGasCostOfGetAmount1Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+    getGasCostOfGetNextSqrtPriceFromInput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+    getGasCostOfGetNextSqrtPriceFromOutput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+    getNextSqrtPriceFromInput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+    getNextSqrtPriceFromOutput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
     callStatic: {
-        getAmount0Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getAmount1Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfGetAmount0Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfGetAmount1Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfGetNextSqrtPriceFromInput(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfGetNextSqrtPriceFromOutput(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getNextSqrtPriceFromInput(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getNextSqrtPriceFromOutput(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
+        getAmount0Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getAmount1Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfGetAmount0Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfGetAmount1Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfGetNextSqrtPriceFromInput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfGetNextSqrtPriceFromOutput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getNextSqrtPriceFromInput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getNextSqrtPriceFromOutput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {};
     estimateGas: {
-        getAmount0Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getAmount1Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfGetAmount0Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfGetAmount1Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfGetNextSqrtPriceFromInput(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfGetNextSqrtPriceFromOutput(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getNextSqrtPriceFromInput(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        getNextSqrtPriceFromOutput(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<BigNumber>;
+        getAmount0Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getAmount1Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfGetAmount0Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfGetAmount1Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfGetNextSqrtPriceFromInput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfGetNextSqrtPriceFromOutput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getNextSqrtPriceFromInput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        getNextSqrtPriceFromOutput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        getAmount0Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getAmount1Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getGasCostOfGetAmount0Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getGasCostOfGetAmount1Delta(sqrtLower: BigNumberish, sqrtUpper: BigNumberish, liquidity: BigNumberish, roundUp: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getGasCostOfGetNextSqrtPriceFromInput(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getGasCostOfGetNextSqrtPriceFromOutput(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getNextSqrtPriceFromInput(sqrtP: BigNumberish, liquidity: BigNumberish, amountIn: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getNextSqrtPriceFromOutput(sqrtP: BigNumberish, liquidity: BigNumberish, amountOut: BigNumberish, zeroForOne: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getAmount0Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getAmount1Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getGasCostOfGetAmount0Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getGasCostOfGetAmount1Delta(sqrtLower: PromiseOrValue<BigNumberish>, sqrtUpper: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, roundUp: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getGasCostOfGetNextSqrtPriceFromInput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getGasCostOfGetNextSqrtPriceFromOutput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getNextSqrtPriceFromInput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountIn: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getNextSqrtPriceFromOutput(sqrtP: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountOut: PromiseOrValue<BigNumberish>, zeroForOne: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

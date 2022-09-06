@@ -24,14 +24,15 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export declare namespace ILiquidations {
   export type ConstructorParamsStruct = {
-    Governor: string;
-    ProtocolLock: string;
-    Accounting: string;
-    Hue: string;
+    Governor: PromiseOrValue<string>;
+    ProtocolLock: PromiseOrValue<string>;
+    Accounting: PromiseOrValue<string>;
+    Hue: PromiseOrValue<string>;
   };
 
   export type ConstructorParamsStructOutput = [
@@ -111,7 +112,7 @@ export interface LiquidationsInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "discoverUndercollateralizedPositions",
-    values: [BigNumberish[]]
+    values: [PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "discoveryIncentive",
@@ -129,7 +130,7 @@ export interface LiquidationsInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "hue", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "liquidate",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "liquidationIncentive",
@@ -153,23 +154,23 @@ export interface LiquidationsInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setDiscoveryIncentive",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setLiquidationIncentive",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMaxRewardsRatio",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setMinLiquidationIncentive",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setTwapDuration",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "stop", values?: undefined): string;
   encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
@@ -179,7 +180,7 @@ export interface LiquidationsInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "validUpdate",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
 
   decodeFunctionResult(functionFragment: "accounting", data: BytesLike): Result;
@@ -417,14 +418,14 @@ export interface Liquidations extends BaseContract {
     ): Promise<[BigNumber] & { period: BigNumber }>;
 
     discoverUndercollateralizedPositions(
-      positionIDs: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      positionIDs: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     discoveryIncentive(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     ensureLiquidationIncentive(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     firstPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -434,8 +435,8 @@ export interface Liquidations extends BaseContract {
     hue(overrides?: CallOverrides): Promise<[string]>;
 
     liquidate(
-      baseTokensToRepay: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      baseTokensToRepay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     liquidationIncentive(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -453,39 +454,42 @@ export interface Liquidations extends BaseContract {
     >;
 
     setDiscoveryIncentive(
-      incentive: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      incentive: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setLiquidationIncentive(
-      incentive: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      incentive: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setMaxRewardsRatio(
-      ratio: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      ratio: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setMinLiquidationIncentive(
-      incentive: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      incentive: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setTwapDuration(
-      duration: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     stopped(overrides?: CallOverrides): Promise<[boolean]>;
 
     twapDuration(overrides?: CallOverrides): Promise<[number]>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
   };
 
   accounting(overrides?: CallOverrides): Promise<string>;
@@ -493,14 +497,14 @@ export interface Liquidations extends BaseContract {
   currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
   discoverUndercollateralizedPositions(
-    positionIDs: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    positionIDs: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   discoveryIncentive(overrides?: CallOverrides): Promise<BigNumber>;
 
   ensureLiquidationIncentive(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
@@ -510,8 +514,8 @@ export interface Liquidations extends BaseContract {
   hue(overrides?: CallOverrides): Promise<string>;
 
   liquidate(
-    baseTokensToRepay: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    baseTokensToRepay: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   liquidationIncentive(overrides?: CallOverrides): Promise<BigNumber>;
@@ -529,39 +533,42 @@ export interface Liquidations extends BaseContract {
   >;
 
   setDiscoveryIncentive(
-    incentive: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    incentive: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setLiquidationIncentive(
-    incentive: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    incentive: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setMaxRewardsRatio(
-    ratio: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    ratio: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setMinLiquidationIncentive(
-    incentive: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    incentive: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setTwapDuration(
-    duration: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    duration: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   stop(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   stopped(overrides?: CallOverrides): Promise<boolean>;
 
   twapDuration(overrides?: CallOverrides): Promise<number>;
 
-  validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  validUpdate(
+    arg0: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
     accounting(overrides?: CallOverrides): Promise<string>;
@@ -569,7 +576,7 @@ export interface Liquidations extends BaseContract {
     currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
     discoverUndercollateralizedPositions(
-      positionIDs: BigNumberish[],
+      positionIDs: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -584,7 +591,7 @@ export interface Liquidations extends BaseContract {
     hue(overrides?: CallOverrides): Promise<string>;
 
     liquidate(
-      baseTokensToRepay: BigNumberish,
+      baseTokensToRepay: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -603,27 +610,27 @@ export interface Liquidations extends BaseContract {
     >;
 
     setDiscoveryIncentive(
-      incentive: BigNumberish,
+      incentive: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setLiquidationIncentive(
-      incentive: BigNumberish,
+      incentive: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setMaxRewardsRatio(
-      ratio: BigNumberish,
+      ratio: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setMinLiquidationIncentive(
-      incentive: BigNumberish,
+      incentive: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setTwapDuration(
-      duration: BigNumberish,
+      duration: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -633,7 +640,10 @@ export interface Liquidations extends BaseContract {
 
     twapDuration(overrides?: CallOverrides): Promise<number>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
@@ -685,13 +695,13 @@ export interface Liquidations extends BaseContract {
     Stopped(): StoppedEventFilter;
 
     "UndercollatPositionDiscovered(uint64,uint256,uint256,uint256)"(
-      positionID?: BigNumberish | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
       debtCount?: null,
       collateralCount?: null,
       price?: null
     ): UndercollatPositionDiscoveredEventFilter;
     UndercollatPositionDiscovered(
-      positionID?: BigNumberish | null,
+      positionID?: PromiseOrValue<BigNumberish> | null,
       debtCount?: null,
       collateralCount?: null,
       price?: null
@@ -709,14 +719,14 @@ export interface Liquidations extends BaseContract {
     currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
     discoverUndercollateralizedPositions(
-      positionIDs: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      positionIDs: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     discoveryIncentive(overrides?: CallOverrides): Promise<BigNumber>;
 
     ensureLiquidationIncentive(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
@@ -726,8 +736,8 @@ export interface Liquidations extends BaseContract {
     hue(overrides?: CallOverrides): Promise<BigNumber>;
 
     liquidate(
-      baseTokensToRepay: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      baseTokensToRepay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     liquidationIncentive(overrides?: CallOverrides): Promise<BigNumber>;
@@ -741,39 +751,42 @@ export interface Liquidations extends BaseContract {
     rewardsLimit(overrides?: CallOverrides): Promise<BigNumber>;
 
     setDiscoveryIncentive(
-      incentive: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      incentive: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setLiquidationIncentive(
-      incentive: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      incentive: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setMaxRewardsRatio(
-      ratio: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      ratio: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setMinLiquidationIncentive(
-      incentive: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      incentive: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setTwapDuration(
-      duration: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     stopped(overrides?: CallOverrides): Promise<BigNumber>;
 
     twapDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -782,8 +795,8 @@ export interface Liquidations extends BaseContract {
     currentPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     discoverUndercollateralizedPositions(
-      positionIDs: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      positionIDs: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     discoveryIncentive(
@@ -791,7 +804,7 @@ export interface Liquidations extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     ensureLiquidationIncentive(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     firstPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -801,8 +814,8 @@ export interface Liquidations extends BaseContract {
     hue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     liquidate(
-      baseTokensToRepay: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      baseTokensToRepay: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     liquidationIncentive(
@@ -820,32 +833,32 @@ export interface Liquidations extends BaseContract {
     rewardsLimit(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setDiscoveryIncentive(
-      incentive: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      incentive: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setLiquidationIncentive(
-      incentive: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      incentive: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setMaxRewardsRatio(
-      ratio: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      ratio: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setMinLiquidationIncentive(
-      incentive: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      incentive: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setTwapDuration(
-      duration: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      duration: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     stop(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -853,7 +866,7 @@ export interface Liquidations extends BaseContract {
     twapDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     validUpdate(
-      arg0: BytesLike,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

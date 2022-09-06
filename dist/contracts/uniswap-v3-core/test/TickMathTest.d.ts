@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TickMathTestInterface extends utils.Interface {
     functions: {
         "MAX_SQRT_RATIO()": FunctionFragment;
@@ -14,10 +14,10 @@ export interface TickMathTestInterface extends utils.Interface {
     getFunction(nameOrSignatureOrTopic: "MAX_SQRT_RATIO" | "MIN_SQRT_RATIO" | "getGasCostOfGetSqrtRatioAtTick" | "getGasCostOfGetTickAtSqrtRatio" | "getSqrtRatioAtTick" | "getTickAtSqrtRatio"): FunctionFragment;
     encodeFunctionData(functionFragment: "MAX_SQRT_RATIO", values?: undefined): string;
     encodeFunctionData(functionFragment: "MIN_SQRT_RATIO", values?: undefined): string;
-    encodeFunctionData(functionFragment: "getGasCostOfGetSqrtRatioAtTick", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getGasCostOfGetTickAtSqrtRatio", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getSqrtRatioAtTick", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getTickAtSqrtRatio", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "getGasCostOfGetSqrtRatioAtTick", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "getGasCostOfGetTickAtSqrtRatio", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "getSqrtRatioAtTick", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "getTickAtSqrtRatio", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "MAX_SQRT_RATIO", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "MIN_SQRT_RATIO", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getGasCostOfGetSqrtRatioAtTick", data: BytesLike): Result;
@@ -43,40 +43,40 @@ export interface TickMathTest extends BaseContract {
     functions: {
         MAX_SQRT_RATIO(overrides?: CallOverrides): Promise<[BigNumber]>;
         MIN_SQRT_RATIO(overrides?: CallOverrides): Promise<[BigNumber]>;
-        getGasCostOfGetSqrtRatioAtTick(tick: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
-        getGasCostOfGetTickAtSqrtRatio(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
-        getSqrtRatioAtTick(tick: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
-        getTickAtSqrtRatio(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<[number]>;
+        getGasCostOfGetSqrtRatioAtTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getGasCostOfGetTickAtSqrtRatio(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getSqrtRatioAtTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getTickAtSqrtRatio(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[number]>;
     };
     MAX_SQRT_RATIO(overrides?: CallOverrides): Promise<BigNumber>;
     MIN_SQRT_RATIO(overrides?: CallOverrides): Promise<BigNumber>;
-    getGasCostOfGetSqrtRatioAtTick(tick: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    getGasCostOfGetTickAtSqrtRatio(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    getSqrtRatioAtTick(tick: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    getTickAtSqrtRatio(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<number>;
+    getGasCostOfGetSqrtRatioAtTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    getGasCostOfGetTickAtSqrtRatio(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    getSqrtRatioAtTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    getTickAtSqrtRatio(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<number>;
     callStatic: {
         MAX_SQRT_RATIO(overrides?: CallOverrides): Promise<BigNumber>;
         MIN_SQRT_RATIO(overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfGetSqrtRatioAtTick(tick: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfGetTickAtSqrtRatio(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getSqrtRatioAtTick(tick: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getTickAtSqrtRatio(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<number>;
+        getGasCostOfGetSqrtRatioAtTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfGetTickAtSqrtRatio(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getSqrtRatioAtTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getTickAtSqrtRatio(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<number>;
     };
     filters: {};
     estimateGas: {
         MAX_SQRT_RATIO(overrides?: CallOverrides): Promise<BigNumber>;
         MIN_SQRT_RATIO(overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfGetSqrtRatioAtTick(tick: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfGetTickAtSqrtRatio(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getSqrtRatioAtTick(tick: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getTickAtSqrtRatio(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfGetSqrtRatioAtTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfGetTickAtSqrtRatio(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getSqrtRatioAtTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getTickAtSqrtRatio(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         MAX_SQRT_RATIO(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         MIN_SQRT_RATIO(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getGasCostOfGetSqrtRatioAtTick(tick: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getGasCostOfGetTickAtSqrtRatio(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getSqrtRatioAtTick(tick: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getTickAtSqrtRatio(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getGasCostOfGetSqrtRatioAtTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getGasCostOfGetTickAtSqrtRatio(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getSqrtRatioAtTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getTickAtSqrtRatio(sqrtPriceX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

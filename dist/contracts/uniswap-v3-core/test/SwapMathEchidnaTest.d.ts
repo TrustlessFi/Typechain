@@ -1,18 +1,18 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface SwapMathEchidnaTestInterface extends utils.Interface {
     functions: {
         "checkComputeSwapStepInvariants(uint160,uint160,uint128,int256,uint24)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "checkComputeSwapStepInvariants"): FunctionFragment;
     encodeFunctionData(functionFragment: "checkComputeSwapStepInvariants", values: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
     ]): string;
     decodeFunctionResult(functionFragment: "checkComputeSwapStepInvariants", data: BytesLike): Result;
     events: {};
@@ -32,17 +32,17 @@ export interface SwapMathEchidnaTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        checkComputeSwapStepInvariants(sqrtPriceRaw: BigNumberish, sqrtPriceTargetRaw: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
+        checkComputeSwapStepInvariants(sqrtPriceRaw: PromiseOrValue<BigNumberish>, sqrtPriceTargetRaw: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
     };
-    checkComputeSwapStepInvariants(sqrtPriceRaw: BigNumberish, sqrtPriceTargetRaw: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    checkComputeSwapStepInvariants(sqrtPriceRaw: PromiseOrValue<BigNumberish>, sqrtPriceTargetRaw: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     callStatic: {
-        checkComputeSwapStepInvariants(sqrtPriceRaw: BigNumberish, sqrtPriceTargetRaw: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        checkComputeSwapStepInvariants(sqrtPriceRaw: PromiseOrValue<BigNumberish>, sqrtPriceTargetRaw: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        checkComputeSwapStepInvariants(sqrtPriceRaw: BigNumberish, sqrtPriceTargetRaw: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        checkComputeSwapStepInvariants(sqrtPriceRaw: PromiseOrValue<BigNumberish>, sqrtPriceTargetRaw: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        checkComputeSwapStepInvariants(sqrtPriceRaw: BigNumberish, sqrtPriceTargetRaw: BigNumberish, liquidity: BigNumberish, amountRemaining: BigNumberish, feePips: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        checkComputeSwapStepInvariants(sqrtPriceRaw: PromiseOrValue<BigNumberish>, sqrtPriceTargetRaw: PromiseOrValue<BigNumberish>, liquidity: PromiseOrValue<BigNumberish>, amountRemaining: PromiseOrValue<BigNumberish>, feePips: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

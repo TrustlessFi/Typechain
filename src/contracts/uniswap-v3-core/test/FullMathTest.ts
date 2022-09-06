@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface FullMathTestInterface extends utils.Interface {
@@ -32,11 +33,19 @@ export interface FullMathTestInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "mulDiv",
-    values: [BigNumberish, BigNumberish, BigNumberish]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "mulDivRoundingUp",
-    values: [BigNumberish, BigNumberish, BigNumberish]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "mulDiv", data: BytesLike): Result;
@@ -76,46 +85,46 @@ export interface FullMathTest extends BaseContract {
 
   functions: {
     mulDiv(
-      x: BigNumberish,
-      y: BigNumberish,
-      z: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
+      z: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     mulDivRoundingUp(
-      x: BigNumberish,
-      y: BigNumberish,
-      z: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
+      z: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
   };
 
   mulDiv(
-    x: BigNumberish,
-    y: BigNumberish,
-    z: BigNumberish,
+    x: PromiseOrValue<BigNumberish>,
+    y: PromiseOrValue<BigNumberish>,
+    z: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   mulDivRoundingUp(
-    x: BigNumberish,
-    y: BigNumberish,
-    z: BigNumberish,
+    x: PromiseOrValue<BigNumberish>,
+    y: PromiseOrValue<BigNumberish>,
+    z: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   callStatic: {
     mulDiv(
-      x: BigNumberish,
-      y: BigNumberish,
-      z: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
+      z: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     mulDivRoundingUp(
-      x: BigNumberish,
-      y: BigNumberish,
-      z: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
+      z: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -124,32 +133,32 @@ export interface FullMathTest extends BaseContract {
 
   estimateGas: {
     mulDiv(
-      x: BigNumberish,
-      y: BigNumberish,
-      z: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
+      z: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     mulDivRoundingUp(
-      x: BigNumberish,
-      y: BigNumberish,
-      z: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
+      z: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     mulDiv(
-      x: BigNumberish,
-      y: BigNumberish,
-      z: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
+      z: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     mulDivRoundingUp(
-      x: BigNumberish,
-      y: BigNumberish,
-      z: BigNumberish,
+      x: PromiseOrValue<BigNumberish>,
+      y: PromiseOrValue<BigNumberish>,
+      z: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

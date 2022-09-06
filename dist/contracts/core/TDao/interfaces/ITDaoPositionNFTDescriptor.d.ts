@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export interface ITDaoPositionNFTDescriptorInterface extends utils.Interface {
     functions: {
         "getTokenDescription(uint256)": FunctionFragment;
@@ -9,9 +9,9 @@ export interface ITDaoPositionNFTDescriptorInterface extends utils.Interface {
         "getTokenSVG(uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "getTokenDescription" | "getTokenName" | "getTokenSVG"): FunctionFragment;
-    encodeFunctionData(functionFragment: "getTokenDescription", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getTokenName", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getTokenSVG", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "getTokenDescription", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "getTokenName", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "getTokenSVG", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "getTokenDescription", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getTokenName", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getTokenSVG", data: BytesLike): Result;
@@ -32,27 +32,27 @@ export interface ITDaoPositionNFTDescriptor extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        getTokenDescription(positionID: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
-        getTokenName(positionID: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
-        getTokenSVG(positionID: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+        getTokenDescription(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string]>;
+        getTokenName(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string]>;
+        getTokenSVG(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string]>;
     };
-    getTokenDescription(positionID: BigNumberish, overrides?: CallOverrides): Promise<string>;
-    getTokenName(positionID: BigNumberish, overrides?: CallOverrides): Promise<string>;
-    getTokenSVG(positionID: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    getTokenDescription(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+    getTokenName(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+    getTokenSVG(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
     callStatic: {
-        getTokenDescription(positionID: BigNumberish, overrides?: CallOverrides): Promise<string>;
-        getTokenName(positionID: BigNumberish, overrides?: CallOverrides): Promise<string>;
-        getTokenSVG(positionID: BigNumberish, overrides?: CallOverrides): Promise<string>;
+        getTokenDescription(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+        getTokenName(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+        getTokenSVG(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
     };
     filters: {};
     estimateGas: {
-        getTokenDescription(positionID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getTokenName(positionID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getTokenSVG(positionID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getTokenDescription(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getTokenName(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getTokenSVG(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        getTokenDescription(positionID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getTokenName(positionID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getTokenSVG(positionID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getTokenDescription(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getTokenName(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getTokenSVG(positionID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

@@ -1,15 +1,15 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TickBitmapEchidnaTestInterface extends utils.Interface {
     functions: {
         "checkNextInitializedTickWithinOneWordInvariants(int24,bool)": FunctionFragment;
         "flipTick(int24)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "checkNextInitializedTickWithinOneWordInvariants" | "flipTick"): FunctionFragment;
-    encodeFunctionData(functionFragment: "checkNextInitializedTickWithinOneWordInvariants", values: [BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "flipTick", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "checkNextInitializedTickWithinOneWordInvariants", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]): string;
+    encodeFunctionData(functionFragment: "flipTick", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "checkNextInitializedTickWithinOneWordInvariants", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "flipTick", data: BytesLike): Result;
     events: {};
@@ -29,30 +29,30 @@ export interface TickBitmapEchidnaTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        checkNextInitializedTickWithinOneWordInvariants(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<[void]>;
-        flipTick(tick: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        checkNextInitializedTickWithinOneWordInvariants(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[void]>;
+        flipTick(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    checkNextInitializedTickWithinOneWordInvariants(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<void>;
-    flipTick(tick: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    checkNextInitializedTickWithinOneWordInvariants(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+    flipTick(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        checkNextInitializedTickWithinOneWordInvariants(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<void>;
-        flipTick(tick: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        checkNextInitializedTickWithinOneWordInvariants(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        flipTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        checkNextInitializedTickWithinOneWordInvariants(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        flipTick(tick: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        checkNextInitializedTickWithinOneWordInvariants(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        flipTick(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        checkNextInitializedTickWithinOneWordInvariants(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        flipTick(tick: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        checkNextInitializedTickWithinOneWordInvariants(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        flipTick(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface TDaoPositionNFTDescriptorInterface extends utils.Interface {
@@ -38,15 +39,15 @@ export interface TDaoPositionNFTDescriptorInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "getTokenDescription",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getTokenName",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getTokenSVG",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "tDao", values?: undefined): string;
 
@@ -95,17 +96,17 @@ export interface TDaoPositionNFTDescriptor extends BaseContract {
 
   functions: {
     getTokenDescription(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     getTokenName(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     getTokenSVG(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -113,17 +114,17 @@ export interface TDaoPositionNFTDescriptor extends BaseContract {
   };
 
   getTokenDescription(
-    positionID: BigNumberish,
+    positionID: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   getTokenName(
-    positionID: BigNumberish,
+    positionID: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   getTokenSVG(
-    positionID: BigNumberish,
+    positionID: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -131,17 +132,17 @@ export interface TDaoPositionNFTDescriptor extends BaseContract {
 
   callStatic: {
     getTokenDescription(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     getTokenName(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     getTokenSVG(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -152,17 +153,17 @@ export interface TDaoPositionNFTDescriptor extends BaseContract {
 
   estimateGas: {
     getTokenDescription(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getTokenName(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getTokenSVG(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -171,17 +172,17 @@ export interface TDaoPositionNFTDescriptor extends BaseContract {
 
   populateTransaction: {
     getTokenDescription(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getTokenName(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getTokenSVG(
-      positionID: BigNumberish,
+      positionID: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

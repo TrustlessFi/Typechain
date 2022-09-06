@@ -1,13 +1,13 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface MathTestableInterface extends utils.Interface {
     functions: {
         "_sqrt(uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "_sqrt"): FunctionFragment;
-    encodeFunctionData(functionFragment: "_sqrt", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "_sqrt", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "_sqrt", data: BytesLike): Result;
     events: {};
 }
@@ -26,19 +26,19 @@ export interface MathTestable extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        _sqrt(y: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber] & {
+        _sqrt(y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber] & {
             r: BigNumber;
         }>;
     };
-    _sqrt(y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    _sqrt(y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     callStatic: {
-        _sqrt(y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        _sqrt(y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {};
     estimateGas: {
-        _sqrt(y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        _sqrt(y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        _sqrt(y: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        _sqrt(y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

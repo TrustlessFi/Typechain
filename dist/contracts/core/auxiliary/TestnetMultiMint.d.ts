@@ -1,14 +1,14 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TestnetMultiMintInterface extends utils.Interface {
     functions: {
         "multiMint(uint256,address[])": FunctionFragment;
         "truEth()": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "multiMint" | "truEth"): FunctionFragment;
-    encodeFunctionData(functionFragment: "multiMint", values: [BigNumberish, string[]]): string;
+    encodeFunctionData(functionFragment: "multiMint", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>[]]): string;
     encodeFunctionData(functionFragment: "truEth", values?: undefined): string;
     decodeFunctionResult(functionFragment: "multiMint", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "truEth", data: BytesLike): Result;
@@ -29,29 +29,29 @@ export interface TestnetMultiMint extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        multiMint(truEthMintCount: BigNumberish, targetAddresses: string[], overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        multiMint(truEthMintCount: PromiseOrValue<BigNumberish>, targetAddresses: PromiseOrValue<string>[], overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         truEth(overrides?: CallOverrides): Promise<[string]>;
     };
-    multiMint(truEthMintCount: BigNumberish, targetAddresses: string[], overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+    multiMint(truEthMintCount: PromiseOrValue<BigNumberish>, targetAddresses: PromiseOrValue<string>[], overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     truEth(overrides?: CallOverrides): Promise<string>;
     callStatic: {
-        multiMint(truEthMintCount: BigNumberish, targetAddresses: string[], overrides?: CallOverrides): Promise<void>;
+        multiMint(truEthMintCount: PromiseOrValue<BigNumberish>, targetAddresses: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<void>;
         truEth(overrides?: CallOverrides): Promise<string>;
     };
     filters: {};
     estimateGas: {
-        multiMint(truEthMintCount: BigNumberish, targetAddresses: string[], overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        multiMint(truEthMintCount: PromiseOrValue<BigNumberish>, targetAddresses: PromiseOrValue<string>[], overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         truEth(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        multiMint(truEthMintCount: BigNumberish, targetAddresses: string[], overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        multiMint(truEthMintCount: PromiseOrValue<BigNumberish>, targetAddresses: PromiseOrValue<string>[], overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         truEth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };

@@ -17,6 +17,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface ERC20DecimalsInterface extends utils.Interface {

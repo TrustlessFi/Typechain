@@ -24,6 +24,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface IHasVotingRewardsInterface extends utils.Interface {
@@ -40,7 +41,7 @@ export interface IHasVotingRewardsInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "claimVotingRewards",
-    values: [BigNumberish[]]
+    values: [PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "implementsVotingRewardsWithToken",
@@ -103,8 +104,8 @@ export interface IHasVotingRewards extends BaseContract {
 
   functions: {
     claimVotingRewards(
-      proposalIDs: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      proposalIDs: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     implementsVotingRewardsWithToken(
@@ -113,15 +114,15 @@ export interface IHasVotingRewards extends BaseContract {
   };
 
   claimVotingRewards(
-    proposalIDs: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    proposalIDs: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   implementsVotingRewardsWithToken(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     claimVotingRewards(
-      proposalIDs: BigNumberish[],
+      proposalIDs: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -132,19 +133,19 @@ export interface IHasVotingRewards extends BaseContract {
 
   filters: {
     "VotingRewardsDistributed(address,uint256)"(
-      voter?: string | null,
+      voter?: PromiseOrValue<string> | null,
       count?: null
     ): VotingRewardsDistributedEventFilter;
     VotingRewardsDistributed(
-      voter?: string | null,
+      voter?: PromiseOrValue<string> | null,
       count?: null
     ): VotingRewardsDistributedEventFilter;
   };
 
   estimateGas: {
     claimVotingRewards(
-      proposalIDs: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      proposalIDs: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     implementsVotingRewardsWithToken(
@@ -154,8 +155,8 @@ export interface IHasVotingRewards extends BaseContract {
 
   populateTransaction: {
     claimVotingRewards(
-      proposalIDs: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      proposalIDs: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     implementsVotingRewardsWithToken(

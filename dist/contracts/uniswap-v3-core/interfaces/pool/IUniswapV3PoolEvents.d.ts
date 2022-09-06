@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, Signer, utils } from "ethers";
 import type { EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export interface IUniswapV3PoolEventsInterface extends utils.Interface {
     functions: {};
     events: {
@@ -175,24 +175,24 @@ export interface IUniswapV3PoolEvents extends BaseContract {
     functions: {};
     callStatic: {};
     filters: {
-        "Burn(address,int24,int24,uint128,uint256,uint256)"(owner?: string | null, tickLower?: BigNumberish | null, tickUpper?: BigNumberish | null, amount?: null, amount0?: null, amount1?: null): BurnEventFilter;
-        Burn(owner?: string | null, tickLower?: BigNumberish | null, tickUpper?: BigNumberish | null, amount?: null, amount0?: null, amount1?: null): BurnEventFilter;
-        "Collect(address,address,int24,int24,uint128,uint128)"(owner?: string | null, recipient?: null, tickLower?: BigNumberish | null, tickUpper?: BigNumberish | null, amount0?: null, amount1?: null): CollectEventFilter;
-        Collect(owner?: string | null, recipient?: null, tickLower?: BigNumberish | null, tickUpper?: BigNumberish | null, amount0?: null, amount1?: null): CollectEventFilter;
-        "CollectProtocol(address,address,uint128,uint128)"(sender?: string | null, recipient?: string | null, amount0?: null, amount1?: null): CollectProtocolEventFilter;
-        CollectProtocol(sender?: string | null, recipient?: string | null, amount0?: null, amount1?: null): CollectProtocolEventFilter;
-        "Flash(address,address,uint256,uint256,uint256,uint256)"(sender?: string | null, recipient?: string | null, amount0?: null, amount1?: null, paid0?: null, paid1?: null): FlashEventFilter;
-        Flash(sender?: string | null, recipient?: string | null, amount0?: null, amount1?: null, paid0?: null, paid1?: null): FlashEventFilter;
+        "Burn(address,int24,int24,uint128,uint256,uint256)"(owner?: PromiseOrValue<string> | null, tickLower?: PromiseOrValue<BigNumberish> | null, tickUpper?: PromiseOrValue<BigNumberish> | null, amount?: null, amount0?: null, amount1?: null): BurnEventFilter;
+        Burn(owner?: PromiseOrValue<string> | null, tickLower?: PromiseOrValue<BigNumberish> | null, tickUpper?: PromiseOrValue<BigNumberish> | null, amount?: null, amount0?: null, amount1?: null): BurnEventFilter;
+        "Collect(address,address,int24,int24,uint128,uint128)"(owner?: PromiseOrValue<string> | null, recipient?: null, tickLower?: PromiseOrValue<BigNumberish> | null, tickUpper?: PromiseOrValue<BigNumberish> | null, amount0?: null, amount1?: null): CollectEventFilter;
+        Collect(owner?: PromiseOrValue<string> | null, recipient?: null, tickLower?: PromiseOrValue<BigNumberish> | null, tickUpper?: PromiseOrValue<BigNumberish> | null, amount0?: null, amount1?: null): CollectEventFilter;
+        "CollectProtocol(address,address,uint128,uint128)"(sender?: PromiseOrValue<string> | null, recipient?: PromiseOrValue<string> | null, amount0?: null, amount1?: null): CollectProtocolEventFilter;
+        CollectProtocol(sender?: PromiseOrValue<string> | null, recipient?: PromiseOrValue<string> | null, amount0?: null, amount1?: null): CollectProtocolEventFilter;
+        "Flash(address,address,uint256,uint256,uint256,uint256)"(sender?: PromiseOrValue<string> | null, recipient?: PromiseOrValue<string> | null, amount0?: null, amount1?: null, paid0?: null, paid1?: null): FlashEventFilter;
+        Flash(sender?: PromiseOrValue<string> | null, recipient?: PromiseOrValue<string> | null, amount0?: null, amount1?: null, paid0?: null, paid1?: null): FlashEventFilter;
         "IncreaseObservationCardinalityNext(uint16,uint16)"(observationCardinalityNextOld?: null, observationCardinalityNextNew?: null): IncreaseObservationCardinalityNextEventFilter;
         IncreaseObservationCardinalityNext(observationCardinalityNextOld?: null, observationCardinalityNextNew?: null): IncreaseObservationCardinalityNextEventFilter;
         "Initialize(uint160,int24)"(sqrtPriceX96?: null, tick?: null): InitializeEventFilter;
         Initialize(sqrtPriceX96?: null, tick?: null): InitializeEventFilter;
-        "Mint(address,address,int24,int24,uint128,uint256,uint256)"(sender?: null, owner?: string | null, tickLower?: BigNumberish | null, tickUpper?: BigNumberish | null, amount?: null, amount0?: null, amount1?: null): MintEventFilter;
-        Mint(sender?: null, owner?: string | null, tickLower?: BigNumberish | null, tickUpper?: BigNumberish | null, amount?: null, amount0?: null, amount1?: null): MintEventFilter;
+        "Mint(address,address,int24,int24,uint128,uint256,uint256)"(sender?: null, owner?: PromiseOrValue<string> | null, tickLower?: PromiseOrValue<BigNumberish> | null, tickUpper?: PromiseOrValue<BigNumberish> | null, amount?: null, amount0?: null, amount1?: null): MintEventFilter;
+        Mint(sender?: null, owner?: PromiseOrValue<string> | null, tickLower?: PromiseOrValue<BigNumberish> | null, tickUpper?: PromiseOrValue<BigNumberish> | null, amount?: null, amount0?: null, amount1?: null): MintEventFilter;
         "SetFeeProtocol(uint8,uint8,uint8,uint8)"(feeProtocol0Old?: null, feeProtocol1Old?: null, feeProtocol0New?: null, feeProtocol1New?: null): SetFeeProtocolEventFilter;
         SetFeeProtocol(feeProtocol0Old?: null, feeProtocol1Old?: null, feeProtocol0New?: null, feeProtocol1New?: null): SetFeeProtocolEventFilter;
-        "Swap(address,address,int256,int256,uint160,uint128,int24)"(sender?: string | null, recipient?: string | null, amount0?: null, amount1?: null, sqrtPriceX96?: null, liquidity?: null, tick?: null): SwapEventFilter;
-        Swap(sender?: string | null, recipient?: string | null, amount0?: null, amount1?: null, sqrtPriceX96?: null, liquidity?: null, tick?: null): SwapEventFilter;
+        "Swap(address,address,int256,int256,uint160,uint128,int24)"(sender?: PromiseOrValue<string> | null, recipient?: PromiseOrValue<string> | null, amount0?: null, amount1?: null, sqrtPriceX96?: null, liquidity?: null, tick?: null): SwapEventFilter;
+        Swap(sender?: PromiseOrValue<string> | null, recipient?: PromiseOrValue<string> | null, amount0?: null, amount1?: null, sqrtPriceX96?: null, liquidity?: null, tick?: null): SwapEventFilter;
     };
     estimateGas: {};
     populateTransaction: {};

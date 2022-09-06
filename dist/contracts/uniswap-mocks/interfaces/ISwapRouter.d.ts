@@ -1,14 +1,14 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export declare namespace ISwapRouter {
     type ExactInputParamsStruct = {
-        path: BytesLike;
-        recipient: string;
-        deadline: BigNumberish;
-        amountIn: BigNumberish;
-        amountOutMinimum: BigNumberish;
+        path: PromiseOrValue<BytesLike>;
+        recipient: PromiseOrValue<string>;
+        deadline: PromiseOrValue<BigNumberish>;
+        amountIn: PromiseOrValue<BigNumberish>;
+        amountOutMinimum: PromiseOrValue<BigNumberish>;
     };
     type ExactInputParamsStructOutput = [
         string,
@@ -24,14 +24,14 @@ export declare namespace ISwapRouter {
         amountOutMinimum: BigNumber;
     };
     type ExactInputSingleParamsStruct = {
-        tokenIn: string;
-        tokenOut: string;
-        fee: BigNumberish;
-        recipient: string;
-        deadline: BigNumberish;
-        amountIn: BigNumberish;
-        amountOutMinimum: BigNumberish;
-        sqrtPriceLimitX96: BigNumberish;
+        tokenIn: PromiseOrValue<string>;
+        tokenOut: PromiseOrValue<string>;
+        fee: PromiseOrValue<BigNumberish>;
+        recipient: PromiseOrValue<string>;
+        deadline: PromiseOrValue<BigNumberish>;
+        amountIn: PromiseOrValue<BigNumberish>;
+        amountOutMinimum: PromiseOrValue<BigNumberish>;
+        sqrtPriceLimitX96: PromiseOrValue<BigNumberish>;
     };
     type ExactInputSingleParamsStructOutput = [
         string,
@@ -53,11 +53,11 @@ export declare namespace ISwapRouter {
         sqrtPriceLimitX96: BigNumber;
     };
     type ExactOutputParamsStruct = {
-        path: BytesLike;
-        recipient: string;
-        deadline: BigNumberish;
-        amountOut: BigNumberish;
-        amountInMaximum: BigNumberish;
+        path: PromiseOrValue<BytesLike>;
+        recipient: PromiseOrValue<string>;
+        deadline: PromiseOrValue<BigNumberish>;
+        amountOut: PromiseOrValue<BigNumberish>;
+        amountInMaximum: PromiseOrValue<BigNumberish>;
     };
     type ExactOutputParamsStructOutput = [
         string,
@@ -73,14 +73,14 @@ export declare namespace ISwapRouter {
         amountInMaximum: BigNumber;
     };
     type ExactOutputSingleParamsStruct = {
-        tokenIn: string;
-        tokenOut: string;
-        fee: BigNumberish;
-        recipient: string;
-        deadline: BigNumberish;
-        amountOut: BigNumberish;
-        amountInMaximum: BigNumberish;
-        sqrtPriceLimitX96: BigNumberish;
+        tokenIn: PromiseOrValue<string>;
+        tokenOut: PromiseOrValue<string>;
+        fee: PromiseOrValue<BigNumberish>;
+        recipient: PromiseOrValue<string>;
+        deadline: PromiseOrValue<BigNumberish>;
+        amountOut: PromiseOrValue<BigNumberish>;
+        amountInMaximum: PromiseOrValue<BigNumberish>;
+        sqrtPriceLimitX96: PromiseOrValue<BigNumberish>;
     };
     type ExactOutputSingleParamsStructOutput = [
         string,
@@ -115,7 +115,11 @@ export interface ISwapRouterInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "exactInputSingle", values: [ISwapRouter.ExactInputSingleParamsStruct]): string;
     encodeFunctionData(functionFragment: "exactOutput", values: [ISwapRouter.ExactOutputParamsStruct]): string;
     encodeFunctionData(functionFragment: "exactOutputSingle", values: [ISwapRouter.ExactOutputSingleParamsStruct]): string;
-    encodeFunctionData(functionFragment: "uniswapV3SwapCallback", values: [BigNumberish, BigNumberish, BytesLike]): string;
+    encodeFunctionData(functionFragment: "uniswapV3SwapCallback", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
     decodeFunctionResult(functionFragment: "exactInput", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "exactInputSingle", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "exactOutput", data: BytesLike): Result;
@@ -139,76 +143,76 @@ export interface ISwapRouter extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         exactInput(params: ISwapRouter.ExactInputParamsStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         exactInputSingle(params: ISwapRouter.ExactInputSingleParamsStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         exactOutput(params: ISwapRouter.ExactOutputParamsStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         exactOutputSingle(params: ISwapRouter.ExactOutputSingleParamsStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     exactInput(params: ISwapRouter.ExactInputParamsStruct, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     exactInputSingle(params: ISwapRouter.ExactInputSingleParamsStruct, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     exactOutput(params: ISwapRouter.ExactOutputParamsStruct, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     exactOutputSingle(params: ISwapRouter.ExactOutputSingleParamsStruct, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         exactInput(params: ISwapRouter.ExactInputParamsStruct, overrides?: CallOverrides): Promise<BigNumber>;
         exactInputSingle(params: ISwapRouter.ExactInputSingleParamsStruct, overrides?: CallOverrides): Promise<BigNumber>;
         exactOutput(params: ISwapRouter.ExactOutputParamsStruct, overrides?: CallOverrides): Promise<BigNumber>;
         exactOutputSingle(params: ISwapRouter.ExactOutputSingleParamsStruct, overrides?: CallOverrides): Promise<BigNumber>;
-        uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<void>;
+        uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
         exactInput(params: ISwapRouter.ExactInputParamsStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         exactInputSingle(params: ISwapRouter.ExactInputSingleParamsStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         exactOutput(params: ISwapRouter.ExactOutputParamsStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         exactOutputSingle(params: ISwapRouter.ExactOutputSingleParamsStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         exactInput(params: ISwapRouter.ExactInputParamsStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         exactInputSingle(params: ISwapRouter.ExactInputSingleParamsStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         exactOutput(params: ISwapRouter.ExactOutputParamsStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         exactOutputSingle(params: ISwapRouter.ExactOutputSingleParamsStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

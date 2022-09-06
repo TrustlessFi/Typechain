@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TestUniswapV3CalleeInterface extends utils.Interface {
     functions: {
         "flash(address,address,uint256,uint256,uint256,uint256)": FunctionFragment;
@@ -18,23 +18,69 @@ export interface TestUniswapV3CalleeInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "flash" | "mint" | "swap0ForExact1" | "swap1ForExact0" | "swapExact0For1" | "swapExact1For0" | "swapToHigherSqrtPrice" | "swapToLowerSqrtPrice" | "uniswapV3FlashCallback" | "uniswapV3MintCallback" | "uniswapV3SwapCallback"): FunctionFragment;
     encodeFunctionData(functionFragment: "flash", values: [
-        string,
-        string,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
     ]): string;
-    encodeFunctionData(functionFragment: "mint", values: [string, string, BigNumberish, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "swap0ForExact1", values: [string, BigNumberish, string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "swap1ForExact0", values: [string, BigNumberish, string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "swapExact0For1", values: [string, BigNumberish, string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "swapExact1For0", values: [string, BigNumberish, string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "swapToHigherSqrtPrice", values: [string, BigNumberish, string]): string;
-    encodeFunctionData(functionFragment: "swapToLowerSqrtPrice", values: [string, BigNumberish, string]): string;
-    encodeFunctionData(functionFragment: "uniswapV3FlashCallback", values: [BigNumberish, BigNumberish, BytesLike]): string;
-    encodeFunctionData(functionFragment: "uniswapV3MintCallback", values: [BigNumberish, BigNumberish, BytesLike]): string;
-    encodeFunctionData(functionFragment: "uniswapV3SwapCallback", values: [BigNumberish, BigNumberish, BytesLike]): string;
+    encodeFunctionData(functionFragment: "mint", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "swap0ForExact1", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "swap1ForExact0", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "swapExact0For1", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "swapExact1For0", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "swapToHigherSqrtPrice", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>
+    ]): string;
+    encodeFunctionData(functionFragment: "swapToLowerSqrtPrice", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>
+    ]): string;
+    encodeFunctionData(functionFragment: "uniswapV3FlashCallback", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "uniswapV3MintCallback", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "uniswapV3SwapCallback", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
     decodeFunctionResult(functionFragment: "flash", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swap0ForExact1", data: BytesLike): Result;
@@ -97,85 +143,85 @@ export interface TestUniswapV3Callee extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        flash(pool: string, recipient: string, amount0: BigNumberish, amount1: BigNumberish, pay0: BigNumberish, pay1: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        flash(pool: PromiseOrValue<string>, recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, pay0: PromiseOrValue<BigNumberish>, pay1: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        mint(pool: string, recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(pool: PromiseOrValue<string>, recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swap0ForExact1(pool: string, amount1Out: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swap0ForExact1(pool: PromiseOrValue<string>, amount1Out: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swap1ForExact0(pool: string, amount0Out: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swap1ForExact0(pool: PromiseOrValue<string>, amount0Out: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapExact0For1(pool: string, amount0In: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapExact0For1(pool: PromiseOrValue<string>, amount0In: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapExact1For0(pool: string, amount1In: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapExact1For0(pool: PromiseOrValue<string>, amount1In: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapToHigherSqrtPrice(pool: string, sqrtPriceX96: BigNumberish, recipient: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapToHigherSqrtPrice(pool: PromiseOrValue<string>, sqrtPriceX96: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapToLowerSqrtPrice(pool: string, sqrtPriceX96: BigNumberish, recipient: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapToLowerSqrtPrice(pool: PromiseOrValue<string>, sqrtPriceX96: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        uniswapV3FlashCallback(fee0: BigNumberish, fee1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3FlashCallback(fee0: PromiseOrValue<BigNumberish>, fee1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        uniswapV3MintCallback(amount0Owed: BigNumberish, amount1Owed: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3MintCallback(amount0Owed: PromiseOrValue<BigNumberish>, amount1Owed: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    flash(pool: string, recipient: string, amount0: BigNumberish, amount1: BigNumberish, pay0: BigNumberish, pay1: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    flash(pool: PromiseOrValue<string>, recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, pay0: PromiseOrValue<BigNumberish>, pay1: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    mint(pool: string, recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    mint(pool: PromiseOrValue<string>, recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swap0ForExact1(pool: string, amount1Out: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    swap0ForExact1(pool: PromiseOrValue<string>, amount1Out: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swap1ForExact0(pool: string, amount0Out: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    swap1ForExact0(pool: PromiseOrValue<string>, amount0Out: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapExact0For1(pool: string, amount0In: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    swapExact0For1(pool: PromiseOrValue<string>, amount0In: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapExact1For0(pool: string, amount1In: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    swapExact1For0(pool: PromiseOrValue<string>, amount1In: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapToHigherSqrtPrice(pool: string, sqrtPriceX96: BigNumberish, recipient: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    swapToHigherSqrtPrice(pool: PromiseOrValue<string>, sqrtPriceX96: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapToLowerSqrtPrice(pool: string, sqrtPriceX96: BigNumberish, recipient: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    swapToLowerSqrtPrice(pool: PromiseOrValue<string>, sqrtPriceX96: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    uniswapV3FlashCallback(fee0: BigNumberish, fee1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    uniswapV3FlashCallback(fee0: PromiseOrValue<BigNumberish>, fee1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    uniswapV3MintCallback(amount0Owed: BigNumberish, amount1Owed: BigNumberish, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    uniswapV3MintCallback(amount0Owed: PromiseOrValue<BigNumberish>, amount1Owed: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        flash(pool: string, recipient: string, amount0: BigNumberish, amount1: BigNumberish, pay0: BigNumberish, pay1: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        mint(pool: string, recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        swap0ForExact1(pool: string, amount1Out: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        swap1ForExact0(pool: string, amount0Out: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        swapExact0For1(pool: string, amount0In: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        swapExact1For0(pool: string, amount1In: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        swapToHigherSqrtPrice(pool: string, sqrtPriceX96: BigNumberish, recipient: string, overrides?: CallOverrides): Promise<void>;
-        swapToLowerSqrtPrice(pool: string, sqrtPriceX96: BigNumberish, recipient: string, overrides?: CallOverrides): Promise<void>;
-        uniswapV3FlashCallback(fee0: BigNumberish, fee1: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<void>;
-        uniswapV3MintCallback(amount0Owed: BigNumberish, amount1Owed: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<void>;
-        uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<void>;
+        flash(pool: PromiseOrValue<string>, recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, pay0: PromiseOrValue<BigNumberish>, pay1: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        mint(pool: PromiseOrValue<string>, recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        swap0ForExact1(pool: PromiseOrValue<string>, amount1Out: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        swap1ForExact0(pool: PromiseOrValue<string>, amount0Out: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        swapExact0For1(pool: PromiseOrValue<string>, amount0In: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        swapExact1For0(pool: PromiseOrValue<string>, amount1In: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        swapToHigherSqrtPrice(pool: PromiseOrValue<string>, sqrtPriceX96: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        swapToLowerSqrtPrice(pool: PromiseOrValue<string>, sqrtPriceX96: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        uniswapV3FlashCallback(fee0: PromiseOrValue<BigNumberish>, fee1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+        uniswapV3MintCallback(amount0Owed: PromiseOrValue<BigNumberish>, amount1Owed: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+        uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "FlashCallback(uint256,uint256)"(fee0?: null, fee1?: null): FlashCallbackEventFilter;
@@ -186,73 +232,73 @@ export interface TestUniswapV3Callee extends BaseContract {
         SwapCallback(amount0Delta?: null, amount1Delta?: null): SwapCallbackEventFilter;
     };
     estimateGas: {
-        flash(pool: string, recipient: string, amount0: BigNumberish, amount1: BigNumberish, pay0: BigNumberish, pay1: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        flash(pool: PromiseOrValue<string>, recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, pay0: PromiseOrValue<BigNumberish>, pay1: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        mint(pool: string, recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(pool: PromiseOrValue<string>, recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swap0ForExact1(pool: string, amount1Out: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swap0ForExact1(pool: PromiseOrValue<string>, amount1Out: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swap1ForExact0(pool: string, amount0Out: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swap1ForExact0(pool: PromiseOrValue<string>, amount0Out: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapExact0For1(pool: string, amount0In: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapExact0For1(pool: PromiseOrValue<string>, amount0In: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapExact1For0(pool: string, amount1In: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapExact1For0(pool: PromiseOrValue<string>, amount1In: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapToHigherSqrtPrice(pool: string, sqrtPriceX96: BigNumberish, recipient: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapToHigherSqrtPrice(pool: PromiseOrValue<string>, sqrtPriceX96: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapToLowerSqrtPrice(pool: string, sqrtPriceX96: BigNumberish, recipient: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapToLowerSqrtPrice(pool: PromiseOrValue<string>, sqrtPriceX96: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        uniswapV3FlashCallback(fee0: BigNumberish, fee1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3FlashCallback(fee0: PromiseOrValue<BigNumberish>, fee1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        uniswapV3MintCallback(amount0Owed: BigNumberish, amount1Owed: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3MintCallback(amount0Owed: PromiseOrValue<BigNumberish>, amount1Owed: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        flash(pool: string, recipient: string, amount0: BigNumberish, amount1: BigNumberish, pay0: BigNumberish, pay1: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        flash(pool: PromiseOrValue<string>, recipient: PromiseOrValue<string>, amount0: PromiseOrValue<BigNumberish>, amount1: PromiseOrValue<BigNumberish>, pay0: PromiseOrValue<BigNumberish>, pay1: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        mint(pool: string, recipient: string, tickLower: BigNumberish, tickUpper: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(pool: PromiseOrValue<string>, recipient: PromiseOrValue<string>, tickLower: PromiseOrValue<BigNumberish>, tickUpper: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swap0ForExact1(pool: string, amount1Out: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swap0ForExact1(pool: PromiseOrValue<string>, amount1Out: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swap1ForExact0(pool: string, amount0Out: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swap1ForExact0(pool: PromiseOrValue<string>, amount0Out: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapExact0For1(pool: string, amount0In: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapExact0For1(pool: PromiseOrValue<string>, amount0In: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapExact1For0(pool: string, amount1In: BigNumberish, recipient: string, sqrtPriceLimitX96: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapExact1For0(pool: PromiseOrValue<string>, amount1In: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapToHigherSqrtPrice(pool: string, sqrtPriceX96: BigNumberish, recipient: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapToHigherSqrtPrice(pool: PromiseOrValue<string>, sqrtPriceX96: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapToLowerSqrtPrice(pool: string, sqrtPriceX96: BigNumberish, recipient: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapToLowerSqrtPrice(pool: PromiseOrValue<string>, sqrtPriceX96: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        uniswapV3FlashCallback(fee0: BigNumberish, fee1: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3FlashCallback(fee0: PromiseOrValue<BigNumberish>, fee1: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        uniswapV3MintCallback(amount0Owed: BigNumberish, amount1Owed: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3MintCallback(amount0Owed: PromiseOrValue<BigNumberish>, amount1Owed: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        uniswapV3SwapCallback(amount0Delta: BigNumberish, amount1Delta: BigNumberish, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        uniswapV3SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

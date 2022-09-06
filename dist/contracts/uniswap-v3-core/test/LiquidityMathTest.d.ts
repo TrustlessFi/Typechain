@@ -1,15 +1,15 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface LiquidityMathTestInterface extends utils.Interface {
     functions: {
         "addDelta(uint128,int128)": FunctionFragment;
         "getGasCostOfAddDelta(uint128,int128)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "addDelta" | "getGasCostOfAddDelta"): FunctionFragment;
-    encodeFunctionData(functionFragment: "addDelta", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getGasCostOfAddDelta", values: [BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "addDelta", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "getGasCostOfAddDelta", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "addDelta", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getGasCostOfAddDelta", data: BytesLike): Result;
     events: {};
@@ -29,24 +29,24 @@ export interface LiquidityMathTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        addDelta(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber] & {
+        addDelta(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber] & {
             z: BigNumber;
         }>;
-        getGasCostOfAddDelta(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getGasCostOfAddDelta(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
     };
-    addDelta(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    getGasCostOfAddDelta(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    addDelta(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    getGasCostOfAddDelta(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     callStatic: {
-        addDelta(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfAddDelta(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        addDelta(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfAddDelta(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {};
     estimateGas: {
-        addDelta(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfAddDelta(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        addDelta(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfAddDelta(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        addDelta(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getGasCostOfAddDelta(x: BigNumberish, y: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        addDelta(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getGasCostOfAddDelta(x: PromiseOrValue<BigNumberish>, y: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

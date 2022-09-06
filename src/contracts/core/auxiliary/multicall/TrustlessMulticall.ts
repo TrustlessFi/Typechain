@@ -20,17 +20,24 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export declare namespace TrustlessMulticall {
-  export type CallStruct = { target: string; callData: BytesLike };
+  export type CallStruct = {
+    target: PromiseOrValue<string>;
+    callData: PromiseOrValue<BytesLike>;
+  };
 
   export type CallStructOutput = [string, string] & {
     target: string;
     callData: string;
   };
 
-  export type ResultStruct = { success: boolean; returnData: BytesLike };
+  export type ResultStruct = {
+    success: PromiseOrValue<boolean>;
+    returnData: PromiseOrValue<BytesLike>;
+  };
 
   export type ResultStructOutput = [boolean, string] & {
     success: boolean;
@@ -72,7 +79,7 @@ export interface TrustlessMulticallInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getBlockHash",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getBlockNumber",
@@ -100,7 +107,7 @@ export interface TrustlessMulticallInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getEthBalance",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getLastBlockHash",
@@ -174,11 +181,11 @@ export interface TrustlessMulticall extends BaseContract {
   functions: {
     all(
       calls: TrustlessMulticall.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getBlockHash(
-      blockNumber: BigNumberish,
+      blockNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -195,7 +202,7 @@ export interface TrustlessMulticall extends BaseContract {
     getCurrentBlockTimestamp(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     getEthBalance(
-      addr: string,
+      addr: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -204,11 +211,11 @@ export interface TrustlessMulticall extends BaseContract {
 
   all(
     calls: TrustlessMulticall.CallStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getBlockHash(
-    blockNumber: BigNumberish,
+    blockNumber: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -224,7 +231,10 @@ export interface TrustlessMulticall extends BaseContract {
 
   getCurrentBlockTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-  getEthBalance(addr: string, overrides?: CallOverrides): Promise<BigNumber>;
+  getEthBalance(
+    addr: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   getLastBlockHash(overrides?: CallOverrides): Promise<string>;
 
@@ -240,7 +250,7 @@ export interface TrustlessMulticall extends BaseContract {
     >;
 
     getBlockHash(
-      blockNumber: BigNumberish,
+      blockNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -256,7 +266,10 @@ export interface TrustlessMulticall extends BaseContract {
 
     getCurrentBlockTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getEthBalance(addr: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getEthBalance(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     getLastBlockHash(overrides?: CallOverrides): Promise<string>;
   };
@@ -266,11 +279,11 @@ export interface TrustlessMulticall extends BaseContract {
   estimateGas: {
     all(
       calls: TrustlessMulticall.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getBlockHash(
-      blockNumber: BigNumberish,
+      blockNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -286,7 +299,10 @@ export interface TrustlessMulticall extends BaseContract {
 
     getCurrentBlockTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getEthBalance(addr: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getEthBalance(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     getLastBlockHash(overrides?: CallOverrides): Promise<BigNumber>;
   };
@@ -294,11 +310,11 @@ export interface TrustlessMulticall extends BaseContract {
   populateTransaction: {
     all(
       calls: TrustlessMulticall.CallStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getBlockHash(
-      blockNumber: BigNumberish,
+      blockNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -323,7 +339,7 @@ export interface TrustlessMulticall extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     getEthBalance(
-      addr: string,
+      addr: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

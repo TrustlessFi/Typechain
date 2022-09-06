@@ -1,25 +1,25 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export declare namespace GovernorAlphaWithVotingRewards {
     type ProposalInfoStruct = {
-        targets: string[];
-        signatures: string[];
-        calldatas: BytesLike[];
-        title: string;
-        ipfsHash: string;
-        proposer: string;
-        eta: BigNumberish;
-        id: BigNumberish;
-        forVotes: BigNumberish;
-        startBlock: BigNumberish;
-        endBlock: BigNumberish;
-        canceled: boolean;
-        executed: boolean;
-        againstVotes: BigNumberish;
-        initialSupply: BigNumberish;
-        state: BigNumberish;
+        targets: PromiseOrValue<string>[];
+        signatures: PromiseOrValue<string>[];
+        calldatas: PromiseOrValue<BytesLike>[];
+        title: PromiseOrValue<string>;
+        ipfsHash: PromiseOrValue<string>;
+        proposer: PromiseOrValue<string>;
+        eta: PromiseOrValue<BigNumberish>;
+        id: PromiseOrValue<BigNumberish>;
+        forVotes: PromiseOrValue<BigNumberish>;
+        startBlock: PromiseOrValue<BigNumberish>;
+        endBlock: PromiseOrValue<BigNumberish>;
+        canceled: PromiseOrValue<boolean>;
+        executed: PromiseOrValue<boolean>;
+        againstVotes: PromiseOrValue<BigNumberish>;
+        initialSupply: PromiseOrValue<BigNumberish>;
+        state: PromiseOrValue<BigNumberish>;
     };
     type ProposalInfoStructOutput = [
         string[],
@@ -57,10 +57,10 @@ export declare namespace GovernorAlphaWithVotingRewards {
         state: number;
     };
     type ProposalVoterInfoStruct = {
-        id: BigNumberish;
+        id: PromiseOrValue<BigNumberish>;
         receipt: GovernorAlpha.ReceiptStruct;
-        votingPower: BigNumberish;
-        votingRewards: BigNumberish;
+        votingPower: PromiseOrValue<BigNumberish>;
+        votingRewards: PromiseOrValue<BigNumberish>;
     };
     type ProposalVoterInfoStructOutput = [
         number,
@@ -76,10 +76,10 @@ export declare namespace GovernorAlphaWithVotingRewards {
 }
 export declare namespace GovernorAlpha {
     type ReceiptStruct = {
-        hasVoted: boolean;
-        support: boolean;
-        rewardReceived: boolean;
-        votes: BigNumberish;
+        hasVoted: PromiseOrValue<boolean>;
+        support: PromiseOrValue<boolean>;
+        rewardReceived: PromiseOrValue<boolean>;
+        votes: PromiseOrValue<BigNumberish>;
     };
     type ReceiptStructOutput = [boolean, boolean, boolean, BigNumber] & {
         hasVoted: boolean;
@@ -132,34 +132,46 @@ export interface TDaoGovernorAlphaInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "DOMAIN_TYPEHASH", values?: undefined): string;
     encodeFunctionData(functionFragment: "INFLATION_PERCENTAGE", values?: undefined): string;
     encodeFunctionData(functionFragment: "__abdicate", values?: undefined): string;
-    encodeFunctionData(functionFragment: "cancel", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "castVote", values: [BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "castVoteBySig", values: [BigNumberish, boolean, BigNumberish, BytesLike, BytesLike]): string;
-    encodeFunctionData(functionFragment: "claimUnderlyingVotingRewards", values: [BigNumberish[]]): string;
-    encodeFunctionData(functionFragment: "claimVotingRewards", values: [BigNumberish[]]): string;
-    encodeFunctionData(functionFragment: "countVotingRewards", values: [BigNumberish, string]): string;
-    encodeFunctionData(functionFragment: "execute", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getActions", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getMetaProposalParameters", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "cancel", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "castVote", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]): string;
+    encodeFunctionData(functionFragment: "castVoteBySig", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "claimUnderlyingVotingRewards", values: [PromiseOrValue<BigNumberish>[]]): string;
+    encodeFunctionData(functionFragment: "claimVotingRewards", values: [PromiseOrValue<BigNumberish>[]]): string;
+    encodeFunctionData(functionFragment: "countVotingRewards", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "execute", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "getActions", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "getMetaProposalParameters", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "getProposals", values?: undefined): string;
-    encodeFunctionData(functionFragment: "getProposalsVoterInfo", values: [string]): string;
-    encodeFunctionData(functionFragment: "getReceipt", values: [BigNumberish, string]): string;
+    encodeFunctionData(functionFragment: "getProposalsVoterInfo", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "getReceipt", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "guardian", values?: undefined): string;
-    encodeFunctionData(functionFragment: "hasClaimedUnderlyingRewards", values: [BigNumberish, string]): string;
+    encodeFunctionData(functionFragment: "hasClaimedUnderlyingRewards", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "implementsVotingRewardsWithToken", values?: undefined): string;
-    encodeFunctionData(functionFragment: "latestProposalIds", values: [string]): string;
+    encodeFunctionData(functionFragment: "latestProposalIds", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "name", values?: undefined): string;
     encodeFunctionData(functionFragment: "proposalCount", values?: undefined): string;
     encodeFunctionData(functionFragment: "proposalMaxOperations", values?: undefined): string;
     encodeFunctionData(functionFragment: "proposalThreshold", values?: undefined): string;
-    encodeFunctionData(functionFragment: "proposals", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "propose", values: [string[], string[], BytesLike[], string, string]): string;
-    encodeFunctionData(functionFragment: "queue", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "proposals", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "propose", values: [
+        PromiseOrValue<string>[],
+        PromiseOrValue<string>[],
+        PromiseOrValue<BytesLike>[],
+        PromiseOrValue<string>,
+        PromiseOrValue<string>
+    ]): string;
+    encodeFunctionData(functionFragment: "queue", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "quorumVotes", values?: undefined): string;
-    encodeFunctionData(functionFragment: "state", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "state", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "tDao", values?: undefined): string;
     encodeFunctionData(functionFragment: "timelock", values?: undefined): string;
-    encodeFunctionData(functionFragment: "voteInUnderlyingProtocol", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "voteInUnderlyingProtocol", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "votingDelay", values?: undefined): string;
     encodeFunctionData(functionFragment: "votingPeriod", values?: undefined): string;
     encodeFunctionData(functionFragment: "votingPeriodBlocks", values?: undefined): string;
@@ -299,28 +311,28 @@ export interface TDaoGovernorAlpha extends BaseContract {
         DOMAIN_TYPEHASH(overrides?: CallOverrides): Promise<[string]>;
         INFLATION_PERCENTAGE(overrides?: CallOverrides): Promise<[BigNumber]>;
         __abdicate(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        cancel(proposalId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        cancel(proposalId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        castVote(proposalId: BigNumberish, support: boolean, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        castVote(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        castVoteBySig(proposalId: BigNumberish, support: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        castVoteBySig(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        claimUnderlyingVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimUnderlyingVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        countVotingRewards(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        execute(proposalId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        countVotingRewards(proposalID: PromiseOrValue<BigNumberish>, voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        execute(proposalId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        getActions(proposalId: BigNumberish, overrides?: CallOverrides): Promise<[
+        getActions(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             string[],
             string[],
             string[]
@@ -329,7 +341,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
             signatures: string[];
             calldatas: string[];
         }>;
-        getMetaProposalParameters(proposalID: BigNumberish, overrides?: CallOverrides): Promise<[
+        getMetaProposalParameters(proposalID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             string,
             BigNumber,
             boolean
@@ -343,21 +355,21 @@ export interface TDaoGovernorAlpha extends BaseContract {
         ] & {
             proposalsInfo: GovernorAlphaWithVotingRewards.ProposalInfoStructOutput[];
         }>;
-        getProposalsVoterInfo(voter: string, overrides?: CallOverrides): Promise<[
+        getProposalsVoterInfo(voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[
             GovernorAlphaWithVotingRewards.ProposalVoterInfoStructOutput[]
         ] & {
             proposalsVoterInfo: GovernorAlphaWithVotingRewards.ProposalVoterInfoStructOutput[];
         }>;
-        getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<[GovernorAlpha.ReceiptStructOutput]>;
+        getReceipt(proposalId: PromiseOrValue<BigNumberish>, voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[GovernorAlpha.ReceiptStructOutput]>;
         guardian(overrides?: CallOverrides): Promise<[string]>;
-        hasClaimedUnderlyingRewards(arg0: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<[boolean]>;
+        hasClaimedUnderlyingRewards(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean]>;
         implementsVotingRewardsWithToken(overrides?: CallOverrides): Promise<[string]>;
-        latestProposalIds(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+        latestProposalIds(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
         name(overrides?: CallOverrides): Promise<[string]>;
         proposalCount(overrides?: CallOverrides): Promise<[number]>;
         proposalMaxOperations(overrides?: CallOverrides): Promise<[BigNumber]>;
         proposalThreshold(overrides?: CallOverrides): Promise<[BigNumber]>;
-        proposals(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        proposals(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             string,
             string,
             string,
@@ -384,17 +396,17 @@ export interface TDaoGovernorAlpha extends BaseContract {
             againstVotes: BigNumber;
             initialSupply: BigNumber;
         }>;
-        propose(targets: string[], signatures: string[], calldatas: BytesLike[], title: string, ipfsHash: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        propose(targets: PromiseOrValue<string>[], signatures: PromiseOrValue<string>[], calldatas: PromiseOrValue<BytesLike>[], title: PromiseOrValue<string>, ipfsHash: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        queue(proposalId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        queue(proposalId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         quorumVotes(overrides?: CallOverrides): Promise<[BigNumber]>;
-        state(proposalId: BigNumberish, overrides?: CallOverrides): Promise<[number]>;
+        state(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[number]>;
         tDao(overrides?: CallOverrides): Promise<[string]>;
         timelock(overrides?: CallOverrides): Promise<[string]>;
-        voteInUnderlyingProtocol(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<[void]>;
+        voteInUnderlyingProtocol(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[void]>;
         votingDelay(overrides?: CallOverrides): Promise<[BigNumber]>;
         votingPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
         votingPeriodBlocks(overrides?: CallOverrides): Promise<[number]>;
@@ -404,28 +416,28 @@ export interface TDaoGovernorAlpha extends BaseContract {
     DOMAIN_TYPEHASH(overrides?: CallOverrides): Promise<string>;
     INFLATION_PERCENTAGE(overrides?: CallOverrides): Promise<BigNumber>;
     __abdicate(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    cancel(proposalId: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    cancel(proposalId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    castVote(proposalId: BigNumberish, support: boolean, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    castVote(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    castVoteBySig(proposalId: BigNumberish, support: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    castVoteBySig(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    claimUnderlyingVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
-        from?: string | Promise<string>;
+    claimUnderlyingVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
-        from?: string | Promise<string>;
+    claimVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    countVotingRewards(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<BigNumber>;
-    execute(proposalId: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    countVotingRewards(proposalID: PromiseOrValue<BigNumberish>, voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    execute(proposalId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    getActions(proposalId: BigNumberish, overrides?: CallOverrides): Promise<[
+    getActions(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         string[],
         string[],
         string[]
@@ -434,7 +446,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
         signatures: string[];
         calldatas: string[];
     }>;
-    getMetaProposalParameters(proposalID: BigNumberish, overrides?: CallOverrides): Promise<[
+    getMetaProposalParameters(proposalID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         string,
         BigNumber,
         boolean
@@ -444,17 +456,17 @@ export interface TDaoGovernorAlpha extends BaseContract {
         moreForThanAgainst: boolean;
     }>;
     getProposals(overrides?: CallOverrides): Promise<GovernorAlphaWithVotingRewards.ProposalInfoStructOutput[]>;
-    getProposalsVoterInfo(voter: string, overrides?: CallOverrides): Promise<GovernorAlphaWithVotingRewards.ProposalVoterInfoStructOutput[]>;
-    getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<GovernorAlpha.ReceiptStructOutput>;
+    getProposalsVoterInfo(voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<GovernorAlphaWithVotingRewards.ProposalVoterInfoStructOutput[]>;
+    getReceipt(proposalId: PromiseOrValue<BigNumberish>, voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<GovernorAlpha.ReceiptStructOutput>;
     guardian(overrides?: CallOverrides): Promise<string>;
-    hasClaimedUnderlyingRewards(arg0: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<boolean>;
+    hasClaimedUnderlyingRewards(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
     implementsVotingRewardsWithToken(overrides?: CallOverrides): Promise<string>;
-    latestProposalIds(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    latestProposalIds(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     name(overrides?: CallOverrides): Promise<string>;
     proposalCount(overrides?: CallOverrides): Promise<number>;
     proposalMaxOperations(overrides?: CallOverrides): Promise<BigNumber>;
     proposalThreshold(overrides?: CallOverrides): Promise<BigNumber>;
-    proposals(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+    proposals(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         string,
         string,
         string,
@@ -481,17 +493,17 @@ export interface TDaoGovernorAlpha extends BaseContract {
         againstVotes: BigNumber;
         initialSupply: BigNumber;
     }>;
-    propose(targets: string[], signatures: string[], calldatas: BytesLike[], title: string, ipfsHash: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    propose(targets: PromiseOrValue<string>[], signatures: PromiseOrValue<string>[], calldatas: PromiseOrValue<BytesLike>[], title: PromiseOrValue<string>, ipfsHash: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    queue(proposalId: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    queue(proposalId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     quorumVotes(overrides?: CallOverrides): Promise<BigNumber>;
-    state(proposalId: BigNumberish, overrides?: CallOverrides): Promise<number>;
+    state(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<number>;
     tDao(overrides?: CallOverrides): Promise<string>;
     timelock(overrides?: CallOverrides): Promise<string>;
-    voteInUnderlyingProtocol(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    voteInUnderlyingProtocol(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     votingDelay(overrides?: CallOverrides): Promise<BigNumber>;
     votingPeriod(overrides?: CallOverrides): Promise<BigNumber>;
     votingPeriodBlocks(overrides?: CallOverrides): Promise<number>;
@@ -501,14 +513,14 @@ export interface TDaoGovernorAlpha extends BaseContract {
         DOMAIN_TYPEHASH(overrides?: CallOverrides): Promise<string>;
         INFLATION_PERCENTAGE(overrides?: CallOverrides): Promise<BigNumber>;
         __abdicate(overrides?: CallOverrides): Promise<void>;
-        cancel(proposalId: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        castVote(proposalId: BigNumberish, support: boolean, overrides?: CallOverrides): Promise<void>;
-        castVoteBySig(proposalId: BigNumberish, support: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: CallOverrides): Promise<void>;
-        claimUnderlyingVotingRewards(proposalIDs: BigNumberish[], overrides?: CallOverrides): Promise<void>;
-        claimVotingRewards(proposalIDs: BigNumberish[], overrides?: CallOverrides): Promise<void>;
-        countVotingRewards(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<BigNumber>;
-        execute(proposalId: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        getActions(proposalId: BigNumberish, overrides?: CallOverrides): Promise<[
+        cancel(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        castVote(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        castVoteBySig(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+        claimUnderlyingVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<void>;
+        claimVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<void>;
+        countVotingRewards(proposalID: PromiseOrValue<BigNumberish>, voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        execute(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        getActions(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             string[],
             string[],
             string[]
@@ -517,7 +529,7 @@ export interface TDaoGovernorAlpha extends BaseContract {
             signatures: string[];
             calldatas: string[];
         }>;
-        getMetaProposalParameters(proposalID: BigNumberish, overrides?: CallOverrides): Promise<[
+        getMetaProposalParameters(proposalID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             string,
             BigNumber,
             boolean
@@ -527,17 +539,17 @@ export interface TDaoGovernorAlpha extends BaseContract {
             moreForThanAgainst: boolean;
         }>;
         getProposals(overrides?: CallOverrides): Promise<GovernorAlphaWithVotingRewards.ProposalInfoStructOutput[]>;
-        getProposalsVoterInfo(voter: string, overrides?: CallOverrides): Promise<GovernorAlphaWithVotingRewards.ProposalVoterInfoStructOutput[]>;
-        getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<GovernorAlpha.ReceiptStructOutput>;
+        getProposalsVoterInfo(voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<GovernorAlphaWithVotingRewards.ProposalVoterInfoStructOutput[]>;
+        getReceipt(proposalId: PromiseOrValue<BigNumberish>, voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<GovernorAlpha.ReceiptStructOutput>;
         guardian(overrides?: CallOverrides): Promise<string>;
-        hasClaimedUnderlyingRewards(arg0: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<boolean>;
+        hasClaimedUnderlyingRewards(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
         implementsVotingRewardsWithToken(overrides?: CallOverrides): Promise<string>;
-        latestProposalIds(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+        latestProposalIds(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         name(overrides?: CallOverrides): Promise<string>;
         proposalCount(overrides?: CallOverrides): Promise<number>;
         proposalMaxOperations(overrides?: CallOverrides): Promise<BigNumber>;
         proposalThreshold(overrides?: CallOverrides): Promise<BigNumber>;
-        proposals(arg0: BigNumberish, overrides?: CallOverrides): Promise<[
+        proposals(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             string,
             string,
             string,
@@ -564,85 +576,85 @@ export interface TDaoGovernorAlpha extends BaseContract {
             againstVotes: BigNumber;
             initialSupply: BigNumber;
         }>;
-        propose(targets: string[], signatures: string[], calldatas: BytesLike[], title: string, ipfsHash: string, overrides?: CallOverrides): Promise<BigNumber>;
-        queue(proposalId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        propose(targets: PromiseOrValue<string>[], signatures: PromiseOrValue<string>[], calldatas: PromiseOrValue<BytesLike>[], title: PromiseOrValue<string>, ipfsHash: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        queue(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         quorumVotes(overrides?: CallOverrides): Promise<BigNumber>;
-        state(proposalId: BigNumberish, overrides?: CallOverrides): Promise<number>;
+        state(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<number>;
         tDao(overrides?: CallOverrides): Promise<string>;
         timelock(overrides?: CallOverrides): Promise<string>;
-        voteInUnderlyingProtocol(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        voteInUnderlyingProtocol(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         votingDelay(overrides?: CallOverrides): Promise<BigNumber>;
         votingPeriod(overrides?: CallOverrides): Promise<BigNumber>;
         votingPeriodBlocks(overrides?: CallOverrides): Promise<number>;
         votingToken(overrides?: CallOverrides): Promise<string>;
     };
     filters: {
-        "ProposalCanceled(uint256)"(id?: BigNumberish | null): ProposalCanceledEventFilter;
-        ProposalCanceled(id?: BigNumberish | null): ProposalCanceledEventFilter;
-        "ProposalCreated(uint256,address)"(id?: BigNumberish | null, proposer?: string | null): ProposalCreatedEventFilter;
-        ProposalCreated(id?: BigNumberish | null, proposer?: string | null): ProposalCreatedEventFilter;
-        "ProposalExecuted(uint256)"(id?: BigNumberish | null): ProposalExecutedEventFilter;
-        ProposalExecuted(id?: BigNumberish | null): ProposalExecutedEventFilter;
-        "ProposalQueued(uint256,uint256)"(id?: BigNumberish | null, eta?: null): ProposalQueuedEventFilter;
-        ProposalQueued(id?: BigNumberish | null, eta?: null): ProposalQueuedEventFilter;
-        "UnderlyingVotingRewardsDistributed(address,uint256)"(caller?: string | null, proposalID?: BigNumberish | null): UnderlyingVotingRewardsDistributedEventFilter;
-        UnderlyingVotingRewardsDistributed(caller?: string | null, proposalID?: BigNumberish | null): UnderlyingVotingRewardsDistributedEventFilter;
-        "VoteCast(address,uint256,bool,uint256)"(voter?: string | null, proposalId?: BigNumberish | null, support?: boolean | null, votes?: null): VoteCastEventFilter;
-        VoteCast(voter?: string | null, proposalId?: BigNumberish | null, support?: boolean | null, votes?: null): VoteCastEventFilter;
-        "VotingRewardsDistributed(address,uint256)"(voter?: string | null, count?: null): VotingRewardsDistributedEventFilter;
-        VotingRewardsDistributed(voter?: string | null, count?: null): VotingRewardsDistributedEventFilter;
+        "ProposalCanceled(uint256)"(id?: PromiseOrValue<BigNumberish> | null): ProposalCanceledEventFilter;
+        ProposalCanceled(id?: PromiseOrValue<BigNumberish> | null): ProposalCanceledEventFilter;
+        "ProposalCreated(uint256,address)"(id?: PromiseOrValue<BigNumberish> | null, proposer?: PromiseOrValue<string> | null): ProposalCreatedEventFilter;
+        ProposalCreated(id?: PromiseOrValue<BigNumberish> | null, proposer?: PromiseOrValue<string> | null): ProposalCreatedEventFilter;
+        "ProposalExecuted(uint256)"(id?: PromiseOrValue<BigNumberish> | null): ProposalExecutedEventFilter;
+        ProposalExecuted(id?: PromiseOrValue<BigNumberish> | null): ProposalExecutedEventFilter;
+        "ProposalQueued(uint256,uint256)"(id?: PromiseOrValue<BigNumberish> | null, eta?: null): ProposalQueuedEventFilter;
+        ProposalQueued(id?: PromiseOrValue<BigNumberish> | null, eta?: null): ProposalQueuedEventFilter;
+        "UnderlyingVotingRewardsDistributed(address,uint256)"(caller?: PromiseOrValue<string> | null, proposalID?: PromiseOrValue<BigNumberish> | null): UnderlyingVotingRewardsDistributedEventFilter;
+        UnderlyingVotingRewardsDistributed(caller?: PromiseOrValue<string> | null, proposalID?: PromiseOrValue<BigNumberish> | null): UnderlyingVotingRewardsDistributedEventFilter;
+        "VoteCast(address,uint256,bool,uint256)"(voter?: PromiseOrValue<string> | null, proposalId?: PromiseOrValue<BigNumberish> | null, support?: PromiseOrValue<boolean> | null, votes?: null): VoteCastEventFilter;
+        VoteCast(voter?: PromiseOrValue<string> | null, proposalId?: PromiseOrValue<BigNumberish> | null, support?: PromiseOrValue<boolean> | null, votes?: null): VoteCastEventFilter;
+        "VotingRewardsDistributed(address,uint256)"(voter?: PromiseOrValue<string> | null, count?: null): VotingRewardsDistributedEventFilter;
+        VotingRewardsDistributed(voter?: PromiseOrValue<string> | null, count?: null): VotingRewardsDistributedEventFilter;
     };
     estimateGas: {
         BALLOT_TYPEHASH(overrides?: CallOverrides): Promise<BigNumber>;
         DOMAIN_TYPEHASH(overrides?: CallOverrides): Promise<BigNumber>;
         INFLATION_PERCENTAGE(overrides?: CallOverrides): Promise<BigNumber>;
         __abdicate(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        cancel(proposalId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        cancel(proposalId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        castVote(proposalId: BigNumberish, support: boolean, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        castVote(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        castVoteBySig(proposalId: BigNumberish, support: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        castVoteBySig(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        claimUnderlyingVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimUnderlyingVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        countVotingRewards(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<BigNumber>;
-        execute(proposalId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        countVotingRewards(proposalID: PromiseOrValue<BigNumberish>, voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        execute(proposalId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        getActions(proposalId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getMetaProposalParameters(proposalID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getActions(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getMetaProposalParameters(proposalID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         getProposals(overrides?: CallOverrides): Promise<BigNumber>;
-        getProposalsVoterInfo(voter: string, overrides?: CallOverrides): Promise<BigNumber>;
-        getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<BigNumber>;
+        getProposalsVoterInfo(voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        getReceipt(proposalId: PromiseOrValue<BigNumberish>, voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         guardian(overrides?: CallOverrides): Promise<BigNumber>;
-        hasClaimedUnderlyingRewards(arg0: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
+        hasClaimedUnderlyingRewards(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         implementsVotingRewardsWithToken(overrides?: CallOverrides): Promise<BigNumber>;
-        latestProposalIds(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+        latestProposalIds(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         name(overrides?: CallOverrides): Promise<BigNumber>;
         proposalCount(overrides?: CallOverrides): Promise<BigNumber>;
         proposalMaxOperations(overrides?: CallOverrides): Promise<BigNumber>;
         proposalThreshold(overrides?: CallOverrides): Promise<BigNumber>;
-        proposals(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        propose(targets: string[], signatures: string[], calldatas: BytesLike[], title: string, ipfsHash: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        proposals(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        propose(targets: PromiseOrValue<string>[], signatures: PromiseOrValue<string>[], calldatas: PromiseOrValue<BytesLike>[], title: PromiseOrValue<string>, ipfsHash: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        queue(proposalId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        queue(proposalId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         quorumVotes(overrides?: CallOverrides): Promise<BigNumber>;
-        state(proposalId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        state(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         tDao(overrides?: CallOverrides): Promise<BigNumber>;
         timelock(overrides?: CallOverrides): Promise<BigNumber>;
-        voteInUnderlyingProtocol(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        voteInUnderlyingProtocol(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         votingDelay(overrides?: CallOverrides): Promise<BigNumber>;
         votingPeriod(overrides?: CallOverrides): Promise<BigNumber>;
         votingPeriodBlocks(overrides?: CallOverrides): Promise<BigNumber>;
@@ -653,52 +665,52 @@ export interface TDaoGovernorAlpha extends BaseContract {
         DOMAIN_TYPEHASH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         INFLATION_PERCENTAGE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         __abdicate(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        cancel(proposalId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        cancel(proposalId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        castVote(proposalId: BigNumberish, support: boolean, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        castVote(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        castVoteBySig(proposalId: BigNumberish, support: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        castVoteBySig(proposalId: PromiseOrValue<BigNumberish>, support: PromiseOrValue<boolean>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        claimUnderlyingVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimUnderlyingVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        claimVotingRewards(proposalIDs: BigNumberish[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        claimVotingRewards(proposalIDs: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        countVotingRewards(proposalID: BigNumberish, voter: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        execute(proposalId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        countVotingRewards(proposalID: PromiseOrValue<BigNumberish>, voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        execute(proposalId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        getActions(proposalId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getMetaProposalParameters(proposalID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getActions(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getMetaProposalParameters(proposalID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getProposals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getProposalsVoterInfo(voter: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getReceipt(proposalId: BigNumberish, voter: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getProposalsVoterInfo(voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getReceipt(proposalId: PromiseOrValue<BigNumberish>, voter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         guardian(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        hasClaimedUnderlyingRewards(arg0: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        hasClaimedUnderlyingRewards(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         implementsVotingRewardsWithToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        latestProposalIds(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        latestProposalIds(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         proposalCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         proposalMaxOperations(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         proposalThreshold(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        proposals(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        propose(targets: string[], signatures: string[], calldatas: BytesLike[], title: string, ipfsHash: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        proposals(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        propose(targets: PromiseOrValue<string>[], signatures: PromiseOrValue<string>[], calldatas: PromiseOrValue<BytesLike>[], title: PromiseOrValue<string>, ipfsHash: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        queue(proposalId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        queue(proposalId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         quorumVotes(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        state(proposalId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        state(proposalId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         tDao(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         timelock(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        voteInUnderlyingProtocol(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        voteInUnderlyingProtocol(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         votingDelay(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         votingPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         votingPeriodBlocks(overrides?: CallOverrides): Promise<PopulatedTransaction>;

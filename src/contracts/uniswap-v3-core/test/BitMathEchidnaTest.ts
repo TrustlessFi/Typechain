@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface BitMathEchidnaTestInterface extends utils.Interface {
@@ -34,11 +35,11 @@ export interface BitMathEchidnaTestInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "leastSignificantBitInvariant",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "mostSignificantBitInvariant",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -81,34 +82,34 @@ export interface BitMathEchidnaTest extends BaseContract {
 
   functions: {
     leastSignificantBitInvariant(
-      input: BigNumberish,
+      input: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     mostSignificantBitInvariant(
-      input: BigNumberish,
+      input: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[void]>;
   };
 
   leastSignificantBitInvariant(
-    input: BigNumberish,
+    input: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   mostSignificantBitInvariant(
-    input: BigNumberish,
+    input: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   callStatic: {
     leastSignificantBitInvariant(
-      input: BigNumberish,
+      input: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     mostSignificantBitInvariant(
-      input: BigNumberish,
+      input: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -117,24 +118,24 @@ export interface BitMathEchidnaTest extends BaseContract {
 
   estimateGas: {
     leastSignificantBitInvariant(
-      input: BigNumberish,
+      input: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     mostSignificantBitInvariant(
-      input: BigNumberish,
+      input: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     leastSignificantBitInvariant(
-      input: BigNumberish,
+      input: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     mostSignificantBitInvariant(
-      input: BigNumberish,
+      input: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

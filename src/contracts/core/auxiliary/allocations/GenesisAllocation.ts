@@ -24,14 +24,15 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export declare namespace GenesisAllocation {
   export type ConstructorParamsStruct = {
-    Authenticator: string;
-    Guardian: string;
-    TcpAllocation: string;
-    GenesisClaimDuration: BigNumberish;
+    Authenticator: PromiseOrValue<string>;
+    Guardian: PromiseOrValue<string>;
+    TcpAllocation: PromiseOrValue<string>;
+    GenesisClaimDuration: PromiseOrValue<BigNumberish>;
   };
 
   export type ConstructorParamsStructOutput = [
@@ -46,7 +47,11 @@ export declare namespace GenesisAllocation {
     GenesisClaimDuration: BigNumber;
   };
 
-  export type AuthStruct = { v: BigNumberish; r: BytesLike; s: BytesLike };
+  export type AuthStruct = {
+    v: PromiseOrValue<BigNumberish>;
+    r: PromiseOrValue<BytesLike>;
+    s: PromiseOrValue<BytesLike>;
+  };
 
   export type AuthStructOutput = [number, string, string] & {
     v: number;
@@ -56,8 +61,8 @@ export declare namespace GenesisAllocation {
 
   export type ClaimAllocationDataStruct = {
     auth: GenesisAllocation.AuthStruct;
-    roundID: BigNumberish;
-    count: BigNumberish;
+    roundID: PromiseOrValue<BigNumberish>;
+    count: PromiseOrValue<BigNumberish>;
   };
 
   export type ClaimAllocationDataStructOutput = [
@@ -113,16 +118,20 @@ export interface GenesisAllocationInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "claimedSig",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "deadline", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "extendDeadline",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getMessage",
-    values: [string, BigNumberish, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(functionFragment: "guardian", values?: undefined): string;
   encodeFunctionData(
@@ -131,7 +140,7 @@ export interface GenesisAllocationInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transferAllocationToIncentiveAllocation",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(functionFragment: "NAME", data: BytesLike): Result;
@@ -235,33 +244,33 @@ export interface GenesisAllocation extends BaseContract {
     NAME(overrides?: CallOverrides): Promise<[string]>;
 
     abdicate(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     authenticator(overrides?: CallOverrides): Promise<[string]>;
 
     claimAllocations(
       claimAllocationData: GenesisAllocation.ClaimAllocationDataStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     claimedSig(
-      arg0: string,
-      arg1: BigNumberish,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     deadline(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     extendDeadline(
-      newDeadline: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newDeadline: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getMessage(
-      userAddress: string,
-      roundID: BigNumberish,
-      count: BigNumberish,
+      userAddress: PromiseOrValue<string>,
+      roundID: PromiseOrValue<BigNumberish>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -270,41 +279,41 @@ export interface GenesisAllocation extends BaseContract {
     tcpAllocation(overrides?: CallOverrides): Promise<[string]>;
 
     transferAllocationToIncentiveAllocation(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   NAME(overrides?: CallOverrides): Promise<string>;
 
   abdicate(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   authenticator(overrides?: CallOverrides): Promise<string>;
 
   claimAllocations(
     claimAllocationData: GenesisAllocation.ClaimAllocationDataStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   claimedSig(
-    arg0: string,
-    arg1: BigNumberish,
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   deadline(overrides?: CallOverrides): Promise<BigNumber>;
 
   extendDeadline(
-    newDeadline: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    newDeadline: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getMessage(
-    userAddress: string,
-    roundID: BigNumberish,
-    count: BigNumberish,
+    userAddress: PromiseOrValue<string>,
+    roundID: PromiseOrValue<BigNumberish>,
+    count: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -313,8 +322,8 @@ export interface GenesisAllocation extends BaseContract {
   tcpAllocation(overrides?: CallOverrides): Promise<string>;
 
   transferAllocationToIncentiveAllocation(
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -330,22 +339,22 @@ export interface GenesisAllocation extends BaseContract {
     ): Promise<void>;
 
     claimedSig(
-      arg0: string,
-      arg1: BigNumberish,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     deadline(overrides?: CallOverrides): Promise<BigNumber>;
 
     extendDeadline(
-      newDeadline: BigNumberish,
+      newDeadline: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     getMessage(
-      userAddress: string,
-      roundID: BigNumberish,
-      count: BigNumberish,
+      userAddress: PromiseOrValue<string>,
+      roundID: PromiseOrValue<BigNumberish>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -354,7 +363,7 @@ export interface GenesisAllocation extends BaseContract {
     tcpAllocation(overrides?: CallOverrides): Promise<string>;
 
     transferAllocationToIncentiveAllocation(
-      count: BigNumberish,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -364,13 +373,13 @@ export interface GenesisAllocation extends BaseContract {
     DeadlineSet(deadline?: null): DeadlineSetEventFilter;
 
     "SignatureProcessed(address,uint256,uint128)"(
-      receiver?: string | null,
-      roundID?: BigNumberish | null,
+      receiver?: PromiseOrValue<string> | null,
+      roundID?: PromiseOrValue<BigNumberish> | null,
       count?: null
     ): SignatureProcessedEventFilter;
     SignatureProcessed(
-      receiver?: string | null,
-      roundID?: BigNumberish | null,
+      receiver?: PromiseOrValue<string> | null,
+      roundID?: PromiseOrValue<BigNumberish> | null,
       count?: null
     ): SignatureProcessedEventFilter;
 
@@ -386,33 +395,33 @@ export interface GenesisAllocation extends BaseContract {
     NAME(overrides?: CallOverrides): Promise<BigNumber>;
 
     abdicate(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     authenticator(overrides?: CallOverrides): Promise<BigNumber>;
 
     claimAllocations(
       claimAllocationData: GenesisAllocation.ClaimAllocationDataStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     claimedSig(
-      arg0: string,
-      arg1: BigNumberish,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     deadline(overrides?: CallOverrides): Promise<BigNumber>;
 
     extendDeadline(
-      newDeadline: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newDeadline: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getMessage(
-      userAddress: string,
-      roundID: BigNumberish,
-      count: BigNumberish,
+      userAddress: PromiseOrValue<string>,
+      roundID: PromiseOrValue<BigNumberish>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -421,8 +430,8 @@ export interface GenesisAllocation extends BaseContract {
     tcpAllocation(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferAllocationToIncentiveAllocation(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -430,33 +439,33 @@ export interface GenesisAllocation extends BaseContract {
     NAME(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     abdicate(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     authenticator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     claimAllocations(
       claimAllocationData: GenesisAllocation.ClaimAllocationDataStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     claimedSig(
-      arg0: string,
-      arg1: BigNumberish,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     deadline(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     extendDeadline(
-      newDeadline: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newDeadline: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getMessage(
-      userAddress: string,
-      roundID: BigNumberish,
-      count: BigNumberish,
+      userAddress: PromiseOrValue<string>,
+      roundID: PromiseOrValue<BigNumberish>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -465,8 +474,8 @@ export interface GenesisAllocation extends BaseContract {
     tcpAllocation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferAllocationToIncentiveAllocation(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface ILiquidationsInterface extends utils.Interface {
     functions: {
         "stop()": FunctionFragment;
@@ -110,11 +110,11 @@ export interface ILiquidations extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     stop(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         stop(overrides?: CallOverrides): Promise<void>;
@@ -132,19 +132,19 @@ export interface ILiquidations extends BaseContract {
         MaxRewardsRatioUpdated(ratio?: null): MaxRewardsRatioUpdatedEventFilter;
         "MinLiquidationIncentiveUpdated(uint64)"(incentive?: null): MinLiquidationIncentiveUpdatedEventFilter;
         MinLiquidationIncentiveUpdated(incentive?: null): MinLiquidationIncentiveUpdatedEventFilter;
-        "UndercollatPositionDiscovered(uint64,uint256,uint256,uint256)"(positionID?: BigNumberish | null, debtCount?: null, collateralCount?: null, price?: null): UndercollatPositionDiscoveredEventFilter;
-        UndercollatPositionDiscovered(positionID?: BigNumberish | null, debtCount?: null, collateralCount?: null, price?: null): UndercollatPositionDiscoveredEventFilter;
+        "UndercollatPositionDiscovered(uint64,uint256,uint256,uint256)"(positionID?: PromiseOrValue<BigNumberish> | null, debtCount?: null, collateralCount?: null, price?: null): UndercollatPositionDiscoveredEventFilter;
+        UndercollatPositionDiscovered(positionID?: PromiseOrValue<BigNumberish> | null, debtCount?: null, collateralCount?: null, price?: null): UndercollatPositionDiscoveredEventFilter;
         "twapDurationUpdated(uint32)"(duration?: null): twapDurationUpdatedEventFilter;
         twapDurationUpdated(duration?: null): twapDurationUpdatedEventFilter;
     };
     estimateGas: {
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

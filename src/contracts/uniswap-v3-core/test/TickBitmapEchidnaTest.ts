@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface TickBitmapEchidnaTestInterface extends utils.Interface {
@@ -36,11 +37,11 @@ export interface TickBitmapEchidnaTestInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "checkNextInitializedTickWithinOneWordInvariants",
-    values: [BigNumberish, boolean]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "flipTick",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -80,63 +81,66 @@ export interface TickBitmapEchidnaTest extends BaseContract {
 
   functions: {
     checkNextInitializedTickWithinOneWordInvariants(
-      tick: BigNumberish,
-      lte: boolean,
+      tick: PromiseOrValue<BigNumberish>,
+      lte: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     flipTick(
-      tick: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      tick: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   checkNextInitializedTickWithinOneWordInvariants(
-    tick: BigNumberish,
-    lte: boolean,
+    tick: PromiseOrValue<BigNumberish>,
+    lte: PromiseOrValue<boolean>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   flipTick(
-    tick: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    tick: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     checkNextInitializedTickWithinOneWordInvariants(
-      tick: BigNumberish,
-      lte: boolean,
+      tick: PromiseOrValue<BigNumberish>,
+      lte: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    flipTick(tick: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    flipTick(
+      tick: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
     checkNextInitializedTickWithinOneWordInvariants(
-      tick: BigNumberish,
-      lte: boolean,
+      tick: PromiseOrValue<BigNumberish>,
+      lte: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     flipTick(
-      tick: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      tick: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     checkNextInitializedTickWithinOneWordInvariants(
-      tick: BigNumberish,
-      lte: boolean,
+      tick: PromiseOrValue<BigNumberish>,
+      lte: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     flipTick(
-      tick: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      tick: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

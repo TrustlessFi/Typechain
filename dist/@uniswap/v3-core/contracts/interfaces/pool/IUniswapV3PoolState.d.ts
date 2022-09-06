@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../../common";
 export interface IUniswapV3PoolStateInterface extends utils.Interface {
     functions: {
         "feeGrowthGlobal0X128()": FunctionFragment;
@@ -18,12 +18,12 @@ export interface IUniswapV3PoolStateInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "feeGrowthGlobal0X128", values?: undefined): string;
     encodeFunctionData(functionFragment: "feeGrowthGlobal1X128", values?: undefined): string;
     encodeFunctionData(functionFragment: "liquidity", values?: undefined): string;
-    encodeFunctionData(functionFragment: "observations", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "positions", values: [BytesLike]): string;
+    encodeFunctionData(functionFragment: "observations", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "positions", values: [PromiseOrValue<BytesLike>]): string;
     encodeFunctionData(functionFragment: "protocolFees", values?: undefined): string;
     encodeFunctionData(functionFragment: "slot0", values?: undefined): string;
-    encodeFunctionData(functionFragment: "tickBitmap", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "ticks", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "tickBitmap", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "ticks", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "feeGrowthGlobal0X128", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "feeGrowthGlobal1X128", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "liquidity", data: BytesLike): Result;
@@ -53,7 +53,7 @@ export interface IUniswapV3PoolState extends BaseContract {
         feeGrowthGlobal0X128(overrides?: CallOverrides): Promise<[BigNumber]>;
         feeGrowthGlobal1X128(overrides?: CallOverrides): Promise<[BigNumber]>;
         liquidity(overrides?: CallOverrides): Promise<[BigNumber]>;
-        observations(index: BigNumberish, overrides?: CallOverrides): Promise<[
+        observations(index: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             number,
             BigNumber,
             BigNumber,
@@ -64,7 +64,7 @@ export interface IUniswapV3PoolState extends BaseContract {
             secondsPerLiquidityCumulativeX128: BigNumber;
             initialized: boolean;
         }>;
-        positions(key: BytesLike, overrides?: CallOverrides): Promise<[
+        positions(key: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber,
@@ -101,8 +101,8 @@ export interface IUniswapV3PoolState extends BaseContract {
             feeProtocol: number;
             unlocked: boolean;
         }>;
-        tickBitmap(wordPosition: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
-        ticks(tick: BigNumberish, overrides?: CallOverrides): Promise<[
+        tickBitmap(wordPosition: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        ticks(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber,
@@ -125,7 +125,7 @@ export interface IUniswapV3PoolState extends BaseContract {
     feeGrowthGlobal0X128(overrides?: CallOverrides): Promise<BigNumber>;
     feeGrowthGlobal1X128(overrides?: CallOverrides): Promise<BigNumber>;
     liquidity(overrides?: CallOverrides): Promise<BigNumber>;
-    observations(index: BigNumberish, overrides?: CallOverrides): Promise<[
+    observations(index: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         number,
         BigNumber,
         BigNumber,
@@ -136,7 +136,7 @@ export interface IUniswapV3PoolState extends BaseContract {
         secondsPerLiquidityCumulativeX128: BigNumber;
         initialized: boolean;
     }>;
-    positions(key: BytesLike, overrides?: CallOverrides): Promise<[
+    positions(key: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
         BigNumber,
         BigNumber,
         BigNumber,
@@ -170,8 +170,8 @@ export interface IUniswapV3PoolState extends BaseContract {
         feeProtocol: number;
         unlocked: boolean;
     }>;
-    tickBitmap(wordPosition: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    ticks(tick: BigNumberish, overrides?: CallOverrides): Promise<[
+    tickBitmap(wordPosition: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    ticks(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
         BigNumber,
         BigNumber,
         BigNumber,
@@ -194,7 +194,7 @@ export interface IUniswapV3PoolState extends BaseContract {
         feeGrowthGlobal0X128(overrides?: CallOverrides): Promise<BigNumber>;
         feeGrowthGlobal1X128(overrides?: CallOverrides): Promise<BigNumber>;
         liquidity(overrides?: CallOverrides): Promise<BigNumber>;
-        observations(index: BigNumberish, overrides?: CallOverrides): Promise<[
+        observations(index: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             number,
             BigNumber,
             BigNumber,
@@ -205,7 +205,7 @@ export interface IUniswapV3PoolState extends BaseContract {
             secondsPerLiquidityCumulativeX128: BigNumber;
             initialized: boolean;
         }>;
-        positions(key: BytesLike, overrides?: CallOverrides): Promise<[
+        positions(key: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber,
@@ -242,8 +242,8 @@ export interface IUniswapV3PoolState extends BaseContract {
             feeProtocol: number;
             unlocked: boolean;
         }>;
-        tickBitmap(wordPosition: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        ticks(tick: BigNumberish, overrides?: CallOverrides): Promise<[
+        tickBitmap(wordPosition: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        ticks(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber,
             BigNumber,
@@ -268,22 +268,22 @@ export interface IUniswapV3PoolState extends BaseContract {
         feeGrowthGlobal0X128(overrides?: CallOverrides): Promise<BigNumber>;
         feeGrowthGlobal1X128(overrides?: CallOverrides): Promise<BigNumber>;
         liquidity(overrides?: CallOverrides): Promise<BigNumber>;
-        observations(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        positions(key: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+        observations(index: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        positions(key: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
         protocolFees(overrides?: CallOverrides): Promise<BigNumber>;
         slot0(overrides?: CallOverrides): Promise<BigNumber>;
-        tickBitmap(wordPosition: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        ticks(tick: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        tickBitmap(wordPosition: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        ticks(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         feeGrowthGlobal0X128(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         feeGrowthGlobal1X128(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         liquidity(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        observations(index: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        positions(key: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        observations(index: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        positions(key: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         protocolFees(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         slot0(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        tickBitmap(wordPosition: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        ticks(tick: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        tickBitmap(wordPosition: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        ticks(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

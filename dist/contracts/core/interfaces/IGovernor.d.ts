@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface IGovernorInterface extends utils.Interface {
     functions: {
         "accounting()": FunctionFragment;
@@ -50,38 +50,42 @@ export interface IGovernorInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "calculateCurrentDailyLiquidityRewardCount", values?: undefined): string;
     encodeFunctionData(functionFragment: "currentPhase", values?: undefined): string;
     encodeFunctionData(functionFragment: "enforcedDecentralization", values?: undefined): string;
-    encodeFunctionData(functionFragment: "execute", values: [string, string, BytesLike]): string;
+    encodeFunctionData(functionFragment: "execute", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>
+    ]): string;
     encodeFunctionData(functionFragment: "executeShutdown", values?: undefined): string;
     encodeFunctionData(functionFragment: "hue", values?: undefined): string;
     encodeFunctionData(functionFragment: "huePositionNFT", values?: undefined): string;
-    encodeFunctionData(functionFragment: "increaseTCPAllocation", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "increaseTCPAllocation", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "isShutdown", values?: undefined): string;
     encodeFunctionData(functionFragment: "lendHue", values?: undefined): string;
     encodeFunctionData(functionFragment: "liquidations", values?: undefined): string;
     encodeFunctionData(functionFragment: "market", values?: undefined): string;
-    encodeFunctionData(functionFragment: "mintIncentive", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "mintVotingRewards", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "mintIncentive", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "mintVotingRewards", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "prices", values?: undefined): string;
     encodeFunctionData(functionFragment: "protocolLock", values?: undefined): string;
     encodeFunctionData(functionFragment: "rates", values?: undefined): string;
-    encodeFunctionData(functionFragment: "requireDebtServicesAccess", values: [string]): string;
-    encodeFunctionData(functionFragment: "requireHueReservesBurnAccess", values: [string]): string;
-    encodeFunctionData(functionFragment: "requireInitializePoolAccess", values: [string]): string;
-    encodeFunctionData(functionFragment: "requireUpdatePositionAccess", values: [string]): string;
-    encodeFunctionData(functionFragment: "requireValidAction", values: [string, string]): string;
+    encodeFunctionData(functionFragment: "requireDebtServicesAccess", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "requireHueReservesBurnAccess", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "requireInitializePoolAccess", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "requireUpdatePositionAccess", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "requireValidAction", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "rewards", values?: undefined): string;
     encodeFunctionData(functionFragment: "settlement", values?: undefined): string;
     encodeFunctionData(functionFragment: "shutdownTime", values?: undefined): string;
     encodeFunctionData(functionFragment: "tcp", values?: undefined): string;
     encodeFunctionData(functionFragment: "tcpAllocation", values?: undefined): string;
-    encodeFunctionData(functionFragment: "upgradeAuctions", values: [string]): string;
-    encodeFunctionData(functionFragment: "upgradeLiquidations", values: [string]): string;
-    encodeFunctionData(functionFragment: "upgradeMarket", values: [string]): string;
-    encodeFunctionData(functionFragment: "upgradePrices", values: [string]): string;
-    encodeFunctionData(functionFragment: "upgradeProtocol", values: [string]): string;
-    encodeFunctionData(functionFragment: "upgradeRates", values: [string]): string;
-    encodeFunctionData(functionFragment: "upgradeRewards", values: [string]): string;
-    encodeFunctionData(functionFragment: "upgradeSettlement", values: [string]): string;
+    encodeFunctionData(functionFragment: "upgradeAuctions", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "upgradeLiquidations", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "upgradeMarket", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "upgradePrices", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "upgradeProtocol", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "upgradeRates", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "upgradeRewards", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "upgradeSettlement", values: [PromiseOrValue<string>]): string;
     decodeFunctionResult(functionFragment: "accounting", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "auctions", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "calculateCurrentDailyDebtRewardCount", data: BytesLike): Result;
@@ -189,139 +193,139 @@ export interface IGovernor extends BaseContract {
         accounting(overrides?: CallOverrides): Promise<[string]>;
         auctions(overrides?: CallOverrides): Promise<[string]>;
         calculateCurrentDailyDebtRewardCount(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         calculateCurrentDailyLiquidityRewardCount(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         currentPhase(overrides?: CallOverrides): Promise<[number]>;
         enforcedDecentralization(overrides?: CallOverrides): Promise<[string]>;
-        execute(target: string, signature: string, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        execute(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         executeShutdown(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         hue(overrides?: CallOverrides): Promise<[string]>;
         huePositionNFT(overrides?: CallOverrides): Promise<[string]>;
-        increaseTCPAllocation(to: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseTCPAllocation(to: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         isShutdown(overrides?: CallOverrides): Promise<[boolean]>;
         lendHue(overrides?: CallOverrides): Promise<[string]>;
         liquidations(overrides?: CallOverrides): Promise<[string]>;
         market(overrides?: CallOverrides): Promise<[string]>;
-        mintIncentive(dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mintIncentive(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        mintVotingRewards(to: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mintVotingRewards(to: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         prices(overrides?: CallOverrides): Promise<[string]>;
         protocolLock(overrides?: CallOverrides): Promise<[string]>;
         rates(overrides?: CallOverrides): Promise<[string]>;
-        requireDebtServicesAccess(caller: string, overrides?: CallOverrides): Promise<[void]>;
-        requireHueReservesBurnAccess(caller: string, overrides?: CallOverrides): Promise<[void]>;
-        requireInitializePoolAccess(caller: string, overrides?: CallOverrides): Promise<[void]>;
-        requireUpdatePositionAccess(caller: string, overrides?: CallOverrides): Promise<[void]>;
-        requireValidAction(target: string, signature: string, overrides?: CallOverrides): Promise<[void]>;
+        requireDebtServicesAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[void]>;
+        requireHueReservesBurnAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[void]>;
+        requireInitializePoolAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[void]>;
+        requireUpdatePositionAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[void]>;
+        requireValidAction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[void]>;
         rewards(overrides?: CallOverrides): Promise<[string]>;
         settlement(overrides?: CallOverrides): Promise<[string]>;
         shutdownTime(overrides?: CallOverrides): Promise<[BigNumber]>;
         tcp(overrides?: CallOverrides): Promise<[string]>;
         tcpAllocation(overrides?: CallOverrides): Promise<[string]>;
-        upgradeAuctions(_auctions: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeAuctions(_auctions: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        upgradeLiquidations(_liquidations: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeLiquidations(_liquidations: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        upgradeMarket(_market: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeMarket(_market: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        upgradePrices(_prices: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradePrices(_prices: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        upgradeProtocol(newGovernor: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeProtocol(newGovernor: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        upgradeRates(_rates: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeRates(_rates: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        upgradeRewards(_rewards: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeRewards(_rewards: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        upgradeSettlement(_settlement: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeSettlement(_settlement: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     accounting(overrides?: CallOverrides): Promise<string>;
     auctions(overrides?: CallOverrides): Promise<string>;
     calculateCurrentDailyDebtRewardCount(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     calculateCurrentDailyLiquidityRewardCount(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     currentPhase(overrides?: CallOverrides): Promise<number>;
     enforcedDecentralization(overrides?: CallOverrides): Promise<string>;
-    execute(target: string, signature: string, data: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    execute(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     executeShutdown(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     hue(overrides?: CallOverrides): Promise<string>;
     huePositionNFT(overrides?: CallOverrides): Promise<string>;
-    increaseTCPAllocation(to: string, count: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    increaseTCPAllocation(to: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     isShutdown(overrides?: CallOverrides): Promise<boolean>;
     lendHue(overrides?: CallOverrides): Promise<string>;
     liquidations(overrides?: CallOverrides): Promise<string>;
     market(overrides?: CallOverrides): Promise<string>;
-    mintIncentive(dest: string, count: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    mintIncentive(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    mintVotingRewards(to: string, count: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    mintVotingRewards(to: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     prices(overrides?: CallOverrides): Promise<string>;
     protocolLock(overrides?: CallOverrides): Promise<string>;
     rates(overrides?: CallOverrides): Promise<string>;
-    requireDebtServicesAccess(caller: string, overrides?: CallOverrides): Promise<void>;
-    requireHueReservesBurnAccess(caller: string, overrides?: CallOverrides): Promise<void>;
-    requireInitializePoolAccess(caller: string, overrides?: CallOverrides): Promise<void>;
-    requireUpdatePositionAccess(caller: string, overrides?: CallOverrides): Promise<void>;
-    requireValidAction(target: string, signature: string, overrides?: CallOverrides): Promise<void>;
+    requireDebtServicesAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    requireHueReservesBurnAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    requireInitializePoolAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    requireUpdatePositionAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    requireValidAction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
     rewards(overrides?: CallOverrides): Promise<string>;
     settlement(overrides?: CallOverrides): Promise<string>;
     shutdownTime(overrides?: CallOverrides): Promise<BigNumber>;
     tcp(overrides?: CallOverrides): Promise<string>;
     tcpAllocation(overrides?: CallOverrides): Promise<string>;
-    upgradeAuctions(_auctions: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    upgradeAuctions(_auctions: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    upgradeLiquidations(_liquidations: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    upgradeLiquidations(_liquidations: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    upgradeMarket(_market: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    upgradeMarket(_market: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    upgradePrices(_prices: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    upgradePrices(_prices: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    upgradeProtocol(newGovernor: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    upgradeProtocol(newGovernor: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    upgradeRates(_rates: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    upgradeRates(_rates: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    upgradeRewards(_rewards: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    upgradeRewards(_rewards: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    upgradeSettlement(_settlement: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    upgradeSettlement(_settlement: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         accounting(overrides?: CallOverrides): Promise<string>;
@@ -330,192 +334,192 @@ export interface IGovernor extends BaseContract {
         calculateCurrentDailyLiquidityRewardCount(overrides?: CallOverrides): Promise<BigNumber>;
         currentPhase(overrides?: CallOverrides): Promise<number>;
         enforcedDecentralization(overrides?: CallOverrides): Promise<string>;
-        execute(target: string, signature: string, data: BytesLike, overrides?: CallOverrides): Promise<[boolean, string] & {
+        execute(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean, string] & {
             success: boolean;
             returnData: string;
         }>;
         executeShutdown(overrides?: CallOverrides): Promise<void>;
         hue(overrides?: CallOverrides): Promise<string>;
         huePositionNFT(overrides?: CallOverrides): Promise<string>;
-        increaseTCPAllocation(to: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        increaseTCPAllocation(to: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         isShutdown(overrides?: CallOverrides): Promise<boolean>;
         lendHue(overrides?: CallOverrides): Promise<string>;
         liquidations(overrides?: CallOverrides): Promise<string>;
         market(overrides?: CallOverrides): Promise<string>;
-        mintIncentive(dest: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        mintVotingRewards(to: string, count: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        mintIncentive(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        mintVotingRewards(to: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         prices(overrides?: CallOverrides): Promise<string>;
         protocolLock(overrides?: CallOverrides): Promise<string>;
         rates(overrides?: CallOverrides): Promise<string>;
-        requireDebtServicesAccess(caller: string, overrides?: CallOverrides): Promise<void>;
-        requireHueReservesBurnAccess(caller: string, overrides?: CallOverrides): Promise<void>;
-        requireInitializePoolAccess(caller: string, overrides?: CallOverrides): Promise<void>;
-        requireUpdatePositionAccess(caller: string, overrides?: CallOverrides): Promise<void>;
-        requireValidAction(target: string, signature: string, overrides?: CallOverrides): Promise<void>;
+        requireDebtServicesAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        requireHueReservesBurnAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        requireInitializePoolAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        requireUpdatePositionAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        requireValidAction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         rewards(overrides?: CallOverrides): Promise<string>;
         settlement(overrides?: CallOverrides): Promise<string>;
         shutdownTime(overrides?: CallOverrides): Promise<BigNumber>;
         tcp(overrides?: CallOverrides): Promise<string>;
         tcpAllocation(overrides?: CallOverrides): Promise<string>;
-        upgradeAuctions(_auctions: string, overrides?: CallOverrides): Promise<void>;
-        upgradeLiquidations(_liquidations: string, overrides?: CallOverrides): Promise<void>;
-        upgradeMarket(_market: string, overrides?: CallOverrides): Promise<void>;
-        upgradePrices(_prices: string, overrides?: CallOverrides): Promise<void>;
-        upgradeProtocol(newGovernor: string, overrides?: CallOverrides): Promise<void>;
-        upgradeRates(_rates: string, overrides?: CallOverrides): Promise<void>;
-        upgradeRewards(_rewards: string, overrides?: CallOverrides): Promise<void>;
-        upgradeSettlement(_settlement: string, overrides?: CallOverrides): Promise<void>;
+        upgradeAuctions(_auctions: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        upgradeLiquidations(_liquidations: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        upgradeMarket(_market: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        upgradePrices(_prices: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        upgradeProtocol(newGovernor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        upgradeRates(_rates: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        upgradeRewards(_rewards: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        upgradeSettlement(_settlement: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "ContractUpgraded(string,address)"(contractName?: string | null, contractAddress?: string | null): ContractUpgradedEventFilter;
-        ContractUpgraded(contractName?: string | null, contractAddress?: string | null): ContractUpgradedEventFilter;
-        "ProtocolUpgraded(address)"(newGovernor?: string | null): ProtocolUpgradedEventFilter;
-        ProtocolUpgraded(newGovernor?: string | null): ProtocolUpgradedEventFilter;
+        "ContractUpgraded(string,address)"(contractName?: PromiseOrValue<string> | null, contractAddress?: PromiseOrValue<string> | null): ContractUpgradedEventFilter;
+        ContractUpgraded(contractName?: PromiseOrValue<string> | null, contractAddress?: PromiseOrValue<string> | null): ContractUpgradedEventFilter;
+        "ProtocolUpgraded(address)"(newGovernor?: PromiseOrValue<string> | null): ProtocolUpgradedEventFilter;
+        ProtocolUpgraded(newGovernor?: PromiseOrValue<string> | null): ProtocolUpgradedEventFilter;
         "ShutdownExecuted()"(): ShutdownExecutedEventFilter;
         ShutdownExecuted(): ShutdownExecutedEventFilter;
-        "ShutdownTokensLocked(address,uint256)"(locker?: string | null, count?: null): ShutdownTokensLockedEventFilter;
-        ShutdownTokensLocked(locker?: string | null, count?: null): ShutdownTokensLockedEventFilter;
-        "ShutdownTokensUnlocked(address,uint256)"(locker?: string | null, count?: null): ShutdownTokensUnlockedEventFilter;
-        ShutdownTokensUnlocked(locker?: string | null, count?: null): ShutdownTokensUnlockedEventFilter;
+        "ShutdownTokensLocked(address,uint256)"(locker?: PromiseOrValue<string> | null, count?: null): ShutdownTokensLockedEventFilter;
+        ShutdownTokensLocked(locker?: PromiseOrValue<string> | null, count?: null): ShutdownTokensLockedEventFilter;
+        "ShutdownTokensUnlocked(address,uint256)"(locker?: PromiseOrValue<string> | null, count?: null): ShutdownTokensUnlockedEventFilter;
+        ShutdownTokensUnlocked(locker?: PromiseOrValue<string> | null, count?: null): ShutdownTokensUnlockedEventFilter;
     };
     estimateGas: {
         accounting(overrides?: CallOverrides): Promise<BigNumber>;
         auctions(overrides?: CallOverrides): Promise<BigNumber>;
         calculateCurrentDailyDebtRewardCount(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         calculateCurrentDailyLiquidityRewardCount(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         currentPhase(overrides?: CallOverrides): Promise<BigNumber>;
         enforcedDecentralization(overrides?: CallOverrides): Promise<BigNumber>;
-        execute(target: string, signature: string, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        execute(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         executeShutdown(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         hue(overrides?: CallOverrides): Promise<BigNumber>;
         huePositionNFT(overrides?: CallOverrides): Promise<BigNumber>;
-        increaseTCPAllocation(to: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseTCPAllocation(to: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         isShutdown(overrides?: CallOverrides): Promise<BigNumber>;
         lendHue(overrides?: CallOverrides): Promise<BigNumber>;
         liquidations(overrides?: CallOverrides): Promise<BigNumber>;
         market(overrides?: CallOverrides): Promise<BigNumber>;
-        mintIncentive(dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mintIncentive(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        mintVotingRewards(to: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mintVotingRewards(to: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         prices(overrides?: CallOverrides): Promise<BigNumber>;
         protocolLock(overrides?: CallOverrides): Promise<BigNumber>;
         rates(overrides?: CallOverrides): Promise<BigNumber>;
-        requireDebtServicesAccess(caller: string, overrides?: CallOverrides): Promise<BigNumber>;
-        requireHueReservesBurnAccess(caller: string, overrides?: CallOverrides): Promise<BigNumber>;
-        requireInitializePoolAccess(caller: string, overrides?: CallOverrides): Promise<BigNumber>;
-        requireUpdatePositionAccess(caller: string, overrides?: CallOverrides): Promise<BigNumber>;
-        requireValidAction(target: string, signature: string, overrides?: CallOverrides): Promise<BigNumber>;
+        requireDebtServicesAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        requireHueReservesBurnAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        requireInitializePoolAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        requireUpdatePositionAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        requireValidAction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         rewards(overrides?: CallOverrides): Promise<BigNumber>;
         settlement(overrides?: CallOverrides): Promise<BigNumber>;
         shutdownTime(overrides?: CallOverrides): Promise<BigNumber>;
         tcp(overrides?: CallOverrides): Promise<BigNumber>;
         tcpAllocation(overrides?: CallOverrides): Promise<BigNumber>;
-        upgradeAuctions(_auctions: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeAuctions(_auctions: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        upgradeLiquidations(_liquidations: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeLiquidations(_liquidations: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        upgradeMarket(_market: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeMarket(_market: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        upgradePrices(_prices: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradePrices(_prices: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        upgradeProtocol(newGovernor: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeProtocol(newGovernor: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        upgradeRates(_rates: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeRates(_rates: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        upgradeRewards(_rewards: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeRewards(_rewards: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        upgradeSettlement(_settlement: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeSettlement(_settlement: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         accounting(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         auctions(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         calculateCurrentDailyDebtRewardCount(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         calculateCurrentDailyLiquidityRewardCount(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         currentPhase(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         enforcedDecentralization(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        execute(target: string, signature: string, data: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        execute(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         executeShutdown(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         hue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         huePositionNFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        increaseTCPAllocation(to: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        increaseTCPAllocation(to: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         isShutdown(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         lendHue(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         liquidations(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         market(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        mintIncentive(dest: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mintIncentive(dest: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        mintVotingRewards(to: string, count: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mintVotingRewards(to: PromiseOrValue<string>, count: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         prices(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         protocolLock(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         rates(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        requireDebtServicesAccess(caller: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        requireHueReservesBurnAccess(caller: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        requireInitializePoolAccess(caller: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        requireUpdatePositionAccess(caller: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        requireValidAction(target: string, signature: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        requireDebtServicesAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        requireHueReservesBurnAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        requireInitializePoolAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        requireUpdatePositionAccess(caller: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        requireValidAction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         rewards(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         settlement(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         shutdownTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         tcp(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         tcpAllocation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        upgradeAuctions(_auctions: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeAuctions(_auctions: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        upgradeLiquidations(_liquidations: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeLiquidations(_liquidations: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        upgradeMarket(_market: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeMarket(_market: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        upgradePrices(_prices: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradePrices(_prices: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        upgradeProtocol(newGovernor: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeProtocol(newGovernor: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        upgradeRates(_rates: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeRates(_rates: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        upgradeRewards(_rewards: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeRewards(_rewards: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        upgradeSettlement(_settlement: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        upgradeSettlement(_settlement: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TimelockInterface extends utils.Interface {
     functions: {
         "GRACE_PERIOD()": FunctionFragment;
@@ -23,15 +23,30 @@ export interface TimelockInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "MAXIMUM_DELAY", values?: undefined): string;
     encodeFunctionData(functionFragment: "MINIMUM_DELAY", values?: undefined): string;
     encodeFunctionData(functionFragment: "admin", values?: undefined): string;
-    encodeFunctionData(functionFragment: "cancelTransaction", values: [string, string, BytesLike, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "cancelTransaction", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     encodeFunctionData(functionFragment: "delay", values?: undefined): string;
     encodeFunctionData(functionFragment: "deployer", values?: undefined): string;
-    encodeFunctionData(functionFragment: "executeTransaction", values: [string, string, BytesLike, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "executeTransaction", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     encodeFunctionData(functionFragment: "getAdmin", values?: undefined): string;
-    encodeFunctionData(functionFragment: "init", values: [string]): string;
-    encodeFunctionData(functionFragment: "queueTransaction", values: [string, string, BytesLike, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "queuedTransactions", values: [BytesLike]): string;
-    encodeFunctionData(functionFragment: "setDelay", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "init", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "queueTransaction", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "queuedTransactions", values: [PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "setDelay", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "GRACE_PERIOD", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "MAXIMUM_DELAY", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "MINIMUM_DELAY", data: BytesLike): Result;
@@ -141,101 +156,101 @@ export interface Timelock extends BaseContract {
         MAXIMUM_DELAY(overrides?: CallOverrides): Promise<[BigNumber]>;
         MINIMUM_DELAY(overrides?: CallOverrides): Promise<[BigNumber]>;
         admin(overrides?: CallOverrides): Promise<[string]>;
-        cancelTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        cancelTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         delay(overrides?: CallOverrides): Promise<[BigNumber]>;
         deployer(overrides?: CallOverrides): Promise<[string]>;
-        executeTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        executeTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         getAdmin(overrides?: CallOverrides): Promise<[string]>;
-        init(_admin: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        init(_admin: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        queueTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        queueTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        queuedTransactions(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
-        setDelay(delay_: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        queuedTransactions(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
+        setDelay(delay_: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     GRACE_PERIOD(overrides?: CallOverrides): Promise<BigNumber>;
     MAXIMUM_DELAY(overrides?: CallOverrides): Promise<BigNumber>;
     MINIMUM_DELAY(overrides?: CallOverrides): Promise<BigNumber>;
     admin(overrides?: CallOverrides): Promise<string>;
-    cancelTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    cancelTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     delay(overrides?: CallOverrides): Promise<BigNumber>;
     deployer(overrides?: CallOverrides): Promise<string>;
-    executeTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    executeTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     getAdmin(overrides?: CallOverrides): Promise<string>;
-    init(_admin: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    init(_admin: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    queueTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    queueTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    queuedTransactions(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
-    setDelay(delay_: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    queuedTransactions(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+    setDelay(delay_: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         GRACE_PERIOD(overrides?: CallOverrides): Promise<BigNumber>;
         MAXIMUM_DELAY(overrides?: CallOverrides): Promise<BigNumber>;
         MINIMUM_DELAY(overrides?: CallOverrides): Promise<BigNumber>;
         admin(overrides?: CallOverrides): Promise<string>;
-        cancelTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        cancelTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         delay(overrides?: CallOverrides): Promise<BigNumber>;
         deployer(overrides?: CallOverrides): Promise<string>;
-        executeTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: CallOverrides): Promise<string>;
+        executeTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
         getAdmin(overrides?: CallOverrides): Promise<string>;
-        init(_admin: string, overrides?: CallOverrides): Promise<void>;
-        queueTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: CallOverrides): Promise<string>;
-        queuedTransactions(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
-        setDelay(delay_: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        init(_admin: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        queueTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+        queuedTransactions(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+        setDelay(delay_: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "CancelTransaction(bytes32,address,string,bytes,uint256)"(txHash?: BytesLike | null, target?: string | null, signature?: null, data?: null, eta?: null): CancelTransactionEventFilter;
-        CancelTransaction(txHash?: BytesLike | null, target?: string | null, signature?: null, data?: null, eta?: null): CancelTransactionEventFilter;
-        "ExecuteTransaction(bytes32,address,string,bytes,uint256)"(txHash?: BytesLike | null, target?: string | null, signature?: null, data?: null, eta?: null): ExecuteTransactionEventFilter;
-        ExecuteTransaction(txHash?: BytesLike | null, target?: string | null, signature?: null, data?: null, eta?: null): ExecuteTransactionEventFilter;
-        "NewAdmin(address)"(newAdmin?: string | null): NewAdminEventFilter;
-        NewAdmin(newAdmin?: string | null): NewAdminEventFilter;
-        "NewDelay(uint256)"(newDelay?: BigNumberish | null): NewDelayEventFilter;
-        NewDelay(newDelay?: BigNumberish | null): NewDelayEventFilter;
-        "NewPendingAdmin(address)"(newPendingAdmin?: string | null): NewPendingAdminEventFilter;
-        NewPendingAdmin(newPendingAdmin?: string | null): NewPendingAdminEventFilter;
-        "QueueTransaction(bytes32,address,string,bytes,uint256)"(txHash?: BytesLike | null, target?: string | null, signature?: null, data?: null, eta?: null): QueueTransactionEventFilter;
-        QueueTransaction(txHash?: BytesLike | null, target?: string | null, signature?: null, data?: null, eta?: null): QueueTransactionEventFilter;
+        "CancelTransaction(bytes32,address,string,bytes,uint256)"(txHash?: PromiseOrValue<BytesLike> | null, target?: PromiseOrValue<string> | null, signature?: null, data?: null, eta?: null): CancelTransactionEventFilter;
+        CancelTransaction(txHash?: PromiseOrValue<BytesLike> | null, target?: PromiseOrValue<string> | null, signature?: null, data?: null, eta?: null): CancelTransactionEventFilter;
+        "ExecuteTransaction(bytes32,address,string,bytes,uint256)"(txHash?: PromiseOrValue<BytesLike> | null, target?: PromiseOrValue<string> | null, signature?: null, data?: null, eta?: null): ExecuteTransactionEventFilter;
+        ExecuteTransaction(txHash?: PromiseOrValue<BytesLike> | null, target?: PromiseOrValue<string> | null, signature?: null, data?: null, eta?: null): ExecuteTransactionEventFilter;
+        "NewAdmin(address)"(newAdmin?: PromiseOrValue<string> | null): NewAdminEventFilter;
+        NewAdmin(newAdmin?: PromiseOrValue<string> | null): NewAdminEventFilter;
+        "NewDelay(uint256)"(newDelay?: PromiseOrValue<BigNumberish> | null): NewDelayEventFilter;
+        NewDelay(newDelay?: PromiseOrValue<BigNumberish> | null): NewDelayEventFilter;
+        "NewPendingAdmin(address)"(newPendingAdmin?: PromiseOrValue<string> | null): NewPendingAdminEventFilter;
+        NewPendingAdmin(newPendingAdmin?: PromiseOrValue<string> | null): NewPendingAdminEventFilter;
+        "QueueTransaction(bytes32,address,string,bytes,uint256)"(txHash?: PromiseOrValue<BytesLike> | null, target?: PromiseOrValue<string> | null, signature?: null, data?: null, eta?: null): QueueTransactionEventFilter;
+        QueueTransaction(txHash?: PromiseOrValue<BytesLike> | null, target?: PromiseOrValue<string> | null, signature?: null, data?: null, eta?: null): QueueTransactionEventFilter;
     };
     estimateGas: {
         GRACE_PERIOD(overrides?: CallOverrides): Promise<BigNumber>;
         MAXIMUM_DELAY(overrides?: CallOverrides): Promise<BigNumber>;
         MINIMUM_DELAY(overrides?: CallOverrides): Promise<BigNumber>;
         admin(overrides?: CallOverrides): Promise<BigNumber>;
-        cancelTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        cancelTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         delay(overrides?: CallOverrides): Promise<BigNumber>;
         deployer(overrides?: CallOverrides): Promise<BigNumber>;
-        executeTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        executeTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         getAdmin(overrides?: CallOverrides): Promise<BigNumber>;
-        init(_admin: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        init(_admin: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        queueTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        queueTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        queuedTransactions(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
-        setDelay(delay_: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        queuedTransactions(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+        setDelay(delay_: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
@@ -243,24 +258,24 @@ export interface Timelock extends BaseContract {
         MAXIMUM_DELAY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         MINIMUM_DELAY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         admin(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        cancelTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        cancelTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         delay(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         deployer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        executeTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        executeTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         getAdmin(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        init(_admin: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        init(_admin: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        queueTransaction(target: string, signature: string, data: BytesLike, eta: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        queueTransaction(target: PromiseOrValue<string>, signature: PromiseOrValue<string>, data: PromiseOrValue<BytesLike>, eta: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        queuedTransactions(arg0: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setDelay(delay_: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        queuedTransactions(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        setDelay(delay_: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

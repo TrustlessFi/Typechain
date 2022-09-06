@@ -1,11 +1,11 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export declare namespace IRewards {
     type PoolConfigStruct = {
-        pool: string;
-        rewardsPortion: BigNumberish;
+        pool: PromiseOrValue<string>;
+        rewardsPortion: PromiseOrValue<BigNumberish>;
     };
     type PoolConfigStructOutput = [string, BigNumber] & {
         pool: string;
@@ -19,7 +19,7 @@ export interface RewardsContractInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "countPools" | "getPoolConfigForPoolID"): FunctionFragment;
     encodeFunctionData(functionFragment: "countPools", values?: undefined): string;
-    encodeFunctionData(functionFragment: "getPoolConfigForPoolID", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "getPoolConfigForPoolID", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "countPools", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getPoolConfigForPoolID", data: BytesLike): Result;
     events: {};
@@ -40,21 +40,21 @@ export interface RewardsContract extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         countPools(overrides?: CallOverrides): Promise<[number]>;
-        getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<[IRewards.PoolConfigStructOutput]>;
+        getPoolConfigForPoolID(poolID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[IRewards.PoolConfigStructOutput]>;
     };
     countPools(overrides?: CallOverrides): Promise<number>;
-    getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<IRewards.PoolConfigStructOutput>;
+    getPoolConfigForPoolID(poolID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<IRewards.PoolConfigStructOutput>;
     callStatic: {
         countPools(overrides?: CallOverrides): Promise<number>;
-        getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<IRewards.PoolConfigStructOutput>;
+        getPoolConfigForPoolID(poolID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<IRewards.PoolConfigStructOutput>;
     };
     filters: {};
     estimateGas: {
         countPools(overrides?: CallOverrides): Promise<BigNumber>;
-        getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getPoolConfigForPoolID(poolID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         countPools(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getPoolConfigForPoolID(poolID: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getPoolConfigForPoolID(poolID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

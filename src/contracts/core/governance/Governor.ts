@@ -24,27 +24,28 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export declare namespace IGovernor {
   export type ProtocolDataStruct = {
-    accounting: string;
-    auctions: string;
-    enforcedDecentralization: string;
-    governorAlpha: string;
-    hue: string;
-    huePositionNFT: string;
-    lendHue: string;
-    liquidations: string;
-    market: string;
-    prices: string;
-    protocolLock: string;
-    rates: string;
-    rewards: string;
-    settlement: string;
-    tcp: string;
-    timelock: string;
-    tcpAllocation: string;
+    accounting: PromiseOrValue<string>;
+    auctions: PromiseOrValue<string>;
+    enforcedDecentralization: PromiseOrValue<string>;
+    governorAlpha: PromiseOrValue<string>;
+    hue: PromiseOrValue<string>;
+    huePositionNFT: PromiseOrValue<string>;
+    lendHue: PromiseOrValue<string>;
+    liquidations: PromiseOrValue<string>;
+    market: PromiseOrValue<string>;
+    prices: PromiseOrValue<string>;
+    protocolLock: PromiseOrValue<string>;
+    rates: PromiseOrValue<string>;
+    rewards: PromiseOrValue<string>;
+    settlement: PromiseOrValue<string>;
+    tcp: PromiseOrValue<string>;
+    timelock: PromiseOrValue<string>;
+    tcpAllocation: PromiseOrValue<string>;
   };
 
   export type ProtocolDataStructOutput = [
@@ -248,7 +249,7 @@ export interface GovernorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "emergencyShutdownTokensLocked",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "enforcedDecentralization",
@@ -256,7 +257,11 @@ export interface GovernorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "execute",
-    values: [string, string, BytesLike]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "executeEmergencyShutdown",
@@ -285,7 +290,7 @@ export interface GovernorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "increaseTCPAllocation",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "init",
@@ -302,7 +307,7 @@ export interface GovernorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "lockTokensForEmergencyShutdown",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "market", values?: undefined): string;
   encodeFunctionData(
@@ -311,11 +316,11 @@ export interface GovernorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "mintIncentive",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "mintVotingRewards",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "periodLength",
@@ -333,32 +338,32 @@ export interface GovernorInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "rates", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "requireDebtServicesAccess",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "requireHueReservesBurnAccess",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "requireInitializePoolAccess",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "requireUpdatePositionAccess",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "requireValidAction",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "rewards", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "setBorrowRewardsPortion",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setPhaseOneStartTime",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "settlement",
@@ -384,39 +389,39 @@ export interface GovernorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "upgradeAuctions",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "upgradeLiquidations",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "upgradeMarket",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "upgradePrices",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "upgradeProtocol",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "upgradeRates",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "upgradeRewards",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "upgradeSettlement",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "validUpdate",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
 
   decodeFunctionResult(
@@ -717,11 +722,11 @@ export interface Governor extends BaseContract {
     borrowRewardsPortion(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     calculateCurrentDailyDebtRewardCount(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     calculateCurrentDailyLiquidityRewardCount(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     currentPeriod(
@@ -737,25 +742,25 @@ export interface Governor extends BaseContract {
     ): Promise<[boolean]>;
 
     emergencyShutdownTokensLocked(
-      arg0: string,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     enforcedDecentralization(overrides?: CallOverrides): Promise<[string]>;
 
     execute(
-      target: string,
-      signature: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     executeEmergencyShutdown(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     executeShutdown(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     firstPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -769,14 +774,14 @@ export interface Governor extends BaseContract {
     huePositionNFT(overrides?: CallOverrides): Promise<[string]>;
 
     increaseTCPAllocation(
-      to: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      to: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     init(
       pd: IGovernor.ProtocolDataStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     isShutdown(overrides?: CallOverrides): Promise<[boolean]>;
@@ -786,8 +791,8 @@ export interface Governor extends BaseContract {
     liquidations(overrides?: CallOverrides): Promise<[string]>;
 
     lockTokensForEmergencyShutdown(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     market(overrides?: CallOverrides): Promise<[string]>;
@@ -797,15 +802,15 @@ export interface Governor extends BaseContract {
     ): Promise<[BigNumber]>;
 
     mintIncentive(
-      to: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      to: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     mintVotingRewards(
-      to: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      to: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     periodLength(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -826,41 +831,41 @@ export interface Governor extends BaseContract {
     rates(overrides?: CallOverrides): Promise<[string]>;
 
     requireDebtServicesAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     requireHueReservesBurnAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     requireInitializePoolAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     requireUpdatePositionAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     requireValidAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     rewards(overrides?: CallOverrides): Promise<[string]>;
 
     setBorrowRewardsPortion(
-      portion: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      portion: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setPhaseOneStartTime(
-      phaseOneStartTime: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      phaseOneStartTime: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     settlement(overrides?: CallOverrides): Promise<[string]>;
@@ -876,50 +881,53 @@ export interface Governor extends BaseContract {
     totalTcpAllocated(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     unlockTokensForEmergencyShutdown(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     upgradeAuctions(
-      _auctions: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _auctions: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     upgradeLiquidations(
-      _liquidations: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _liquidations: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     upgradeMarket(
-      _market: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _market: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     upgradePrices(
-      _prices: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _prices: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     upgradeProtocol(
-      newGovernor: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newGovernor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     upgradeRates(
-      _rates: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _rates: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     upgradeRewards(
-      _rewards: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _rewards: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     upgradeSettlement(
-      _settlement: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _settlement: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
   };
 
   EMERGENCY_SHUTDOWN_THRESHOLD(overrides?: CallOverrides): Promise<BigNumber>;
@@ -931,11 +939,11 @@ export interface Governor extends BaseContract {
   borrowRewardsPortion(overrides?: CallOverrides): Promise<BigNumber>;
 
   calculateCurrentDailyDebtRewardCount(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   calculateCurrentDailyLiquidityRewardCount(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
@@ -947,25 +955,25 @@ export interface Governor extends BaseContract {
   emergencyShutdownThresholdMet(overrides?: CallOverrides): Promise<boolean>;
 
   emergencyShutdownTokensLocked(
-    arg0: string,
+    arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   enforcedDecentralization(overrides?: CallOverrides): Promise<string>;
 
   execute(
-    target: string,
-    signature: string,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    target: PromiseOrValue<string>,
+    signature: PromiseOrValue<string>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   executeEmergencyShutdown(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   executeShutdown(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
@@ -979,14 +987,14 @@ export interface Governor extends BaseContract {
   huePositionNFT(overrides?: CallOverrides): Promise<string>;
 
   increaseTCPAllocation(
-    to: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    to: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   init(
     pd: IGovernor.ProtocolDataStruct,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   isShutdown(overrides?: CallOverrides): Promise<boolean>;
@@ -996,8 +1004,8 @@ export interface Governor extends BaseContract {
   liquidations(overrides?: CallOverrides): Promise<string>;
 
   lockTokensForEmergencyShutdown(
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   market(overrides?: CallOverrides): Promise<string>;
@@ -1005,15 +1013,15 @@ export interface Governor extends BaseContract {
   maxTotalDailyRewardsAllocation(overrides?: CallOverrides): Promise<BigNumber>;
 
   mintIncentive(
-    to: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    to: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   mintVotingRewards(
-    to: string,
-    count: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    to: PromiseOrValue<string>,
+    count: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   periodLength(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1034,41 +1042,41 @@ export interface Governor extends BaseContract {
   rates(overrides?: CallOverrides): Promise<string>;
 
   requireDebtServicesAccess(
-    caller: string,
+    caller: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   requireHueReservesBurnAccess(
-    caller: string,
+    caller: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   requireInitializePoolAccess(
-    caller: string,
+    caller: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   requireUpdatePositionAccess(
-    caller: string,
+    caller: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   requireValidAction(
-    target: string,
-    signature: string,
+    target: PromiseOrValue<string>,
+    signature: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   rewards(overrides?: CallOverrides): Promise<string>;
 
   setBorrowRewardsPortion(
-    portion: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    portion: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setPhaseOneStartTime(
-    phaseOneStartTime: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    phaseOneStartTime: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   settlement(overrides?: CallOverrides): Promise<string>;
@@ -1084,50 +1092,53 @@ export interface Governor extends BaseContract {
   totalTcpAllocated(overrides?: CallOverrides): Promise<BigNumber>;
 
   unlockTokensForEmergencyShutdown(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   upgradeAuctions(
-    _auctions: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _auctions: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   upgradeLiquidations(
-    _liquidations: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _liquidations: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   upgradeMarket(
-    _market: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _market: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   upgradePrices(
-    _prices: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _prices: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   upgradeProtocol(
-    newGovernor: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    newGovernor: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   upgradeRates(
-    _rates: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _rates: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   upgradeRewards(
-    _rewards: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _rewards: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   upgradeSettlement(
-    _settlement: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _settlement: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+  validUpdate(
+    arg0: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
     EMERGENCY_SHUTDOWN_THRESHOLD(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1155,16 +1166,16 @@ export interface Governor extends BaseContract {
     emergencyShutdownThresholdMet(overrides?: CallOverrides): Promise<boolean>;
 
     emergencyShutdownTokensLocked(
-      arg0: string,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     enforcedDecentralization(overrides?: CallOverrides): Promise<string>;
 
     execute(
-      target: string,
-      signature: string,
-      data: BytesLike,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean, string] & { success: boolean; returnData: string }>;
 
@@ -1183,8 +1194,8 @@ export interface Governor extends BaseContract {
     huePositionNFT(overrides?: CallOverrides): Promise<string>;
 
     increaseTCPAllocation(
-      to: string,
-      count: BigNumberish,
+      to: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1200,7 +1211,7 @@ export interface Governor extends BaseContract {
     liquidations(overrides?: CallOverrides): Promise<string>;
 
     lockTokensForEmergencyShutdown(
-      count: BigNumberish,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1211,14 +1222,14 @@ export interface Governor extends BaseContract {
     ): Promise<BigNumber>;
 
     mintIncentive(
-      to: string,
-      count: BigNumberish,
+      to: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     mintVotingRewards(
-      to: string,
-      count: BigNumberish,
+      to: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1240,40 +1251,40 @@ export interface Governor extends BaseContract {
     rates(overrides?: CallOverrides): Promise<string>;
 
     requireDebtServicesAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     requireHueReservesBurnAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     requireInitializePoolAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     requireUpdatePositionAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     requireValidAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     rewards(overrides?: CallOverrides): Promise<string>;
 
     setBorrowRewardsPortion(
-      portion: BigNumberish,
+      portion: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setPhaseOneStartTime(
-      phaseOneStartTime: BigNumberish,
+      phaseOneStartTime: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1292,69 +1303,86 @@ export interface Governor extends BaseContract {
     unlockTokensForEmergencyShutdown(overrides?: CallOverrides): Promise<void>;
 
     upgradeAuctions(
-      _auctions: string,
+      _auctions: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     upgradeLiquidations(
-      _liquidations: string,
+      _liquidations: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    upgradeMarket(_market: string, overrides?: CallOverrides): Promise<void>;
+    upgradeMarket(
+      _market: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    upgradePrices(_prices: string, overrides?: CallOverrides): Promise<void>;
+    upgradePrices(
+      _prices: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     upgradeProtocol(
-      newGovernor: string,
+      newGovernor: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    upgradeRates(_rates: string, overrides?: CallOverrides): Promise<void>;
+    upgradeRates(
+      _rates: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    upgradeRewards(_rewards: string, overrides?: CallOverrides): Promise<void>;
+    upgradeRewards(
+      _rewards: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     upgradeSettlement(
-      _settlement: string,
+      _settlement: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
   };
 
   filters: {
     "ContractUpgraded(string,address)"(
-      contractName?: string | null,
-      contractAddress?: string | null
+      contractName?: PromiseOrValue<string> | null,
+      contractAddress?: PromiseOrValue<string> | null
     ): ContractUpgradedEventFilter;
     ContractUpgraded(
-      contractName?: string | null,
-      contractAddress?: string | null
+      contractName?: PromiseOrValue<string> | null,
+      contractAddress?: PromiseOrValue<string> | null
     ): ContractUpgradedEventFilter;
 
     "ProtocolUpgraded(address)"(
-      newGovernor?: string | null
+      newGovernor?: PromiseOrValue<string> | null
     ): ProtocolUpgradedEventFilter;
-    ProtocolUpgraded(newGovernor?: string | null): ProtocolUpgradedEventFilter;
+    ProtocolUpgraded(
+      newGovernor?: PromiseOrValue<string> | null
+    ): ProtocolUpgradedEventFilter;
 
     "ShutdownExecuted()"(): ShutdownExecutedEventFilter;
     ShutdownExecuted(): ShutdownExecutedEventFilter;
 
     "ShutdownTokensLocked(address,uint256)"(
-      locker?: string | null,
+      locker?: PromiseOrValue<string> | null,
       count?: null
     ): ShutdownTokensLockedEventFilter;
     ShutdownTokensLocked(
-      locker?: string | null,
+      locker?: PromiseOrValue<string> | null,
       count?: null
     ): ShutdownTokensLockedEventFilter;
 
     "ShutdownTokensUnlocked(address,uint256)"(
-      locker?: string | null,
+      locker?: PromiseOrValue<string> | null,
       count?: null
     ): ShutdownTokensUnlockedEventFilter;
     ShutdownTokensUnlocked(
-      locker?: string | null,
+      locker?: PromiseOrValue<string> | null,
       count?: null
     ): ShutdownTokensUnlockedEventFilter;
   };
@@ -1369,11 +1397,11 @@ export interface Governor extends BaseContract {
     borrowRewardsPortion(overrides?: CallOverrides): Promise<BigNumber>;
 
     calculateCurrentDailyDebtRewardCount(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     calculateCurrentDailyLiquidityRewardCount(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     currentPeriod(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1387,25 +1415,25 @@ export interface Governor extends BaseContract {
     ): Promise<BigNumber>;
 
     emergencyShutdownTokensLocked(
-      arg0: string,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     enforcedDecentralization(overrides?: CallOverrides): Promise<BigNumber>;
 
     execute(
-      target: string,
-      signature: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     executeEmergencyShutdown(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     executeShutdown(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     firstPeriod(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1419,14 +1447,14 @@ export interface Governor extends BaseContract {
     huePositionNFT(overrides?: CallOverrides): Promise<BigNumber>;
 
     increaseTCPAllocation(
-      to: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      to: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     init(
       pd: IGovernor.ProtocolDataStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     isShutdown(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1436,8 +1464,8 @@ export interface Governor extends BaseContract {
     liquidations(overrides?: CallOverrides): Promise<BigNumber>;
 
     lockTokensForEmergencyShutdown(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     market(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1447,15 +1475,15 @@ export interface Governor extends BaseContract {
     ): Promise<BigNumber>;
 
     mintIncentive(
-      to: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      to: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     mintVotingRewards(
-      to: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      to: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     periodLength(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1469,41 +1497,41 @@ export interface Governor extends BaseContract {
     rates(overrides?: CallOverrides): Promise<BigNumber>;
 
     requireDebtServicesAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     requireHueReservesBurnAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     requireInitializePoolAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     requireUpdatePositionAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     requireValidAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     rewards(overrides?: CallOverrides): Promise<BigNumber>;
 
     setBorrowRewardsPortion(
-      portion: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      portion: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setPhaseOneStartTime(
-      phaseOneStartTime: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      phaseOneStartTime: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     settlement(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1519,50 +1547,53 @@ export interface Governor extends BaseContract {
     totalTcpAllocated(overrides?: CallOverrides): Promise<BigNumber>;
 
     unlockTokensForEmergencyShutdown(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     upgradeAuctions(
-      _auctions: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _auctions: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     upgradeLiquidations(
-      _liquidations: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _liquidations: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     upgradeMarket(
-      _market: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _market: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     upgradePrices(
-      _prices: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _prices: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     upgradeProtocol(
-      newGovernor: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newGovernor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     upgradeRates(
-      _rates: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _rates: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     upgradeRewards(
-      _rewards: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _rewards: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     upgradeSettlement(
-      _settlement: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _settlement: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    validUpdate(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    validUpdate(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1579,11 +1610,11 @@ export interface Governor extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     calculateCurrentDailyDebtRewardCount(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     calculateCurrentDailyLiquidityRewardCount(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     currentPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1597,7 +1628,7 @@ export interface Governor extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     emergencyShutdownTokensLocked(
-      arg0: string,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1606,18 +1637,18 @@ export interface Governor extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     execute(
-      target: string,
-      signature: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     executeEmergencyShutdown(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     executeShutdown(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     firstPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1633,14 +1664,14 @@ export interface Governor extends BaseContract {
     huePositionNFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     increaseTCPAllocation(
-      to: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      to: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     init(
       pd: IGovernor.ProtocolDataStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     isShutdown(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1650,8 +1681,8 @@ export interface Governor extends BaseContract {
     liquidations(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     lockTokensForEmergencyShutdown(
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     market(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1661,15 +1692,15 @@ export interface Governor extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     mintIncentive(
-      to: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      to: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     mintVotingRewards(
-      to: string,
-      count: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      to: PromiseOrValue<string>,
+      count: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     periodLength(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1683,41 +1714,41 @@ export interface Governor extends BaseContract {
     rates(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     requireDebtServicesAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     requireHueReservesBurnAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     requireInitializePoolAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     requireUpdatePositionAccess(
-      caller: string,
+      caller: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     requireValidAction(
-      target: string,
-      signature: string,
+      target: PromiseOrValue<string>,
+      signature: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     rewards(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setBorrowRewardsPortion(
-      portion: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      portion: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setPhaseOneStartTime(
-      phaseOneStartTime: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      phaseOneStartTime: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     settlement(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1733,51 +1764,51 @@ export interface Governor extends BaseContract {
     totalTcpAllocated(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     unlockTokensForEmergencyShutdown(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     upgradeAuctions(
-      _auctions: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _auctions: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     upgradeLiquidations(
-      _liquidations: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _liquidations: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     upgradeMarket(
-      _market: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _market: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     upgradePrices(
-      _prices: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _prices: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     upgradeProtocol(
-      newGovernor: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newGovernor: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     upgradeRates(
-      _rates: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _rates: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     upgradeRewards(
-      _rewards: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _rewards: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     upgradeSettlement(
-      _settlement: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _settlement: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     validUpdate(
-      arg0: BytesLike,
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface TickBitmapTestInterface extends utils.Interface {
     functions: {
         "bitmap(int16)": FunctionFragment;
@@ -12,12 +12,12 @@ export interface TickBitmapTestInterface extends utils.Interface {
         "nextInitializedTickWithinOneWord(int24,bool)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "bitmap" | "flipTick" | "getGasCostOfFlipTick" | "getGasCostOfNextInitializedTickWithinOneWord" | "isInitialized" | "nextInitializedTickWithinOneWord"): FunctionFragment;
-    encodeFunctionData(functionFragment: "bitmap", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "flipTick", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getGasCostOfFlipTick", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "getGasCostOfNextInitializedTickWithinOneWord", values: [BigNumberish, boolean]): string;
-    encodeFunctionData(functionFragment: "isInitialized", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "nextInitializedTickWithinOneWord", values: [BigNumberish, boolean]): string;
+    encodeFunctionData(functionFragment: "bitmap", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "flipTick", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "getGasCostOfFlipTick", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "getGasCostOfNextInitializedTickWithinOneWord", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]): string;
+    encodeFunctionData(functionFragment: "isInitialized", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "nextInitializedTickWithinOneWord", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<boolean>]): string;
     decodeFunctionResult(functionFragment: "bitmap", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "flipTick", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getGasCostOfFlipTick", data: BytesLike): Result;
@@ -41,67 +41,67 @@ export interface TickBitmapTest extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        bitmap(arg0: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
-        flipTick(tick: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        bitmap(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        flipTick(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        getGasCostOfFlipTick(tick: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        getGasCostOfFlipTick(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        getGasCostOfNextInitializedTickWithinOneWord(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<[BigNumber]>;
-        isInitialized(tick: BigNumberish, overrides?: CallOverrides): Promise<[boolean]>;
-        nextInitializedTickWithinOneWord(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<[number, boolean] & {
+        getGasCostOfNextInitializedTickWithinOneWord(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        isInitialized(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[boolean]>;
+        nextInitializedTickWithinOneWord(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[number, boolean] & {
             next: number;
             initialized: boolean;
         }>;
     };
-    bitmap(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    flipTick(tick: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    bitmap(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    flipTick(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    getGasCostOfFlipTick(tick: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    getGasCostOfFlipTick(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    getGasCostOfNextInitializedTickWithinOneWord(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-    isInitialized(tick: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-    nextInitializedTickWithinOneWord(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<[number, boolean] & {
+    getGasCostOfNextInitializedTickWithinOneWord(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+    isInitialized(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+    nextInitializedTickWithinOneWord(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[number, boolean] & {
         next: number;
         initialized: boolean;
     }>;
     callStatic: {
-        bitmap(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        flipTick(tick: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        getGasCostOfFlipTick(tick: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        getGasCostOfNextInitializedTickWithinOneWord(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        isInitialized(tick: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        nextInitializedTickWithinOneWord(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<[number, boolean] & {
+        bitmap(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        flipTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        getGasCostOfFlipTick(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfNextInitializedTickWithinOneWord(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        isInitialized(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        nextInitializedTickWithinOneWord(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[number, boolean] & {
             next: number;
             initialized: boolean;
         }>;
     };
     filters: {};
     estimateGas: {
-        bitmap(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        flipTick(tick: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        bitmap(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        flipTick(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        getGasCostOfFlipTick(tick: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        getGasCostOfFlipTick(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        getGasCostOfNextInitializedTickWithinOneWord(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<BigNumber>;
-        isInitialized(tick: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        nextInitializedTickWithinOneWord(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<BigNumber>;
+        getGasCostOfNextInitializedTickWithinOneWord(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
+        isInitialized(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        nextInitializedTickWithinOneWord(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        bitmap(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        flipTick(tick: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        bitmap(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        flipTick(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        getGasCostOfFlipTick(tick: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        getGasCostOfFlipTick(tick: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        getGasCostOfNextInitializedTickWithinOneWord(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        isInitialized(tick: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        nextInitializedTickWithinOneWord(tick: BigNumberish, lte: boolean, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getGasCostOfNextInitializedTickWithinOneWord(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        isInitialized(tick: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        nextInitializedTickWithinOneWord(tick: PromiseOrValue<BigNumberish>, lte: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

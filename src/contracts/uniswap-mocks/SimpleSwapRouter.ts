@@ -21,15 +21,16 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export declare namespace SimpleSwapRouter {
   export type ExactInputParamsStruct = {
-    path: BytesLike;
-    recipient: string;
-    deadline: BigNumberish;
-    amountIn: BigNumberish;
-    amountOutMinimum: BigNumberish;
+    path: PromiseOrValue<BytesLike>;
+    recipient: PromiseOrValue<string>;
+    deadline: PromiseOrValue<BigNumberish>;
+    amountIn: PromiseOrValue<BigNumberish>;
+    amountOutMinimum: PromiseOrValue<BigNumberish>;
   };
 
   export type ExactInputParamsStructOutput = [
@@ -82,23 +83,42 @@ export interface SimpleSwapRouterInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "refundETH", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "sweepToken",
-    values: [string, BigNumberish, string]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "sweepTokenWithFee",
-    values: [string, BigNumberish, string, BigNumberish, string]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "uniswapV3SwapCallback",
-    values: [BigNumberish, BigNumberish, BytesLike]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "unwrapWETH9",
-    values: [BigNumberish, string]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "unwrapWETH9WithFee",
-    values: [BigNumberish, string, BigNumberish, string]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "WETH9", data: BytesLike): Result;
@@ -157,50 +177,50 @@ export interface SimpleSwapRouter extends BaseContract {
 
     exactInput(
       params: SimpleSwapRouter.ExactInputParamsStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     factory(overrides?: CallOverrides): Promise<[string]>;
 
     refundETH(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     sweepToken(
-      token: string,
-      amountMinimum: BigNumberish,
-      recipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     sweepTokenWithFee(
-      token: string,
-      amountMinimum: BigNumberish,
-      recipient: string,
-      feeBips: BigNumberish,
-      feeRecipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      feeBips: PromiseOrValue<BigNumberish>,
+      feeRecipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     uniswapV3SwapCallback(
-      amount0Delta: BigNumberish,
-      amount1Delta: BigNumberish,
-      _data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     unwrapWETH9(
-      amountMinimum: BigNumberish,
-      recipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     unwrapWETH9WithFee(
-      amountMinimum: BigNumberish,
-      recipient: string,
-      feeBips: BigNumberish,
-      feeRecipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      feeBips: PromiseOrValue<BigNumberish>,
+      feeRecipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
@@ -208,50 +228,50 @@ export interface SimpleSwapRouter extends BaseContract {
 
   exactInput(
     params: SimpleSwapRouter.ExactInputParamsStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   factory(overrides?: CallOverrides): Promise<string>;
 
   refundETH(
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   sweepToken(
-    token: string,
-    amountMinimum: BigNumberish,
-    recipient: string,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    amountMinimum: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   sweepTokenWithFee(
-    token: string,
-    amountMinimum: BigNumberish,
-    recipient: string,
-    feeBips: BigNumberish,
-    feeRecipient: string,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    amountMinimum: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<string>,
+    feeBips: PromiseOrValue<BigNumberish>,
+    feeRecipient: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   uniswapV3SwapCallback(
-    amount0Delta: BigNumberish,
-    amount1Delta: BigNumberish,
-    _data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    amount0Delta: PromiseOrValue<BigNumberish>,
+    amount1Delta: PromiseOrValue<BigNumberish>,
+    _data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   unwrapWETH9(
-    amountMinimum: BigNumberish,
-    recipient: string,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    amountMinimum: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   unwrapWETH9WithFee(
-    amountMinimum: BigNumberish,
-    recipient: string,
-    feeBips: BigNumberish,
-    feeRecipient: string,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    amountMinimum: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<string>,
+    feeBips: PromiseOrValue<BigNumberish>,
+    feeRecipient: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -267,39 +287,39 @@ export interface SimpleSwapRouter extends BaseContract {
     refundETH(overrides?: CallOverrides): Promise<void>;
 
     sweepToken(
-      token: string,
-      amountMinimum: BigNumberish,
-      recipient: string,
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     sweepTokenWithFee(
-      token: string,
-      amountMinimum: BigNumberish,
-      recipient: string,
-      feeBips: BigNumberish,
-      feeRecipient: string,
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      feeBips: PromiseOrValue<BigNumberish>,
+      feeRecipient: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     uniswapV3SwapCallback(
-      amount0Delta: BigNumberish,
-      amount1Delta: BigNumberish,
-      _data: BytesLike,
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     unwrapWETH9(
-      amountMinimum: BigNumberish,
-      recipient: string,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     unwrapWETH9WithFee(
-      amountMinimum: BigNumberish,
-      recipient: string,
-      feeBips: BigNumberish,
-      feeRecipient: string,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      feeBips: PromiseOrValue<BigNumberish>,
+      feeRecipient: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -311,50 +331,50 @@ export interface SimpleSwapRouter extends BaseContract {
 
     exactInput(
       params: SimpleSwapRouter.ExactInputParamsStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     factory(overrides?: CallOverrides): Promise<BigNumber>;
 
     refundETH(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     sweepToken(
-      token: string,
-      amountMinimum: BigNumberish,
-      recipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     sweepTokenWithFee(
-      token: string,
-      amountMinimum: BigNumberish,
-      recipient: string,
-      feeBips: BigNumberish,
-      feeRecipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      feeBips: PromiseOrValue<BigNumberish>,
+      feeRecipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     uniswapV3SwapCallback(
-      amount0Delta: BigNumberish,
-      amount1Delta: BigNumberish,
-      _data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     unwrapWETH9(
-      amountMinimum: BigNumberish,
-      recipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     unwrapWETH9WithFee(
-      amountMinimum: BigNumberish,
-      recipient: string,
-      feeBips: BigNumberish,
-      feeRecipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      feeBips: PromiseOrValue<BigNumberish>,
+      feeRecipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -363,50 +383,50 @@ export interface SimpleSwapRouter extends BaseContract {
 
     exactInput(
       params: SimpleSwapRouter.ExactInputParamsStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     refundETH(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     sweepToken(
-      token: string,
-      amountMinimum: BigNumberish,
-      recipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     sweepTokenWithFee(
-      token: string,
-      amountMinimum: BigNumberish,
-      recipient: string,
-      feeBips: BigNumberish,
-      feeRecipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      feeBips: PromiseOrValue<BigNumberish>,
+      feeRecipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     uniswapV3SwapCallback(
-      amount0Delta: BigNumberish,
-      amount1Delta: BigNumberish,
-      _data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     unwrapWETH9(
-      amountMinimum: BigNumberish,
-      recipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     unwrapWETH9WithFee(
-      amountMinimum: BigNumberish,
-      recipient: string,
-      feeBips: BigNumberish,
-      feeRecipient: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      amountMinimum: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      feeBips: PromiseOrValue<BigNumberish>,
+      feeRecipient: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }
